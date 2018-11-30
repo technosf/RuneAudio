@@ -43,6 +43,10 @@ rfkill block 0
 sed -i '/blacklist/ s/^#//' /etc/modprobe.d/disable_rpi3_wifi_bt.conf
 echo
 
+echo -e "$bar Enable Ethernet Hot Plug ..."
+#################################################################################
+pacman -Sy ifplugd
+
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
 # force hdmi mode, remove black border (overscan)
