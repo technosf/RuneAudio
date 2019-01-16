@@ -39,6 +39,14 @@ file=/etc/nginx/nginx.conf
 if ! grep -q 'aria2' $file; then
 	echo $file
 	
+	string=$( cat <<EOF
+        location /aria2 {
+            alias $path/web;
+        }
+EOF
+)
+	appendS -n +10 'listen 80 '
+	
 	commentS '^\s*rewrite'
 	string=$( cat <<'EOF'
             rewrite /css/(.*) /assets/css/$1 break;
@@ -50,13 +58,7 @@ EOF
 )
 	appendS -n +7 'listen 80 '
 	
-	string=$( cat <<EOF
-        location /aria2 {
-            alias $path/web;
-        }
-EOF
-)
-	appendS -n +9 'listen 80 '
+
 fi
 
 mkdir -p /root/.config/aria2
@@ -106,7 +108,7 @@ echo "Run: systemctl < start / stop > aria2"
 echo "Startup: systemctl < enable / disable > aria2"
 echo
 echo "Download directory: $path"
-title -nt "WebUI: < RuneAudio_IP >/aria2/"
+title -nt "WebUI: < RuneAudio_IP >/aria2/docs"
 
 # for modified 'rewrite' config
 restartnginx
