@@ -35,18 +35,17 @@ ln -s $path/web /srv/http/aria2
 
 # modify file
 file=/etc/nginx/nginx.conf
-
-if ! grep -q 'aria2' $file; then
-	echo $file
+echo $file
 	
-	string=$( cat <<EOF
+string=$( cat <<EOF
         location /aria2 {
             alias $path/web;
         }
 EOF
 )
-	appendS -n +10 'listen 80 '
-	
+appendS -n +10 'listen 80 '
+
+if ! grep -q '^#.*\s*rewrite' $file; then
 	commentS '^\s*rewrite'
 	string=$( cat <<'EOF'
             rewrite /css/(.*) /assets/css/$1 break;
@@ -57,8 +56,6 @@ EOF
 EOF
 )
 	appendS -n +7 'listen 80 '
-	
-
 fi
 
 mkdir -p /root/.config/aria2
