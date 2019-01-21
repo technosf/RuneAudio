@@ -7,8 +7,6 @@ alias=lanh
 
 installstart $@
 
-getuninstall
-
 pacman -Sy --noconfirm ifplugd
 
 installfinish $@
