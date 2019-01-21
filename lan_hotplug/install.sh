@@ -9,4 +9,6 @@ installstart $@
 
 pacman -Sy --noconfirm ifplugd
 
+redis-cli hset addons lanh 1 &> /dev/null # mark as upgraded - disable button
+
 installfinish $@
