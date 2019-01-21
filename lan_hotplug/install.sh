@@ -11,7 +11,7 @@ getuninstall
 
 echo -e "$bar Install WiFi hotplug package ..."
 
-pacman -Sy ifplugd
+pacman -Sy --noconfirm ifplugd
 
 installfinish $@
 
