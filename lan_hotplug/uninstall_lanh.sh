@@ -1,13 +1,11 @@
 #!/bin/bash
 
-alias=motd
+alias=lanh
 
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
 uninstallstart $@
-
-echo -e "$bar Uninstall WiFi hotplug package ..."
 
 pacman -R --noconfirm ifplugd
 
