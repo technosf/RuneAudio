@@ -28,12 +28,13 @@ if [[ $? != 0 ]]; then
 	exit
 fi
 
-crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
-
-# enha
 # gpio
 rm -f /root/gpio*
+
+# addo
 rm /etc/sudoers.d/http
+# enha
+crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 mv /etc/motd{.backup,} 2> /dev/null
