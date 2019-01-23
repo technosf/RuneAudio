@@ -17,7 +17,7 @@ timestart l
 rankmirrors
 
 echo -e "$bar Prefetch packages ..."
-pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd libmpdclient libgcrypt libgpg-error
+pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd libmpdclient libgcrypt libgpg-error readline
 
 echo -e "$bar Get files ..."
 # pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
@@ -38,7 +38,7 @@ echo -e "$bar Remove conflict packages ..."
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg libgcrypt libgpg-error
+pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg libgcrypt libgpg-error readline
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
 pip install flask
