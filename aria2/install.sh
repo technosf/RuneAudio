@@ -11,8 +11,6 @@ installstart $@
 
 getuninstall
 
-rankmirrors
-
 echo -e "$bar Aria2 package ..."
 pacman -Sy --noconfirm aria2 glibc
 
