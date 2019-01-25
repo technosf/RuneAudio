@@ -34,14 +34,6 @@ wget -qN --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_se
 . setupsystem.sh
 rm setupsystem.sh
 
-# rankmirrors
-#################################################################################
-if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wgetnc $gitpath/rankmirrors/rankmirrors.sh
-	chmod +x rankmirrors.sh
-	./rankmirrors.sh
-fi
-
 # addons menu
 #################################################################################
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
@@ -89,18 +81,7 @@ echo
 wgetnc $gitpath/USB_DAC/install.sh; chmod +x install.sh; ./install.sh 'bcm2835 ALSA_1'
 echo
 
-# mpd
-#################################################################################
-#wgetnc $gitpath/mpd/install.sh; chmod +x install.sh; ./install.sh
-
-# chromium
-#################################################################################
-#wgetnc $gitpath/chromium/install.sh; chmod +x install.sh; ./install.sh
-
 systemctl reload php-fpm
-
-# systemctl daemon-reload # done in GPIO install
-systemctl restart nmbd smbd
 
 # show installed packages status
 title "$bar Installed packages status"
