@@ -15,8 +15,6 @@ fi
 title -l '=' "$bar Upgrade Midori ..."
 timestart
 
-[[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
-
 pacman -S --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs\
 	harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar
 
