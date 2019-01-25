@@ -14,8 +14,6 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
-rankmirrors
-
 echo -e "$bar Prefetch packages ..."
 pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd libmpdclient libgcrypt libgpg-error readline
 
