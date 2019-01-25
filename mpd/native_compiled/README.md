@@ -19,7 +19,6 @@ pacman -R ashuffle-rune mpd-rune ffmpeg-rune
 ```
 
 **fix `libreadline.so.6` error**  
-[`rankmirrors.sh`](https://github.com/rern/RuneAudio/tree/master/rankmirrors) fixes download errors.
 ```sh
 pacman -Sy
 pacman -S readline
