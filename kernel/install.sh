@@ -14,8 +14,6 @@ fi
 title -l '=' "$bar Upgrade Kernel ..."
 timestart
 
-rankmirrors
-
 pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-firmware cifs-utils
 
 # get kernel version
