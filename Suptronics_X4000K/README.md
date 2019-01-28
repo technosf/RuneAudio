@@ -18,7 +18,7 @@ Suptronics X4000K - ES9018K2M
 
 **Audio** (RuneAudio 0.4b)
 - Menu > Settings
-	- I²S kernel modules = `RPI DAC` (via HDMI, DSD128 stutters)
+	- I²S kernel modules = `RPI DAC` (via HDMI)
 		- `Apply Settings`
 		- Reboot
 - Menu > MPD
