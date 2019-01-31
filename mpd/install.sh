@@ -41,6 +41,9 @@ pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
 pip install flask
 
+# fix symlink version
+ln -s /usr/lib/libreadline.so{,.7}
+
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd libmpdclient
 
