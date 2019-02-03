@@ -15,7 +15,7 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
 echo -e "$bar Prefetch packages ..."
-pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd libmpdclient libgcrypt libgpg-error readline
+pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
 
 echo -e "$bar Get files ..."
 # pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
@@ -45,7 +45,7 @@ pip install flask
 ln -s /usr/lib/libreadline.so{,.7}
 
 echo -e "$bar Install MPD ..."
-pacman -S --noconfirm mpd libmpdclient
+pacman -S --noconfirm mpd mpc libmpdclient
 
 cp /etc/mpd.conf{.backup,}
 
