@@ -17,9 +17,8 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
 if ! pacman -Q mpd-rune &> /dev/null; then
-	echo -e "$bar Upgrade MPD ..."
 	pacman -Sy mpd mpc
-	echo -e "$bar Start MPD ..."
+	echo -e "$bar Restart MPD ..."
 	if ! systemctl restart mpd &> /dev/null; then
 		title -l = "$warn MPD upgrade failed."
 	else
