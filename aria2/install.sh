@@ -106,4 +106,4 @@ echo "Download directory: $path"
 title -nt "WebUI: < RuneAudio_IP >/aria2/docs"
 
 # for modified 'rewrite' config
-restartnginx
+nginx -s reload
