@@ -4,15 +4,33 @@ alias=mpdu
 
 . /srv/http/addonstitle.sh
 
-if pacman -Q mpd &> /dev/null; then
-	redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
-	title "$info MPD already upgraded."
-	title -nt "Further upgrade: pacman -Sy mpd"
+pkg=$( pacman -Ss '^mpd$' | head -n1 )
+version=$( echo $pkg | cut -d' ' -f2 )
+installed=$( echo $pkg | cut -d' ' -f3 )
+
+if [[ $installed == '[installed]' ]]; then
+	title "$info MPD already upgraded to latest version: $version"
 	exit
 fi
 
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
+
+if ! pacman -Q mpd-rune &> /dev/null; then
+	echo -e "$bar Upgrade MPD ..."
+	pacman -Sy mpd mpc
+	echo -e "$bar Start MPD ..."
+	if ! systemctl restart mpd &> /dev/null; then
+		title -l = "$warn MPD upgrade failed."
+	else
+		clearcache
+		systemctl restart rune_PL_wrk
+	
+		timestop l
+		title -l '=' "$bar MPD upgraded successfully to $version"
+	fi
+	exit
+fi
 
 echo -e "$bar Prefetch packages ..."
 pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
@@ -72,13 +90,9 @@ if ! systemctl restart mpd &> /dev/null; then
 	exit
 fi
 
-redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
-mpdversion=$( mpd -V | head -n1 | awk '{ print $NF }' )
-
 clearcache
 systemctl restart rune_PL_wrk
 	
 timestop l
-title -l '=' "$bar MPD upgraded successfully to $mpdversion"
-echo -e "$info Next upgrade: pacman -Sy mpd"
+title -l '=' "$bar MPD upgraded successfully to $version"
 title -nt "$info Local browser enabled: $( tcolor Chromium ) browser must be installed to replace Midori"
