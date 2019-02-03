@@ -4,23 +4,21 @@ alias=kern
 
 . /srv/http/addonstitle.sh
 
-version=$( uname -r | cut -d'-' -f1 )
+pkg=$( pacman -Ss 'linux-raspberrypi$' | head -n1 )
+version=$( echo $pkg | cut -d' ' -f2 )
+installed=$( echo $pkg | cut -d' ' -f3 )
 
-if [[ $version > 4.4.39 ]]; then
-	title "$info Kernel already upgraged to $version"
+if [[ $installed == '[installed]' ]]; then
+	title "$info Kernel already upgraged to latest version: $version"
 	exit
 fi
 
 title -l '=' "$bar Upgrade Kernel ..."
 timestart
 
-pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-firmware cifs-utils
-
-# get kernel version
-version=$( pacman -Q linux-raspberrypi | cut -d' ' -f2 )
+pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi
 
 redis-cli set kernel "Linux runeaudio ${version}-ARCH" &> /dev/null
-redis-cli hset addons kern 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
 title -l '=' "$bar Kernel upgraded to $version successfully."
