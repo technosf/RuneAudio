@@ -1,17 +1,14 @@
 #!/bin/bash
 
-#  $1-password ; $2-server name ; $3-readonly name ; $4-readwrite name
-
-alias=samb
-
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-smbdv=$( smbd -V )
-if [[ $smbdv && $smbdv != 'Version 4.3.4' && $smbdv != 'Version 4.8.1' ]]; then
-	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
-	title "$info Samba already upgraded."
-	title -nt "Further upgrade: pacman -Sy samba"
+pkg=$( pacman -Ss '^samba$' | head -n1 )
+version=$( echo $pkg | cut -d' ' -f2 )
+installed=$( echo $pkg | cut -d' ' -f3 )
+
+if [[ $installed == '[installed]' ]]; then
+	title "$info Samba already upgraded to latest version: $version"
 	exit
 fi
 if ! mount | grep -q '/dev/sda1'; then
@@ -22,14 +19,19 @@ fi
 title -l '=' "$bar Upgrade Samba ..."
 timestart
 
+systemctl stop nmbd smbd
+mv /etc/samba/smb.conf{,.backup}
+
+if ! pacman -Q samba4-rune &> /dev/null; then
+	pacman -S --noconfirm samba
+	mv /etc/samba/smb.conf{,.backup}
+	systemctl restart nmb smb
+	title -l '=' "$bar Samba upgraded successfully to $version"
+	exit
+fi
+
 echo -e "$bar Prefetch packages ..."
 pacman -Syw libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient
-
-systemctl stop nmbd smbd
-
-pacman -Sy
-
-mv /etc/samba/smb.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
@@ -101,13 +103,9 @@ systemctl enable nmb smb
 [[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
-sambaversion=$(  smbd -V | cut -d' ' -f2 )
-
-redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
-
 timestop
-title -l '=' "$bar Samba upgraded successfully to $sambaversion"
-echo -e "$info Next upgrade: pacman -Sy samba"
+
+title -l '=' "$bar Samba upgraded successfully to $version"
 
 if (( $# > 1 )); then
 	l=10
