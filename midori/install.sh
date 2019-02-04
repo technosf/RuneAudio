@@ -1,34 +1,33 @@
 #!/bin/bash
 
-# change version number in RuneAudio_Addons/srv/http/addonslist.php
-
-alias=mido
-
 . /srv/http/addonstitle.sh
 
-if ! pacman -Q midori-rune &> /dev/null; then
-	redis-cli hset addons mido 1 &> /dev/null # mark as upgraded - disable button
-	title "$info Midori already upgraded."
+pkg=$( pacman -Ss '^midori$' | head -n1 )
+version=$( echo $pkg | cut -d' ' -f2 )
+installed=$( echo $pkg | cut -d' ' -f3 )
+
+if [[ $installed == '[installed]' ]]; then
+	title "$info Midori already upgraded to latest version: $version"
 	exit
 fi
 
 title -l '=' "$bar Upgrade Midori ..."
 timestart
 
-pacman -S --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs\
-	harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar
+if ! pacman -Q midori-rune &> /dev/null; then
+	pacman -Sw --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs\
+		harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar
 
-file=$( ls -l /lib/libicuuc* | grep -v '^lrw' )
-file=$( echo $file | cut -d' ' -f9 )
-ln -sf $file /lib/libicuuc.so.56
+	file=$( ls -l /lib/libicuuc* | grep -v '^lrw' )
+	file=$( echo $file | cut -d' ' -f9 )
+	ln -sf $file /lib/libicuuc.so.56
 
-file=$( ls -l /lib/libicudata* | grep -v '^lrw' )
-file=$( echo $file | cut -d' ' -f9 )
-ln -sf $file /lib/libicudata.so.56
+	file=$( ls -l /lib/libicudata* | grep -v '^lrw' )
+	file=$( echo $file | cut -d' ' -f9 )
+	ln -sf $file /lib/libicudata.so.56
+fi
 
 yes 2>/dev/null | pacman -S midori
-
-redis-cli hset addons mido 1 &> /dev/null
 
 if grep '^chromium' /root/.xinitrc; then
 	echo -e "$bar Disable Chromium ..."
@@ -43,4 +42,6 @@ sleep 3
 xinit &> /dev/null &
 
 timestop
-title -l '=' "$bar Midori upgraded successfully."
+
+title -l '=' "$bar Midori upgraded to $version successfully."
+
