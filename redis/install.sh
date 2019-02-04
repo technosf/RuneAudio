@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# change version number in RuneAudio_Addons/srv/http/addonslist.php
-
-alias=redis
-
 . /srv/http/addonstitle.sh
 
 pkg=$( pacman -Ss '^redis$' | head -n1 )
