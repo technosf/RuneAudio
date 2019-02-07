@@ -16,7 +16,7 @@ fi
 title -l '=' "$bar Upgrade Kernel ..."
 timestart
 
-pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi
+pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi coreutils kmod
 
 redis-cli set kernel "Linux runeaudio ${version}-ARCH" &> /dev/null
 
