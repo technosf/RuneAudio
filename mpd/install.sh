@@ -30,7 +30,7 @@ if ! pacman -Q mpd-rune &> /dev/null; then
 fi
 
 echo -e "$bar Prefetch packages ..."
-pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
+pacman -Syw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
 
 echo -e "$bar Get files ..."
 # pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
