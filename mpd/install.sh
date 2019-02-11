@@ -52,12 +52,11 @@ pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
 pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg libgcrypt libgpg-error readline
+# fix symlink version
+ln -s /usr/lib/libreadline.so{,.7}
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
 pip install flask
-
-# fix symlink version
-ln -s /usr/lib/libreadline.so{,.7}
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd mpc libmpdclient
