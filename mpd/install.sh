@@ -29,7 +29,7 @@ ln -sf /usr/bin/python{2.7,}
 
 cp /etc/mpd.conf{,.backup}
 
-sed -i '/^IgnorePkg/ s/mpd //; s/ffmpeg ashuffle //' /etc/pacman.conf
+sed -i 's/mpd-rune \|ffmpeg \|ashuffle //g' /etc/pacman.conf
 
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
