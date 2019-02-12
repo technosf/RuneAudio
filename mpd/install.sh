@@ -29,11 +29,9 @@ ln -sf /usr/bin/python{2.7,}
 
 cp /etc/mpd.conf{,.backup}
 
-sed -i 's/mpd-rune \|ffmpeg \|ashuffle //g' /etc/pacman.conf
-
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
-pacman -Q mpd-rune &> /dev/null && pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
+pacman -Q mpd-rune &> /dev/null && pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
 pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg libgcrypt libgpg-error readline
