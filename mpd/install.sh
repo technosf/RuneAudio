@@ -14,21 +14,6 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
-if ! pacman -Q mpd-rune &> /dev/null; then
-	pacman -Sy mpd mpc
-	echo -e "$bar Restart MPD ..."
-	if ! systemctl restart mpd &> /dev/null; then
-		title -l = "$warn MPD upgrade failed."
-	else
-		clearcache
-		systemctl restart rune_PL_wrk
-	
-		timestop l
-		title -l '=' "$bar MPD upgraded successfully to $version"
-	fi
-	exit
-fi
-
 echo -e "$bar Prefetch packages ..."
 pacman -Syw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
 
@@ -48,12 +33,12 @@ sed -i '/^IgnorePkg/ s/mpd //; s/ffmpeg ashuffle //' /etc/pacman.conf
 
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
-pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
+pacman -Q mpd-rune &> /dev/null && pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
 pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg libgcrypt libgpg-error readline
 # fix symlink version
-ln -s /usr/lib/libreadline.so{,.7}
+ln -sf /usr/lib/libreadline.so{,.7}
 pacman -S --noconfirm python2-pip
 ln -sf /usr/bin/pip{2,}
 pip install flask
