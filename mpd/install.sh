@@ -14,8 +14,6 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
-pacman -Sy
-
 if ! pacman -Q mpd-rune &> /dev/null; then
 	pacman -Sy mpd mpc
 	echo -e "$bar Restart MPD ..."
