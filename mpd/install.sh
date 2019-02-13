@@ -78,6 +78,4 @@ version=$( mpd -V | head -n1 | cut -d'(' -f2 | cut -d')' -f1 )
 
 title -l '=' "$bar MPD upgraded successfully to $version"
 
-[[ $( redis-cli get local_browser ) == 0 ]] && exit
-
-title -nt "$info Local browser enabled: $( tcolor Chromium ) browser must be installed to replace Midori"
+[[ $( redis-cli get local_browser ) == 1 ]] && title -nt "$info Local browser enabled: $( tcolor Chromium ) browser must be installed to replace Midori"
