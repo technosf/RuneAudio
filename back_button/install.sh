@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias=paus
+alias=back
 
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
