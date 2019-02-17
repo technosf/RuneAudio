@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias=back
+alias=bbtn
 
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
