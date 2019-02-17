@@ -11,7 +11,7 @@ getuninstall
 
 title -l '=' "$bar Modify file ..."
 
-file=/srvhttp/app/templates/enhancebody.php
+file=/srv/http/app/templates/enhancebody.php
 
 commentH 'db-home'
 
