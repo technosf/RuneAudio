@@ -68,7 +68,7 @@ function createThumbnail( $path, $pathcoverarts ) {
 				$tags = $id3tag[ 'tags' ][ 'id3v2' ] ?: ( $id3tag[ 'tags' ][ 'vorbiscomment' ] ?: $id3tag[ 'tags' ][ 'id3v1' ] ); // mp3 > flac > very old id3v1
 				if ( !$tags ) break; // no tags - end foreach $files
 				
-				$album = str_replace( '/', '|', $tags[ 'album' ][ 0 ] );
+				$album = str_replace( '/', '|', $tags[ 'album' ][ 0 ] ); // slash "/" character not allowed in filename
 				$artist = str_replace( '/', '|', $tags[ 'artist' ][ 0 ] );
 				$thumbfile = "$pathcoverarts/$album^^$artist.jpg";
 				if ( file_exists( $thumbfile ) ) break; // thumnail exists - end foreach $files
