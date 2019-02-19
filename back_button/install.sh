@@ -19,7 +19,7 @@ commentH 'db-back'
 
 string=$( cat <<'EOF'
 			<div id="db-home"><i class="fa fa-library"></i></div>
-			<i id="db-back" style="float: left" class="fa fa-arrow-left"></i>
+			<i id="db-back" style="float: left; width: 60px;" class="fa fa-arrow-left"></i>
 			<span></span>
 EOF
 )
