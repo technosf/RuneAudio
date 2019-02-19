@@ -7,6 +7,11 @@ rm $0
 title -l '=' "$bar Update / Create coverarts for browsing ..."
 timestart
 
+if ! find /mnt/MPD -name 'coverarts' -type d; then
+	title "$info Directory 'coverarts' not exist."
+	exit
+fi
+
 albums=$( mpc stats | grep Albums | awk '{ print $NF }' )
 minutes=(( $album / 5 ))
 echo -e "$bar This may take up to $minutes minutes ..."
