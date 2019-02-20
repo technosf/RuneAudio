@@ -24,7 +24,7 @@ $coverfiles = array(
 	, 'Cover.png', 'Cover.jpg', 'Folder.png', 'Folder.jpg', 'Front.png', 'Front.jpg'
 );
 
-$ls = shell_exec( 'find "/mnt/MPD/USB/hdd/Music/_Lossless" -type d -not -path "/mnt/MPD/Webradio"' );
+$ls = shell_exec( 'find "/mnt/MPD" -type d -not -path "/mnt/MPD/Webradio"' );
 $dirs = explode( "\n", rtrim( $ls ) );
 $countdirs = count( $dirs );
 echo "Find coverarts to create thumbnails in \e[36m".number_format( $countdirs )."\e[0m directories ...\n\n";
