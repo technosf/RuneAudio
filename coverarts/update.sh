@@ -10,7 +10,7 @@ if [[ ! -e $path ]]; then
 	exit
 fi
 
-title -l '=' "$bar Update / Create coverarts for browsing ..."
+title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
 
 timestart
 
