@@ -15,7 +15,8 @@
 //         convert to thumbnail - next directory >>
 //     create from text
 //         create dummy thumbnail - next directory >>
-$path = '/mnt/MPD/USB/hdd/Music/0';
+
+$path = empty( $argv[ 1 ] ) ? '/mnt/MPD' : $argv[ 1 ];
 
 $start = time();
 
@@ -138,7 +139,7 @@ foreach( $dirs as $dir ) { // >>> dir
 }                          // >>> dir
 
 echo "\nNew thumbnails      : \e[36m".number_format( $countthumb )."\e[0m\n";
-if ( $countdummy ) echo "Dummy thumbnails    : \e[36m".number_format( $countdummy )."\e[0m.\n";
+if ( $countdummy ) echo "Dummy thumbnails    : \e[36m".number_format( $countdummy )."\e[0m\n";
 if ( $countexist ) echo "Existing thumbnails : \e[36m".number_format( $countexist )."\e[0m\n";
 echo "Directories         : \e[36m".number_format( $countdirs )."\e[0m\n";
 echo "Running time        : \e[36m".gmdate( 'H:i:s', time() - $start )."\e[0m\n";
