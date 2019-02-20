@@ -5,7 +5,7 @@ rm $0
 . /srv/http/addonstitle.sh
 
 path=$( redis-cli get pathcoverarts )
-if [[ ! -e $path ]]; then
+if [[ ! $path || ! -e $path ]]; then
 	title "$info Create coverarts directory ..."
 
 	df=$( df )
