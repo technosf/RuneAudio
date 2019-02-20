@@ -15,6 +15,9 @@
 //         convert to thumbnail - next directory >>
 //     create from text
 //         create dummy thumbnail - next directory >>
+$path = '/mnt/MPD/USB/hdd/Music/0';
+
+$start = time();
 
 $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
@@ -24,12 +27,15 @@ $coverfiles = array(
 	, 'Cover.png', 'Cover.jpg', 'Folder.png', 'Folder.jpg', 'Front.png', 'Front.jpg'
 );
 
-$ls = shell_exec( 'find "/mnt/MPD" -type d -not -path "/mnt/MPD/Webradio"' );
+$ls = shell_exec( 'find "'.$path.'" -type d -not -path "/mnt/MPD/Webradio"' );
 $dirs = explode( "\n", rtrim( $ls ) );
 $countdirs = count( $dirs );
 echo "Find coverarts to create thumbnails in \e[36m".number_format( $countdirs )."\e[0m directories ...\n\n";
 
 // each directory
+$countexist = 0;
+$countthumb = 0;
+$countdummy = 0;
 $dirnum = 0;
 foreach( $dirs as $dir ) { // >>> dir
 	$dirnum++;
@@ -42,7 +48,8 @@ foreach( $dirs as $dir ) { // >>> dir
 		$cue = 1;
 		$filenames = $cuefiles;
 	}
-	echo "$dirnum/$countdirs : ".str_replace( '/mnt/MPD/', '', $dir )."\n";
+	$percent = round( $dirnum / $countdirs * 100 );
+	echo "$percent% - $dirnum/$countdirs : ".str_replace( '/mnt/MPD/', '', $dir )."\n";
 	
 	// each file - process only 1st audio file
 	foreach( $filenames as $filename ) { // >> files
@@ -70,6 +77,7 @@ foreach( $dirs as $dir ) { // >>> dir
 			$thumbfile = "$pathcoverarts/$tags.jpg";
 			if ( file_exists( $thumbfile ) ) {
 				echo "  Thumbnail already exists.\n\n";
+				$countexist++;
 				$thumbnail = 1;
 				break; // thumnail exists - end foreach $files
 			}
@@ -83,6 +91,7 @@ foreach( $dirs as $dir ) { // >>> dir
 							-unsharp 0x.5 \
 							"'.$thumbfile.'"
 					' );
+					$countthumb++;
 					$thumbnail = 1;
 					break; // found > converted - end foreach $coverfiles
 				}
@@ -105,6 +114,7 @@ foreach( $dirs as $dir ) { // >>> dir
 				exec( 'convert "'.$coverfile.'" -thumbnail 200x200 -unsharp 0x.5 "'.$thumbfile.'"' );
 				unlink( $coverfile );
 				echo "  Thumbnail created from embedded ID3: $filename\n\n";
+				$countthumb++;
 				$thumbnail = 1;
 				break; // extracted > converted - end foreach $files
 			}
@@ -119,6 +129,7 @@ foreach( $dirs as $dir ) { // >>> dir
 				"'.$thumbfile.'"
 			' );
 			echo "  Coverart not found. Dummy thumbnail created.\n\n";
+			$countdummy++;
 			$thumbnail = 1;
 			break; // end foreach $files
 		}
@@ -126,7 +137,11 @@ foreach( $dirs as $dir ) { // >>> dir
 	if ( !$thumbnail ) echo "  No audio files found.\n\n";
 }                          // >>> dir
 
-echo "\e[36m".number_format( $countdirs )."\e[0m directories processed.";
+echo "\nNew thumbnails      : \e[36m".number_format( $countthumb )."\e[0m\n";
+if ( $countdummy ) echo "Dummy thumbnails    : \e[36m".number_format( $countdummy )."\e[0m.\n";
+if ( $countexist ) echo "Existing thumbnails : \e[36m".number_format( $countexist )."\e[0m\n";
+echo "Directories         : \e[36m".number_format( $countdirs )."\e[0m\n";
+echo "Running time        : \e[36m".gmdate( 'H:i:s', time() - $start )."\e[0m\n";
 
 $ch = curl_init( 'http://localhost/pub?id=notify' );
 curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json' ) );
