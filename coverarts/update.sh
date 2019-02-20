@@ -24,4 +24,5 @@ chmod +x enhancecoverart.php
 
 timestop
 
-title "$bar Update / Create coverarts completed."
+title "$bar Thumbnails updated/created and saved at \e[36m$pathcoverarts\e[0m"
+title -nt "Refresh browser > \e[36mLibrary Coverart\e[0m"
