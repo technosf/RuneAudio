@@ -14,10 +14,6 @@ title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
 
 timestart
 
-albums=$( mpc stats | grep Albums | awk '{ print $NF }' )
-minutes=$(( albums / 3 / 60 ))
-echo -e "$bar This may take up to $minutes minutes for $albums albums ..."
-
 wgetnc https://github.com/rern/RuneAudio/raw/master/coverarts/enhancecoverart.php
 chmod +x enhancecoverart.php
 ./enhancecoverart.php
