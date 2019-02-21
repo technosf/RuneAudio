@@ -35,7 +35,6 @@ for album in "${albums[@]}"; do
 	find=$( mpc find -f "%album%^[%albumartist%|%artist%]" album "$album" | awk '!a[$0]++' )
 	albumArtist="$albumArtist"$'\n'"$find"
 	(( i++ ))
-	(( $i == 10 )) && break
 	percent=$(( $i * 100 / $count ))
 	echo -en "\r\033[K${percent}% - $album"
 done
