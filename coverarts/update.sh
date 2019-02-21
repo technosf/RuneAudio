@@ -36,11 +36,10 @@ for album in "${albums[@]}"; do
 	albumArtist="$albumArtist"$'\n'"$find"
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
-	echo -en "\r\033[K${percent}% - $album"
+	echo "${percent}% - $album"
 done
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
-echo -en "\r\033[K"
-echo -e "$( tcolor $( numfmt --g $i ) ) Albums"
+echo -e "\n$( tcolor $( numfmt --g $i ) ) Album names"
 
 echo -e "\n\n$bar Get album-artist list ...\n"
 # get album artist file
@@ -64,7 +63,7 @@ for albumArtist in "${albumArtists[@]}"; do
 		(( exist++ ))
 		continue
 	fi
-	
+	created=0
 	for cover in "${coverfiles[@]}"; do
 		coverfile=$dir/$cover
 		if [[ -e $coverfile ]]; then
