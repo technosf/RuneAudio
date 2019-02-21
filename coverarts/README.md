@@ -1,6 +1,12 @@
 ## Coverarts Browsing for RuneUI Enhancement
 
 Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It takes a while depend on numbers of album for the 1st time. Subsequent updates will be on new/changed album/artist names only.
+- Directory to save caverarts
+	- **RuneUI Enhancement** will create directory `coverarts` in:
+		- `USB` - if found and has rw permission
+		- `NAS` - if no USB and has rw permission
+		- `LocalStorage` (SD) - if the above 2 not available
+	- Then create symbolic to  `/srv/http/assets/img/coverarts`
 - Get album list by **name**
 	- Albums with duplicate names but different artists not include in the list
 - Get **all** album list by **name** and **albumartist**
@@ -12,7 +18,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- Find coverart file in that path and create thumbnail
 	- If not available, find ID3 embedded covertart and create thumbnail
 	- If not available, create dummy thumbnail
-- Save thumbnails to **/srv/http/assets/img/coverarts**
+- Save thumbnails to `/srv/http/assets/img/coverarts`
 
 ### To update / change:
 - Edit directly in saved directory
