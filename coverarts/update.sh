@@ -40,7 +40,7 @@ for album in "${albums[@]}"; do
 done
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 echo -en "\r\033[K"
-echo -e "$( tcolor $i ) Albums"
+echo -e "$( tcolor $( numfmt --g $i ) ) Albums"
 
 echo -e "\n\n$bar Get album-artist list ...\n"
 # get album artist file
@@ -81,9 +81,6 @@ for albumArtist in "${albumArtists[@]}"; do
 	[[ $created ]] && continue
 	
 	coverfile=$( /srv/http/enhanceID3cover.php "$file" )
-	echo $file
-	echo $coverfile
-	exit
 	if [[ $coverfile != 0 ]]; then
 		convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 		rm "$coverfile"
@@ -91,7 +88,7 @@ for albumArtist in "${albumArtists[@]}"; do
 		(( thumb++ ))
 		continue
 	fi
-	anotate=$album\n$artist\n$filempd
+	anotate="$album\n$artist\n$filempd"
 	convert /srv/http/assets/img/cover-dummy.svg \
 		-resize 200x200 \
 		-font /srv/http/assets/fonts/lato/lato-regular-webfont.ttf \
@@ -103,7 +100,21 @@ for albumArtist in "${albumArtists[@]}"; do
 	(( dummy++ ))
 done
 
+echo -e "\nNew thumbnails      : $( tcolor $( numfmt --g $thumb ) )"
+(( $dummy )) && echo -e "Dummy thumbnails    : $( tcolor $( numfmt --g $dummy ) )"
+(( $exist )) && echo -e "Existing thumbnails : $( tcolor $( numfmt --g $exist ) )"
+echo -e "Albums              : $( tcolor $( numfmt --g $i ) )"
+
+# save album count
+redis-cli set countalbum $i &> /dev/null
+
+curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated / created."'" }' &> /dev/null
+
 timestop
 
-title "$bar Thumbnails updated and saved at $( tcolor "$pathcoverarts" )"
-title -nt "Refresh browser > $( tcolor 'Library Coverart' )"
+title "$bar Thumbnails updated / created successfully."
+echo -e "$bar To change:"
+echo "  - Coverart files used before ID3 embedded"
+echo "  - Replace coverart normally and update"
+echo "  - Replace / Remove directly in $( tcolor /srv/http/assets/img/coverarts ) (200x200 px)"
+title -nt "$info Refresh browser > $( tcolor 'Library Coverart' )"
