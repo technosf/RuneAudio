@@ -1,6 +1,6 @@
 ## Coverarts Browsing for RuneUI Enhancement
 
-Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data.
+Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It
 - Get album list by **name**
 	- Albums with duplicate names but different artists not include in the list
 - Get **all** album list by **name** and **albumartist**
@@ -14,9 +14,9 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- If not available, create dummy thumbnail
 - Save thumbnails to **/srv/http/assets/img/coverarts**
 
-To change:
+### To update / change:
 - Remove or replace coverart normally then update
-- Correct ID3 tag then update
+- Edit / Correct ID3 tag then update
 - Edit dirrectly in saved directory
 	- Replace with 200x200 px image
 	- Delete to remove duplicates
