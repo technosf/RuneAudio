@@ -101,7 +101,7 @@ done
 
 echo -e "\nNew thumbnails      : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "Dummy thumbnails    : $( tcolor $( numfmt --g $dummy ) )"
-(( $exist )) && echo -e "Existing thumbnails : $( tcolor $( numfmt --g $exist ) )"
+(( $exist )) && echo -e "Existing/Duplicates : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Albums              : $( tcolor $( numfmt --g $i ) )"
 
 # save album count
