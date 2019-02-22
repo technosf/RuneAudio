@@ -7,17 +7,17 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 		- `NAS` - if no USB and has rw permission
 		- `LocalStorage` (SD) - if the above 2 not available
 	- Then create symbolic at `/srv/http/assets/img/coverarts`
-- Get album list by **name**
+- Get **album name** list
 	- Albums with duplicate names but different artists not include in the list
-- Get **all** album list by **name** and **albumartist**
+- Get **all album** list by **name** and **albumartist** (includes \*.cue file)
 	- Fallback to **artist** if not set
-	- Set different **albumartist** for each song in the same album - duplicate thumbnails created
+	- Compilation albums without **albumartist** tag create duplicate thumbnails
 - Create coverart file
 	- Get file path from album data
-	- Check if thumbnail already exists, skip
-	- Find coverart file in that path and create thumbnail
-	- If not available, find ID3 embedded covertart and create thumbnail
-	- If not available, create dummy thumbnail
+	- Check if thumbnail already exists
+	- If none, Find coverart file in that path and create thumbnail
+	- If none, find ID3 embedded covertart and create thumbnail
+	- If none, create dummy thumbnail with album name and artist
 - Save thumbnails to `/srv/http/assets/img/coverarts`
 
 ### To update / change:
