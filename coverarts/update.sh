@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -21,9 +21,8 @@ coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
-	echo -e "\n${percent}% $i/$count - $( tcolor "$album" ) • $artist"
+	echo -e "\n${percent}% $i/$count$cue - $( tcolor "$album" ) • $artist"
 	
-	dir=$( dirname "$file" )
 	thumbname=${thumbname//\//|} # slash "/" character not allowed in filename
 	thumbfile="$pathcoverarts/$thumbname.jpg"
 	
@@ -41,7 +40,7 @@ function createThumbnail() {
 				-unsharp 0x.5 \
 				"$thumbfile"
 			(( thumb++ ))
-			echo -e "  $pad Thumbnail created from file: $coverfile"
+			echo -e "$pad Thumbnail created from file: $coverfile"
 			return
 		fi
 	done
@@ -51,7 +50,7 @@ function createThumbnail() {
 		if [[ $coverfile != 0 ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			rm "$coverfile"
-			echo -e "  $pad Thumbnail created from embedded ID3: $file"
+			echo -e "$pad Thumbnail created from embedded ID3: $file"
 			(( thumb++ ))
 			return
 		fi
@@ -64,19 +63,25 @@ function createThumbnail() {
 		-fill "#e0e7ee" \
 		-annotate +10+90 "$album\n$artist" \
 		"$thumbfile"
-	echo -e "  $pad4 Coverart not found. Dummy thumbnail created."
+	echo -e "$pad4 Coverart not found. Dummy thumbnail created."
 	(( dummy++ ))
 }
 
 title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
 
+sleep 2
+
 # get album
 listalbum=$( mpc list album | awk NF )
 readarray -t albums <<<"$listalbum"
+count=${#albums[@]}
+echo "Album names : $( tcolor $count )"
 
 # get album artist - expand albums with same name
 title "$bar Get album list ..."
-count=${#albums[@]}
+
+sleep 2
+
 i=0
 albumArtist=
 for album in "${albums[@]}"; do
@@ -98,6 +103,7 @@ for albumArtist in "${albumArtists[@]}"; do
 	artist=$( echo "$albumArtist" | cut -d'^' -f2 )
 	filempd=$( mpc find -f %file% album "$album" albumartist "$artist" | head -n1 )
 	file=/mnt/MPD/$filempd
+	dir=$( dirname "$file" )
 	thumbname="$album^^$artist"
 	(( i++ ))
 	createThumbnail
@@ -107,31 +113,33 @@ countalbum=$i
 # cue - not in mpd database
 title "$bar Cue Sheet - Get album list ..."
 
+sleep 2
+
 cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
-cue=1
+cue=' cue'
 i=0
 for file in "${files[@]}"; do
 	tag=$( cat "$file" | grep '^TITLE\|^PERFORMER' )
 	album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
 	artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
-	filempd=${file/\/mnt\/MPD\/}
-	thumbname="$album^^$artist^^$filempd"
+	dir=$( dirname "$file" )
+	thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
 	(( i++ ))
 	createThumbnail
 done
 countalbum=$(( $countalbum + $i ))
 
-echo -e "\nNew thumbnails      : $( tcolor $( numfmt --g $thumb ) )"
-(( $dummy )) && echo -e "Dummy thumbnails    : $( tcolor $( numfmt --g $dummy ) )"
-(( $exist )) && echo -e "Existing/Duplicates : $( tcolor $( numfmt --g $exist ) )"
-echo -e "Albums              : $( tcolor $( numfmt --g $countalbum ) )"
+echo -e "\n\nNew thumbnails   : $( tcolor $( numfmt --g $thumb ) )"
+(( $dummy )) && echo -e "Dummy thumbnails : $( tcolor $( numfmt --g $dummy ) )"
+(( $exist )) && echo -e "Existings        : $( tcolor $( numfmt --g $exist ) )"
+echo -e "Albums           : $( tcolor $( numfmt --g $countalbum ) )"
 
 # save album count
 redis-cli set countalbum $i &> /dev/null
 
-curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated / created."'" }' &> /dev/null
+curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated."'" }' &> /dev/null
 
 timestop
 
