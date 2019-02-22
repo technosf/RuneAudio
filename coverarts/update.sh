@@ -10,6 +10,15 @@ if [[ ! -e $pathcoverarts ]]; then
 	exit
 fi
 
+timestart
+
+exist=0
+thumb=0
+dummy=0
+pad=$( tcolor '.' 6 6 )
+pad4=$( tcolor '.' 4 4 )
+coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
+
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
 	echo -e "\n${percent}% $i/$count - $( tcolor "$album" ) • $artist"
@@ -21,7 +30,7 @@ function createThumbnail() {
 	if [[ -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Thumbnail already exists."
-		return 0
+		return
 	fi
 	
 	for cover in "${coverfiles[@]}"; do
@@ -33,7 +42,7 @@ function createThumbnail() {
 				"$thumbfile"
 			(( thumb++ ))
 			echo -e "  $pad Thumbnail created from file: $coverfile"
-			return 0
+			return
 		fi
 	done
 	
@@ -44,7 +53,7 @@ function createThumbnail() {
 			rm "$coverfile"
 			echo -e "  $pad Thumbnail created from embedded ID3: $file"
 			(( thumb++ ))
-			return 0
+			return
 		fi
 	fi
 	
@@ -60,15 +69,6 @@ function createThumbnail() {
 }
 
 title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
-
-timestart
-
-exist=0
-thumb=0
-dummy=0
-pad=$( tcolor '.' 6 6 )
-pad4=$( tcolor '.' 4 4 )
-coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
 
 # get album
 listalbum=$( mpc list album | awk NF )
@@ -96,7 +96,7 @@ i=0
 for albumArtist in "${albumArtists[@]}"; do
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
 	artist=$( echo "$albumArtist" | cut -d'^' -f2 )
-	filempd=$( mpc find -f %file% album "$album" artist "$artist" | head -n1 )
+	filempd=$( mpc find -f %file% album "$album" albumartist "$artist" | head -n1 )
 	file=/mnt/MPD/$filempd
 	thumbname="$album^^$artist"
 	(( i++ ))
