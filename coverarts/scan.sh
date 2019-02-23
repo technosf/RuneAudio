@@ -16,12 +16,19 @@ exist=0
 thumb=0
 dummy=0
 pad=$( tcolor '.' 6 6 )
-pad4=$( tcolor '.' 4 4 )
+padB=$( tcolor '.' 4 4 )
+padR=$( tcolor '.' 1 1 )
 coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
 	echo -e "\n${percent}% $i/$count$cue - $( tcolor "$album" ) • $artist"
+	
+	# skip if non utf-8 found
+	if [[ $( echo $thumbname | grep -axv '.*' ) ]]; then
+		echo "$padR Name contains non UTF-8 characters."
+		return
+	fi
 	
 	thumbname=${thumbname//\//|} # slash "/" character not allowed in filename
 	thumbfile="$pathcoverarts/$thumbname.jpg"
@@ -63,7 +70,7 @@ function createThumbnail() {
 		-fill "#e0e7ee" \
 		-annotate +10+90 "$album\n$artist" \
 		"$thumbfile"
-	echo -e "$pad4 Coverart not found. Dummy thumbnail created."
+	echo -e "$padB Coverart not found. Dummy thumbnail created."
 	(( dummy++ ))
 }
 
@@ -134,8 +141,8 @@ done
 
 countalbum=$(( $countalbum + $i ))
 
-echo -e "\n\nNew thumbnails   : $( tcolor $( numfmt --g $thumb ) )"
-(( $dummy )) && echo -e "Dummy thumbnails : $( tcolor $( numfmt --g $dummy ) )"
+echo -e "\n\n$pad New thumbnails   : $( tcolor $( numfmt --g $thumb ) )"
+(( $dummy )) && echo -e "$oadB Dummy thumbnails : $( tcolor $( numfmt --g $dummy ) )"
 (( $exist )) && echo -e "Existings        : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Albums           : $( tcolor $( numfmt --g $countalbum ) )"
 
