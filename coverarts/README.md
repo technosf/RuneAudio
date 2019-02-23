@@ -27,3 +27,6 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- Replace with 200x200 px image
 - Remove or replace coverart normally then update
 - Edit / Correct ID3 tag then update
+
+### `*wav` file albumartist
+- Default MPD cannot read **albumartist** data
