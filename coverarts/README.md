@@ -12,6 +12,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Get **all album** list by **name** and **albumartist** tags (includes `*.cue` file)
 	- Fallback to **artist** if not set
 	- Compilation albums without **albumartist** create duplicate thumbnails
+	- `*.cue` file in the same directory as single audio files will result induplicate files
 - Create coverart file
 	- Get **file** tag from **album** and **albumartist** tags
 	- Check if **thumbnail** already exists
