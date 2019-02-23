@@ -149,7 +149,7 @@ countalbum=$(( $countalbum + $i ))
 echo -e "\n\n$pad New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $exist )) && echo -e "Existings/Duplicates : $( tcolor $( numfmt --g $exist ) )"
-echo -e "Albums               : $( tcolor $( numfmt --g $countalbum ) )"
+echo -e "Total Albums         : $( tcolor $( numfmt --g $countalbum ) )"
 
 # save album count
 redis-cli set countalbum $i &> /dev/null
