@@ -46,9 +46,11 @@ function createThumbnail() {
 				-thumbnail 200x200 \
 				-unsharp 0x.5 \
 				"$thumbfile"
-			(( thumb++ ))
-			echo -e "$pad Thumbnail created from file: $coverfile"
-			return
+			if [[ $? == 0 ]]; then
+				echo -e "$pad Thumbnail created from file: $coverfile"
+				(( thumb++ ))
+				return
+			fi
 		fi
 	done
 	
@@ -56,10 +58,12 @@ function createThumbnail() {
 		coverfile=$( /srv/http/enhanceID3cover.php "$file" )
 		if [[ $coverfile != 0 ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-			rm "$coverfile"
-			echo -e "$pad Thumbnail created from embedded ID3: $file"
-			(( thumb++ ))
-			return
+			if [[ $? == 0 ]]; then
+				rm "$coverfile"
+				echo -e "$pad Thumbnail created from embedded ID3: $file"
+				(( thumb++ ))
+				return
+			fi
 		fi
 	fi
 	
@@ -142,7 +146,7 @@ done
 countalbum=$(( $countalbum + $i ))
 
 echo -e "\n\n$pad New thumbnails   : $( tcolor $( numfmt --g $thumb ) )"
-(( $dummy )) && echo -e "$oadB Dummy thumbnails : $( tcolor $( numfmt --g $dummy ) )"
+(( $dummy )) && echo -e "$padB Dummy thumbnails : $( tcolor $( numfmt --g $dummy ) )"
 (( $exist )) && echo -e "Existings        : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Albums           : $( tcolor $( numfmt --g $countalbum ) )"
 
