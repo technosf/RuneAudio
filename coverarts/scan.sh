@@ -64,6 +64,7 @@ function createThumbnail() {
 				(( thumb++ ))
 				return
 			fi
+			rm "$coverfile"
 		fi
 	fi
 	
