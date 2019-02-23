@@ -130,7 +130,7 @@ for file in "${files[@]}"; do
 	createThumbnail
 done
 
-chown -R http:http $pathcoverarts
+#chown -R http:http $pathcoverarts
 
 countalbum=$(( $countalbum + $i ))
 
