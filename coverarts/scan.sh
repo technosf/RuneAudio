@@ -129,6 +129,9 @@ for file in "${files[@]}"; do
 	(( i++ ))
 	createThumbnail
 done
+
+chown -R http:http $pathcoverarts
+
 countalbum=$(( $countalbum + $i ))
 
 echo -e "\n\nNew thumbnails   : $( tcolor $( numfmt --g $thumb ) )"
