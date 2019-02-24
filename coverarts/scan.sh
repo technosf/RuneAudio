@@ -109,6 +109,7 @@ echo -e "\n$( tcolor $( numfmt --g $i ) ) Album names"
 title "$bar Get album-artist list ..."
 # get album artist file
 count=${#albumArtists[@]}
+countalbum=$count
 i=0
 for albumArtist in "${albumArtists[@]}"; do
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
@@ -120,7 +121,6 @@ for albumArtist in "${albumArtists[@]}"; do
 	(( i++ ))
 	createThumbnail
 done
-countalbum=$i
 
 # cue - not in mpd database
 title "$bar Cue Sheet - Get album list ..."
@@ -130,6 +130,7 @@ sleep 2
 cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
+countalbum=$(( $countalbum + $count ))
 cue=' cue'
 i=0
 for file in "${files[@]}"; do
@@ -141,10 +142,6 @@ for file in "${files[@]}"; do
 	(( i++ ))
 	createThumbnail
 done
-
-#chown -R http:http $pathcoverarts
-
-countalbum=$(( $countalbum + $i ))
 
 echo -e "\n\n$pad New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
