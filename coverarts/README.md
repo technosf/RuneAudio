@@ -24,13 +24,10 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- If none, create **dummy** thumbnail with album name and artist
 - Save thumbnails to `/srv/http/assets/img/coverarts`
 
-### To update / change:
-- Edit directly in saved directory
-	- Delete to replace with new coverarts
-	- Delete to remove duplicates
-	- Replace with 200x200 px image
-- Remove or replace coverart normally then update
-- Edit / Correct ID3 tag then update
+### To change:
+- Remove by long-press on each coverart (They'll be recreated on next scan if ID3 tags are still the same.)
+- Edit ID3 tags then update
+- Replace coverarts normally then update
 
 ### Issue with `*.wav` file albumartist
 - Default MPD cannot read **albumartist** data which will fallback to **artist**
