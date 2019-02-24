@@ -24,7 +24,8 @@ coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
-	echo -e "\n${percent}% $( tcolor $i/$count$cue ) - $( tcolor "$album" ) • $artist"
+	echo
+	echo ${percent}% $( tcolor "$i/$count$cue" 8 ) $( tcolor "$album" ) • $artist
 	
 	# skip if non utf-8 found
 	if [[ $( echo $thumbname | grep -axv '.*' ) ]]; then
@@ -83,7 +84,8 @@ function createThumbnail() {
 	(( dummy++ ))
 }
 
-title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
+[[ $( redis-cli exists countalbum ) == 1 ]] && update=Update || update=Create
+title -l '=' "$bar $update thumbnails for browsing by coverarts..."
 
 # get album
 listalbum=$( mpc list album | awk NF )
@@ -101,7 +103,7 @@ for album in "${albums[@]}"; do
 	albumArtist="$albumArtist"$'\n'"$find"
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
-	echo "${percent}% $( tcolor ( $i/$count ) - $album"
+	echo ${percent}% $( tcolor "$i/$count" 8 ) $album
 done
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 echo -e "\n$( tcolor $( numfmt --g $i ) ) Album names"
