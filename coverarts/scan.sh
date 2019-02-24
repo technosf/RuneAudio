@@ -84,18 +84,14 @@ function createThumbnail() {
 
 title -l '=' "$bar Update / Create thumbnails for browsing by coverarts..."
 
-sleep 2
-
 # get album
 listalbum=$( mpc list album | awk NF )
 readarray -t albums <<<"$listalbum"
 count=${#albums[@]}
-echo "Album names : $( tcolor $count )"
+albumnames=$count
 
 # get album artist - expand albums with same name
 title "$bar Get album list ..."
-
-sleep 2
 
 i=0
 albumArtist=
@@ -128,8 +124,6 @@ done
 # cue - not in mpd database
 title "$bar Cue Sheet - Get album list ..."
 
-sleep 2
-
 cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
@@ -150,6 +144,7 @@ echo -e "\n\n$pad New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings/Duplicates : $( tcolor $( numfmt --g $exist ) )"
+echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
 echo -e "Total albums         : $( tcolor $( numfmt --g $countalbum ) )"
 
 # save album count
