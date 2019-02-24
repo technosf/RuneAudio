@@ -127,7 +127,7 @@ title "$bar Cue Sheet - Get album list ..."
 cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
-countalbum=$(( $countalbum + $count ))
+countalbum=$(( countalbum + count ))
 cue=' cue'
 i=0
 for file in "${files[@]}"; do
@@ -148,7 +148,7 @@ echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
 echo -e "Total albums         : $( tcolor $( numfmt --g $countalbum ) )"
 
 # save album count
-redis-cli set countalbum $i &> /dev/null
+redis-cli set countalbum $countalbum &> /dev/null
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated."'" }' &> /dev/null
 
