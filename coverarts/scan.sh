@@ -15,6 +15,7 @@ timestart
 exist=0
 thumb=0
 dummy=0
+nonutf8=0
 pad=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
@@ -27,6 +28,7 @@ function createThumbnail() {
 	# skip if non utf-8 found
 	if [[ $( echo $thumbname | grep -axv '.*' ) ]]; then
 		echo "$padR Name contains non UTF-8 characters."
+		(( nonutf8++ ))
 		return
 	fi
 	
@@ -145,6 +147,7 @@ done
 
 echo -e "\n\n$pad New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
+(( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings/Duplicates : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Total albums         : $( tcolor $( numfmt --g $countalbum ) )"
 
