@@ -33,5 +33,5 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Edit / Correct ID3 tag then update
 
 ### Issue with `*.wav` file albumartist
-- Default MPD cannot read **albumartist** data which fallback to **artist**
+- Default MPD cannot read **albumartist** data which will fallback to **artist**
 - Compilation albums will have duplicate thumbnails
