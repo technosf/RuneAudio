@@ -16,7 +16,8 @@ exist=0
 thumb=0
 dummy=0
 nonutf8=0
-pad=$( tcolor '.' 6 6 )
+padW=$( tcolor '.' 7 7 )
+padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
 coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
@@ -49,7 +50,7 @@ function createThumbnail() {
 				-unsharp 0x.5 \
 				"$thumbfile"
 			if [[ $? == 0 ]]; then
-				echo -e "$pad Thumbnail created from file: $coverfile"
+				echo -e "$padC Thumbnail created from file: $coverfile"
 				(( thumb++ ))
 				return
 			fi
@@ -62,7 +63,7 @@ function createThumbnail() {
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
 				rm "$coverfile"
-				echo -e "$pad Thumbnail created from embedded ID3: $file"
+				echo -e "$padC Thumbnail created from embedded ID3: $file"
 				(( thumb++ ))
 				return
 			fi
@@ -140,12 +141,12 @@ for file in "${files[@]}"; do
 	createThumbnail
 done
 
-echo -e "\n\n$pad New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
+echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings/Duplicates : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
-echo -e "Total albums         : $( tcolor $( numfmt --g $countalbum ) )"
+echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
 
 # save album count
 redis-cli set countalbum $countalbum &> /dev/null
