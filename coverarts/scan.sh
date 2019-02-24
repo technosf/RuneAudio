@@ -24,7 +24,7 @@ coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
-	echo -e "\n${percent}% $i/$count$cue - $( tcolor "$album" ) • $artist"
+	echo -e "\n${percent}% $( tcolor $i/$count$cue ) - $( tcolor "$album" ) • $artist"
 	
 	# skip if non utf-8 found
 	if [[ $( echo $thumbname | grep -axv '.*' ) ]]; then
@@ -101,7 +101,7 @@ for album in "${albums[@]}"; do
 	albumArtist="$albumArtist"$'\n'"$find"
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
-	echo "${percent}% $i/$count - $album"
+	echo "${percent}% $( tcolor ( $i/$count ) - $album"
 done
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 echo -e "\n$( tcolor $( numfmt --g $i ) ) Album names"
