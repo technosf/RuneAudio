@@ -20,7 +20,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- Get **file** tag from **album** and **albumartist** tags
 	- Check if **thumbnail** already exists
 	- If none, Find **coverart file** in directory and create thumbnail
-	- If none, find **ID3 embedded covertart** and create thumbnail
+	- If none, find **ID3 embedded covertart** and create thumbnail (skip if `*.cue` or `*.wav`)
 	- If none, create **dummy** thumbnail with album name and artist
 - Save thumbnails to `/srv/http/assets/img/coverarts`
 
