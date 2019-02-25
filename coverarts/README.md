@@ -29,7 +29,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Edit ID3 tags then update
 - Replace coverarts normally then update
 
-### Albums contain `*.wav` files
-- Default MPD cannot read **albumartist** data which will fallback to **artist**.
-- Thumbnails will be reated with album names only.
-- Albums contain `*.wav` files must have unique names to avoid overwrite each other.
+### Albums with `*.wav` files
+- Default MPD cannot read **albumartist** data which will fallback to **artist** instead.
+- To avoid duplicates in the same albums, only 1 thumbnail will be created for each directory.
+- To avoid overwrite, `*.wav` files must have unique album names.
