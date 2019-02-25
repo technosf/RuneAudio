@@ -12,6 +12,7 @@ fi
 
 timestart
 
+cue=0
 exist=0
 thumb=0
 dummy=0
@@ -21,6 +22,8 @@ padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
 coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
+
+rm /srv/http/tmp/skipped-wav.txt
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
@@ -39,7 +42,7 @@ function createThumbnail() {
 	
 	if [[ -e "$thumbfile" ]]; then
 		(( exist++ ))
-		echo "  Thumbnail already exists."
+		echo "  Skip - Thumbnail already exists."
 		return
 	fi
 	
@@ -58,7 +61,7 @@ function createThumbnail() {
 		fi
 	done
 	
-	if [[ !$cue ]]; then
+	if [[ !$cue || !$wav ]]; then
 		coverfile=$( /srv/http/enhanceID3cover.php "$file" )
 		if [[ $coverfile != 0 ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
@@ -119,7 +122,21 @@ for albumArtist in "${albumArtists[@]}"; do
 	filempd=$( mpc find -f %file% album "$album" albumartist "$artist" | head -n1 )
 	file=/mnt/MPD/$filempd
 	dir=$( dirname "$file" )
-	thumbname="$album^^$artist"
+	if [[ $dir == $dirwav ]]; then
+		echo "  Skip - *.wav in the same directory."
+		(( countalbum-- ))
+		echo "$file" >> '/srv/http/tmp/skipped-wav.txt'
+		continue
+	fi
+	
+	if [[ ${file##*.} == wav ]]; then
+		wav=1
+		dirwav=$dir
+		thumbname="$album^^"
+	else
+		wav=0
+		thumbname="$album^^$artist"
+	fi
 	(( i++ ))
 	createThumbnail
 done
