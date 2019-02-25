@@ -24,9 +24,10 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Save thumbnails to `/srv/http/assets/img/coverarts`
 
 ### To change:
-- Remove by long-press on each coverart (They'll be recreated on next scan if ID3 tags are still the same.)
-- Edit ID3 tags then update
-- Replace coverarts normally then update
+- Remove by long-press on each coverart.
+- Edit ID3 tags then update.
+- Replace coverarts normally then update.
+- Removed thumbnails will be recreated on next scan if ID3 tags and coverarts were still the same.
 
 ### Albums with `*.cue` files
 - To avoid duplicates, remove `*.cue` files if individual audio files already exist in that directory.
