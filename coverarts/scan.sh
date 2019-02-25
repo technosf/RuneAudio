@@ -12,7 +12,7 @@ fi
 
 timestart
 
-cue=0
+cue=
 exist=0
 thumb=0
 dummy=0
