@@ -15,7 +15,6 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Get **album** list from `*.cue` files
 	- MPD database has no albums from `*.cue` files - not listed in browse by album
 	- This will parse and show them in browse by coverart
-	- `*.cue` file and single audio files in the same directory - duplicate files created
 - Create coverart file
 	- Get **file** tag from **album** and **albumartist** tags
 	- Check if **thumbnail** already exists
@@ -29,7 +28,10 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - Edit ID3 tags then update
 - Replace coverarts normally then update
 
+### Albums with `*.cue` files
+- To avoid duplicates, remove `*.cue` files if individual audio files already exist in that directory.
+
 ### Albums with `*.wav` files
 - Default MPD cannot read **albumartist** data which will fallback to **artist** instead.
 - To avoid duplicates in the same albums, only 1 thumbnail will be created for each directory.
-- To avoid overwrite, `*.wav` files must have unique album names.
+- To avoid overwrite, different albums, with `*.wav` files, must have unique album names.
