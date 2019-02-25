@@ -34,4 +34,6 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 ### Albums with `*.wav` files
 - Default MPD cannot read **albumartist** data which will fallback to **artist** instead.
 - To avoid duplicates in the same albums, only 1 thumbnail will be created for each directory.
-- To avoid overwrite, different albums, with `*.wav` files, must have unique album names.
+- To avoid overwrite:
+	- Different albums must have different album names.
+	- Different albums must be in different directories.
