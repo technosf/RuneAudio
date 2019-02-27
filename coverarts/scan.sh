@@ -233,6 +233,7 @@ fi
 echo
 echo Thumbnails directory : $( tcolor "$pathcoverarts" )
 echo
+echo -e "$bar To update: Long-press $( tcolor CoverArt )"
 echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
 echo "  - Replace coverart normally and update"
