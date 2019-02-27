@@ -6,30 +6,41 @@ rm $0
 
 # verify coverarts directory
 pathcoverarts=$( redis-cli get pathcoverarts )
-if [[ -e $pathcoverarts ]]; then
-	acl=$( getfacl -p $pathcoverarts | grep other | cut -d':' -f3 )
-	if [[ ${acl:0:2} != rw ]]; then
-		title "$info Directory $( tcolor $pathcoverarts ) is not writeable."
+if [[ -e "$pathcoverarts" ]]; then # exist and writable
+	touch "$pathcoverarts/0"
+	if (( $? != 0 )); then
+		title "$info Directory $( tcolor "$pathcoverarts" ) is not writeable."
 		title -nt "New thumbnails cannot be saved."
 		exit
 	fi
-elif [[ ! -e $pathcoverarts || ! $pathcoverarts ]]; then
-	echo -e "$bar Create coverarts directory ..."
-	
-	pathcoverarts=/mnt/MPD/LocalStorage/coverarts
-	df=$( df )
-	dfUSB=$( echo "$df" | grep '/mnt/MPD/USB' | head -n1 )
-	dfNAS=$( echo "$df" | grep '/mnt/MPD/NAS' | head -n1 )
-	if [[ $dfUSB || $dfNAS ]]; then
-		[[ $dfUSB ]] && mount=$dfUSB || mount=$dfNAS
-		mnt=$( echo $mount | awk '{ print $NF }' )
-		acl=$( getfacl -p $mnt | grep other | cut -d':' -f3 )
-		[[ ${acl:0:2} == rw ]] && pathcoverarts=$mnt/coverarts
+	rm "$pathcoverarts/0"
+elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not set
+	existing=$(find /mnt/MPD/ -type d -name coverarts )
+	if [[ $existing ]]; then # exist > recreate link and set redis
+		touch "$existing/0"
+		if (( $? == 0 )); then
+			rm "$existing/0"
+			ln -sf "$existing" /srv/http/assets/img/
+			redis-cli set pathcoverarts "$existing"
+		fi
+	else
+		echo -e "$bar Create coverarts directory ..."
+
+		pathcoverarts=/mnt/MPD/LocalStorage/coverarts
+		df=$( df )
+		dfUSB=$( echo "$df" | grep '/mnt/MPD/USB' | head -n1 )
+		dfNAS=$( echo "$df" | grep '/mnt/MPD/NAS' | head -n1 )
+		if [[ $dfUSB || $dfNAS ]]; then
+			[[ $dfUSB ]] && mount=$dfUSB || mount=$dfNAS
+			mnt=$( echo $mount | awk '{ print $NF }' )
+			acl=$( getfacl -p $mnt | grep other | cut -d':' -f3 )
+			[[ ${acl:0:2} == rw ]] && pathcoverarts=$mnt/coverarts
+		fi
+		mkdir -p $pathcoverarts
+		pathlink=/srv/http/assets/img/
+		ln -sf $pathcoverarts $pathlink
+		redis-cli set pathcoverarts $pathcoverarts &> /dev/null
 	fi
-	mkdir -p $pathcoverarts
-	pathlink=/srv/http/assets/img/
-	ln -sf $pathcoverarts $pathlink
-	redis-cli set pathcoverarts $pathcoverarts &> /dev/null	
 fi
 
 timestart
