@@ -5,7 +5,6 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- `USB` - if found and has rw permission
 	- `NAS` - if no USB and has rw permission
 	- `LocalStorage` (SD) - if the above 2 not available
-	- With symbolic link at `/srv/http/assets/img/coverarts`
 - Get **album name** list
 	- Albums with duplicate names but different artists not include in the list
 - Get **album** list by **name** and **albumartist** tags (includes `*.cue` file)
