@@ -137,7 +137,9 @@ function createThumbnail() {
 }
 
 [[ $( redis-cli exists countalbum ) == 1 ]] && update=Update || update=Create
-title -l '=' "$bar $update thumbnails for $( tcolor 'Browse By CoverArt' ) ..."
+coloredname=$( tcolor 'Browsing By Coverarts' )
+
+title -l '=' "$bar $update thumbnails for $coloredname ..."
 
 # get album
 listalbum=$( mpc list album | awk NF )
@@ -223,7 +225,7 @@ curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart B
 
 timestop
 
-title -l '=' "$bar $update thumbnails for $( tcolor 'Browse By CoverArt' ) successfully."
+title -l '=' "$bar $update thumbnails for $coloredname successfully."
 
 if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
