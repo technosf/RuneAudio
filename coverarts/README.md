@@ -1,4 +1,5 @@
-## Coverarts Browsing for RuneUI Enhancement
+## Browse By CoverArt for RuneUI Enhancement
+*(This runs through CoverArt button in RuneUI Enhancement Library.)*  
 
 Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It will take a while depend on numbers of album for the 1st time. Subsequent updates will be on new/changed album/artist names only.
 - Directory `coverarts` to save thumbnails will be created in:
