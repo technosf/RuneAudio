@@ -217,7 +217,8 @@ title -l '=' "$bar Thumbnails updated / created successfully."
 if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
 fi
-echo Thumbnails directory: $( tcolor "$pathcoverarts" )
+echo
+echo Thumbnails directory : $( tcolor "$pathcoverarts" )
 echo
 echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
