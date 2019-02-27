@@ -17,29 +17,32 @@ if [[ -e "$pathcoverarts" ]]; then # exist and writable
 elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not set
 	existing=$(find /mnt/MPD/ -type d -name coverarts )
 	if [[ $existing ]]; then # exist > recreate link and set redis
+		ln -sf "$existing" /srv/http/assets/img/
+		redis-cli set pathcoverarts "$existing"
 		touch "$existing/0"
-		if (( $? == 0 )); then
-			rm "$existing/0"
-			ln -sf "$existing" /srv/http/assets/img/
-			redis-cli set pathcoverarts "$existing"
+		if (( $? != 0 )); then
+			title "$info Directory $( tcolor "$existing" ) found but not writeable."
+			exit
 		fi
+		rm "$existing/0"
 	else
 		echo -e "$bar Create coverarts directory ..."
 
-		pathcoverarts=/mnt/MPD/LocalStorage/coverarts
 		df=$( df )
 		dfUSB=$( echo "$df" | grep '/mnt/MPD/USB' | head -n1 )
 		dfNAS=$( echo "$df" | grep '/mnt/MPD/NAS' | head -n1 )
 		if [[ $dfUSB || $dfNAS ]]; then
 			[[ $dfUSB ]] && mount=$dfUSB || mount=$dfNAS
 			mnt=$( echo $mount | awk '{ print $NF }' )
-			acl=$( getfacl -p $mnt | grep other | cut -d':' -f3 )
-			[[ ${acl:0:2} == rw ]] && pathcoverarts=$mnt/coverarts
+			pathcoverarts="$mnt/coverarts"
+			mkdir "$pathcoverarts"
+			if (( $? != 0 )); then
+				pathcoverarts=/mnt/MPD/LocalStorage/coverarts
+				mkdir "$pathcoverarts"
+			fi
+			ln -sf "$pathcoverarts" /srv/http/assets/img/
+			redis-cli set pathcoverarts $pathcoverarts &> /dev/null
 		fi
-		mkdir -p $pathcoverarts
-		pathlink=/srv/http/assets/img/
-		ln -sf $pathcoverarts $pathlink
-		redis-cli set pathcoverarts $pathcoverarts &> /dev/null
 	fi
 fi
 
