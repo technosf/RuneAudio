@@ -9,8 +9,12 @@ rm $0
 timestart
 
 # verify coverarts directory
-[[ $# -eq 1 && $1 != 0 ]] && pathcoverarts=$1 || pathcoverarts=$( redis-cli get pathcoverarts )
-
+if [[ $# -eq 1 && $1 != 0 ]];then
+	pathcoverarts=$1
+	redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
+else
+	pathcoverarts=$( redis-cli get pathcoverarts )
+fi
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
