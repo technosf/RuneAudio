@@ -4,8 +4,16 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
+# verify coverarts directory
 pathcoverarts=$( redis-cli get pathcoverarts )
-if [[ ! $pathcoverarts || ! -e $pathcoverarts ]]; then
+if [[ -e $pathcoverarts ]]; then
+	acl=$( getfacl -p $pathcoverarts | grep other | cut -d':' -f3 )
+	if [[ ${acl:0:2} != rw ]]; then
+		title "$info Directory $( tcolor $pathcoverarts ) is not writeable."
+		title -nt "New thumbnails cannot be saved."
+		exit
+	fi
+elif [[ ! -e $pathcoverarts || ! $pathcoverarts ]]; then
 	echo -e "$bar Create coverarts directory ..."
 	
 	pathcoverarts=/mnt/MPD/LocalStorage/coverarts
@@ -21,7 +29,7 @@ if [[ ! $pathcoverarts || ! -e $pathcoverarts ]]; then
 	mkdir -p $pathcoverarts
 	pathlink=/srv/http/assets/img/
 	ln -sf $pathcoverarts $pathlink
-	redis-cli set pathcoverarts $pathcoverarts &> /dev/null
+	redis-cli set pathcoverarts $pathcoverarts &> /dev/null	
 fi
 
 timestart
