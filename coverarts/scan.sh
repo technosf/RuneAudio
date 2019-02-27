@@ -2,7 +2,7 @@
 
 #$1-pathcoverarts
 
-#rm $0
+rm $0
 
 . /srv/http/addonstitle.sh
 
