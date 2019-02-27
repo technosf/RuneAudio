@@ -28,7 +28,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	if (( $( echo "$pathcoverarts" | wc -l ) > 1 )); then # more than 1 found
 		title "$info Directory $( tcolor coverarts ) found more than 1 at:"
 		echo "$pathcoverarts"
-		title -nt "Run again and specify which path to use."
+		title -nt "Run $( tcolor 'RuneUie - Browse By CoverArt' ) addon and specify which path to use."
 		exit
 	fi
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
@@ -137,7 +137,7 @@ function createThumbnail() {
 }
 
 [[ $( redis-cli exists countalbum ) == 1 ]] && update=Update || update=Create
-coloredname=$( tcolor 'Browsing By Coverarts' )
+coloredname=$( tcolor 'Browsing By Coverart' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
