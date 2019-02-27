@@ -1,8 +1,10 @@
 #!/bin/bash
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
+
+timestart
 
 # verify coverarts directory
 pathcoverarts=$( redis-cli get pathcoverarts )
@@ -10,7 +12,7 @@ if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
 		title "$info Directory $( tcolor "$pathcoverarts" ) is not writeable."
-		title -nt "New thumbnails cannot be saved."
+		title -nt "Enable write permission then try again."
 		exit
 	fi
 	rm "$pathcoverarts/0"
@@ -22,6 +24,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 		touch "$existing/0"
 		if (( $? != 0 )); then
 			title "$info Directory $( tcolor "$existing" ) found but not writeable."
+			title -nt "Enable write permission then try again."
 			exit
 		fi
 		rm "$existing/0"
@@ -45,8 +48,6 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 		fi
 	fi
 fi
-
-timestart
 
 cue=
 exist=0
