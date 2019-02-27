@@ -223,7 +223,7 @@ curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart B
 
 timestop
 
-title -l '=' "$bar $update thumbnails for $( tcolor 'Browse By CoveraArt' ) successfully."
+title -l '=' "$bar $update thumbnails for $( tcolor 'Browse By CoverArt' ) successfully."
 
 if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
