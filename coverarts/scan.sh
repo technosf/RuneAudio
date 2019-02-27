@@ -73,7 +73,7 @@ padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
 coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
 
-rm /srv/http/tmp/skipped-wav.txt
+rm -f /srv/http/tmp/skipped-wav.txt # remove log
 
 function createThumbnail() {
 	percent=$(( $i * 100 / $count ))
@@ -223,7 +223,7 @@ curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart B
 
 timestop
 
-title -l '=' "$bar Thumbnails updated / created successfully."
+title -l '=' "$bar Thumbnails $update successfully."
 if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
 fi
