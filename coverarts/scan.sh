@@ -7,7 +7,7 @@ rm $0
 timestart
 
 # verify coverarts directory
-[[ $# == 1 && $1 != 0 ]] && pathcoverarts=$1 || pathcoverarts=$( redis-cli get pathcoverarts )
+[[ $# -eq 1 && $1 != 0 ]] && pathcoverarts=$1 || pathcoverarts=$( redis-cli get pathcoverarts )
 
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
