@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#$1-pathcoverarts
-
 rm $0
 
 . /srv/http/addonstitle.sh
@@ -24,11 +22,11 @@ if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	fi
 	rm "$pathcoverarts/0"
 elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not set
-	pathcoverarts=$( find /mnt/MPD/ -type d -name coverarts )
+	pathcoverarts=$( find /mnt/MPD/ -maxdepth 3 -type d -name coverarts )
 	if (( $( echo "$pathcoverarts" | wc -l ) > 1 )); then # more than 1 found
 		title "$info Directory $( tcolor coverarts ) found more than 1 at:"
 		echo "$pathcoverarts"
-		title -nt "Run $( tcolor 'RuneUie - Browse By CoverArt' ) addon and specify which path to use."
+		title -nt "Keep the one to be used and rename others."
 		exit
 	fi
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
