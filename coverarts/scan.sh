@@ -23,7 +23,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	existing=$(find /mnt/MPD/ -type d -name coverarts )
 	if [[ $existing ]]; then # exist > recreate link and set redis
 		ln -sf "$existing" /srv/http/assets/img/
-		redis-cli set pathcoverarts "$existing"
+		redis-cli set pathcoverarts "$existing" &> /dev/null
 		touch "$existing/0"
 		if (( $? != 0 )); then
 			title "$info Directory $( tcolor "$existing" ) found but not writeable."
