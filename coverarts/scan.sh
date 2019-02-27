@@ -214,7 +214,7 @@ done
 echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
-(( $exist )) && echo -e "Existings/Duplicates : $( tcolor $( numfmt --g $exist ) )"
+(( $exist )) && echo -e "Existings            : $( tcolor $( numfmt --g $exist ) )"
 echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
 echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
 
