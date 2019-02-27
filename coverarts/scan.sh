@@ -218,7 +218,7 @@ if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
 fi
 echo
-echo Thumbnails directory : $( tcolor "$pathcoverarts" )
+echo Thumbnails directory : $( tcolor /srv/http/assets/img/coverarts )
 echo
 echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
