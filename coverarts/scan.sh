@@ -7,7 +7,8 @@ rm $0
 timestart
 
 # verify coverarts directory
-pathcoverarts=$( redis-cli get pathcoverarts )
+(( $# == 1 )) && pathcoverarts=$1 || pathcoverarts=$( redis-cli get pathcoverarts )
+
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
@@ -221,4 +222,4 @@ echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
 echo "  - Replace coverart normally and update"
 echo "  - Delete by long-press on each coverart"
-title -nt "$info Start browsing: $( tcolor 'Library > Coverart' )"
+title -nt "$info Start browsing: $( tcolor 'Library > CoverArt' )"
