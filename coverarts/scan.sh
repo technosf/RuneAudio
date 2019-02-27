@@ -234,6 +234,5 @@ echo
 echo -e "$bar To change :"
 echo "  - Coverart files used before ID3 embedded"
 echo "  - Replace coverart normally and update"
-echo "  - Delete by long-press on each coverart"
-echo -e "$bar To update : Long-press $( tcolor 'Library > CoverArt' )"
-title -nt "$info To browse : Tap $( tcolor 'Library > CoverArt' )"
+echo "  - Delete by long-press on each thumbnail"
+echo -e "$bar To update : Long-press $( tcolor CoverArt ) in Library"
