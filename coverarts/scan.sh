@@ -5,9 +5,23 @@ rm $0
 . /srv/http/addonstitle.sh
 
 pathcoverarts=$( redis-cli get pathcoverarts )
-if [[ ! -e $pathcoverarts ]]; then
-	title "$info Thumnail directory, $path, not exist."
-	exit
+if [[ ! $pathcoverarts || ! -e $pathcoverarts ]]; then
+	echo -e "$bar Create coverarts directory ..."
+	
+	pathcoverarts=/mnt/MPD/LocalStorage/coverarts
+	df=$( df )
+	dfUSB=$( echo "$df" | grep '/mnt/MPD/USB' | head -n1 )
+	dfNAS=$( echo "$df" | grep '/mnt/MPD/NAS' | head -n1 )
+	if [[ $dfUSB || $dfNAS ]]; then
+		[[ $dfUSB ]] && mount=$dfUSB || mount=$dfNAS
+		mnt=$( echo $mount | awk '{ print $NF }' )
+		acl=$( getfacl -p $mnt | grep other | cut -d':' -f3 )
+		[[ ${acl:0:2} == rw ]] && pathcoverarts=$mnt/coverarts
+	fi
+	mkdir -p $pathcoverarts
+	pathlink=/srv/http/assets/img/
+	ln -sf $pathcoverarts $pathlink
+	redis-cli set pathcoverarts $pathcoverarts &> /dev/null
 fi
 
 timestart
