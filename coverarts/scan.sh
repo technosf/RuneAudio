@@ -2,7 +2,7 @@
 
 #$1-pathcoverarts
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -20,17 +20,17 @@ if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	fi
 	rm "$pathcoverarts/0"
 elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not set
-	existing=$(find /mnt/MPD/ -type d -name coverarts )
-	if [[ $existing ]]; then # exist > recreate link and set redis
-		ln -sf "$existing" /srv/http/assets/img/
-		redis-cli set pathcoverarts "$existing" &> /dev/null
-		touch "$existing/0"
+	pathcoverarts=$(find /mnt/MPD/ -type d -name coverarts )
+	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
+		ln -sf "$pathcoverarts" /srv/http/assets/img/
+		redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
+		touch "$pathcoverarts/0"
 		if (( $? != 0 )); then
-			title "$info Directory $( tcolor "$existing" ) found but not writeable."
+			title "$info Directory $( tcolor "$pathcoverarts" ) found but not writeable."
 			title -nt "Enable write permission then try again."
 			exit
 		fi
-		rm "$existing/0"
+		rm "$pathcoverarts/0"
 	else
 		echo -e "$bar Create coverarts directory ..."
 
@@ -79,7 +79,6 @@ function createThumbnail() {
 	
 	thumbname=${thumbname//\//|} # slash "/" character not allowed in filename
 	thumbfile="$pathcoverarts/$thumbname.jpg"
-	
 	if [[ -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Skip - Thumbnail already exists."
