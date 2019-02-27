@@ -44,7 +44,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 				mkdir "$pathcoverarts"
 			fi
 			ln -sf "$pathcoverarts" /srv/http/assets/img/
-			redis-cli set pathcoverarts $pathcoverarts &> /dev/null
+			redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
 		fi
 	fi
 fi
@@ -215,6 +215,7 @@ title -l '=' "$bar Thumbnails updated / created successfully."
 if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
 	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
 fi
+echo Thumbnails directory: $( tcolor "$pathcoverarts" )
 echo
 echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
