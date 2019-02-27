@@ -189,6 +189,10 @@ curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart B
 timestop
 
 title -l '=' "$bar Thumbnails updated / created successfully."
+if [[ $( echo $pathcoverarts | cut -d'/' -f4 ) == LocalStorage ]]; then
+	echo -e "$info $( tcolor $pathcoverarts ) is in SD card. Backup before reflash."
+fi
+echo
 echo -e "$bar To change:"
 echo "  - Coverart files used before ID3 embedded"
 echo "  - Replace coverart normally and update"
