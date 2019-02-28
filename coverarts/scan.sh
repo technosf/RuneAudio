@@ -8,9 +8,17 @@ timestart
 
 # verify installed imagemagik
 if [[ $( pacman -Ss 'imagemagick$' | head -n1 | cut -d' ' -f3 ) != '[installed]' ]]; then
-	title "$info $( tcolor ImageMagick ) not installed properly."
-	title -nt "Reinstall by SSH: pacman -Sy imagemagick"
-	exit
+	echo -e "$bar Prefetch packages ..."
+	pacman -Syw --noconfirm imagemagick libpng zlib glibc
+	
+	echo -e "$bar Install ImageMagick for coverart resizing ..."
+	pacman -S --noconfirm imagemagick libpng zlib glibc
+	
+	if [[ $( pacman -Ss 'imagemagick$' | head -n1 | cut -d' ' -f3 ) != '[installed]' ]]; then
+		title "$info $( tcolor ImageMagick ) not installed properly."
+		title -nt "Reinstall manually by SSH: pacman -Sy imagemagick libpng zlib glibc"
+		exit
+	fi
 fi
 
 # verify coverarts directory
