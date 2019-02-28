@@ -7,12 +7,9 @@ rm $0
 timestart
 
 # verify installed imagemagik
-pkg=$( pacman -Ss 'imagemagick$' | head -n1 )
-installed=$( echo $pkg | cut -d' ' -f3 )
-
-if [[ $installed != '[installed]' ]]; then
+if [[ $( pacman -Ss 'imagemagick$' | head -n1 | cut -d' ' -f3 ) != '[installed]' ]]; then
 	title "$info $( tcolor ImageMagick ) not installed properly."
-	title -nt "Install by SSH: pacman -Sy imagemagick"
+	title -nt "Reinstall by SSH: pacman -Sy imagemagick"
 	exit
 fi
 
