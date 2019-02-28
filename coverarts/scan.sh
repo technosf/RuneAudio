@@ -139,6 +139,9 @@ coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
+echo -e "$bar Update Library database ..."
+mpc update | head -n1
+
 # get album
 listalbum=$( mpc list album | awk NF )
 readarray -t albums <<<"$listalbum"
