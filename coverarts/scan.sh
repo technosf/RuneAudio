@@ -6,13 +6,19 @@ rm $0
 
 timestart
 
-# verify coverarts directory
-if [[ $# -eq 1 && $1 != 0 ]];then
-	pathcoverarts=$1
-	redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
-else
-	pathcoverarts=$( redis-cli get pathcoverarts )
+# verify installed imagemagik
+pkg=$( pacman -Ss 'imagemagick$' | head -n1 )
+installed=$( echo $pkg | cut -d' ' -f3 )
+
+if [[ $installed != '[installed]' ]]; then
+	title "$info $( tcolor ImageMagick ) not installed properly."
+	title -nt "Install by SSH: pacman -Sy imagemagick"
+	exit
 fi
+
+# verify coverarts directory
+pathcoverarts=$( redis-cli get pathcoverarts )
+
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
