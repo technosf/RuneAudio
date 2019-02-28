@@ -32,7 +32,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 - To avoid duplicates, remove `*.cue` files if individual audio files already exist in that directory.
 
 ### Albums with `*.wav` files
-- Default MPD cannot read **albumartist** data which will fallback to **artist** instead.
+- Default MPD cannot read **albumartist** tag from `*.wav` files which will fallback to **artist** instead.
 - So, only 1 thumbnail will be created for each directory to avoid duplicates.  
 - While other file types can be in the same directory or have a duplicate name:
 	- To create separate thumbnails, separate albums must be placed in separate directories.
