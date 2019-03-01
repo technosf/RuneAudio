@@ -186,7 +186,7 @@ else
 		albumArtist="$albumArtist"$'\n'"$find"
 		(( i++ ))
 		percent=$(( $i * 100 / $count ))
-		echo ${percent}% $( tcolor "$i/$count" 8 ) $album
+		echo ${percent}% $( tcolor "$i/$count name" 8 ) $album
 	done
 fi
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
