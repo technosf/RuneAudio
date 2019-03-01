@@ -145,6 +145,10 @@ if [[ $1 ]]; then
 	find=$( find "$1" -type d )
 	readarray -t dirs <<<"$find"
 	count=${#dirs[@]}
+	if (( $count == 0 )); then
+		title "$info No music files found in $1"
+		exit
+	fi
 	echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
 	
 	i=0
@@ -165,6 +169,10 @@ else
 	listalbum=$( mpc list album | awk NF )
 	readarray -t albums <<<"$listalbum"
 	count=${#albums[@]}
+	if (( $count == 0 )); then
+		title "$info No albums found in database"
+		exit
+	fi
 	echo -e "\n$( tcolor $( numfmt --g $count ) ) Album names"
 	albumnames=$count
 
@@ -178,7 +186,7 @@ else
 		albumArtist="$albumArtist"$'\n'"$find"
 		(( i++ ))
 		percent=$(( $i * 100 / $count ))
-		echo ${percent}% $( tcolor "$i/$count name" 8 ) $album
+		echo ${percent}% $( tcolor "$i/$count" 8 ) $album
 	done
 fi
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
@@ -214,30 +222,36 @@ for albumArtist in "${albumArtists[@]}"; do
 done
 
 # cue - not in mpd database
-title "$bar Cue Sheet - Get album list ..."
-
-cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
+[[ $1 ]] && path=$1 || path=/mnt/MPD
+echo $path
+cueFiles=$( find "$path" -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
-countalbum=$(( countalbum + count ))
-cue=' cue'
-i=0
-for file in "${files[@]}"; do
-	tag=$( cat "$file" | grep '^TITLE\|^PERFORMER' )
-	album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
-	artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
-	dir=$( dirname "$file" )
-	thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
-	(( i++ ))
-	createThumbnail
-done
+if (( $count != 0 )); then
+	title "$bar Cue Sheet - Get album list ..."
+
+	countalbum=$(( countalbum + count ))
+	cue=' cue'
+	i=0
+	for file in "${files[@]}"; do
+		tag=$( cat "$file" | grep '^TITLE\|^PERFORMER' )
+		album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
+		artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
+		dir=$( dirname "$file" )
+		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
+		(( i++ ))
+		createThumbnail
+	done
+fi
 
 echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings            : $( tcolor $( numfmt --g $exist ) )"
-echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
-echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
+if [[ -z $1 ]]; then
+	echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
+	echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
+fi
 
 # save album count
 redis-cli set countalbum $countalbum &> /dev/null
