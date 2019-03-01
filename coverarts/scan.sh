@@ -143,12 +143,12 @@ title "$bar Get album-artist list ..."
 if [[ $1 ]]; then
 ######### base: specific path
 	find=$( find "$1" -type d )
-	readarray -t dirs <<<"$find"
-	count=${#dirs[@]}
-	if (( $count == 0 )); then
+	if [[ -z $find ]]; then
 		title "$info No music files found in $1"
 		exit
 	fi
+	readarray -t dirs <<<"$find"
+	count=${#dirs[@]}
 	echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
 	
 	i=0
@@ -167,12 +167,12 @@ else
 ######### base: database
 	# get album names
 	listalbum=$( mpc list album | awk NF )
-	readarray -t albums <<<"$listalbum"
-	count=${#albums[@]}
-	if (( $count == 0 )); then
+	if [[ -z $listalbum ]]; then
 		title "$info No albums found in database"
 		exit
 	fi
+	readarray -t albums <<<"$listalbum"
+	count=${#albums[@]}
 	echo -e "\n$( tcolor $( numfmt --g $count ) ) Album names"
 	albumnames=$count
 
@@ -225,9 +225,9 @@ done
 [[ $1 ]] && path=$1 || path=/mnt/MPD
 echo $path
 cueFiles=$( find "$path" -type f -name '*.cue' )
-readarray -t files <<<"$cueFiles"
-count=${#files[@]}
-if (( $count != 0 )); then
+if [[ -n $cueFiles ]]; then
+	readarray -t files <<<"$cueFiles"
+	count=${#files[@]}
 	title "$bar Cue Sheet - Get album list ..."
 
 	countalbum=$(( countalbum + count ))
