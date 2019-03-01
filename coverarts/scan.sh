@@ -26,8 +26,6 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 		exit
 	fi
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
-		ln -sf "$pathcoverarts" /srv/http/assets/img/
-		redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
 		touch "$pathcoverarts/0"
 		if (( $? != 0 )); then
 			title "$info Directory $( tcolor "$pathcoverarts" ) found but not writeable."
@@ -50,11 +48,11 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 				pathcoverarts=/mnt/MPD/LocalStorage/coverarts
 				mkdir "$pathcoverarts"
 			fi
-			ln -sf "$pathcoverarts" /srv/http/assets/img/
-			redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
 		fi
 	fi
 fi
+redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
+ln -sf "$pathcoverarts" /srv/http/assets/img/
 
 cue=
 exist=0
