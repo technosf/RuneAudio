@@ -223,7 +223,6 @@ done
 
 # cue - not in mpd database
 [[ $1 ]] && path=$1 || path=/mnt/MPD
-echo $path
 cueFiles=$( find "$path" -type f -name '*.cue' )
 if [[ -n $cueFiles ]]; then
 	readarray -t files <<<"$cueFiles"
