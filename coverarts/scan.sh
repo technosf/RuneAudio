@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# $1-specified path
+
 rm $0
 
 . /srv/http/addonstitle.sh
@@ -136,31 +138,55 @@ title -l '=' "$bar $update thumbnails for $coloredname ..."
 echo -e "$bar Update Library database ..."
 mpc update | head -n1
 
-# get album
-listalbum=$( mpc list album | awk NF )
-readarray -t albums <<<"$listalbum"
-count=${#albums[@]}
-albumnames=$count
-
-# get album artist - expand albums with same name
-title "$bar Get album list ..."
-
-i=0
-albumArtist=
-for album in "${albums[@]}"; do
-	find=$( mpc find -f "%album%^[%albumartist%|%artist%]" album "$album" | awk '!a[$0]++' )
-	albumArtist="$albumArtist"$'\n'"$find"
-	(( i++ ))
-	percent=$(( $i * 100 / $count ))
-	echo ${percent}% $( tcolor "$i/$count" 8 ) $album
-done
-readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
-echo -e "\n$( tcolor $( numfmt --g $i ) ) Album names"
-
 title "$bar Get album-artist list ..."
-# get album artist file
+
+if [[ $1 ]]; then
+######### base: specific path
+	find=$( find "$1" -type d )
+	readarray -t dirs <<<"$find"
+	count=${#dirs[@]}
+	echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
+	
+	i=0
+	albumArtist=
+	for dir in "${dirs[@]}"; do
+		path=${dir/\/mnt\/MPD\/}
+		mpcls=$( mpc ls -f "%album%^[%albumartist%|%artist%]" "$path" | grep '\^' | awk '!a[$0]++' )
+		(( i++ ))
+		percent=$(( $i * 100 / $count ))
+		echo ${percent}% $( tcolor "$i/$count dir" 8 ) $path
+		[[ -z $mpcls ]] && continue
+		albumArtist="$albumArtist"$'\n'"$mpcls"
+	done
+	albumArtist=$( echo "$albumArtist" | awk '!a[$0]++' )
+else
+######### base: database
+	# get album names
+	listalbum=$( mpc list album | awk NF )
+	readarray -t albums <<<"$listalbum"
+	count=${#albums[@]}
+	echo -e "\n$( tcolor $( numfmt --g $count ) ) Album names"
+	albumnames=$count
+
+	# expand albums with same name
+	title "$bar Get album-artist list ..."
+
+	i=0
+	albumArtist=
+	for album in "${albums[@]}"; do
+		find=$( mpc find -f "%album%^[%albumartist%|%artist%]" album "$album" | awk '!a[$0]++' )
+		albumArtist="$albumArtist"$'\n'"$find"
+		(( i++ ))
+		percent=$(( $i * 100 / $count ))
+		echo ${percent}% $( tcolor "$i/$count" 8 ) $album
+	done
+fi
+readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 count=${#albumArtists[@]}
 countalbum=$count
+
+# get path of each album > get coverart > create
+title "$bar Get files ..."
 i=0
 for albumArtist in "${albumArtists[@]}"; do
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
