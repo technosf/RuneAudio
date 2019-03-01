@@ -216,7 +216,8 @@ done
 # cue - not in mpd database
 title "$bar Cue Sheet - Get album list ..."
 
-cueFiles=$( find /mnt/MPD -type f -name '*.cue' )
+[[ $1 ]] && path=$1 || path=/mnt/MPD
+cueFiles=$( find "$path" -type f -name '*.cue' )
 readarray -t files <<<"$cueFiles"
 count=${#files[@]}
 countalbum=$(( countalbum + count ))
