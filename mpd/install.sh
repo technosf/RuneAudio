@@ -71,7 +71,8 @@ fi
 
 clearcache
 systemctl restart rune_PL_wrk
-	
+redis-cli hset addons mpdu 1 &> /dev/null
+
 timestop l
 
 version=$( mpd -V | head -n1 | cut -d'(' -f2 | cut -d')' -f1 )
