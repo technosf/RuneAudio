@@ -65,7 +65,7 @@ padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
-coverfiles=( cover.png cover.jpg folder.png folder.jpg front.png front.jpg Cover.png Cover.jpg Folder.png Folder.jpg Front.png Front.jpg )
+coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 
 rm -f /srv/http/tmp/skipped-wav.txt # remove log
 
@@ -89,7 +89,7 @@ function createThumbnail() {
 		return
 	fi
 	
-	for cover in "${coverfiles[@]}"; do
+	for cover in $coverfiles; do
 		coverfile="$dir/$cover"
 		if [[ -e "$coverfile" ]]; then
 			convert "$coverfile" \
