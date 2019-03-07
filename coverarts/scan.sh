@@ -248,7 +248,7 @@ fi
 echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
-(( $exist )) && echo -e "Existings            : $( tcolor $( numfmt --g $exist ) )"
+(( $exist )) && echo -e "Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
 if [[ -v scanpath ]]; then
 	echo -e "Partial update path  : $scanpath"
 else
