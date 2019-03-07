@@ -15,7 +15,7 @@ pathcoverarts=$( redis-cli get pathcoverarts )
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
-		title "$info Directory $( tcolor "$pathcoverarts" ) is not writeable."
+		title "$info Directory $( tcolor "$pathcoverarts" ) is not writable."
 		title -nt "Enable write permission then try again."
 		exit
 	fi
