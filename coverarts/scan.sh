@@ -249,7 +249,9 @@ echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings            : $( tcolor $( numfmt --g $exist ) )"
-if [[ -z $1 ]]; then
+if [[ -v scanpath ]]; then
+	echo -e "Partial update path  : $scanpath"
+else
 	echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
 	echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
 fi
