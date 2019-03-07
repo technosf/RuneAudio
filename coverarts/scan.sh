@@ -16,7 +16,7 @@ if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
 	if (( $? != 0 )); then
 		title "$info Directory $( tcolor "$pathcoverarts" ) is not writable."
-		title -nt "Enable write permission then try again."
+		title -nt "Set write permission then try again."
 		exit
 	fi
 	rm "$pathcoverarts/0"
@@ -31,8 +31,8 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
 		touch "$pathcoverarts/0"
 		if (( $? != 0 )); then
-			title "$info Directory $( tcolor "$pathcoverarts" ) found but not writeable."
-			title -nt "Enable write permission then try again."
+			title "$info Directory $( tcolor "$pathcoverarts" ) found but not writable."
+			title -nt "Set write permission then try again."
 			exit
 		fi
 		rm "$pathcoverarts/0"
