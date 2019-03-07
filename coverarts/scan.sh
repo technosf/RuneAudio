@@ -272,9 +272,8 @@ echo
 echo Thumbnails directory : $( tcolor "$pathcoverarts" )
 echo
 echo -e "$bar To change :"
-echo "    - Coverart files used before ID3 embedded"
-echo "    - Replace coverart normally and update"
-echo "    - Delete by long-press on each thumbnail"
+echo "    - Replace - manage coverarts normally and update (Coverart files used before ID3 embedded)"
+echo "    - Delete  - long-press on each thumbnail"
 echo -e "$bar To update :"
-echo "    - Full    - Long-press $( tcolor CoverArt ) in Library"
-echo "    - Partial - Context menu > Update thumbnails"
+echo "    - Full    - Library > long-press $( tcolor CoverArt )"
+echo "    - Partial - Library > directory > Context menu > Update thumbnails"
