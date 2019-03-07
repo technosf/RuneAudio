@@ -25,7 +25,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	if (( $( echo "$pathcoverarts" | wc -l ) > 1 )); then # more than 1 found
 		title "$info Directory $( tcolor coverarts ) found more than 1 at:"
 		echo "$pathcoverarts"
-		title -nt "Keep the one to be used and rename others."
+		title -nt "Keep one to use and rename others."
 		exit
 	fi
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
