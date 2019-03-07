@@ -83,7 +83,7 @@ function createThumbnail() {
 	
 	thumbname=${thumbname//\//|} # slash "/" character not allowed in filename
 	thumbfile="$pathcoverarts/$thumbname.jpg"
-	if [[ -e "$thumbfile" ]]; then
+	if [[ -z $2 && -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Skip - Thumbnail exists."
 		return
@@ -140,7 +140,7 @@ mpc update | head -n1
 
 title "$bar Get album-artist list ..."
 
-if [[ $1 ]]; then
+if [[ -n $1 ]]; then
 ######### base: specific path
 	find=$( find "$1" -type d )
 	if [[ -z $find ]]; then
