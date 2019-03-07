@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# $1-specified path
+[[ -n "$1" ]] && scanpath=$1
+[[ -n "$2" ]] && removeexist=$2
 
 rm $0
 
@@ -83,7 +84,8 @@ function createThumbnail() {
 	
 	thumbname=${thumbname//\//|} # slash "/" character not allowed in filename
 	thumbfile="$pathcoverarts/$thumbname.jpg"
-	if [[ -z "$2" && -e "$thumbfile" ]]; then
+	
+	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Skip - Thumbnail exists."
 		return
@@ -140,7 +142,7 @@ mpc update | head -n1
 
 title "$bar Get album-artist list ..."
 
-if [[ -n "$1" ]]; then
+if [[ -v scanpath ]]; then
 ######### base: specific path
 	find=$( find "$1" -type d )
 	if [[ -z $find ]]; then
