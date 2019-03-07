@@ -250,6 +250,7 @@ echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e "Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
 if [[ -v scanpath ]]; then
+	scanpath=$( tcolor "$scanpath" )
 	echo -e "Partial update path  : $scanpath"
 else
 	echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
