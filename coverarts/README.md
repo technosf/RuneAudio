@@ -19,7 +19,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- Check if **thumbnail** already exists
 	- If none, Find **coverart file** in directory and create thumbnail
 	- If none, find **ID3 embedded covertart** and create thumbnail (skip if `*.cue` or `*.wav`)
-	- If none, create **dummy** thumbnail with album name and artist
+	- If none, use `rune.svg` as **dummy** thumbnail
 - Save thumbnails
 
 ### To change:
