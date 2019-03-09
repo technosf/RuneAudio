@@ -120,17 +120,8 @@ function createThumbnail() {
 		fi
 	fi
 	
-	[[ -n $artist ]] && anotate="$album\n$artist" || anotate=$album
-	convert /srv/http/assets/img/cover-dummy.svg \
-		-resize 200x200 \
-		-font /srv/http/assets/fonts/lato/lato-regular-webfont.ttf \
-		-pointsize 16 \
-		-fill "#e0e7ee" \
-		-annotate +10+90 "$anotate" \
-		"$thumbfile"
-	echo -e "$padB Coverart not found. Dummy thumbnail created."
-	#ln -s /srv/http/assets/img/cover.svg "${thumbfile:0:-3}svg"
-	#echo -e "$padB Coverart not found."
+	ln -s /srv/http/assets/img/cover.svg "${thumbfile:0:-3}svg"
+	echo -e "$padB Coverart not found."
 	(( dummy++ ))
 }
 
