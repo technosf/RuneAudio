@@ -247,10 +247,9 @@ if [[ -v scanpath ]]; then
 else
 	echo -e "Album names          : $( tcolor $( numfmt --g $albumnames ) )"
 	echo -e "$padW Total albums       : $( tcolor $( numfmt --g $countalbum ) )"
+	# save album count
+	redis-cli set countalbum $countalbum &> /dev/null
 fi
-
-# save album count
-[[ ! -v scanpath ]] && redis-cli set countalbum $countalbum &> /dev/null
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated."'" }' &> /dev/null
 
