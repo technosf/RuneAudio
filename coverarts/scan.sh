@@ -250,7 +250,7 @@ else
 fi
 
 # save album count
-[[ -v scanpath ]] && redis-cli set countalbum $countalbum &> /dev/null
+[[ ! -v scanpath ]] && redis-cli set countalbum $countalbum &> /dev/null
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' -d '{ "title": "'"Coverart Browsing"'", "text": "'"Thumbnails updated."'" }' &> /dev/null
 
