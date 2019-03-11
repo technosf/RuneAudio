@@ -7,7 +7,7 @@ rm $0
 title -l '=' "$bar Change screen off duration ..."
 
 export DISPLAY=:0
-xset s $(( 1 * 60 )) 0
+xset s $(( $1 * 60 )) 0
 
 (( $1 == 0 )) && min=disabled || min="$1 minutes"
 
