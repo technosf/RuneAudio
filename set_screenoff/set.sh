@@ -8,6 +8,6 @@ title -l '=' "$bar Change screen off duration ..."
 
 xset s $(( 1 * 60 )) 0
 
-(( $1 == 0 )) && min=disabled || min=$1
+(( $1 == 0 )) && min=disabled || min="$1 minutes"
 
-title -nt "$info Notification duration changed to $( tcolor $min ) minutes"
+title -nt "$info Screen off timeout changed to $( tcolor "$min" )"
