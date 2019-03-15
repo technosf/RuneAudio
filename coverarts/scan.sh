@@ -47,9 +47,13 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 			mnt=$( echo $mount | awk '{ print $NF }' )
 			pathcoverarts="$mnt/coverarts"
 			mkdir "$pathcoverarts"
-			[[ $? != 0 ]] && mkdir /mnt/MPD/LocalStorage/coverarts
+			if [[ $? != 0 ]]; then
+				pathcoverarts=/mnt/MPD/LocalStorage/coverarts
+				mkdir "$pathcoverarts"
+			fi
 		else
-			mkdir /mnt/MPD/LocalStorage/coverarts
+			pathcoverarts=/mnt/MPD/LocalStorage/coverarts
+			mkdir "$pathcoverarts"
 		fi
 	fi
 fi
