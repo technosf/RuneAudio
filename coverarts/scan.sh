@@ -14,7 +14,7 @@ pathcoverarts=$( redis-cli get pathcoverarts )
 
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
-	if (( $? != 0 )); then
+	if [[ $? != 0 ]]; then
 		title "$info Directory $( tcolor "$pathcoverarts" ) is not writable."
 		title -nt "Set write permission then try again."
 		exit
@@ -30,7 +30,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	fi
 	if [[ $pathcoverarts ]]; then # exist > recreate link and set redis
 		touch "$pathcoverarts/0"
-		if (( $? != 0 )); then
+		if [[ $? != 0 ]]; then
 			title "$info Directory $( tcolor "$pathcoverarts" ) found but not writable."
 			title -nt "Set write permission then try again."
 			exit
