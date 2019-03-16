@@ -49,11 +49,11 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 			mkdir "$pathcoverarts"
 			if [[ $? != 0 ]]; then
 				pathcoverarts=/mnt/MPD/LocalStorage/coverarts
-				mkdir "$pathcoverarts"
+				mkdir -p "$pathcoverarts"
 			fi
 		else
 			pathcoverarts=/mnt/MPD/LocalStorage/coverarts
-			mkdir "$pathcoverarts"
+			mkdir -p "$pathcoverarts"
 		fi
 	fi
 fi
