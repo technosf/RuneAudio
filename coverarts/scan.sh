@@ -39,26 +39,24 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	else
 		echo -e "$bar Create coverarts directory ..."
 
+		pathcoverarts=/mnt/MPD/LocalStorage/coverarts
 		df=$( df )
 		dfUSB=$( echo "$df" | grep '/mnt/MPD/USB' | head -n1 )
 		dfNAS=$( echo "$df" | grep '/mnt/MPD/NAS' | head -n1 )
 		if [[ $dfUSB || $dfNAS ]]; then
 			[[ $dfUSB ]] && mount=$dfUSB || mount=$dfNAS
 			mnt=$( echo $mount | awk '{ print $NF }' )
-			pathcoverarts="$mnt/coverarts"
-			mkdir "$pathcoverarts"
-			if [[ $? != 0 ]]; then
-				pathcoverarts=/mnt/MPD/LocalStorage/coverarts
-				mkdir -p "$pathcoverarts"
+			touch $mnt/0
+			if [[ $? == 0 ]]; then
+				pathcoverarts="$mnt/coverarts"
+				rm $mnt/0
 			fi
-		else
-			pathcoverarts=/mnt/MPD/LocalStorage/coverarts
-			mkdir -p "$pathcoverarts"
 		fi
+		mkdir -p "$pathcoverarts"
 	fi
 fi
-redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
 ln -sf "$pathcoverarts" /srv/http/assets/img/
+redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
 
 cue=
 exist=0
