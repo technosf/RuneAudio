@@ -239,6 +239,8 @@ if [[ -n $cueFiles ]]; then
 	done
 fi
 
+chown -R http:http "$pathcoverarts"
+
 echo -e "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 names    : $( tcolor $( numfmt --g $nonutf8 ) )"
