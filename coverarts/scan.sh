@@ -9,6 +9,7 @@ rm $0
 
 timestart
 
+#################### to be removed ########################################
 # verify coverarts directory
 pathcoverarts=$( readlink -f /srv/http/assets/img/coverarts )
 
@@ -56,7 +57,7 @@ elif [[ ! -e "$pathcoverarts" || ! $pathcoverarts ]]; then # not exist or not se
 	fi
 fi
 ln -sf "$pathcoverarts" /srv/http/assets/img/
-redis-cli set pathcoverarts "$pathcoverarts" &> /dev/null
+####################################################################################################
 
 cue=
 exist=0
