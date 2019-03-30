@@ -10,7 +10,7 @@ rm $0
 timestart
 
 # verify coverarts directory
-pathcoverarts=$( redis-cli get pathcoverarts )
+pathcoverarts=$( readlink -f /srv/http/assets/img/coverarts )
 
 if [[ -e "$pathcoverarts" ]]; then # exist and writable
 	touch "$pathcoverarts/0"
