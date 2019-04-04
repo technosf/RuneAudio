@@ -59,6 +59,15 @@ fi
 ln -sf "$pathcoverarts" /srv/http/assets/img/
 ####################################################################################################
 
+if ! pacman -Q imagemagick &> /dev/null; then
+	pacman -Sy imagemagick libpng zlib glibc
+fi
+if ! pacman -Q imagemagick &> /dev/null; then
+	title "$info $( tcolor ImageMagick ) install failed."
+	title -nt "Try again later."
+	exit
+fi
+
 cue=
 exist=0
 thumb=0
