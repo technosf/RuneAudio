@@ -94,7 +94,7 @@ function createThumbnail() {
 	fi
 	
 	# "/" not allowed in filename, "#" and "?" not allwed in img src
-	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g'
+	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
 	thumbfile="$pathcoverarts/$thumbname.jpg"
 	
 	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
