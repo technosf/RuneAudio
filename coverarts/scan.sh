@@ -128,7 +128,7 @@ function createThumbnail() {
 	(( dummy++ ))
 }
 
-[[ $( redis-cli exists countalbum ) == 1 ]] && update=Update || update=Create
+[[ -n $( ls /srv/http/assets/img ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
