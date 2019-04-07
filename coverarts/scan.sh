@@ -84,7 +84,7 @@ function createThumbnail() {
 		return
 	fi
 	
-	# "/" not allowed in filename, "#" and "?" not allwed in img src
+	# "/" not allowed in filename, "#" and "?" not allowed in img src
 	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
 	thumbfile="$pathcoverarts/$thumbname.jpg"
 	
