@@ -128,7 +128,7 @@ function createThumbnail() {
 	(( dummy++ ))
 }
 
-[[ -n $( ls /srv/http/assets/img ) ]] && update=Update || update=Create
+[[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
