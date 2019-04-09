@@ -16,6 +16,7 @@ fi
 
 pathsettings=$( readlink -f $imgsettings )
 rm -rf $imgsettings
+
 moveDirLink() { # $1-pathold $2-chown
 	dirold=$( basename $1 )
 	pathnew=$pathsettings/$dirold
@@ -24,13 +25,15 @@ moveDirLink() { # $1-pathold $2-chown
 	ln -s "$pathnew" $( dirname $1 )
 	[[ -n $2 ]] && chown -R $2 "$pathnew" $1
 }
-echo -e "$bar /etc/netctl"
 moveDirLink /etc/netctl
-echo -e "$bar /var/lib/redis"
-moveDirLink /var/lib/redis redis:redis
-echo -e "$bar /var/lib/mpd"
+
 moveDirLink /var/lib/mpd mpd:audio
 [[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
 ln -sf "$pathnew/mpd.conf" /etc
+
+redis-cli save &> /dev/null
+systemctl stop redis
+moveDirLink /var/lib/redis redis:redis
+systemctl start redis
 
 title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
