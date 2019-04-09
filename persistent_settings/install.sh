@@ -3,6 +3,7 @@
 alias=pers
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 title -l '=' "$bar Set persistent database and settings ..."
 
@@ -17,7 +18,7 @@ fi
 pathsettings=$( readlink -f $imgsettings )
 rm -rf $imgsettings
 
-moveDirLink() { # $1-pathold $2-chown
+moveDirLink() { # $1-pathold $2-chown $3-no ln
 	dirold=$( basename $1 )
 	pathnew=$pathsettings/$dirold
 	[[ ! -e "$pathnew" ]] && mv $1 "$pathsettings"
@@ -35,6 +36,12 @@ ln -sf "$pathnew/mpd.conf" /etc
 redis-cli save &> /dev/null
 systemctl stop redis
 moveDirLink /var/lib/redis redis:redis
-systemctl restart redis rune_SY_wrk rune_PL_wrk
+
+file=/usr/lib/systemd/system/redis.service
+commentS 'ExecStartPre'
+commentS 'RestartSec'
+commentS 'StartLimit'
+systemctl daemon-reload
+systemctl restart redis #rune_SY_wrk rune_PL_wrk
 
 title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
