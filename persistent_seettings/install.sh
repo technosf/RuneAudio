@@ -8,9 +8,13 @@ title -l '=' "$bar Set persistent database and settings ..."
 
 makeDirLink settings
 imgsettings=/srv/http/assets/img/settings
-if [[ -L $imgsettings ]]; then
+if [[ ! -L $imgsettings ]]; then
+	echo -e "$info No persistent storage found/writable in USB/NAS"
+	rm -rf $imgsettings
+	exit
+else
 	pathsettings=$( readlink -f $imgsettings )
-	
+	rm -rf $imgsettings
 	moveDirLink() { # $1-pathold $2-chown
 		dirold=$( basename $1 )
 		pathnew=$pathsettings/$dirold
@@ -25,6 +29,5 @@ if [[ -L $imgsettings ]]; then
 	[[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
 	ln -sf "$pathnew/mpd.conf" /etc
 fi
-rm -rf $imgsettings
 
 title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
