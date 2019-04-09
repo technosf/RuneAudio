@@ -3,6 +3,7 @@
 alias=pers
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 title -l '=' "$bar Restore database and settings from persistent storage ..."
 
@@ -26,6 +27,9 @@ mv -f /var/lib/mpd/mpd.conf /etc # restore changes
 redis-cli save &> /dev/null
 systemctl stop redis
 removeDirLink /var/lib/redis redis:redis
-systemctl restart redis rune_SY_wrk rune_PL_wrk
+file=/usr/lib/systemd/system/redis.service
+restorefile $file
+systemctl daemon-reload
+systemctl restart redis #rune_SY_wrk rune_PL_wrk
 
 title -nt "$bar Database and settings restore successfully."
