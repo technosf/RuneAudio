@@ -1,5 +1,7 @@
 #/bin/bash
 
+alias=pers
+
 . /srv/http/addonstitle.sh
 
 title -l '=' "$bar Set persistent database and settings ..."
