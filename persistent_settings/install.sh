@@ -10,8 +10,9 @@ title -l '=' "$bar Set persistent database and settings ..."
 makeDirLink settings
 imgsettings=/srv/http/assets/img/settings
 if [[ ! -L $imgsettings ]]; then
-	echo -e "$info No persistent storage found/writable in USB/NAS"
 	rm -rf $imgsettings
+	echo -e "$info No USB or NAS found or not writable."
+	echo "Set NAS write permission or plug in a USB drive."
 	exit
 fi
 
