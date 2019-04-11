@@ -25,8 +25,8 @@ commentS 'SUBSYSTEM=="sound"'
 
 # recent udev only run with systemd
 string=$( cat <<'EOF'
-ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
-ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
+ACTION=="add", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacon.service"
+ACTION=="remove", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacoff.service"
 EOF
 )
 appendS 'SUBSYSTEM=="sound"'
