@@ -18,21 +18,14 @@ echo $file
 
 commentS 'Audio output switched'
 #----------------------------------------------------------------------------------
-file=/etc/udev/rules.d/rune_usb-audio.rules
-echo $file
-# split add-remove to suppress notify twice
-commentS 'SUBSYSTEM=="sound"'
-
-# recent udev only run with systemd
-string=$( cat <<'EOF'
+mv /etc/udev/rules.d/rune_usb-audio.rules{,.backup}
+# long running script must run with systemd
+cat << 'EOF' > /etc/udev/rules.d/usbdac.rules
 ACTION=="add", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacon.service"
 ACTION=="remove", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacoff.service"
 EOF
-)
-appendS 'SUBSYSTEM=="sound"'
 #----------------------------------------------------------------------------------
-file=/root/usbdac
-string=$( cat <<'EOF'
+cat << 'EOF' > /root/usbdac
 #!/usr/bin/php
 
 <?php
@@ -54,12 +47,11 @@ if ( $argc > 1 ) {
 ui_notify( 'Audio Output Switch', $name );
 wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
-)
-echo "$string" > $file
-chmod +x $file
+
+chmod +x /root/usbdac
 #----------------------------------------------------------------------------------
 unitfile() {
-    string=$( cat <<EOF
+    cat << EOF > /etc/systemd/system/$2.service
 [Unit]
 Description=Hotplug USB DAC
 [Service]
@@ -68,8 +60,6 @@ ExecStart=/root/usbdac $1
 [Install]
 WantedBy=multi-user.target
 EOF
-)
-    echo "$string" > /etc/systemd/system/$2.service
 }
 unitfile on usbdacon
 unitfile '' usbdacoff
