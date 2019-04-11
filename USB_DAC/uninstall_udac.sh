@@ -13,9 +13,10 @@ rm -v $file
 
 echo -e "$bar Restore file ..."
 
-restorefile /etc/udev/rules.d/rune_usb-audio.rules
+restorefile /etc/udev/rules.d/rune_usb-audio.rules /srv/http/app/libs/runeaudio.php
 
-udevadm control --reload-rules && udevadm trigger
+udevadm control --reload-rules
+systemctl restart systemd-udevd
 
 redis-cli del aodefault &> /dev/null
 
