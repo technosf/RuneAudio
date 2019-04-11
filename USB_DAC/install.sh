@@ -18,7 +18,7 @@ echo $file
 
 commentS 'Audio output switched'
 #----------------------------------------------------------------------------------
-mv /etc/udev/rules.d/rune_usb-audio.rules{,.backup}
+rm /etc/udev/rules.d/rune_usb-audio.rules
 # long running script must run with systemd
 cat << 'EOF' > /etc/udev/rules.d/usbdac.rules
 ACTION=="add", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacon.service"
