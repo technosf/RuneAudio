@@ -16,7 +16,7 @@ echo -e "$bar Add new files ..."
 file=/etc/motd.logo
 echo $file
 
-string=$( cat <<'EOF'
+cat << 'EOF' > $file
                           .,;uh         
                    .,;cdk0XNWMM,        
              .,cdONMMMMMMMMMMMM:        
@@ -38,8 +38,6 @@ string=$( cat <<'EOF'
                 dNNOd;'                 
                  ''                     
 EOF
-)
-echo "$string" > $file
 
 file=/etc/profile.d/motd.sh
 echo $file
@@ -51,13 +49,11 @@ else
 	redis-cli del motdcolor &> /dev/null
 fi
 
-string=$( cat <<EOF
+cat << EOF > $file
 #!/bin/bash
 
 echo -e "$color$( < /etc/motd.logo )\e[0m\n"
 EOF
-)
-echo "$string" > $file
 
 echo -e "$bar Modify files ..."
 
