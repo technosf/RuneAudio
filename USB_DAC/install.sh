@@ -18,16 +18,33 @@ echo $file
 # split add-remove to suppress notify twice
 commentS 'SUBSYSTEM=="sound"'
 
+unitfile() {
+    string=$( cat <<EOF
+[Unit]
+Description=Hotplug USB DAC
+[Service]
+Type=oneshot
+ExecStart=/root/usbdac $1
+[Install]
+WantedBy=multi-user.target
+EOF
+)
+    echo "$string" > /etc/systemd/system/$2.service
+}
+unitfile on usbdacon
+unitfile '' usbdacoff
+
 string=$( cat <<'EOF'
-ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/usbdac on"
-ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/usbdac"
+ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
+ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
 EOF
 )
 appendS 'SUBSYSTEM=="sound"'
 
-udevadm control --reload-rules && udevadm trigger
+udevadm control --reload-rules
+systemctl restart systemd-udevd
 
-file=/srv/http/usbdac
+file=/root/usbdac
 string=$( cat <<'EOF'
 #!/usr/bin/php
 
@@ -53,7 +70,6 @@ EOF
 )
 echo "$string" > $file
 
-chown http:http $file
 chmod +x $file
 
 redis-cli set aodefault "$1" &> /dev/null
