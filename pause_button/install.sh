@@ -16,7 +16,7 @@ echo -e "$bar Add files ..."
 file=/srv/http/assets/css/pausebutton.css
 echo $file
 
-string=$( cat <<'EOF'
+cat << 'EOF' > $file
 .playback-controls {
     width: 240px;
 }
@@ -28,8 +28,6 @@ string=$( cat <<'EOF'
     }
 }
 EOF
-)
-echo "$string" > $file
 
 echo -e "$bar Modify files ..."
 
