@@ -18,6 +18,14 @@ echo $file
 # split add-remove to suppress notify twice
 commentS 'SUBSYSTEM=="sound"'
 
+# recent udev only run with systemd
+string=$( cat <<'EOF'
+ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
+ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
+EOF
+)
+appendS 'SUBSYSTEM=="sound"'
+
 unitfile() {
     string=$( cat <<EOF
 [Unit]
@@ -33,13 +41,6 @@ EOF
 }
 unitfile on usbdacon
 unitfile '' usbdacoff
-
-string=$( cat <<'EOF'
-ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
-ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
-EOF
-)
-appendS 'SUBSYSTEM=="sound"'
 
 udevadm control --reload-rules
 systemctl restart systemd-udevd
