@@ -8,8 +8,7 @@ alias=udac
 uninstallstart $@
 
 echo -e "$bar Remove file ..."
-file=/srv/http/usbdac
-rm -v $file
+rm -v /root/usbdac
 
 echo -e "$bar Restore file ..."
 
