@@ -31,25 +31,6 @@ EOF
 )
 appendS 'SUBSYSTEM=="sound"'
 #----------------------------------------------------------------------------------
-unitfile() {
-    string=$( cat <<EOF
-[Unit]
-Description=Hotplug USB DAC
-[Service]
-Type=oneshot
-ExecStart=/root/usbdac $1
-[Install]
-WantedBy=multi-user.target
-EOF
-)
-    echo "$string" > /etc/systemd/system/$2.service
-}
-unitfile on usbdacon
-unitfile '' usbdacoff
-
-udevadm control --reload-rules
-systemctl restart systemd-udevd
-#----------------------------------------------------------------------------------
 file=/root/usbdac
 string=$( cat <<'EOF'
 #!/usr/bin/php
@@ -75,8 +56,26 @@ wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
 )
 echo "$string" > $file
-#----------------------------------------------------------------------------------
 chmod +x $file
+#----------------------------------------------------------------------------------
+unitfile() {
+    string=$( cat <<EOF
+[Unit]
+Description=Hotplug USB DAC
+[Service]
+Type=oneshot
+ExecStart=/root/usbdac $1
+[Install]
+WantedBy=multi-user.target
+EOF
+)
+    echo "$string" > /etc/systemd/system/$2.service
+}
+unitfile on usbdacon
+unitfile '' usbdacoff
+#----------------------------------------------------------------------------------
+udevadm control --reload-rules
+systemctl restart systemd-udevd
 
 redis-cli set aodefault "$1" &> /dev/null
 
