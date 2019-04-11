@@ -13,7 +13,7 @@ rm -v /etc/udev/rules.d/usbdac.rules /root/usbdac
 
 echo -e "$bar Restore files ..."
 
-cat > 'EOF' << /etc/udev/rules.d/rune_usb-audio.rules
+cat << 'EOF' > /etc/udev/rules.d/rune_usb-audio.rules
 #KERNEL=="card*", DRIVER=="snd-usb-audio", RUN+="/var/www/command/refresh_ao"
 KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
 EOF
