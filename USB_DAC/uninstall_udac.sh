@@ -8,11 +8,16 @@ alias=udac
 uninstallstart $@
 
 echo -e "$bar Remove file ..."
-rm -v /root/usbdac
 
-echo -e "$bar Restore file ..."
+rm -v /etc/udev/rules.d/usbdac.rules /root/usbdac
 
-restorefile /etc/udev/rules.d/rune_usb-audio.rules /srv/http/app/libs/runeaudio.php
+echo -e "$bar Restore files ..."
+
+cat > 'EOF' << /etc/udev/rules.d/rune_usb-audio.rules
+#KERNEL=="card*", DRIVER=="snd-usb-audio", RUN+="/var/www/command/refresh_ao"
+KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao"
+EOF
+restorefile /srv/http/app/libs/runeaudio.php
 
 udevadm control --reload-rules
 systemctl restart systemd-udevd
