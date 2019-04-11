@@ -12,7 +12,12 @@ installstart $@
 getuninstall
 
 echo -e "$bar Modify files ..."
+#----------------------------------------------------------------------------------
+file=/srv/http/app/libs/runeaudio.php
+echo $file
 
+commentS 'Audio output switched'
+#----------------------------------------------------------------------------------
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
 # split add-remove to suppress notify twice
@@ -25,7 +30,7 @@ ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.s
 EOF
 )
 appendS 'SUBSYSTEM=="sound"'
-
+#----------------------------------------------------------------------------------
 unitfile() {
     string=$( cat <<EOF
 [Unit]
@@ -44,7 +49,7 @@ unitfile '' usbdacoff
 
 udevadm control --reload-rules
 systemctl restart systemd-udevd
-
+#----------------------------------------------------------------------------------
 file=/root/usbdac
 string=$( cat <<'EOF'
 #!/usr/bin/php
@@ -70,7 +75,7 @@ wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
 )
 echo "$string" > $file
-
+#----------------------------------------------------------------------------------
 chmod +x $file
 
 redis-cli set aodefault "$1" &> /dev/null
