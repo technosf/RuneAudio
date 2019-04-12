@@ -18,14 +18,19 @@ echo $file
 
 commentS 'Audio output switched'
 #----------------------------------------------------------------------------------
-rm /etc/udev/rules.d/rune_usb-audio.rules
+file=/etc/udev/rules.d/rune_usb-audio.rules
+rm $file
 # long running script must run with systemd
 cat << 'EOF' > /etc/udev/rules.d/usbdac.rules
 ACTION=="add", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacon.service"
 ACTION=="remove", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacoff.service"
 EOF
 #----------------------------------------------------------------------------------
-cat << 'EOF' > /root/usbdac
+echo -e "$bar Add files ..."
+file=/root/usbdac
+echo $file
+
+cat << 'EOF' > $file
 #!/usr/bin/php
 
 <?php
@@ -51,7 +56,10 @@ EOF
 chmod +x /root/usbdac
 #----------------------------------------------------------------------------------
 unitfile() {
-    cat << EOF > /etc/systemd/system/$2.service
+    file=/etc/systemd/system/$2.service
+	echo $file
+	
+    cat << EOF > $file
 [Unit]
 Description=Hotplug USB DAC
 [Service]
