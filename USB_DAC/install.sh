@@ -49,7 +49,7 @@ if ( $argc > 1 ) {
 	$name = $redis->hGet( 'udaclist', $ao );
 }
 
-ui_notify( 'Audio Output Switch', $name );
+ui_notify( 'Audio Output Switched', $name );
 wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
 
