@@ -22,8 +22,8 @@ file=/etc/udev/rules.d/rune_usb-audio.rules
 rm $file
 # long running script must run with systemd ( TAG+= not work here )
 cat << 'EOF' > /etc/udev/rules.d/usbdac.rules
-ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
-ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
+ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
 EOF
 #----------------------------------------------------------------------------------
 echo -e "$bar Add files ..."
