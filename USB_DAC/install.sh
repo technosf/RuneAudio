@@ -20,10 +20,10 @@ commentS 'Audio output switched'
 #----------------------------------------------------------------------------------
 file=/etc/udev/rules.d/rune_usb-audio.rules
 rm $file
-# long running script must run with systemd
+# long running script must run with systemd ( TAG+= not work here )
 cat << 'EOF' > /etc/udev/rules.d/usbdac.rules
-ACTION=="add", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacon.service"
-ACTION=="remove", SUBSYSTEM=="sound", TAG+="systemd", ENV{SYSTEMD_WANTS}="usbdacoff.service"
+ACTION=="add", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacon.service"
+ACTION=="remove", SUBSYSTEM=="sound", RUN+="/usr/bin/systemctl start usbdacoff.service"
 EOF
 #----------------------------------------------------------------------------------
 echo -e "$bar Add files ..."
