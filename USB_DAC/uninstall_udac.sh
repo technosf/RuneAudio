@@ -9,7 +9,7 @@ uninstallstart $@
 
 echo -e "$bar Remove file ..."
 
-rm -v /etc/udev/rules.d/usbdac.rules /root/usbdac
+rm -v /etc/udev/rules.d/usbdac.rules /etc/systemd/system/usbdac* /root/usbdac
 
 echo -e "$bar Restore files ..."
 
