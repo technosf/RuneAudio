@@ -12,6 +12,7 @@ timestart
 exist=0
 thumb=0
 dummy=0
+nonutf8=0
 padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
@@ -43,8 +44,6 @@ echo getThumbnail( $argv[ 1 ], 'scancover' );
 EOF
 chmod +x /tmp/scandir.php
 
-/srv/http/enhancegetcover.php
-
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
@@ -55,16 +54,25 @@ for dir in "${dirs[@]}"; do
 	echo
 	mpdpath=${dir:9}
 	echo ${percent}% $( tcolor "$i/$count" 8 ) $( tcolor "$mpdpath" )
-	coverfile=$( /tmp/scandir.php "$dir" )
-	pathname=${mpdpath//\//|}
-	thumbfile=$imgcoverarts/${mpdpath//\//|}.jpg
+	
+	# skip if non utf-8 found
+	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
+		echo "$padR Directory path contains non UTF-8 characters."
+		(( nonutf8++ ))
+		continue
+	fi
+	
+	# "/" not allowed in filename, "#" and "?" not allowed in img src
+	thumbname=$( echo $mpdpath | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
+	thumbfile=$imgcoverarts/${thumbname//\//|}.jpg
 	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Skip - Thumbnail exists."
-		return
+		continue
 	fi
 	
 	created=0
+	coverfile=$( /tmp/scandir.php "$dir" )
 	if [[ $coverfile != 0 ]]; then
 		echo $coverfile
 		echo $thumbfile
@@ -87,10 +95,11 @@ done
 
 rm /tmp/scandir.php
 
-echo -e              "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
-(( $dummy )) && echo -e  "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
-(( $exist )) && echo -e      "Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
-[[ -v scanpath ]] && echo -e "Update directory     : $( tcolor "$scanpath" )"
+echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
+(( $dummy )) && echo -e   "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
+(( $nonutf8 )) && echo -e "$padR Non UTF-8 path     : $( tcolor $( numfmt --g $nonutf8 ) )"
+(( $exist )) && echo -e       "Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
+[[ -v scanpath ]] && echo -e  "Update directory     : $( tcolor "$scanpath" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
 	-d '{ "title": "'"Browse By CoverArt"'", "text": "'"Thumbnails ${update}d."'" }' \
