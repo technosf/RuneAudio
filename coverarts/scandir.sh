@@ -17,6 +17,7 @@ padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
+coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 
 [[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By Directory CoverArt' )
@@ -49,6 +50,7 @@ count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
 i=0
 for dir in "${dirs[@]}"; do
+	created=0
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
 	echo
@@ -71,7 +73,20 @@ for dir in "${dirs[@]}"; do
 		continue
 	fi
 	
-	created=0
+	for cover in $coverfiles; do
+		coverfile="$dir/$cover"
+		if [[ -e "$coverfile" ]]; then
+#			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+			if [[ $? == 0 ]]; then
+				echo -e "$padC Thumbnail created - file: $coverfile"
+				(( thumb++ ))
+				created=1
+				break
+			fi
+		fi
+	done
+	[[ $created ]] && continue
+	
 	coverfile=$( /tmp/scandir.php "$dir" )
 	if [[ $coverfile != 0 ]]; then
 		echo $coverfile
@@ -79,18 +94,18 @@ for dir in "${dirs[@]}"; do
 #		convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 		if [[ $? == 0 ]]; then
 			chown http:http "$thumbfile"
-			echo -e "$padC Thumbnail created."
+			echo -e "$padC Thumbnail created - embedded ID3."
 			(( thumb++ ))
 			created=1
 		fi
 	fi
-	if [[ ! $created ]]; then
-		thumbfile=${thumbfile:0:-3}svg
-#		ln -s /srv/http/assets/img/cover.svg "$thumbfile"
-		chown -h http:http "$thumbfile"
-		echo -e "$padB Coverart not found."
-		(( dummy++ ))
-	fi
+	[[ $created ]] && continue
+
+	thumbfile=${thumbfile:0:-3}svg
+#	ln -s /srv/http/assets/img/cover.svg "$thumbfile"
+	chown -h http:http "$thumbfile"
+	echo -e "$padB Coverart not found."
+	(( dummy++ ))
 done
 
 rm /tmp/scandir.php
