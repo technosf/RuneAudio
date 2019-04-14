@@ -23,19 +23,15 @@ coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.
 rm -f /srv/http/tmp/skipped-wav.txt # remove log
 
 [[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
-coloredname=$( tcolor 'Browse By Directory CoverArt' )
+coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
-
-echo -e "$bar Update Library database ..."
-
-title "$bar Get subdirectory list ..."
 
 [[ -v scanpath ]] && path=$1 || path=/mnt/MPD
 echo Base directory: $( tcolor "$path" )
 
 imgcoverarts=/srv/http/assets/img/coverarts
-find=$( find "$path" -mindepth 1 ! -wholename /mnt/MPD/Webradio -type d )
+find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
 if [[ -z $find ]]; then
 	title "$info No directories found in $1"
 	exit
@@ -63,7 +59,7 @@ for dir in "${dirs[@]}"; do
 	mpdpath=${dir:9}
 	echo ${percent}% $( tcolor "$i/$count" 8 ) $( tcolor "$mpdpath" )
 	if [[ -z $( find "$dir" -maxdepth 1 -type f ) ]]; then
-		echo "  Empty directory."
+		echo "  No files found."
 		continue
 	fi
 	
