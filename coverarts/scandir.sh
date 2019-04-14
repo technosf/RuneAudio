@@ -9,6 +9,7 @@
 
 timestart
 
+cue=
 exist=0
 thumb=0
 dummy=0
@@ -19,6 +20,8 @@ padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 
+rm -f /srv/http/tmp/skipped-wav.txt # remove log
+
 [[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By Directory CoverArt' )
 
@@ -26,36 +29,43 @@ title -l '=' "$bar $update thumbnails for $coloredname ..."
 
 echo -e "$bar Update Library database ..."
 
-title "$bar Get directory list ..."
+title "$bar Get subdirectory list ..."
 
 [[ -v scanpath ]] && path=$1 || path=/mnt/MPD
+echo Base directory: $( tcolor "$path" )
+
 imgcoverarts=/srv/http/assets/img/coverarts
-find=$( find "$path" -type d )
+find=$( find "$path" -mindepth 1 ! -wholename /mnt/MPD/Webradio -type d )
 if [[ -z $find ]]; then
 	title "$info No directories found in $1"
 	exit
 fi
 
 # create temporary file to let bash run php with arguments
-cat << 'EOF' > /tmp/scandir.php
+scandirphp=/tmp/scandir.php
+cat << 'EOF' > $scandirphp
 #!/usr/bin/php
 <?php
 require_once( '/srv/http/enhancegetcover.php' );
-echo getThumbnail( $argv[ 1 ], 'scancover' );
+echo getCoverFile( $argv[ 1 ], 'scancover' );
 EOF
-chmod +x /tmp/scandir.php
+chmod +x $scandirphp
 
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
-echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
+echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
 i=0
 for dir in "${dirs[@]}"; do
-	created=0
+	created=
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
 	echo
 	mpdpath=${dir:9}
 	echo ${percent}% $( tcolor "$i/$count" 8 ) $( tcolor "$mpdpath" )
+	if [[ -z $( find "$dir" -maxdepth 1 -type f ) ]]; then
+		echo "  Empty directory."
+		continue
+	fi
 	
 	# skip if non utf-8 found
 	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
@@ -64,9 +74,10 @@ for dir in "${dirs[@]}"; do
 		continue
 	fi
 	
+	thumbname=$( mpc ls -f "%album%^^[%albumartist%|%artist%]^^$mpdpath" "$mpdpath" | head -n1 )
 	# "/" not allowed in filename, "#" and "?" not allowed in img src
-	thumbname=$( echo $mpdpath | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
-	thumbfile=$imgcoverarts/${thumbname//\//|}.jpg
+	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
+	thumbfile=$imgcoverarts/$thumbname.jpg
 	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
 		(( exist++ ))
 		echo "  Skip - Thumbnail exists."
@@ -78,7 +89,7 @@ for dir in "${dirs[@]}"; do
 		if [[ -e "$coverfile" ]]; then
 #			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
-				echo -e "$padC Thumbnail created - file: $coverfile"
+				echo -e "$padC Thumbnail created from file."
 				(( thumb++ ))
 				created=1
 				break
@@ -87,14 +98,18 @@ for dir in "${dirs[@]}"; do
 	done
 	[[ $created ]] && continue
 	
-	coverfile=$( /tmp/scandir.php "$dir" )
-	if [[ $coverfile != 0 ]]; then
-		echo $coverfile
-		echo $thumbfile
+	coverfile=$( $scandirphp "$dir" )
+	if [[ $coverfile == noaudiofile ]]; then
+		echo "  No coverart or audio files found."
+		continue
+		
+	elif [[ -n $coverfile ]]; then
+		echo coverfile = $coverfile
+		echo thumbfile = $thumbfile
 #		convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 		if [[ $? == 0 ]]; then
 			chown http:http "$thumbfile"
-			echo -e "$padC Thumbnail created - embedded ID3."
+			echo -e "$padC Thumbnail created from embedded ID3."
 			(( thumb++ ))
 			created=1
 		fi
@@ -114,7 +129,7 @@ echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $t
 (( $dummy )) && echo -e   "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 path     : $( tcolor $( numfmt --g $nonutf8 ) )"
 (( $exist )) && echo -e       "Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
-[[ -v scanpath ]] && echo -e  "Update directory     : $( tcolor "$scanpath" )"
+[[ -v scanpath ]] && echo -e  "Parsed directory     : $( tcolor "$scanpath" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
 	-d '{ "title": "'"Browse By CoverArt"'", "text": "'"Thumbnails ${update}d."'" }' \
@@ -128,7 +143,8 @@ echo
 echo Thumbnails directory : $( tcolor "$imgcoverarts" )
 echo
 echo -e "$bar To change individually:"
-echo "    - CoverArt > long-press thumbnail > Delete / Replace icon"
+echo "    - CoverArt > long-press thumbnail > Replace icon"
 echo -e "$bar To update with database:"
 echo "    - Full    - Library > long-press CoverArt"
 echo "    - Partial - Library > directory > context menu > Update thumbnails"
+echo "    - CoverArt > long-press old thumbnail > Delete icon
