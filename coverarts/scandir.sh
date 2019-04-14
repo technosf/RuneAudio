@@ -9,6 +9,16 @@
 
 timestart
 
+# create temporary file to let bash run php with arguments
+scandirphp=/tmp/scandir.php
+cat << 'EOF' > $scandirphp
+#!/usr/bin/php
+<?php
+require_once( '/srv/http/enhancegetcover.php' );
+echo getCoverFile( $argv[ 1 ], 'scancover' );
+EOF
+chmod +x $scandirphp
+
 cue=
 exist=0
 thumb=0
@@ -30,26 +40,16 @@ title -l '=' "$bar $update thumbnails for $coloredname ..."
 [[ -v scanpath ]] && path=$1 || path=/mnt/MPD
 echo Base directory: $( tcolor "$path" )
 
-imgcoverarts=/srv/http/assets/img/coverarts
 find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
 if [[ -z $find ]]; then
 	title "$info No directories found in $1"
 	exit
 fi
 
-# create temporary file to let bash run php with arguments
-scandirphp=/tmp/scandir.php
-cat << 'EOF' > $scandirphp
-#!/usr/bin/php
-<?php
-require_once( '/srv/http/enhancegetcover.php' );
-echo getCoverFile( $argv[ 1 ], 'scancover' );
-EOF
-chmod +x $scandirphp
-
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
+imgcoverarts=/srv/http/assets/img/coverarts
 i=0
 for dir in "${dirs[@]}"; do
 	created=
@@ -119,7 +119,7 @@ for dir in "${dirs[@]}"; do
 	(( dummy++ ))
 done
 
-rm /tmp/scandir.php
+rm -rf /tmp/scandir.php "$dirtmp"
 
 echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e   "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
