@@ -54,6 +54,8 @@ EOF
 )
 appendS -n +10 'listen 80 '
 
+systemctl reload nginx
+
 mkdir -p /root/.config/aria2
 
 file=/root/.config/aria2/aria2.conf
@@ -97,7 +99,4 @@ echo "Run: systemctl < start / stop > aria2"
 echo "Startup: systemctl < enable / disable > aria2"
 echo
 echo "Download directory: $path"
-title -nt "WebUI: < RuneAudio_IP >/aria2/docs"
-
-# for modified 'rewrite' config
-nginx -s reload
+title -nt "WebUI: < RuneAudio_IP >/aria2"
