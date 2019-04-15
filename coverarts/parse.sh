@@ -114,7 +114,7 @@ for dir in "${dirs[@]}"; do
 	echo -e "$padB Coverart not found."
 	(( dummy++ ))
 done
-chown -R http:http /srv/http/assets/img/coverarts
+chown -HR http:http /srv/http/assets/img/coverarts
 
 echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e   "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
