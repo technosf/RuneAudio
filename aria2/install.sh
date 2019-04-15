@@ -61,7 +61,7 @@ mkdir -p /root/.config/aria2
 file=/root/.config/aria2/aria2.conf
 echo $file
 
-string=$( cat <<'EOF'
+cat << 'EOF' > $file
 enable-rpc=true
 rpc-listen-all=true
 daemon=true
@@ -69,13 +69,11 @@ disable-ipv6=true
 dir=$path
 max-connection-per-server=4
 EOF
-)
-echo -e "$string" > $file
 
 file=/etc/systemd/system/aria2.service
 echo $file
 
-string=$( cat <<'EOF'
+cat << 'EOF' > $file
 [Unit]
 Description=Aria2
 After=network-online.target
@@ -85,8 +83,6 @@ ExecStart=/usr/bin/aria2c
 [Install]
 WantedBy=multi-user.target
 EOF
-)
-echo -e "$string" > $file
 
 [[ $1 == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
 redis-cli del ariastartup &> /dev/null
