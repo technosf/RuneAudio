@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 . /srv/http/addonstitle.sh
 
 pkg=$( pacman -Ss '^mpd$' | head -n1 )
