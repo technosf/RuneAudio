@@ -135,7 +135,7 @@ echo Thumbnails directory : $( tcolor "$imgcoverarts" )
 echo
 echo -e "$bar To change individually:"
 echo "    - CoverArt > long-press thumbnail > CoverArt icon"
-echo -e "$bar To update with database:"
+echo -e "$bar To update with updated database:"
 echo "    - Full    - Library > long-press CoverArt"
 echo "    - Partial - Library > directory > context menu > Update thumbnails"
 echo "    - CoverArt > long-press old thumbnail > Delete icon"
