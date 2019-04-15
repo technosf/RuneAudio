@@ -46,6 +46,14 @@ EOF
 	appendS -n +7 'listen 80 '
 fi
 
+string=$( cat <<EOF
+        location /aria2 {
+            root /var/www;
+        }
+EOF
+)
+appendS -n +10 'listen 80 '
+
 mkdir -p /root/.config/aria2
 
 file=/root/.config/aria2/aria2.conf
