@@ -24,24 +24,14 @@ mkdir -p $path
 
 echo -e "$bar WebUI ..."
 wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
-rm -rf $path/web
-mkdir $path/web
-bsdtar -xf master.zip --strip 1 -C $path/web
+bsdtar -xf master.zip --strip 2 -C $path ./webui-aria2-master/docs
 rm master.zip
 
-ln -s $path/web /srv/http/aria2
+ln -s $path /srv/http
 
 # modify file
 file=/etc/nginx/nginx.conf
 echo $file
-	
-string=$( cat <<EOF
-        location /aria2 {
-            alias $path/web;
-        }
-EOF
-)
-appendS -n +10 'listen 80 '
 
 if ! grep -q '^#.*\s*rewrite' $file; then
 	commentS '^\s*rewrite'
