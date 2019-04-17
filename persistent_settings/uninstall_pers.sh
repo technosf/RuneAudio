@@ -33,6 +33,6 @@ file=/usr/lib/systemd/system/redis.service
 restorefile $file
 
 systemctl daemon-reload
-systemctl restart redis
+systemctl restart redis rune_PL_wrk
 
 uninstallfinish $@
