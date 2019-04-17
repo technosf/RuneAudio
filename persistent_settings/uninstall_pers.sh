@@ -15,7 +15,7 @@ fi
 pathsettings=$( dirname $( readlink -f /etc/netctl ) )
 
 removeDirLink() { # $1-pathlink $2-chown
-	echo -e "$bar Restore $1
+	echo -e "$bar Restore $1"
 	rm -rf $1
 	cp -rf "$pathsettings/$( basename $1 )" $( dirname $1 )
 	chown -R $2 $1
