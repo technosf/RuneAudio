@@ -43,6 +43,7 @@ moveDirLink /var/lib/mpd mpd:audio
 [[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
 ln -sf "$pathnew/mpd.conf" /etc
 
+addons=$( redis-cli hgetall addons )
 redis-cli save &> /dev/null
 systemctl stop redis
 moveDirLink /var/lib/redis redis:redis
@@ -51,8 +52,13 @@ file=/usr/lib/systemd/system/redis.service
 commentS 'ExecStartPre'
 commentS 'RestartSec'
 commentS 'StartLimit'
+
 systemctl daemon-reload
 systemctl restart redis rune_PL_wrk
 
-title -nt "$info Database and settings moved to: $( tcolor "$pathsettings" )"
+redis-cli del addons &> /dev/null
+redis-cli hmset addons $addons &> /dev/null
+
 installfinish $@
+
+title -nt "$info Database and settings moved to: $( tcolor "$pathsettings" )"
