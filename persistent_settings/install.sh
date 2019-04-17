@@ -5,7 +5,10 @@ alias=pers
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-title -l '=' "$bar Set persistent database and settings ..."
+#title -l '=' "$bar Set persistent database and settings ..."
+installstart $@
+
+getuninstall
 
 makeDirLink settings
 imgsettings=/srv/http/assets/img/settings
@@ -51,4 +54,5 @@ commentS 'StartLimit'
 systemctl daemon-reload
 systemctl restart redis #rune_SY_wrk rune_PL_wrk
 
-title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
+#title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
+installfinish $@
