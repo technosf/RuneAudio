@@ -43,6 +43,7 @@ moveDirLink /var/lib/mpd mpd:audio
 [[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
 ln -sf "$pathnew/mpd.conf" /etc
 chown -h mpd:audio /etc/mpd.conf
+redis-cli set mpdconfhash $( md5sum /etc/mpd.conf | cut -d' ' -f1 ) &> /dev/null
 
 addons=$( redis-cli hgetall addons )
 redis-cli save &> /dev/null
