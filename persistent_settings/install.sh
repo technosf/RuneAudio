@@ -5,7 +5,6 @@ alias=pers
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-#title -l '=' "$bar Set persistent database and settings ..."
 installstart $@
 
 getuninstall
