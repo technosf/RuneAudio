@@ -63,4 +63,4 @@ redis-cli hmset addons $addons &> /dev/null
 
 installfinish $@
 
-title -nt "$info Database and settings moved to: $( tcolor "$pathsettings" )"
+title -nt "$info Database and settings path: $( tcolor "$pathsettings" )"
