@@ -52,7 +52,7 @@ commentS 'ExecStartPre'
 commentS 'RestartSec'
 commentS 'StartLimit'
 systemctl daemon-reload
-systemctl restart redis #rune_SY_wrk rune_PL_wrk
+systemctl restart redis rune_PL_wrk
 
 title -nt "$info Database and settings moved to: $( tcolor "$pathsettings" )"
 installfinish $@
