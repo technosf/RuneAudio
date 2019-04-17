@@ -34,10 +34,10 @@ moveDirLink() { # $1-pathold $2-chown $3-no ln
 	[[ ! -e "$pathnew" ]] && mv $1 "$pathsettings"
 	rm -rf $1
 	ln -s "$pathnew" $( dirname $1 )
-	[[ -n $2 ]] && chown -R $2 "$pathnew" $1
+	chown -R $2 "$pathnew" $1
 }
 
-moveDirLink /etc/netctl
+moveDirLink /etc/netctl root:root
 
 moveDirLink /var/lib/mpd mpd:audio
 [[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
