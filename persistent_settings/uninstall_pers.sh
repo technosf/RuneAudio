@@ -5,7 +5,6 @@ alias=pers
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-#title -l '=' "$bar Restore database and settings from persistent storage ..."
 uninstallstart $@
 
 if [[ ! -L /etc/netctl ]]; then
