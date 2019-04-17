@@ -42,6 +42,7 @@ moveDirLink /etc/netctl root:root
 moveDirLink /var/lib/mpd mpd:audio
 [[ ! -e "$pathsettings/mpd.conf" ]] && cp /etc/mpd.conf "$pathnew" # maintain changes
 ln -sf "$pathnew/mpd.conf" /etc
+chown -h mpd:audio /etc/mpd.conf
 
 addons=$( redis-cli hgetall addons )
 redis-cli save &> /dev/null
