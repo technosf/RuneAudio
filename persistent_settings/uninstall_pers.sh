@@ -5,7 +5,8 @@ alias=pers
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-title -l '=' "$bar Restore database and settings from persistent storage ..."
+#title -l '=' "$bar Restore database and settings from persistent storage ..."
+uninstallstart $@
 
 if [[ ! -L /etc/netctl ]]; then
 	echo -e "$info No persistent database and settings found."
@@ -32,4 +33,5 @@ restorefile $file
 systemctl daemon-reload
 systemctl restart redis #rune_SY_wrk rune_PL_wrk
 
-title -nt "$bar Database and settings restore successfully."
+#title -nt "$bar Database and settings restore successfully."
+uninstallfinish $@
