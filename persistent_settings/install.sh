@@ -28,7 +28,8 @@ fi
 pathsettings=$( readlink -f $imgsettings )
 rm -rf $imgsettings
 
-moveDirLink() { # $1-pathold $2-chown $3-no ln
+moveDirLink() { # $1-pathold $2-chown
+	echo -e "$bar Move $1"
 	dirold=$( basename $1 )
 	pathnew=$pathsettings/$dirold
 	[[ ! -e "$pathnew" ]] && mv $1 "$pathsettings"
@@ -54,5 +55,5 @@ commentS 'StartLimit'
 systemctl daemon-reload
 systemctl restart redis #rune_SY_wrk rune_PL_wrk
 
-#title -nt "$info database and settings moved to: $( tcolor "$pathsettings" )"
+title -nt "$info Database and settings moved to: $( tcolor "$pathsettings" )"
 installfinish $@
