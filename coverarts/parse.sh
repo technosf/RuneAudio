@@ -126,7 +126,6 @@ count=${#albumArtists[@]}
 countalbum=$count
 i=0
 for albumArtist in "${albumArtists[@]}"; do
-	echo $albumArtist
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
 	artist=$( echo "$albumArtist" | cut -d'^' -f2 )
 	dir=$( echo "$albumArtist" | cut -d'^' -f3 )
