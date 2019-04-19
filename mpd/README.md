@@ -28,11 +28,6 @@ Upgrade MPD to latest version, 0.3:0.19.17 / 0.4b:0.19.19 to **0.21.4** (as of 2
 - **mpc** will be upgraded as well
 	
 	- **issue:** broken Midori
-		- missing symlinks:
-			- libicudata.so.59
-			- libicui18n.so.59
-			- libicuuc.so.59
-			- libwebp.so.6
 		- missing packages:
 			- glib2
 			- gtk3
