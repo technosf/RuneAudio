@@ -155,7 +155,7 @@ if [[ -n $cueFiles ]]; then
 	done
 fi
 
-chown -HR http:http /srv/http/assets/img/coverarts
+chown -h http:http /srv/http/assets/img/coverarts/*
 
 echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
 (( $dummy )) && echo -e   "$padB Dummy thumbnails   : $( tcolor $( numfmt --g $dummy ) )"
