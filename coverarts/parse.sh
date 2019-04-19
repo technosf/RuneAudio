@@ -68,7 +68,7 @@ function createThumbnail() {
 		fi
 	done
 	
-	if [[ !$cue || !$wav ]]; then
+	if [[ !$cue ]]; then
 		coverfile=$( $scandirphp "$dir" )
 		if [[ $coverfile != 0 ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
