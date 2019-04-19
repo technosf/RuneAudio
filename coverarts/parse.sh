@@ -3,7 +3,7 @@
 [[ -n "$1" ]] && scanpath=$1
 [[ -n "$2" ]] && removeexist=$2
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -29,91 +29,133 @@ padC=$( tcolor '.' 6 6 )
 padB=$( tcolor '.' 4 4 )
 padR=$( tcolor '.' 1 1 )
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
+imgcoverarts=/srv/http/assets/img/coverarts
 
-rm -f /srv/http/tmp/skipped-wav.txt # remove log
+function createThumbnail() {
+	percent=$(( $i * 100 / $count ))
+	echo
+	echo ${percent}% $( tcolor "$i/$count$cue" 8 ) $( tcolor "$album" ) • $artist
+	
+	# skip if non utf-8 found
+	if [[ $( echo $thumbname | grep -axv '.*' ) ]]; then
+		echo "$padR Name contains non UTF-8 characters."
+		(( nonutf8++ ))
+		return
+	fi
+	
+	# "/" not allowed in filename, "#" and "?" not allowed in img src
+	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
+	thumbfile="$imgcoverarts/$thumbname.jpg"
+	
+	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
+		(( exist++ ))
+		echo "  Skip - Thumbnail exists."
+		return
+	fi
+	
+	for cover in $coverfiles; do
+		coverfile="$dir/$cover"
+		if [[ -e "$coverfile" ]]; then
+			convert "$coverfile" \
+				-thumbnail 200x200 \
+				-unsharp 0x.5 \
+				"$thumbfile"
+			if [[ $? == 0 ]]; then
+				echo -e "$padC Thumbnail created - file: $coverfile"
+				(( thumb++ ))
+				return
+			fi
+		fi
+	done
+	
+	if [[ !$cue || !$wav ]]; then
+		coverfile=$( $scandirphp "$dir" )
+		if [[ $coverfile != 0 ]]; then
+			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+			if [[ $? == 0 ]]; then
+				rm "$coverfile"
+				echo -e "$padC Thumbnail created - ID3: $file"
+				(( thumb++ ))
+				return
+			fi
+			rm "$coverfile"
+		fi
+	fi
+	
+	ln -s /srv/http/assets/img/cover.svg "${thumbfile:0:-3}svg"
+	echo -e "$padB Coverart not found."
+	(( dummy++ ))
+}
 
 [[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
-[[ -v scanpath ]] && path=$1 || path=/mnt/MPD
-echo Base directory: $( tcolor "$path" )
+title "$bar Get directory list ..."
 
-find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
+if [[ -v scanpath ]]; then
+	path=$1
+	find=$( find "$1" -type d )
+else
+	path=/mnt/MPD
+	find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
+fi
 if [[ -z $find ]]; then
-	title "$info No directories found in $1"
+	title "$info No music files found in $1"
 	exit
 fi
-
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
-echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
-imgcoverarts=/srv/http/assets/img/coverarts
+echo -e "\n$( tcolor $( numfmt --g $count ) ) Directories"
+
 i=0
+albumArtist=
 for dir in "${dirs[@]}"; do
-	created=
+	path=${dir/\/mnt\/MPD\/}
+	mpcls=$( mpc ls -f "%album%^[%albumartist%|%artist%]" "$path" | grep '\^' | awk '!a[$0]++' )
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
-	echo
-	mpdpath=${dir:9}
-	echo ${percent}% $( tcolor "$i/$count" 8 ) $( tcolor "$mpdpath" )
-	if [[ -z $( find "$dir" -maxdepth 1 -type f ) ]]; then
-		echo "  No files found."
-		continue
-	fi
-	
-	# skip if non utf-8 found
-	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
-		echo "$padR Directory path contains non UTF-8 characters."
-		(( nonutf8++ ))
-		continue
-	fi
-	
-	albumartist=$( mpc ls -f "%album%^^[%albumartist%|%artist%]" "$mpdpath" 2> /dev/null | head -n1 )
-	# "/" not allowed in filename, "#" and "?" not allowed in img src
-	thumbname=$( echo $albumartist^^$mpdpath | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
-	thumbfile=$imgcoverarts/$thumbname.jpg
-	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
-		(( exist++ ))
-		echo "  Skip - Thumbnail exists."
-		continue
-	fi
-	
-	for cover in $coverfiles; do
-		coverfile="$dir/$cover"
-		if [[ -e "$coverfile" ]]; then
-			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-			if [[ $? == 0 ]]; then
-				echo -e "$padC Thumbnail created from file."
-				(( thumb++ ))
-				created=1
-				break
-			fi
-		fi
-	done
-	[[ $created ]] && continue
-	
-	coverfile=$( $scandirphp "$dir" )
-	if [[ $coverfile == noaudiofile ]]; then
-		echo "  No coverart or audio files found."
-		continue
-		
-	elif [[ -n $coverfile ]]; then
-		convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-		if [[ $? == 0 ]]; then
-			echo -e "$padC Thumbnail created from embedded ID3."
-			(( thumb++ ))
-			created=1
-		fi
-	fi
-	[[ $created ]] && continue
-
-	thumbfile=${thumbfile:0:-3}svg
-	ln -s /srv/http/assets/img/cover.svg "$thumbfile"
-	echo -e "$padB Coverart not found."
-	(( dummy++ ))
+	echo ${percent}% $( tcolor "$i/$count dir" 8 ) $path
+	[[ -z $mpcls ]] && continue
+	albumArtist="$albumArtist"$'\n'"$mpcls^$dir"
 done
+albumArtist=$( echo "$albumArtist" | awk '!a[$0]++' )
+readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
+count=${#albumArtists[@]}
+countalbum=$count
+i=0
+for albumArtist in "${albumArtists[@]}"; do
+	echo $albumArtist
+	album=$( echo "$albumArtist" | cut -d'^' -f1 )
+	artist=$( echo "$albumArtist" | cut -d'^' -f2 )
+	dir=$( echo "$albumArtist" | cut -d'^' -f3 )
+	thumbname="$album^^$artist"
+	(( i++ ))
+	createThumbnail
+done
+# cue - not in mpd database
+[[ $1 ]] && path=$1 || path=/mnt/MPD
+cueFiles=$( find "$path" -type f -name '*.cue' )
+if [[ -n $cueFiles ]]; then
+	readarray -t files <<<"$cueFiles"
+	count=${#files[@]}
+	title "$bar Cue Sheet - Get album list ..."
+
+	countalbum=$(( countalbum + count ))
+	cue=' cue'
+	i=0
+	for file in "${files[@]}"; do
+		tag=$( cat "$file" | grep '^TITLE\|^PERFORMER' )
+		album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
+		artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
+		dir=$( dirname "$file" )
+		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
+		(( i++ ))
+		createThumbnail
+	done
+fi
+
 chown -HR http:http /srv/http/assets/img/coverarts
 
 echo -e               "\n\n$padC New thumbnails     : $( tcolor $( numfmt --g $thumb ) )"
