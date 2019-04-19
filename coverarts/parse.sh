@@ -61,7 +61,7 @@ function createThumbnail() {
 				-unsharp 0x.5 \
 				"$thumbfile"
 			if [[ $? == 0 ]]; then
-				echo -e "$padC Thumbnail created - file: $coverfile"
+				echo -e "$padC Thumbnail created from $cover"
 				(( thumb++ ))
 				return
 			fi
@@ -74,7 +74,7 @@ function createThumbnail() {
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
 				rm "$coverfile"
-				echo -e "$padC Thumbnail created - ID3: $file"
+				echo -e "$padC Thumbnail created from embedded ID3"
 				(( thumb++ ))
 				return
 			fi
