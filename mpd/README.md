@@ -27,7 +27,7 @@ Upgrade MPD to latest version, 0.3:0.19.17 / 0.4b:0.19.19 to **0.21.4** (as of 2
 	- fix mpd.log permission
 - **mpc** will be upgraded as well
 - **issue:**
-	- broken Midori
+	- broken Midori - install Chromium instead
 
 **Upgrade**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)
