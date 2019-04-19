@@ -113,7 +113,7 @@ i=0
 albumArtist=
 for dir in "${dirs[@]}"; do
 	path=${dir/\/mnt\/MPD\/}
-	mpcls=$( mpc ls -f "%album%^[%albumartist%|%artist%]" "$path" | grep '\^' | awk '!a[$0]++' )
+	mpcls=$( mpc ls -f "%album%^[%albumartist%|%artist%]" "$path" | awk '!a[$0]++ && NF' )
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
 	echo ${percent}% $( tcolor "$i/$count dir" 8 ) $path
@@ -123,7 +123,6 @@ done
 albumArtist=$( echo "$albumArtist" | awk '!a[$0]++' )
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 count=${#albumArtists[@]}
-countalbum=$count
 i=0
 for albumArtist in "${albumArtists[@]}"; do
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
@@ -141,7 +140,6 @@ if [[ -n $cueFiles ]]; then
 	count=${#files[@]}
 	title "$bar Cue Sheet - Get album list ..."
 
-	countalbum=$(( countalbum + count ))
 	cue=' cue'
 	i=0
 	for file in "${files[@]}"; do
