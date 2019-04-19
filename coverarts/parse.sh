@@ -3,7 +3,7 @@
 [[ -n "$1" ]] && scanpath=$1
 [[ -n "$2" ]] && removeexist=$2
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -46,6 +46,8 @@ function createThumbnail() {
 	# "/" not allowed in filename, "#" and "?" not allowed in img src
 	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
 	thumbfile="$imgcoverarts/$thumbname.jpg"
+	dummyfile="$imgcoverarts/$thumbname.svg"
+	rm -f "$dummyfile"
 	
 	if [[ ! -v removeexist && -e "$thumbfile" ]]; then
 		(( exist++ ))
@@ -61,7 +63,7 @@ function createThumbnail() {
 				-unsharp 0x.5 \
 				"$thumbfile"
 			if [[ $? == 0 ]]; then
-				echo -e "$padC Thumbnail created from $cover"
+				echo -e "$padC Thumbnail created - file: $coverfile"
 				(( thumb++ ))
 				return
 			fi
@@ -70,19 +72,19 @@ function createThumbnail() {
 	
 	if [[ !$cue ]]; then
 		coverfile=$( $scandirphp "$dir" )
-		if [[ $coverfile != 0 ]]; then
+		if [[ $coverfile != 'noaudiofile' ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
 				rm "$coverfile"
-				echo -e "$padC Thumbnail created from embedded ID3"
+				echo -e "$padC Thumbnail created - ID3: $file"
 				(( thumb++ ))
 				return
 			fi
-			rm "$coverfile"
+			rm -f "$coverfile"
 		fi
 	fi
 	
-	ln -s /srv/http/assets/img/cover.svg "${thumbfile:0:-3}svg"
+	ln -s /srv/http/assets/img/cover.svg "$dummyfile"
 	echo -e "$padB Coverart not found."
 	(( dummy++ ))
 }
@@ -113,7 +115,7 @@ i=0
 albumArtist=
 for dir in "${dirs[@]}"; do
 	path=${dir/\/mnt\/MPD\/}
-	mpcls=$( mpc ls -f "%album%^[%albumartist%|%artist%]" "$path" | awk '!a[$0]++ && NF' )
+	mpcls=$( mpc ls -f "[%album%^[%albumartist%|%artist%]]" "$path" | awk '!a[$0]++ && NF' )
 	(( i++ ))
 	percent=$(( $i * 100 / $count ))
 	echo ${percent}% $( tcolor "$i/$count dir" 8 ) $path
@@ -123,6 +125,7 @@ done
 albumArtist=$( echo "$albumArtist" | awk '!a[$0]++' )
 readarray -t albumArtists <<<"${albumArtist:1}" # remove 1st \n
 count=${#albumArtists[@]}
+echo "count = $count"
 i=0
 for albumArtist in "${albumArtists[@]}"; do
 	album=$( echo "$albumArtist" | cut -d'^' -f1 )
