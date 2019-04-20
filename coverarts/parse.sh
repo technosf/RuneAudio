@@ -81,21 +81,23 @@ function createThumbnail() {
 	
 	if [[ -z $cueFiles ]]; then
 		coverfile=$( $scandirphp "$dir" )
-		if [[ $coverfile == noaudiofile ]]; then
-			echo "  No coverart or audio files found."
-			return
-			
-		elif [[ -n $coverfile ]]; then
-			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-			if [[ $? == 0 ]]; then
-				if [[ -v removeexist ]]; then
-					echo "$padB Replace - Existing thumbnail."
-					(( replace++ ))
-				else
-					echo -e "$padC Thumbnail created from embedded ID3."
-					(( thumb++ ))
-				fi
+		if [[ $coverfile != wavefile ]]; then
+			if [[ $coverfile == noaudiofile ]]; then
+				echo "  No coverart or audio files found."
 				return
+				
+			elif [[ -n $coverfile ]]; then
+				convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+				if [[ $? == 0 ]]; then
+					if [[ -v removeexist ]]; then
+						echo "$padB Replace - Existing thumbnail."
+						(( replace++ ))
+					else
+						echo -e "$padC Thumbnail created from embedded ID3."
+						(( thumb++ ))
+					fi
+					return
+				fi
 			fi
 		fi
 	fi
