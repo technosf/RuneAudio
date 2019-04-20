@@ -3,7 +3,7 @@
 path=$1
 [[ $2 != 0 ]] && removeexist=1
 
-#rm $0
+rm $0
 
 . /srv/http/addonstitle.sh
 
