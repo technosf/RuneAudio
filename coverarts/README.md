@@ -14,5 +14,5 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 Any of:
 - Long-press on each thumbnail > coverart / delete
 - Edit ID3 tags then update
-- Replace coverarts normally then update
+- Replace coverarts normally then update  
 (Removed thumbnails will be recreated on next run if ID3 tags and coverarts were still the same.)
