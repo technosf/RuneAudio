@@ -6,7 +6,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 ### Process
 (Directory based)
 - Get **directory** list.
-- Get **album** and **albumartist / artist** name from 1st file in **directory**.
+- Get **album** and **albumartist / artist** name from 1st file/cue in **directory**.
 - Find **coverart file** in directory and create thumbnail.
 - If none, find **ID3 embedded covertart** and create thumbnail. (skip for `*.cue` or `*.wav`)
 - If none, use default `cover.svg` as **dummy** thumbnail.
