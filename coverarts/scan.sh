@@ -43,9 +43,8 @@ function createThumbnail() {
 		[[ -z $thumbname ]] && return
 		
 	else
-		tag=$( cat "$cuefile" | grep '^TITLE\|^PERFORMER' )
-		album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
-		artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
+		album=$( cat "$cuefile" | grep '^TITLE' | cut -d'"' -f2 )
+		artist=$( cat "$cuefile" | grep '^PERFORMER' | cut -d'"' -f2 )
 		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
 	fi
 	# "/" not allowed in filename, "#" and "?" not allowed in img src
