@@ -1,16 +1,13 @@
 #!/bin/bash
 
-[[ -n "$1" ]] && scanpath=$1
-[[ -n "$2" ]] && removeexist=$2
+path=$1
+[[ $2 != 0 ]] && removeexist=1
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
-if [[ -n "$3" ]]; then
-	echo -e "$bar Update Library database ..."
-	mpc update
-fi
+[[ $3 != 0 ]] && mpc update
 
 timestart
 
@@ -57,7 +54,7 @@ function createThumbnail() {
 		return
 	fi
 	
-	if [[ -e "$thumbfile" && ! -v removeexist ]]; then
+	if [[ -e "$thumbfile" && ! $removeexist ]]; then
 		echo "$padW Skip - Thumbnail exists."
 		(( exist++ ))
 		return
@@ -70,7 +67,7 @@ function createThumbnail() {
 		if [[ -e "$coverfile" ]]; then
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
-				if [[ -v removeexist ]]; then
+				if [[ $removeexist ]]; then
 					echo "$padB Replace - Existing thumbnail."
 					(( replace++ ))
 				else
@@ -92,7 +89,7 @@ function createThumbnail() {
 			elif [[ -n $coverfile ]]; then
 				convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 				if [[ $? == 0 ]]; then
-					if [[ -v removeexist ]]; then
+					if [[ $removeexist ]]; then
 						echo "$padB Replace - Existing thumbnail."
 						(( replace++ ))
 					else
@@ -128,7 +125,6 @@ coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
-[[ -v scanpath ]] && path=$1 || path=/mnt/MPD
 echo Base directory: $( tcolor "$path" )
 find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
 [[ -z $find ]] && find=$path
@@ -150,7 +146,7 @@ echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g 
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $(nonutf8) ) )"
 echo
 echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 $imgcoverarts | wc -l ) ) )"
-[[ -v scanpath ]] && echo -e  "      Parsed directory : $( tcolor "$scanpath" )"
+echo -e  "      Parsed directory : $( tcolor "$path" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
 	-d '{ "title": "'"Browse By CoverArt"'", "text": "'"Thumbnails ${update}d."'" }' \
