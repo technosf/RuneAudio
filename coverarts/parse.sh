@@ -7,7 +7,10 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-[[ -n "$3" ]] && mpc update
+if [[ -n "$3" ]]; then
+	echo -e "$bar Update Library database ..."
+	mpc update
+fi
 
 timestart
 
