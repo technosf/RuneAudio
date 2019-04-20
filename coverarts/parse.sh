@@ -3,7 +3,7 @@
 [[ -n "$1" ]] && scanpath=$1
 [[ -n "$2" ]] && removeexist=$2
 
-#rm $0
+rm $0
 
 . /srv/http/addonstitle.sh
 
