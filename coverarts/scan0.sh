@@ -126,7 +126,7 @@ coloredname=$( tcolor 'Browse By CoverArt' )
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
 echo Base directory: $( tcolor "$path" )
-find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d )
+find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d | sort )
 [[ -z $find ]] && find=$path
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
