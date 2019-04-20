@@ -37,11 +37,15 @@ function createThumbnail() {
 		return
 	fi
 	
-	cueFiles=$( find "$path" -type f -name '*.cue' | head -1 )
+	cueFiles=$( find "$path" -type f -name '*.cue' )
 	if [[ -z $cueFiles ]]; then
-		thumbname=$( mpc ls -f "[%album%^^[%albumartist%|%artist%]]" "$mpdpath" 2> /dev/null | awk '!a[$0]++ && NF' | head -1 )
+		mpcls=$( mpc ls -f "[%album%^^[%albumartist%|%artist%]]" "$mpdpath" 2> /dev/null | awk '!a[$0]++ && NF' )
+		readarray -t thumbnames <<<"$mpcls"
+		thumbname=${thumbnames[0]}
 	else
-		tag=$( cat "$cueFiles" | grep '^TITLE\|^PERFORMER' )
+		readarray -t cuefiles <<<"$cueFiles"
+		cuefile=${cuefiles[0]}
+		tag=$( cat "$cuefile" | grep '^TITLE\|^PERFORMER' )
 		album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
 		artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
 		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
