@@ -145,7 +145,9 @@ echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g 
 (( $exist )) && echo -e   "$padW Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
 (( $dummy )) && echo -e   "$padW Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) )"
 (( $nonutf8 )) && echo -e "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $nonutf8 ) )"
-[[ -v scanpath ]] && echo -e  "      Parsed directory : $( tcolor "$scanpath" )"
+echo
+echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 | wc -l ) ) )"
+echo -e                       "      Parsed directory : $( tcolor "$path" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
 	-d '{ "title": "'"Browse By CoverArt"'", "text": "'"Thumbnails ${update}d."'" }' \
