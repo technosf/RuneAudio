@@ -32,7 +32,7 @@ function createThumbnail() {
 	
 	# skip if non utf-8 found
 	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
-		echo "$padR Directory path contains non UTF-8 characters."
+		echo "$padR Skip - $( tcolor "$mpdpath" 1 ) contains non UTF-8 characters."
 		(( nonutf8++ ))
 		return
 	fi
@@ -55,8 +55,8 @@ function createThumbnail() {
 	fi
 	
 	if [[ -e "$thumbfile" && ! $removeexist ]]; then
-		echo "$padW Skip - Thumbnail exists."
 		(( exist++ ))
+		echo "$padW #$exist Skip - Thumbnail exists."
 		return
 	fi
 	
@@ -68,11 +68,11 @@ function createThumbnail() {
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
-					echo "$padB Replace - Existing thumbnail."
 					(( replace++ ))
+					echo "$padB #$prplace Replace - Existing thumbnail."
 				else
-					echo -e "$padC Thumbnail created from file: $cover"
 					(( thumb++ ))
+					echo -e "$padC #$thumb New - Thumbnail created from file $cover"
 				fi
 				return
 			fi
@@ -81,30 +81,27 @@ function createThumbnail() {
 	
 	if [[ -z $cuefile ]]; then
 		coverfile=$( $scandirphp "$dir" )
-		if [[ $coverfile != wavefile ]]; then
-			if [[ $coverfile == noaudiofile ]]; then
-				echo "  No coverart or audio files found."
-				return
-				
-			elif [[ -n $coverfile ]]; then
-				convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-				if [[ $? == 0 ]]; then
-					if [[ $removeexist ]]; then
-						echo "$padB Replace - Existing thumbnail."
-						(( replace++ ))
-					else
-						echo -e "$padC Thumbnail created from embedded ID3."
-						(( thumb++ ))
-					fi
-					return
+		if [[ ${coverfile:0:4} != '/srv' ]]; then
+			echo "  $coverfile"
+			return
+		else
+			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+			if [[ $? == 0 ]]; then
+				if [[ $removeexist ]]; then
+					(( replace++ ))
+					echo "$padB #$replace Replace - Existing thumbnail."
+				else
+					(( thumb++ ))
+					echo -e "$padC #$thumb New - Thumbnail created from embedded ID3."
 				fi
+				return
 			fi
 		fi
 	fi
 
 	ln -s /srv/http/assets/img/cover.svg "$dummyfile"
-	echo -e "$padW Dummy - Coverart not found."
 	(( dummy++ ))
+	echo -e "$padW #$dummy Dummy - No coverart found."
 }
 
 cue=
