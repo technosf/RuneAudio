@@ -3,7 +3,7 @@
 [[ -n "$1" ]] && scanpath=$1
 [[ -n "$2" ]] && removeexist=$2
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -120,7 +120,7 @@ padR=$( tcolor '.' 1 1 )
 imgcoverarts=/srv/http/assets/img/coverarts
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 
-[[ -n $( ls /srv/http/assets/img/coverarts ) ]] && update=Update || update=Create
+[[ -n $( ls $imgcoverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
@@ -138,16 +138,16 @@ for dir in "${dirs[@]}"; do
 	percent=$(( $i * 100 / $count ))
 	createThumbnail
 done
-chown -h http:http /srv/http/assets/img/coverarts/*
+chown -h http:http $imgcoverarts/*
 
 echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g $thumb ) )"
 (( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) )"
 (( $exist )) && echo -e   "$padW Existings thumbnails : $( tcolor $( numfmt --g $exist ) )"
 (( $dummy )) && echo -e   "$padW Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) )"
-(( $nonutf8 )) && echo -e "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $nonutf8 ) )"
+(( $nonutf8 )) && echo -e "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $(nonutf8) ) )"
 echo
-echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 | wc -l ) ) )"
-echo -e                       "      Parsed directory : $( tcolor "$path" )"
+echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 $imgcoverarts | wc -l ) ) )"
+[[ -v scanpath ]] && echo -e  "      Parsed directory : $( tcolor "$scanpath" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
 	-d '{ "title": "'"Browse By CoverArt"'", "text": "'"Thumbnails ${update}d."'" }' \
