@@ -3,15 +3,18 @@
 
 Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It will take a while depend on numbers of album for the 1st time. Subsequent updates will be on new/changed album/artist names only.
 
+### Scope
+- Directory based as each album normally stored in each directory.
+- Compilation albums(multiple artists) must be tagged with the same `albumartist` (e.g. Various artist)
+- The same album with the same artist can have only 1 thumbnail. Unique tags needed.
+- Untagged files are skipped.
+
 ### Process
-(Directory based)
 - Get **directory** list.
 - Get **album** and **albumartist / artist** name from 1st file/cue in **directory**.
 - Find **coverart file** in directory and create thumbnail.
 - If none, find **ID3 embedded covertart** and create thumbnail. (skip for `*.cue` or `*.wav`)
 - If none, use default `cover.svg` as **dummy** thumbnail.
-
-(The same album with the same artist can have only 1 thumbnail. Unique tags needed.)
 
 ### To change:
 Any of:
