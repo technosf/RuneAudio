@@ -37,14 +37,10 @@ function createThumbnail() {
 		return
 	fi
 	
-	cueFiles=$( find "$path" -type f -name '*.cue' )
-	if [[ -z $cueFiles ]]; then
-		mpcls=$( mpc ls -f "[%album%^^[%albumartist%|%artist%]]" "$mpdpath" 2> /dev/null | awk '!a[$0]++ && NF' )
-		readarray -t thumbnames <<<"$mpcls"
-		thumbname=${thumbnames[0]}
+	cuefile=$( find "$path" -maxdepth 1 -type f -name '*.cue' | head -1 )
+	if [[ -z $cuefile ]]; then
+		thumbname=$( mpc ls -f "[%album%^^[%albumartist%|%artist%]]" "$mpdpath" 2> /dev/null | awk '!a[$0]++ && NF' | head -1 )
 	else
-		readarray -t cuefiles <<<"$cueFiles"
-		cuefile=${cuefiles[0]}
 		tag=$( cat "$cuefile" | grep '^TITLE\|^PERFORMER' )
 		album=$( echo "$tag" | grep TITLE | sed 's/.*"\(.*\)".*/\1/' )
 		artist=$( echo "$tag" | grep PERFORMER | sed 's/.*"\(.*\)".*/\1/' )
@@ -83,7 +79,7 @@ function createThumbnail() {
 		fi
 	done
 	
-	if [[ -z $cueFiles ]]; then
+	if [[ -z $cuefile ]]; then
 		coverfile=$( $scandirphp "$dir" )
 		if [[ $coverfile != wavefile ]]; then
 			if [[ $coverfile == noaudiofile ]]; then
