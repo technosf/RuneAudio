@@ -64,11 +64,12 @@ createThumbnail() {
 			(( dup++ ))
 			echo "$padR Skip - $( tcolor "$album - $artist" 1 ) duplicate"
 			echo -e "$mpcfind\n" >> $duplog
+			return
 		elif [[ ! $removeexist ]]; then
 			(( exist++ ))
 			echo "$padW #$exist Skip - Thumbnail exists."
+			return
 		fi
-		return
 	fi
 	
 	dummyfile=${thumbfile:0:-3}svg
