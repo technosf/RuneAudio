@@ -3,7 +3,7 @@
 path=$1
 [[ $2 == 1 ]] && removeexist=1
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -28,7 +28,7 @@ createThumbnail() {
 	# skip if non utf-8 name
 	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
 		(( nonutf8++ ))
-		echo -e "$padR Skip - $( tcolor "$mpdpath" 1 ) contains non UTF-8 characters."
+		echo -e "$padR Skip - $mpdpath ) contains non UTF-8 characters."
 		echo $mpdpath >> $nonutf8log
 		return
 	fi
@@ -53,7 +53,7 @@ createThumbnail() {
 	thumbfile=$imgcoverarts/$thumbname.jpg
 	if (( ${#thumbfile} > 255 )); then
 		(( longname++ ))
-		echo -e "$padR Skip - $( tcolor "$thumbfile" 1 ) longer than 255 characters."
+		echo -e "$padR Skip - $thumbfile longer than 255 characters."
 		echo -e "$thumbfile\n" >> $longnamelog
 		return
 	fi
@@ -62,7 +62,7 @@ createThumbnail() {
 		mpcfind=$( mpc find albumartist "$artist" album "$album" | sed 's|\(.*\)/.*|\1|' | awk '!a[$0]++' )
 		if (( $( echo "$mpcfind" | wc -l ) > 1 )); then
 			(( dup++ ))
-			echo -e "$padR Skip - $( tcolor "$album - $artist" 1 ) duplicate"
+			echo -e "$padR Skip - $album - $artist duplicate"
 			echo -e "$mpcfind\n" >> $duplog
 			return
 		elif [[ ! $removeexist ]]; then
@@ -158,23 +158,23 @@ done
 chown -h http:http $imgcoverarts/*
 
 echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g $thumb ) )"
-(( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) 2 )"
+(( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) )"
 (( $exist )) && echo -e   "$padW Existings thumbnails : $( numfmt --g $exist )"
-(( $dummy )) && echo -e   "$padG Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) 8 )"
+(( $dummy )) && echo -e   "$padG Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) )"
 if (( $nonutf8 )); then
-	echo -e               "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $nonutf8 ) 1 )  (See list in $( tcolor "$nonutf8log" ))"
+	echo -e               "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $nonutf8 ) )  (See list in $( tcolor "$nonutf8log" ))"
 else
 	rm $nonutf8log
 fi
 if (( $longname )); then
-	echo -e              "$padR Too long named       : $( tcolor $( numfmt --g $longname ) 1 )  (See list in $( tcolor "$longnamelog" ))"
+	echo -e              "$padR Too long named       : $( tcolor $( numfmt --g $longname ) )  (See list in $( tcolor "$longnamelog" ))"
 else
 	rm $longnamelog
 fi
 if (( $dup )); then
 	echo "$( awk '!NF || !seen[$0]++' $duplog | cat -s )" > $duplog # remove duplicate files
 	dup=$(( $( grep -cve '^\s*$' $duplog ) - 1 )) # count without blank lines and less header
-	echo -e              "$padR Duplicate albums     : $( tcolor $( numfmt --g $dup ) 1 )  (See list in $( tcolor "$duplog" ))"
+	echo -e              "$padR Duplicate albums     : $( tcolor $( numfmt --g $dup ) )  (See list in $( tcolor "$duplog" ))"
 else
 	rm $duplog
 fi
