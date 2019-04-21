@@ -3,7 +3,7 @@
 path=$1
 [[ $2 == 1 ]] && removeexist=1
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -28,7 +28,7 @@ createThumbnail() {
 	# skip if non utf-8 name
 	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
 		(( nonutf8++ ))
-		echo "$padR Skip - $( tcolor "$mpdpath" 1 ) contains non UTF-8 characters."
+		echo -e "$padR Skip - $( tcolor "$mpdpath" 1 ) contains non UTF-8 characters."
 		echo $mpdpath >> $nonutf8log
 		return
 	fi
@@ -53,7 +53,7 @@ createThumbnail() {
 	thumbfile=$imgcoverarts/$thumbname.jpg
 	if (( ${#thumbfile} > 255 )); then
 		(( longname++ ))
-		echo "$padR Skip - $( tcolor "$thumbfile" 1 ) longer than 255 characters."
+		echo -e "$padR Skip - $( tcolor "$thumbfile" 1 ) longer than 255 characters."
 		echo -e "$thumbfile\n" >> $longnamelog
 		return
 	fi
@@ -62,12 +62,12 @@ createThumbnail() {
 		mpcfind=$( mpc find albumartist "$artist" album "$album" | sed 's|\(.*\)/.*|\1|' | awk '!a[$0]++' )
 		if (( $( echo "$mpcfind" | wc -l ) > 1 )); then
 			(( dup++ ))
-			echo "$padR Skip - $( tcolor "$album - $artist" 1 ) duplicate"
+			echo -e "$padR Skip - $( tcolor "$album - $artist" 1 ) duplicate"
 			echo -e "$mpcfind\n" >> $duplog
 			return
 		elif [[ ! $removeexist ]]; then
 			(( exist++ ))
-			echo "$padW #$exist Skip - Thumbnail exists."
+			echo -e "$padW #$exist Skip - Thumbnail exists."
 			return
 		fi
 	fi
@@ -81,7 +81,7 @@ createThumbnail() {
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
 					(( replace++ ))
-					echo "$padB #$prplace Replace - Existing thumbnail."
+					echo -e "$padB #$prplace Replace - Existing thumbnail."
 				else
 					(( thumb++ ))
 					echo -e "$padC #$thumb New - Thumbnail created from $cover"
@@ -101,7 +101,7 @@ createThumbnail() {
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
 					(( replace++ ))
-					echo "$padB #$replace Replace - Existing thumbnail."
+					echo -e "$padB #$replace Replace - Existing thumbnail."
 				else
 					(( thumb++ ))
 					echo -e "$padC #$thumb New - Thumbnail created from embedded ID3."
@@ -124,7 +124,7 @@ dummy=0
 padG=$( tcolor '.' 8 8 )
 padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
-padB=$( tcolor '.' 4 4 )
+padB=$( tcolor '.' 2 2 )
 padR=$( tcolor '.' 1 1 )
 imgcoverarts=/srv/http/assets/img/coverarts
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
@@ -158,7 +158,7 @@ done
 chown -h http:http $imgcoverarts/*
 
 echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g $thumb ) )"
-(( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) 4 )"
+(( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) 2 )"
 (( $exist )) && echo -e   "$padW Existings thumbnails : $( numfmt --g $exist )"
 (( $dummy )) && echo -e   "$padG Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) 8 )"
 if (( $nonutf8 )); then
