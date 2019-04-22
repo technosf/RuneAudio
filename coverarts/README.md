@@ -23,3 +23,7 @@ Any of:
 - Replace coverarts normally then update  
 
 (Removed thumbnails will be recreated on next run if ID3 tags and coverarts were still the same.)
+
+### To update:
+- All: Library > long-press CoverArt
+- Directory: Library > Directory context menu > Update thumbnails
