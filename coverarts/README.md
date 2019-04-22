@@ -6,7 +6,7 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 ### Scope
 - Directory based as each album normally stored in each directory.
 - Compilation albums(multiple artists) must be tagged with the same `albumartist` (e.g. Various artist)
-- The same album with the same artist can have only 1 thumbnail. Unique tags needed.
+- An album with the same artist can have only 1 thumbnail. Unique album tag needed to create each thumbnail.
 - Untagged files are skipped.
 
 ### Process
