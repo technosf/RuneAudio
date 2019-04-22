@@ -43,6 +43,10 @@ createThumbnail() {
 		albumartist=$( echo $thumbname | tr -s ^^ )
 		album=$( echo $albumartist | cut -d^ -f1 )
 		artist=$( echo $albumartist | cut -d^ -f2 )
+		if [[ -z $album || -z $artist ]]; then
+			echo "  Incomplete album and artist tags."
+			return
+		fi
 	else
 		album=$( cat "$cuefile" | grep '^TITLE' | cut -d'"' -f2 )
 		artist=$( cat "$cuefile" | grep '^PERFORMER' | cut -d'"' -f2 )
