@@ -197,4 +197,5 @@ echo
 echo -e "$bar To change individually:"
 echo "    - CoverArt > long-press thumbnail > coverArt / delete"
 echo -e "$bar To update with updated database:"
+echo "    - Library > long-press CoverArt"
 echo "    - Library > directory > context menu > Update thumbnails"
