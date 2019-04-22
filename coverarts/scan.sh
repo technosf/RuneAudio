@@ -62,7 +62,7 @@ createThumbnail() {
 		mpcfind=$( mpc find albumartist "$artist" album "$album" | sed 's|\(.*\)/.*|\1|' | awk '!a[$0]++' )
 		if (( $( echo "$mpcfind" | wc -l ) > 1 )); then
 			(( dup++ ))
-			echo -e "$padR Skip - $album - $artist duplicate"
+			echo -e "$padY Skip - $album - $artist duplicate"
 			echo -e "$mpcfind\n" >> $duplog
 			return
 		elif [[ ! $removeexist ]]; then
@@ -124,6 +124,7 @@ dummy=0
 padG=$( tcolor '.' 8 8 )
 padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
+padY=$( tcolor '.' 3 3 )
 padB=$( tcolor '.' 2 2 )
 padR=$( tcolor '.' 1 1 )
 imgcoverarts=/srv/http/assets/img/coverarts
@@ -174,7 +175,7 @@ fi
 if (( $dup )); then
 	echo "$( awk '!NF || !seen[$0]++' $duplog | cat -s )" > $duplog # remove duplicate files
 	dup=$(( $( grep -cve '^\s*$' $duplog ) - 1 )) # count without blank lines and less header
-	echo -e              "$padR Duplicate albums     : $( tcolor $( numfmt --g $dup ) )  (See list in $( tcolor "$duplog" ))"
+	echo -e              "$padY Duplicate albums     : $( tcolor $( numfmt --g $dup ) )  (See list in $( tcolor "$duplog" ))"
 else
 	rm $duplog
 fi
