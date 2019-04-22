@@ -81,7 +81,7 @@ createThumbnail() {
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
 					(( replace++ ))
-					echo -e "$padB #$prplace Replace - Existing thumbnail."
+					echo -e "$padG #$prplace Replace - Existing thumbnail."
 				else
 					(( thumb++ ))
 					echo -e "$padC #$thumb New - Thumbnail created from $cover"
@@ -101,7 +101,7 @@ createThumbnail() {
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
 					(( replace++ ))
-					echo -e "$padB #$replace Replace - Existing thumbnail."
+					echo -e "$padG #$replace Replace - Existing thumbnail."
 				else
 					(( thumb++ ))
 					echo -e "$padC #$thumb New - Thumbnail created from embedded ID3."
@@ -113,7 +113,7 @@ createThumbnail() {
 
 	ln -s /srv/http/assets/img/cover.svg "$dummyfile"
 	(( dummy++ ))
-	echo -e "$padG #$dummy Dummy - No coverart found."
+	echo -e "$padGr #$dummy Dummy - No coverart found."
 }
 
 cue=
@@ -121,11 +121,11 @@ replace=0
 exist=0
 thumb=0
 dummy=0
-padG=$( tcolor '.' 8 8 )
+padGr=$( tcolor '.' 8 8 )
 padW=$( tcolor '.' 7 7 )
 padC=$( tcolor '.' 6 6 )
 padY=$( tcolor '.' 3 3 )
-padB=$( tcolor '.' 2 2 )
+padG=$( tcolor '.' 2 2 )
 padR=$( tcolor '.' 1 1 )
 imgcoverarts=/srv/http/assets/img/coverarts
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
@@ -159,9 +159,9 @@ done
 chown -h http:http $imgcoverarts/*
 
 echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g $thumb ) )"
-(( $replace )) && echo -e "$padB Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) )"
+(( $replace )) && echo -e "$padG Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) )"
 (( $exist )) && echo -e   "$padW Existings thumbnails : $( numfmt --g $exist )"
-(( $dummy )) && echo -e   "$padG Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) )"
+(( $dummy )) && echo -e   "$padGr Dummy thumbnails     : $( tcolor $( numfmt --g $dummy ) )"
 if (( $nonutf8 )); then
 	echo -e               "$padR Non UTF-8 path       : $( tcolor $( numfmt --g $nonutf8 ) )  (See list in $( tcolor "$nonutf8log" ))"
 else
