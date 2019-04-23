@@ -3,7 +3,7 @@
 path=$1
 [[ $2 == 1 ]] && removeexist=1
 
-rm $0
+#rm $0
 
 . /srv/http/addonstitle.sh
 
@@ -44,7 +44,7 @@ createThumbnail() {
 		album=$( echo $albumartist | cut -d^ -f1 )
 		artist=$( echo $albumartist | cut -d^ -f2 )
 		if [[ -z $album || -z $artist ]]; then
-			echo "  Incomplete album and artist tags."
+			echo "  Missing album or artist tag."
 			return
 		fi
 	else
@@ -52,8 +52,8 @@ createThumbnail() {
 		artist=$( cat "$cuefile" | grep '^PERFORMER' | cut -d'"' -f2 )
 		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
 	fi
-	# "/" not allowed in filename, "#" and "?" not allowed in img src
-	thumbname=$( echo $thumbname | sed 's|/|\||g; s/#/{/g; s/?/}/g' )
+	# "/" not allowed in filename, escape ", "#" and "?" not allowed in img src
+	thumbname=$( echo $thumbname | sed 's/\//|/g; s/"/\\"/g; s/#/{/g; s/?/}/g' )
 	thumbfile=$imgcoverarts/$thumbname.jpg
 	if (( ${#thumbfile} > 255 )); then
 		(( longname++ ))
@@ -63,10 +63,13 @@ createThumbnail() {
 	fi
 	
 	if [[ -e "$thumbfile" ]]; then
-		mpcfind=$( mpc find albumartist "$artist" album "$album" | sed 's|\(.*\)/.*|\1|' | awk '!a[$0]++' )
+		# names after escaped
+		albumname=${album//\"/\\\"}
+		artistname=${artist//\"/\\\"}
+		mpcfind=$( mpc find albumartist "$artistname" album "$albumname" | sed 's|\(.*\)/.*|\1|' | awk '!a[$0]++' )
 		if (( $( echo "$mpcfind" | wc -l ) > 1 )); then
 			(( dup++ ))
-			echo -e "$padY Skip - $album - $artist duplicate"
+			echo -e "$padY Skip - $albumname - $artistname duplicate"
 			echo -e "$mpcfind\n" >> $duplog
 			return
 		elif [[ ! $removeexist ]]; then
