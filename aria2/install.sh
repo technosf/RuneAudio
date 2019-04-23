@@ -61,7 +61,7 @@ mkdir -p /root/.config/aria2
 file=/root/.config/aria2/aria2.conf
 echo $file
 
-cat << 'EOF' > $file
+cat << EOF > $file
 enable-rpc=true
 rpc-listen-all=true
 daemon=true
