@@ -11,6 +11,8 @@ rm $0
 
 timestart
 
+Sstart=$( date +%s )
+
 # create temporary file to let bash run php with arguments
 scandirphp=/tmp/scandir.php
 cat << 'EOF' > $scandirphp
@@ -21,10 +23,26 @@ echo getCoverFile( $argv[ 1 ], 'scancover' );
 EOF
 chmod +x $scandirphp
 
+formatTime() {
+	hh=$(( $1 / 3600 ))
+	(( ${#hh} == 1 )) && hh=0$hh
+	mm=$(( $1 / 60 ))
+	(( ${#mm} == 1 )) && mm=0$mm
+	ss=$(( $1 % 60 ))
+	(( ${#ss} == 1 )) && ss=0$ss
+	if [[ $hh == 00 ]]; then
+		echo "$mm:$ss"
+	else
+		echo "$hh:$mm:$ss"
+	fi
+}
 createThumbnail() {
 	mpdpath=${dir:9}
 	echo
-	echo ${percent}% $( tcolor "$i/$count" 8 ) $( tcolor "$mpdpath" )
+	elapse=$(( $( date +%s ) - $Sstart ))
+	total=$( formatTime $(( $elapse * 100 / $percent )) )
+	elapse=$( formatTime $elapse )
+	echo ${percent}% $( tcolor "$elapse/$total $i/$count" 8 ) $( tcolor "$mpdpath" )
 	# skip if non utf-8 name
 	if [[ $( echo $mpdpath | grep -axv '.*' ) ]]; then
 		(( nonutf8++ ))
