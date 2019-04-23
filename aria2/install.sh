@@ -28,6 +28,8 @@ bsdtar -xf master.zip --strip 2 -C $path ./webui-aria2-master/docs
 rm master.zip
 
 ln -s $path /srv/http
+# disable UI language feature
+sed '/determinePreferredLanguage/, s|^|//|' /srv/http/aria2/app.js
 
 # modify file
 file=/etc/nginx/nginx.conf
