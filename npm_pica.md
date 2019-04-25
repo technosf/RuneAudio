@@ -20,6 +20,12 @@ echo "    pica = require('pica')();" > entry.js
 browserify entry.js -o /srv/http/assets/js/vendor/pica.js
 rm entry.js
 ```
+## Fix broken mpd
+```sh
+ln -s /lib/libicui18n.so.{64.1,56}
+ln -s /lib/libicuucso.{64.1,56}
+
+```
 ## Usage
 ```js
 var picaOption = {
