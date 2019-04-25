@@ -15,7 +15,7 @@ npm install -g browserify
 npm install -g pica
 npm install -g babelify @babel/core @babel/preset-env
 
-echo "const pica = require('pica')();" > entry.js
+echo "    pica = require('pica')();" > entry.js
 browserify entry.js -o /srv/http/assets/js/vendor/pica.js
 rm entry.js
 ```
