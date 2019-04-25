@@ -2,6 +2,7 @@
 [**pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed
 
 ## Convert
+Warning: This breaks **mpd**.
 ```sh
 pacman -Syw openssl
 tmpopenssl=/tmp/openssl
