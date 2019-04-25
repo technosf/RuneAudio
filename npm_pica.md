@@ -4,7 +4,7 @@
 ## Convert
 Warning: This breaks **mpd**.
 ```sh
-pacman -Syw openssl
+pacman -Syw --noconfirm openssl
 tmpopenssl=/tmp/openssl
 mkdir $tmpopenssl
 bsdtar xf /var/cache/pacman/pkg/openssl* -C $tmpopenssl
