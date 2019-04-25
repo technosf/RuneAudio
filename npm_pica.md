@@ -2,7 +2,7 @@
 [**pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed
 
 ## Convert
-Warning: **MPD** needs an upgrade otherwise it'll be broken.
+Warning: **MPD** must be upgraded afterward.
 ```sh
 pacman -Syw --noconfirm openssl
 tmpopenssl=/tmp/openssl
