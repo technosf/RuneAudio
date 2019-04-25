@@ -49,7 +49,7 @@ if ( $argc > 1 ) {
 	$name = $redis->hGet( 'udaclist', $ao );
 }
 
-ui_render( 'notify', json_encode( array( 'title' => 'Audio Output Switched', 'text' => $name, 'icon' => 'mpd' ) ) );
+ui_render( 'notify', json_encode( array( 'title' => 'Audio Output Switched', 'text' => $name, 'icon' => 'output' ) ) );
 wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
 
