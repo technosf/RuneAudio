@@ -15,8 +15,9 @@ title -l '=' "$bar Upgrade Midori ..."
 timestart
 
 if ! pacman -Q midori-rune &> /dev/null; then
-	pacman -Sw --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs\
-		harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar
+	pacman -Sw --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs \
+		harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar \
+		aria2 brotli gobject-introspection-runtime hyphen libpeas webkit2gtk woff2 midori
 
 	file=$( ls -l /lib/libicuuc* | grep -v '^lrw' )
 	file=$( echo $file | cut -d' ' -f9 )
