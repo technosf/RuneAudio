@@ -2,7 +2,7 @@
 [**pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed
 
 ## Convert
-Warning: This breaks **mpd**.
+Warning: **MPD** needs an upgrade otherwise it'll be broken.
 ```sh
 pacman -Syw --noconfirm openssl
 tmpopenssl=/tmp/openssl
@@ -20,12 +20,7 @@ echo "    pica = require('pica')();" > entry.js
 browserify entry.js -o /srv/http/assets/js/vendor/pica.js
 rm entry.js
 ```
-## Fix broken mpd
-```sh
-ln -s /lib/libicui18n.so.{64.1,56}
-ln -s /lib/libicuucso.{64.1,56}
 
-```
 ## Usage
 ```js
 var picaOption = {
