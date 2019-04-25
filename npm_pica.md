@@ -10,7 +10,7 @@ mkdir $tmpopenssl
 bsdtar xf /var/cache/pacman/pkg/openssl* -C $tmpopenssl
 cp $tmpopenssl/usr/lib/{libcrypto.so.1.1,libssl.so.1.1} /lib
 rm -r $tmpopenssl
-pacman -S npm icu libuv libtirpc
+pacman -S --noconfirm npm icu libuv libtirpc
 
 npm install -g browserify
 npm install -g pica
