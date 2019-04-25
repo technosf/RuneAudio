@@ -1,4 +1,4 @@
-### convert pica3 (npm) to normal pica.js
+### convert pica5 (npm) to browser pica.js
 ```sh
 pacman -Syw openssl
 tmpopenssl=/tmp/openssl
