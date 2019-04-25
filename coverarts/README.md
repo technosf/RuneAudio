@@ -9,7 +9,9 @@ Update / Create thumbnails for browsing by coverart from local coverart files or
 	- Priority: USB > NAS > SD 
 	- `ext*` format and write permission
 - Directory based as each album normally stored in each directory.
-- Compilation albums(multiple artists) must be tagged with the same `albumartist` (e.g. Various artist)
+- Compilation albums(multiple artists) 
+	- Must be tagged with the same `albumartist` (e.g. Various artist)
+	- Otherwise thumbnail created from 1st found file, skip the rest
 - An album with the same artist can have only 1 thumbnail. Unique album tag needed to create each thumbnail.
 - Untagged files are skipped.
 
