@@ -13,9 +13,7 @@ cp $tmpopenssl/usr/lib/{libcrypto.so.1.1,libssl.so.1.1} /lib
 rm -r $tmpopenssl
 pacman -S --noconfirm npm icu libuv libtirpc
 
-npm install -g browserify
-npm install -g pica
-npm install -g babelify @babel/core @babel/preset-env
+npm install -g browserify pica babelify @babel/core @babel/preset-env
 
 echo "    pica = require('pica')();" > entry.js
 browserify entry.js -o /srv/http/assets/js/vendor/pica.js
