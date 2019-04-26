@@ -1,4 +1,6 @@
-Arch Linux Arm Java Runtime
+## Minify js and css
+[**yuicompressor**](https://github.com/yui/yuicompressor)
+- `0%` and `0deg` converted to `0` bug
 ```sh
 pacman -S jdk10-openjdk
 
