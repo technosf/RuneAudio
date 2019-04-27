@@ -71,7 +71,7 @@ createThumbnail() {
 		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
 	fi
 	# "/" not allowed in filename, escape ", "#" and "?" not allowed in img src
-	thumbname=$( echo $thumbname | sed 's/\//|/g; s/"/%22/g; s/#/{/g; s/?/}/g' )
+	thumbname=$( echo $thumbname | sed 's/\//|/g; s/#/{/g; s/?/}/g' )
 	thumbfile=$imgcoverarts/$thumbname.jpg
 	if (( ${#thumbfile} > 255 )); then
 		(( longname++ ))
