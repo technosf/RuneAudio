@@ -12,12 +12,13 @@ installstart $@
 
 getuninstall
 
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
-
-pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
-rm transmission-cli*
 if [[ $( redis-cli get buildversion ) > 20170229 ]]; then
 	ln -sf /lib/libevent-2.{1.so.6.0.2,0.so.5}
+	pacman -Sy --noconfirm transmission-cli
+else
+	wgetnc https://github.com/rern/RuneAudio/raw/$branch/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
+	pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
+	rm transmission-cli*
 fi
 
 # remove conf for non-exist user 'transmission'
