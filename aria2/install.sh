@@ -12,7 +12,8 @@ installstart $@
 getuninstall
 
 echo -e "$bar Aria2 package ..."
-pacman -Sy --noconfirm aria2 glibc
+[[ -n $( pacman -Qu | grep glibc ) ]] && pacman -Sy --noconfirm glibc
+pacman -Sy --noconfirm aria2
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
