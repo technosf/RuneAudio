@@ -14,15 +14,21 @@ if [[ $installed == '[installed]' ]]; then
 fi
 
 title -l '=' "$bar Install Kid3 ..."
+
 timestart l
 
 echo -e "$bar Prefetch packages ..."
-pacman -Syw --noconfirm kid3-qt icu readline pcre2 harfbuzz freetype2
+pacman -Syw --noconfirm kid3-qt icu glibc readline pcre2 harfbuzz freetype2
 
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm kid3-qt icu readline pcre2 harfbuzz
+
+pacman -S --noconfirm glibc readline
+# fix missing symlink
 ln -sf /lib/libreadline.so.{8.0,7}
-pacman -S --noconfirm freetype2
+# reinstall
+pacman -S --noconfirm readline
+
+pacman -S --noconfirm kid3-qt icu pcre2 harfbuzz freetype2
 
 if [[ ! -e /usr/lib/libssl.so.1.1 ]]; then
   wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
