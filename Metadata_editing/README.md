@@ -9,12 +9,34 @@ pip install mutagen
 mid3v2 -l /path/file
 
 # write tag
-mid3v2 
+mid3v2 --FRAMENAME=VALUE /path/file
 ```
---artist=ARTIST (TPE1)
---album=ALBUM (TALB)
---song=TITLE (TIT2)
---genre=GENRE (TCON)
---year=YEAR (TDRC)
---track=NUM (TRCK)
+**--FRAMENAME=VALUE**
+- --artist=ARTIST (TPE1)
+- --album=ALBUM (TALB)
+- --TPE2=ALBUMARTIST
+- --song=TITLE (TIT2)
+- --genre=GENRE (TCON)
+- --TCOM=COMPOSER
+- --year=YEAR (TDRC)
+- --track=TRACK (TRCK)
+- --TPOS=DISC
 
+### FLAC Tags
+```sh
+# list tag
+metaflac --show-tag=NAME
+
+# write tag - remove then write
+metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE
+```
+**tag NAME**
+- ARTIST
+- ALBUM
+- ALBUMARTIST
+- TITLE
+- GENRE
+- COMPOSER
+- DATE
+- TRACKNUMBER
+- DISCNUMBER
