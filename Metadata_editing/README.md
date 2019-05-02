@@ -16,8 +16,8 @@ mid3v2 --FRAMENAME=VALUE /path/file
 - --album=ALBUM (TALB)
 - --TPE2=ALBUMARTIST
 - --song=TITLE (TIT2)
-- --genre=GENRE (TCON)
 - --TCOM=COMPOSER
+- --genre=GENRE (TCON)
 - --year=YEAR (TDRC)
 - --track=TRACK (TRCK)
 - --TPOS=DISC
@@ -35,8 +35,8 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 - ALBUM
 - ALBUMARTIST
 - TITLE
-- GENRE
 - COMPOSER
+- GENRE
 - DATE
 - TRACKNUMBER
 - DISCNUMBER
@@ -49,8 +49,8 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 | ALBUM       | TALB   | IPRD |
 | ALBUMARTIST | TPE2   |      |
 | TITLE       | TIT2   | INAM |
-| GENRE       | TCON   | IGNR |
 | COMPOSER    | TCOM   | IMUS |
+| GENRE       | TCON   | IGNR |
 | DATE        | TDRC   | ICRD |
 | TRACKNUMBER | TRCK   | IPRT |
 | DISCNUMBER  | TPOS   |      |
