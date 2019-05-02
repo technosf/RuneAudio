@@ -40,3 +40,5 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE
 - DATE
 - TRACKNUMBER
 - DISCNUMBER
+
+[**Tag Mapping**](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
