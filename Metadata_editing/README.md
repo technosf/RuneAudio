@@ -25,10 +25,10 @@ mid3v2 --FRAMENAME=VALUE /path/file
 ### FLAC Tags
 ```sh
 # list tag - case insensitive NAME
-metaflac --show-tag=NAME [--show-tag=NAME]
+metaflac --show-tag=NAME [--show-tag=NAME] /path/file
 
 # write tag - uppercase NAME ( keep timestamp > remove > write )
-metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag=NAME --set-tag=NAME=VALUE]
+metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag=NAME --set-tag=NAME=VALUE] /path/file
 ```
 **tag NAME**
 - ARTIST
