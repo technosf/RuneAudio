@@ -41,8 +41,7 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 - TRACKNUMBER
 - DISCNUMBER
 
-[**Tag Mapping**](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
-
+**Tag Mapping**
 
 | FLAC        | ID3  | RIFF |
 | ----------- | ---- | ---- |
@@ -56,3 +55,4 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 | TRACKNUMBER | TRCK | IPRT |
 | DISCNUMBER  | TPOS |      |
 
+[Tag Mapping](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
