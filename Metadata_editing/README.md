@@ -15,12 +15,10 @@ mid3v2 --FRAMENAME=VALUE /path/file
 - --artist=ARTIST (TPE1)
 - --album=ALBUM (TALB)
 - --TPE2=ALBUMARTIST
-- --song=TITLE (TIT2)
 - --TCOM=COMPOSER
 - --genre=GENRE (TCON)
-- --year=YEAR (TDRC)
+- --song=TITLE (TIT2)
 - --track=TRACK (TRCK)
-- --TPOS=DISC
 
 ### FLAC Tags
 ```sh
@@ -34,12 +32,10 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 - ARTIST
 - ALBUM
 - ALBUMARTIST
-- TITLE
 - COMPOSER
 - GENRE
-- DATE
+- TITLE
 - TRACKNUMBER
-- DISCNUMBER
 
 **Tag Mapping**
 
@@ -48,11 +44,9 @@ metaflac --preserve-modtime --remove-tag=NAME --set-tag=NAME=VALUE [--remove-tag
 | ARTIST      | TPE1   | IART |
 | ALBUM       | TALB   | IPRD |
 | ALBUMARTIST | TPE2   |      |
-| TITLE       | TIT2   | INAM |
 | COMPOSER    | TCOM   | IMUS |
 | GENRE       | TCON   | IGNR |
-| DATE        | TDRC   | ICRD |
+| TITLE       | TIT2   | INAM |
 | TRACKNUMBER | TRCK   | IPRT |
-| DISCNUMBER  | TPOS   |      |
 
 [Tag Mapping](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
