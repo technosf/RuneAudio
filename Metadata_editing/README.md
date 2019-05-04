@@ -21,6 +21,7 @@ mid3v2 \
 ```
 
 ### FLAC Tags
+[**metaflac**](https://xiph.org/flac/documentation_tools_metaflac.html)
 ```sh
 # list tag - case insensitive NAME
 metaflac --show-tag=NAME [--show-tag=NAME] '/path/file'
@@ -44,7 +45,7 @@ metaflac --preserve-modtime \
 	'/path/file'
 ```
 
-**Tag Mapping**
+[**Tag Mapping**](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
 
 | FLAC        | ID3v2  | RIFF |
 | ----------- | ----   | ---- |
@@ -55,5 +56,3 @@ metaflac --preserve-modtime \
 | GENRE       | TCON   | IGNR |
 | TITLE       | TIT2   | INAM |
 | TRACKNUMBER | TRCK   | IPRT |
-
-[Tag Mapping](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
