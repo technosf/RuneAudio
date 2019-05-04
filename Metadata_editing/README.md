@@ -56,4 +56,5 @@ metaflac --preserve-modtime \
 | GENRE       | TCON   | IGNR |
 | TITLE       | TIT2   | INAM |
 | TRACKNUMBER | TRCK   | IPRT |
+
 `*.wav` files use RIFF
