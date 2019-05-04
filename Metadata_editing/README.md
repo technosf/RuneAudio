@@ -52,10 +52,8 @@ mid3v2 \
 ```sh
 wget https://github.com/rern/_assets/raw/master/lib/libcrypto.so.1.1 -P /usr/lib
 wget https://github.com/rern/_assets/raw/master/lib/libssl.so.1.1 -P /usr/lib
-wget https://github.com/rern/_assets/raw/master/lib/libicui18n.so.64.2 -P /usr/lib
-wget https://github.com/rern/_assets/raw/master/lib/libicuuc.so.64.2 -P /usr/lib
 wget https://github.com/rern/_assets/raw/master/lib/libreadline.so.8.0 -P /usr/lib
-pacman -Sy kid3 glibc
+pacman -Sy glibc pcre2 icu harfbuzz freetype2 kid3
 
 # all format
 kid3-cli \
