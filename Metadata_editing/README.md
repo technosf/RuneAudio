@@ -67,6 +67,9 @@ kid3-cli \
 	-c 'set title "TITLE"' \
 	-c 'set tracknumber "TRACK"' \
 	'/path/file'
+	
+# remove ID3v1
+kid3-cli -c 'remove 1' '/path/file'
 ```
 
 [**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
