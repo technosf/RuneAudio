@@ -55,25 +55,15 @@ wget https://github.com/rern/_assets/raw/master/lib/libicuuc.so.64.2 -P /usr/lib
 wget https://github.com/rern/_assets/raw/master/lib/libreadline.so.8.0 -P /usr/lib
 pacman -Sy kid3 glibc
 
-# ID3V2
+# all format
 kid3-cli \
-	-c 'set TPE1 ARTIST' \
-	-c 'set TALB ALBUM' \
-	-c 'set TPE2 ALBUMARTIST' \
-	-c 'set TCOM COMPOSER' \
-	-c 'set TCON GENRE' \
-	-c 'set TIT2 TITLE' \
-	-c 'set TRCK TRACKNUMBER' \
-	'/path/file'
-# FLAC
-kid3-cli \
-	-c 'set ARTIST ARTIST' \
-	-c 'set ALBUM ALBUM' \
-	-c 'set ALBUMARTIST ALBUMARTIST' \
-	-c 'set COMPOSER COMPOSER' \
-	-c 'set GENRE GENRE' \
-	-c 'set TITLE TITLE' \
-	-c 'set TRACKNUMBER TRACKNUMBER' \
+	-c 'set Artist ARTIST' \
+	-c 'set Album ALBUM' \
+	-c 'set AlbumArtist ALBUMARTIST' \
+	-c 'set Composer COMPOSER' \
+	-c 'set Genre GENRE' \
+	-c 'set Title TITLE' \
+	-c 'set TrackNumber TRACK' \
 	'/path/file'
 ```
 
