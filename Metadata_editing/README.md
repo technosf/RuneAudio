@@ -45,6 +45,35 @@ metaflac --preserve-modtime \
 	'/path/file'
 ```
 
+### Tags
+[**Kid3**](https://kid3.sourceforge.io/)
+```sh
+wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
+wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
+pacman -Sy kid3 glibc
+
+# ID3V2
+kid3-cli \
+	-c 'set TPE1 ARTIST' \
+	-c 'set TALB ALBUM' \
+	-c 'set TPE2 ALBUMARTIST' \
+	-c 'set TCOM COMPOSER' \
+	-c 'set TCON GENRE' \
+	-c 'set TIT2 TITLE' \
+	-c 'set TRCK TRACKNUMBER' \
+	'/path/file'
+# FLAC
+kid3-cli \
+	-c 'set ARTIST ARTIST' \
+	-c 'set ALBUM ALBUM' \
+	-c 'set ALBUMARTIST ALBUMARTIST' \
+	-c 'set COMPOSER COMPOSER' \
+	-c 'set GENRE GENRE' \
+	-c 'set TITLE TITLE' \
+	-c 'set TRACKNUMBER TRACKNUMBER' \
+	'/path/file'
+```
+
 [**Tag Mapping**](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
 
 | FLAC        | ID3v2  | RIFF |
