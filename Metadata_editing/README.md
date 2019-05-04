@@ -77,7 +77,7 @@ kid3-cli \
 	'/path/file'
 ```
 
-[**Tag Mapping**](https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping)
+[**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
 
 | FLAC        | ID3v2  | RIFF |
 | ----------- | ----   | ---- |
