@@ -59,13 +59,13 @@ pacman -Sy kid3 glibc
 
 # all format
 kid3-cli \
-	-c 'set Artist ARTIST' \
-	-c 'set Album ALBUM' \
-	-c 'set AlbumArtist ALBUMARTIST' \
-	-c 'set Composer COMPOSER' \
-	-c 'set Genre GENRE' \
-	-c 'set Title TITLE' \
-	-c 'set TrackNumber TRACK' \
+	-c 'set Artist "ARTIST"' \
+	-c 'set Album "ALBUM"' \
+	-c 'set AlbumArtist "ALBUMARTIST"' \
+	-c 'set Composer "COMPOSER"' \
+	-c 'set Genre "GENRE"' \
+	-c 'set Title "TITLE"' \
+	-c 'set TrackNumber "TRACK"' \
 	'/path/file'
 ```
 
