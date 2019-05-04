@@ -48,8 +48,11 @@ metaflac --preserve-modtime \
 ### Tags
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
+wget https://github.com/rern/_assets/raw/master/lib/libcrypto.so.1.1 -P /usr/lib
+wget https://github.com/rern/_assets/raw/master/lib/libssl.so.1.1 -P /usr/lib
+wget https://github.com/rern/_assets/raw/master/lib/libicui18n.so.64.2 -P /usr/lib
+wget https://github.com/rern/_assets/raw/master/lib/libicuuc.so.64.2 -P /usr/lib
+wget https://github.com/rern/_assets/raw/master/lib/libreadline.so.8.0 -P /usr/lib
 pacman -Sy kid3 glibc
 
 # ID3V2
