@@ -1,28 +1,10 @@
 ## Metadata Editing
 
-### ID3 tags
-[**mid3v2**](https://mutagen.readthedocs.io/en/latest/man/mid3v2.html)
-```sh
-pip install mutagen
-
-# list all tags
-mid3v2 -l '/path/file'
-
-# write tag
-mid3v2 \
-	--artist=ARTIST \
-	--album=ALBUM \
-	--TPE2=ALBUMARTIST \
-	--TCOM=COMPOSER \
-	--genre=GENRE \
-	--song=TITLE \
-	--track=TRACK \
-	'/path/file'
-```
-
-### FLAC Tags
+### FLAC tags
 [**metaflac**](https://xiph.org/flac/documentation_tools_metaflac.html)
 ```sh
+# no packages needed
+
 # list tag - case insensitive NAME
 metaflac --show-tag=NAME [--show-tag=NAME] '/path/file'
 
@@ -45,7 +27,27 @@ metaflac --preserve-modtime \
 	'/path/file'
 ```
 
-### Tags
+### ID3 tags
+[**mid3v2**](https://mutagen.readthedocs.io/en/latest/man/mid3v2.html)
+```sh
+pip install mutagen
+
+# list all tags
+mid3v2 -l '/path/file'
+
+# write tag
+mid3v2 \
+	--artist=ARTIST \
+	--album=ALBUM \
+	--TPE2=ALBUMARTIST \
+	--TCOM=COMPOSER \
+	--genre=GENRE \
+	--song=TITLE \
+	--track=TRACK \
+	'/path/file'
+```
+
+### ALL tags
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
 wget https://github.com/rern/_assets/raw/master/lib/libcrypto.so.1.1 -P /usr/lib
