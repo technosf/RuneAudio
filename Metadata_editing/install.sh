@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias=kid3
+
 . /srv/http/addonstitle.sh
 
 pkg=$( pacman -Ss '^kid3$' | head -n1 )
