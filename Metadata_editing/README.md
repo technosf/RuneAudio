@@ -3,7 +3,7 @@
 ### FLAC tags
 [**metaflac**](https://xiph.org/flac/documentation_tools_metaflac.html)
 ```sh
-# no packages needed
+# no install needed
 
 # list tag - case insensitive NAME
 metaflac --show-tag=NAME [--show-tag=NAME] '/path/file'
@@ -30,6 +30,7 @@ metaflac --preserve-modtime \
 ### ID3 tags
 [**mid3v2**](https://mutagen.readthedocs.io/en/latest/man/mid3v2.html)
 ```sh
+# install
 pip install mutagen
 
 # list all tags
@@ -50,10 +51,12 @@ mid3v2 \
 ### ALL tags
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
-wget https://github.com/rern/_assets/raw/master/lib/libcrypto.so.1.1 -P /usr/lib
-wget https://github.com/rern/_assets/raw/master/lib/libssl.so.1.1 -P /usr/lib
-wget https://github.com/rern/_assets/raw/master/lib/libreadline.so.8.0 -P /usr/lib
-# wget all libicu*
+# install
+wget https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
+mv /usr/lib/libcrypto.so.1.1{,X}
+mv /usr/lib/libssl.so.1.1{,X}
+bsdtar xvf kid3lib.tar.xz -C /usr/lib
+rm kid3lib.tar.xz
 ln -s /usr/lib/libreadline.so.{8.0,8}
 pacman -Sy glibc kid3
 
