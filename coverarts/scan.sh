@@ -23,19 +23,6 @@ echo getCoverFile( $argv[ 1 ], 'scancover' );
 EOF
 chmod +x $scandirphp
 
-formatTime() {
-	hh=$(( $1 / 3600 ))
-	(( ${#hh} == 1 )) && hh=0$hh
-	mm=$(( $1 / 60 ))
-	(( ${#mm} == 1 )) && mm=0$mm
-	ss=$(( $1 % 60 ))
-	(( ${#ss} == 1 )) && ss=0$ss
-	if [[ $hh == 00 ]]; then
-		echo "$mm:$ss"
-	else
-		echo "$hh:$mm:$ss"
-	fi
-}
 createThumbnail() {
 	mpdpath=${dir:9}
 	echo
