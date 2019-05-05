@@ -1,5 +1,37 @@
 ## Metadata Editing
 
+### ALL tags
+[**Kid3**](https://kid3.sourceforge.io/)
+```sh
+# all format
+kid3-cli \
+	-c 'set artist "ARTIST"' \
+	-c 'set album "ALBUM"' \
+	-c 'set albumartist "ALBUMARTIST"' \
+	-c 'set composer "COMPOSER"' \
+	-c 'set genre "GENRE"' \
+	-c 'set title "TITLE"' \
+	-c 'set tracknumber "TRACK"' \
+	"/path/file"
+	
+# remove ID3v1
+kid3-cli -c 'remove 1' "/path/file"
+```
+
+[**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
+
+| FLAC        | ID3v2  | RIFF |
+| ----------- | ----   | ---- |
+| ARTIST      | TPE1   | IART |
+| ALBUM       | TALB   | IPRD |
+| ALBUMARTIST | TPE2   |      |
+| COMPOSER    | TCOM   | IMUS |
+| GENRE       | TCON   | IGNR |
+| TITLE       | TIT2   | INAM |
+| TRACKNUMBER | TRCK   | IPRT |
+
+`*.wav` files use RIFF
+
 ### FLAC tags
 [**metaflac**](https://xiph.org/flac/documentation_tools_metaflac.html)
 ```sh
@@ -47,47 +79,3 @@ mid3v2 \
 	--track="TRACK" \
 	"/path/file"
 ```
-
-### ALL tags
-[**Kid3**](https://kid3.sourceforge.io/)
-```sh
-# expand partition needed
-
-# install
-wget https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
-mv /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
-mv /usr/lib/libssl.so.1.1{,X} &> /dev/null
-bsdtar xvf kid3lib.tar.xz -C /usr/lib
-rm kid3lib.tar.xz
-ln -s /usr/lib/libreadline.so.{8.0,8}
-pacman -Sy glibc kid3
-[[ $( redis-cli get release ) == 0.4b ]] && pacman -S pcre2 harfbuzz freetype2
-
-# all format
-kid3-cli \
-	-c 'set artist "ARTIST"' \
-	-c 'set album "ALBUM"' \
-	-c 'set albumartist "ALBUMARTIST"' \
-	-c 'set composer "COMPOSER"' \
-	-c 'set genre "GENRE"' \
-	-c 'set title "TITLE"' \
-	-c 'set tracknumber "TRACK"' \
-	"/path/file"
-	
-# remove ID3v1
-kid3-cli -c 'remove 1' "/path/file"
-```
-
-[**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
-
-| FLAC        | ID3v2  | RIFF |
-| ----------- | ----   | ---- |
-| ARTIST      | TPE1   | IART |
-| ALBUM       | TALB   | IPRD |
-| ALBUMARTIST | TPE2   |      |
-| COMPOSER    | TCOM   | IMUS |
-| GENRE       | TCON   | IGNR |
-| TITLE       | TIT2   | INAM |
-| TRACKNUMBER | TRCK   | IPRT |
-
-`*.wav` files use RIFF
