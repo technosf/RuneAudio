@@ -51,6 +51,8 @@ mid3v2 \
 ### ALL tags
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
+# expand partition needed
+
 # install
 wget https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
 mv /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
@@ -59,6 +61,7 @@ bsdtar xvf kid3lib.tar.xz -C /usr/lib
 rm kid3lib.tar.xz
 ln -s /usr/lib/libreadline.so.{8.0,8}
 pacman -Sy glibc kid3
+[[ $( redis-cli get release ) == 0.4b ]] && pacman -S pcre2 harfbuzz freetype2
 
 # all format
 kid3-cli \
