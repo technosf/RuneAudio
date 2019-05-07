@@ -3,7 +3,7 @@
 ### ALL tags
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
-# all format
+# all format by common tag names
 kid3-cli \
 	-c 'set artist "ARTIST"' \
 	-c 'set album "ALBUM"' \
@@ -20,15 +20,15 @@ kid3-cli -c 'remove 1' "/path/file"
 
 [**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
 
-| FLAC        | ID3v2  | RIFF |
-| ----------- | ----   | ---- |
-| ARTIST      | TPE1   | IART |
-| ALBUM       | TALB   | IPRD |
-| ALBUMARTIST | TPE2   |      |
-| COMPOSER    | TCOM   | IMUS |
-| GENRE       | TCON   | IGNR |
-| TITLE       | TIT2   | INAM |
-| TRACKNUMBER | TRCK   | IPRT |
+| FLAC        | ID3v2  | RIFF | Kid3        |
+| ----------- | ----   | ---- | ----------- |
+| ARTIST      | TPE1   | IART | artist      
+| ALBUM       | TALB   | IPRD | album       |
+| ALBUMARTIST | TPE2   |      | albumartist |
+| COMPOSER    | TCOM   | IMUS | composer    |
+| GENRE       | TCON   | IGNR | genre       |
+| TITLE       | TIT2   | INAM | title       |
+| TRACKNUMBER | TRCK   | IPRT | tracknumber |
 
 `*.wav` files use RIFF
 
