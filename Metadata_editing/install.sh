@@ -4,17 +4,15 @@ alias=kid3
 
 . /srv/http/addonstitle.sh
 
-pkg=$( pacman -Ss '^kid3$' | head -n1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
-
-if [[ $installed == '[installed]' ]]; then
-	title "$info Kid3 already upgraded to latest version: $version"
+ if [[ $( redis-cli hget addons kid3 ) ]]; then
+	title "$info Kid3 already installed"
 	exit
 fi
 
 title -l '=' "$bar Install $( tcolor Kid3 ) ..."
 timestart l
+
+getuninstall
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
 mv /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
