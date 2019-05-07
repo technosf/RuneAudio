@@ -20,7 +20,7 @@ kid3-cli -c 'remove 1' "/path/file"
 
 [**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
 
-| FLAC        | ID3v2  | RIFF | Kid3        |
+| FLAC        | ID3v2  | RIFF | Kid3 name   |
 | ----------- | ----   | ---- | ----------- |
 | ARTIST      | TPE1   | IART | artist      
 | ALBUM       | TALB   | IPRD | album       |
