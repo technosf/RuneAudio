@@ -22,7 +22,7 @@ if [[ ! -e /lib/libicudata.so.64.2 ]]; then
 	rm kid3lib.tar.xz
 	ln -sf /usr/lib/libreadline.so.{8.0,8}
 fi
-pacman -Sy --noconfirm glibc
+pacman -Sy
 [[ $( redis-cli get release ) == 0.4b ]] && pacman -S --noconfirm pcre2 harfbuzz freetype2
 pacman -Rdd --noconfirm libsystemd
 pacman -S --noconfirm kid3
