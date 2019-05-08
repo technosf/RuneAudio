@@ -26,6 +26,11 @@ pacman -S --noconfirm kid3
 
 timestop l
 
+if [[ ! -e /usr/bin/kid3-cli ]]; then
+	title -l '=' "$warn $( tcolor Kid3 ) installed failed."
+	exit
+fi
+
 redis-cli hset addons kid3 1 &> /dev/null
 
 title -l '=' "$bar $( tcolor Kid3 ) installed successfully."
