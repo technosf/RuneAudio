@@ -53,6 +53,7 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-s
 fi
 
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
+mv /srv/http/.git /tmp
 rm -fr /srv
 
 bsdtar -xvf $file -C /
@@ -60,6 +61,7 @@ rm $file
 
 chown -R http:http /srv
 chmod -R 755 /srv
+mv /tmp/.git /srv/http
 
 redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
 redis-cli del pathlyrics settings udaclist volumemute &> /dev/null
