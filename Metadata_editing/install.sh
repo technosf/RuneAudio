@@ -15,8 +15,8 @@ timestart l
 echo -e "$bar Get files ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
-mv /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
-mv /usr/lib/libssl.so.1.1{,X} &> /dev/null
+cp /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
+cp /usr/lib/libssl.so.1.1{,X} &> /dev/null
 bsdtar xvf kid3lib.tar.xz -C /usr/lib
 rm kid3lib.tar.xz
 ln -s /usr/lib/libreadline.so.{8.0,8}
