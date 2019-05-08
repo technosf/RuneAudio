@@ -24,8 +24,7 @@ if [[ ! -e /lib/libicudata.so.64.2 ]]; then
 fi
 pacman -Sy --noconfirm glibc
 [[ $( redis-cli get release ) == 0.4b ]] && pacman -S --noconfirm pcre2 harfbuzz freetype2
-pacman -R --noconfirm libsystemd
-pacman -S --noconfirm kid3
+yes | pacman -S --noconfirm kid3
 
 timestop l
 
