@@ -37,9 +37,9 @@ fi
 
 if ! pacman -Q parted &>/dev/null; then
 	echo -e "$bar Install parted ..."
-	wgetnc https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
-	pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
-	rm parted-3.2-5-armv7h.pkg.tar.xz
+	wgetnc https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-9-armv7h.pkg.tar.xz
+	pacman -U --noconfirm parted-3.2-9-armv7h.pkg.tar.xz
+	rm parted-3.2-9-armv7h.pkg.tar.xz
 fi
 
 echo -e "$bar fdisk ..."
