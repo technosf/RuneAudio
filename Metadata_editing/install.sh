@@ -31,6 +31,7 @@ timestop l
 
 if [[ ! -e /usr/bin/kid3-cli ]]; then
 	title -l '=' "$warn $( tcolor Kid3 ) installed failed."
+	title -nt "Try install again or SSH: pacman -S kid3"
 	exit
 fi
 
