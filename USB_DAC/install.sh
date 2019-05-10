@@ -41,7 +41,7 @@ include '/srv/http/app/libs/runeaudio.php';
 wrk_mpdconf( $redis, 'refresh' );
 
 if ( $argc > 1 ) {
-	# "exec" gets only last line which is new power-on card
+	// "exec" gets only last line which is new power-on card
 	$ao = exec( '/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2' );
 	$name = $ao;
 } else {
