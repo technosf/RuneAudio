@@ -4,8 +4,9 @@ alias=kid3
 
 . /srv/http/addonstitle.sh
 
- if [[ $( redis-cli hget addons kid3 ) ]]; then
+ if pacman -Q kid3 &> /dev/null; then
 	title "$info Kid3 already installed"
+	redis-cli hset addons kid3 1
 	exit
 fi
 
