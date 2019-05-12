@@ -55,7 +55,7 @@ if ( $argc > 1 ) {
 		}
 	}
 }
-ui_render( 'notify', json_encode( array( 'title' => 'Audio Output Switched', 'text' => $name, 'icon' => 'output' ) ) );
+ui_render( 'notify', json_encode( array( 'title' => 'Switch Audio Output', 'text' => $name, 'icon' => 'output' ) ) );
 wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
 
