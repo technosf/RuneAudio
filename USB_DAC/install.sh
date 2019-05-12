@@ -46,9 +46,15 @@ if ( $argc > 1 ) {
 	$name = $ao;
 } else {
 	$ao = $redis->get( 'aodefault' );
-	$name = $redis->hGet( 'udaclist', $ao );
+	$acards = $redis->hGetAll( 'acards' );
+	foreach( $acards as $key => $value ) {
+		if ( $key === $ao ) {
+			$value = json_decode( $value );
+			$name = $value->extlabel ?: $value->name;
+			break;
+		}
+	}
 }
-
 ui_render( 'notify', json_encode( array( 'title' => 'Audio Output Switched', 'text' => $name, 'icon' => 'output' ) ) );
 wrk_mpdconf( $redis, 'switchao', $ao );
 EOF
