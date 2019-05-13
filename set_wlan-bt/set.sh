@@ -4,7 +4,7 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-if [[ $1 == yes ]]; then
+if [[ $1 == 0 ]]; then
 	title -l '=' "$bar Disable WiFi and Bluetooth ..."
 
 	systemctl disable netctl-auto@wlan0
