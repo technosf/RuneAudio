@@ -13,5 +13,5 @@ killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
 
-[[ $1 == 'yes' ]] && enable=enabled || enable=disabled
+[[ $1 == yes ]] && enable=enabled || enable=disabled
 title -nt "$info Pointer of local browser $( tcolor $enable )."
