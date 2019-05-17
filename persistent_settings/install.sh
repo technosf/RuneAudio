@@ -54,6 +54,9 @@ file=/usr/lib/systemd/system/redis.service
 commentS 'ExecStartPre'
 commentS 'RestartSec'
 commentS 'StartLimit'
+path=${pathsettings:0:12}
+mount=$( systemctl list-units | grep "$path" | head -1 | awk '{ print $1 }' )
+appendS '^Description' "After=network.target $mount"
 
 systemctl daemon-reload
 systemctl restart redis rune_PL_wrk
