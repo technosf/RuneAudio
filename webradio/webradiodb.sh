@@ -28,14 +28,12 @@ redis-cli del webradios &> /dev/null
 
 # add data to files
 makefile() {
-	string=$( cat <<EOF
+	cat << EOF > "/mnt/MPD/Webradio/$1.pls"
 [playlist]
 NumberOfEntries=1
 Title1=$1
 File1=$2
 EOF
-)
-	echo "$string" > /mnt/MPD/Webradio/"$1".pls
 }
 checkname() {
 	for n in "${names[@]}"; do
