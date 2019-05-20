@@ -25,6 +25,26 @@ EOF
 )
 appendH 'db-home'
 
+file=/srv/http/assets/js/enhancefunction.js
+
+commentH 'plsback'
+
+string=$( cat <<'EOF'
+		$( '#pl-currentpath' ).html( '<i class="fa fa-arrow-left plsback"></i><a class="lipath">'+ name +'</a></ul>'+ counthtml );
+EOF
+)
+appendH 'plsback'
+
+file=/srv/http/assets/js/enhance.js
+
+commentH 'left plsbackroot'
+
+string=$( cat <<'EOF'
+		$( '#pl-currentpath' ).html( '<i class="fa fa-arrow-left plsbackroot"></i>'+ plcounthtml );
+EOF
+)
+appendH 'left plsbackroot'
+
 installfinish $@
 
 restartlocalbrowser
