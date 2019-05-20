@@ -12,6 +12,7 @@ getuninstall
 title -l '=' "$bar Modify file ..."
 
 file=/srv/http/app/templates/enhancebody.php
+echo $file
 
 commentH 'db-home'
 
@@ -26,6 +27,7 @@ EOF
 appendH 'db-home'
 
 file=/srv/http/assets/js/enhance.js
+echo $file
 
 comment 'left plsbackroot'
 
@@ -36,6 +38,7 @@ EOF
 append 'left plsbackroot'
 
 file=/srv/http/assets/js/enhancefunction.js
+echo $file
 
 comment 'plsback'
 
