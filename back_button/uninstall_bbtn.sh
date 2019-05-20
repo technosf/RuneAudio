@@ -9,7 +9,12 @@ uninstallstart $@
 
 echo -e "$bar Restore files ..."
 
-restorefile /srv/http/app/templates/enhancebody.php
+files="
+/srv/http/app/templates/enhancebody.php
+/srv/http/assets/js/enhance.js
+/srv/http/assets/js/enhancefunction.js
+"
+restorefile $files
 
 uninstallfinish $@
 
