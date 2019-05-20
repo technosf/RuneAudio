@@ -27,23 +27,23 @@ appendH 'db-home'
 
 file=/srv/http/assets/js/enhance.js
 
-commentH 'left plsbackroot'
+comment 'left plsbackroot'
 
 string=$( cat <<'EOF'
 		$( '#pl-currentpath' ).html( '<i class="fa fa-arrow-left plsbackroot"></i>'+ plcounthtml );
 EOF
 )
-appendH 'left plsbackroot'
+append 'left plsbackroot'
 
 file=/srv/http/assets/js/enhancefunction.js
 
-commentH 'plsback'
+comment 'plsback'
 
 string=$( cat <<'EOF'
 		$( '#pl-currentpath' ).html( '<i class="fa fa-arrow-left plsback"></i><a class="lipath">'+ name +'</a></ul>'+ counthtml );
 EOF
 )
-appendH 'plsback'
+append 'plsback'
 
 installfinish $@
 
