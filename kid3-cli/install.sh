@@ -2,13 +2,13 @@
 
 . /srv/http/addonstitle.sh
 
-if pacman -Q kid3-cli &> /dev/null; then
-	title "$info kid3-cli already installed"
+if pacman -Q kid3-cli || pacman -Q kid3 &> /dev/null; then
+	title "$info Kid3 already installed"
 	redis-cli hset addons kid3 1
 	exit
 fi
 
-title -l '=' "$bar Install $( tcolor kid3-cli ) ..."
+title -l '=' "$bar Install $( tcolor Kid3 ) ..."
 timestart l
 
 if [[ ! -e /lib/libicudata.so.64.2 ]]; then
@@ -35,4 +35,4 @@ rm $file
 
 redis-cli hset addons kid3 1 &> /dev/null
 
-title -l '=' "$bar $( tcolor kid3-cli ) installed successfully."
+title -l '=' "$bar $( tcolor Kid3 ) installed successfully."
