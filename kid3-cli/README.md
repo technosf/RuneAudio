@@ -1,5 +1,6 @@
 ## kid3-cli 
 
+Build **kid3-cli** package
 ```sh
 pacman -Sy
 pacman -S base-devel qt5-tools extra-cmake-modules jsoncpp
