@@ -18,7 +18,6 @@ makepkg -A --skipinteg
 
 **Install**
 ```sh
-pacman -Sy --noconfirm chromaprint id3lib libmp4v2 qt5-multimedia taglib
 file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
 wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$file
 pacman -U --noconfirm $file
