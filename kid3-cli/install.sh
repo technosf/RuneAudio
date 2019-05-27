@@ -23,23 +23,22 @@ if [[ ! -e /lib/libicudata.so.64.2 ]]; then
 	ln -f /usr/lib/libicui18n.so.64{.2,}
 	ln -f /usr/lib/libicuio.so.64{.2,}
 	ln -f /usr/lib/libicuuc.so.64{.2,}
-	rm kid3lib.tar.xz
 fi
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/kid3-cli/kid3pkg1.tar
 wgetnc https://github.com/rern/RuneAudio/raw/master/kid3-cli/kid3pkg2.tar
-bsdtar xvf kid3pkg1.tar -C /var/cache/pacman/pkg
-bsdtar xvf kid3pkg2.tar -C /var/cache/pacman/pkg
-rm kid3pkg1.tar kid3pkg2.tar
+bsdtar xvf kid3pkg1.tar
+bsdtar xvf kid3pkg2.tar
+pacman -U --noconfirm \
+	glibc-2.28-5-armv7h.pkg.tar.xz \
+	kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
 if [[ $( redis-cli get release ) == 0.4b ]]; then
 	pacman -U --noconfirm \
 		pcre2-10.33-1-armv7h.pkg.tar.xz \
 		harfbuzz-2.5.0-1-armv7h.pkg.tar.xz \
 		freetype2-2.10.0-2-armv7h.pkg.tar.xz
 fi
-pacman -U --noconfirm \
-	glibc-2.28-5-armv7h.pkg.tar.xz \
-	kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
+rm *.tar *.xz
 
 redis-cli hset addons kid3 1 &> /dev/null
 
