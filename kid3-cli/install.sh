@@ -19,7 +19,7 @@ if [[ ! -e /lib/libicudata.so.64.2 ]]; then
 	cp /usr/lib/libssl.so.1.1{,X} &> /dev/null
 	bsdtar xvf kid3lib.tar.xz -C /usr/lib
 	rm kid3lib.tar.xz
-	ln -sf /usr/lib/libreadline.so.{8.0,8
+	ln -sf /usr/lib/libreadline.so.8{.0,}
 	ln -f /usr/lib/libicudata.so.64{.2,}
 	ln -f /usr/lib/libicui18n.so.64{.2,}
 	ln -f /usr/lib/libicuio.so.64{.2,}
