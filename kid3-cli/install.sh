@@ -26,6 +26,7 @@ if [[ ! -e /lib/libicudata.so.64.2 ]]; then
 	ln -f /usr/lib/libicuuc.so.64{.2,}
 fi
 
+[[ $( redis-cli get release ) == 0.4b ]] && pacman -S --noconfirm pcre2 harfbuzz freetype2
 pacman -S glibc
 
 file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
