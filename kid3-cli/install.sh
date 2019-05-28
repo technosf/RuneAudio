@@ -32,7 +32,7 @@ mkdir pkg pkg4 pkg5
 bsdtar xvf kid3pkg1.tar -C pkg
 bsdtar xvf kid3pkg2.tar -C pkg
 mv pkg/{pcre*,harfbuzz*,freetype2*} pkg4
-mv pkg/{gtreamer*,orc*} pkg5
+mv pkg/{gstreamer*,orc*} pkg5
 
 if [[ $( redis-cli get release ) == 0.4b ]]; then
 	pacman -U --noconfirm pkg4/*
