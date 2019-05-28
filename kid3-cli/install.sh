@@ -37,7 +37,7 @@ mv pkg1/{pcre*,harfbuzz*,freetype2*} pkg2
 pacman -U --noconfirm pkg1/*
 [[ $( redis-cli get release ) == 0.4b ]] && pacman -U --noconfirm pkg2/*
 pacman -U --noconfirm kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
-rm -rf pkg1 pkg2 kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
+rm -rf kid3pkg* pkg* kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
 
 redis-cli hset addons kid3 1 &> /dev/null
 
