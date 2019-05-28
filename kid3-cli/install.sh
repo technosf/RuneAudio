@@ -28,13 +28,18 @@ fi
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/kid3-cli/kid3pkg1.tar
 wgetnc https://github.com/rern/RuneAudio/raw/master/kid3-cli/kid3pkg2.tar
-mkdir pkg1 pkg2
-bsdtar xvf kid3pkg1.tar -C pkg1
-bsdtar xvf kid3pkg2.tar -C pkg1
-mv pkg1/{pcre*,harfbuzz*,freetype2*} pkg2
+mkdir pkg pkg4 pkg5
+bsdtar xvf kid3pkg1.tar -C pkg
+bsdtar xvf kid3pkg2.tar -C pkg
+mv pkg/{pcre*,harfbuzz*,freetype2*} pkg4
+mv pkg/{gtreamer*,orc*} pkg5
 
-pacman -U --noconfirm pkg1/*
-[[ $( redis-cli get release ) == 0.4b ]] && pacman -U --noconfirm pkg2/*
+pacman -U --noconfirm pkg/*
+if [[ $( redis-cli get release ) == 0.4b ]]; then
+	pacman -U --noconfirm pkg4/*
+else
+	pacman -U --noconfirm pkg5/*
+fi
 rm -rf kid3pkg* pkg*
 
 redis-cli hset addons kid3 1 &> /dev/null
