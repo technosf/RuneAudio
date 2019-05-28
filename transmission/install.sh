@@ -15,8 +15,8 @@ getuninstall
 if [[ ! -e /usr/bin/kid3-cli ]]; then
 	file=libcryptossl.tar.xz
 	wgetnc https://github.com/rern/_assets/raw/master/$file
-	cp /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,X} &> /dev/null
+	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
+	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
 	bsdtar xvf $file -C /usr/lib
 	rm $file
 fi
