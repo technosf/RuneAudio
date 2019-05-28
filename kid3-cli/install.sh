@@ -34,12 +34,13 @@ bsdtar xvf kid3pkg2.tar -C pkg
 mv pkg/{pcre*,harfbuzz*,freetype2*} pkg4
 mv pkg/{gtreamer*,orc*} pkg5
 
-pacman -U --noconfirm pkg/*
 if [[ $( redis-cli get release ) == 0.4b ]]; then
 	pacman -U --noconfirm pkg4/*
 else
 	pacman -U --noconfirm pkg5/*
 fi
+pacman -U --noconfirm pkg/*
+
 rm -rf kid3pkg* pkg*
 
 redis-cli hset addons kid3 1 &> /dev/null
