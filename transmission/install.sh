@@ -12,14 +12,14 @@ installstart $@
 
 getuninstall
 
-if [[ $( redis-cli get buildversion ) > 20170229 ]]; then
-	ln -sf /lib/libevent-2.{1.so.6.0.2,0.so.5}
-	pacman -Sy --noconfirm transmission-cli
-else
-	wgetnc https://github.com/rern/RuneAudio/raw/$branch/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
-	pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
-	rm transmission-cli*
-fi
+file=libcryptossl.tar.xz
+wgetnc https://github.com/rern/_assets/raw/master/$file
+cp /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
+cp /usr/lib/libssl.so.1.1{,X} &> /dev/null
+bsdtar xvf $file -C /usr/lib
+rm $file
+
+pacman -Sy libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
