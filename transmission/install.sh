@@ -21,7 +21,7 @@ if [[ ! -e /usr/bin/kid3-cli ]]; then
 	rm $file
 fi
 
-pacman -Sy libevent transmission-cli
+pacman -Sy --noconfirm libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
