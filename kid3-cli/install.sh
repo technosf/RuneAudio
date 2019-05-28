@@ -12,7 +12,7 @@ title -l '=' "$bar Install $( tcolor Kid3 ) ..."
 timestart l
 
 if [[ ! -e /lib/libicudata.so.64.2 ]]; then
-	echo -e "$bar Get files ..."
+	echo -e "$bar Get package files ..."
 
 	wgetnc https://github.com/rern/RuneAudio/raw/master/Metadata_editing/kid3lib.tar.xz
 	cp /usr/lib/libcrypto.so.1.1{,X} &> /dev/null
