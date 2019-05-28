@@ -2,7 +2,7 @@
 
 . /srv/http/addonstitle.sh
 
-if pacman -Q kid3-cli || pacman -Q kid3 &> /dev/null; then
+if [[ -e /usr/bin/kid3-cli ]]; then
 	title "$info Kid3 already installed"
 	redis-cli hset addons kid3 1
 	exit
