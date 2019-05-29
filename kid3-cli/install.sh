@@ -1,5 +1,9 @@
 #!/bin/bash
 
+alias=kid3
+
+rm $0
+
 . /srv/http/addonstitle.sh
 
 if [[ -e /usr/bin/kid3-cli ]]; then
