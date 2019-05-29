@@ -33,8 +33,7 @@ kid3-cli -c 'remove 1' "/path/file"
 
 **Build**
 ```sh
-pacman -Sy
-pacman -S base-devel qt5-tools extra-cmake-modules jsoncpp
+pacman -Sy base-devel qt5-tools extra-cmake-modules jsoncpp
 
 useradd x
 su x
