@@ -18,7 +18,18 @@ timestart l
 
 echo -e "$bar Prefetch packages ..."
 pkg="libnfs libwebp gcc wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error"
-[[ $( redis-cli get release ) == 0.4b ]] && pkg="$pkg icu readline"
+if [[ $( redis-cli get release ) == 0.4b ]]; then
+	pkg="$pkg icu readline"
+	# fix python3 issue by swith to python2
+	ln -sf /usr/bin/python{2.7,}
+	# fix symlink version
+	ln -sf /usr/lib/libreadline.so{,.7}
+	pacman -S --noconfirm python2-pip
+	ln -sf /usr/bin/pip{2,}
+	pip install flask
+fi
+cp /etc/mpd.conf{,.backup}
+
 pacman -Syw --noconfirm $pkg
 
 echo -e "$bar Get files ..."
@@ -32,25 +43,12 @@ if [[ ! -e /usr/bin/kid3-cli ]]; then
 	rm $file
 fi
 
-# fix python3 issue by swith to python2
-ln -sf /usr/bin/python{2.7,}
-
-cp /etc/mpd.conf{,.backup}
-
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
 pacman -Q mpd-rune &> /dev/null && pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
-echo -e "$bar Install packages ..."
-pacman -S --noconfirm libnfs icu libwebp gcc wavpack ffmpeg libgcrypt libgpg-error readline
-# fix symlink version
-ln -sf /usr/lib/libreadline.so{,.7}
-pacman -S --noconfirm python2-pip
-ln -sf /usr/bin/pip{2,}
-pip install flask
-
 echo -e "$bar Install MPD ..."
-pacman -S --noconfirm mpd mpc libmpdclient
+pacman -S --noconfirm $pkg
 
 cp /etc/mpd.conf{.backup,}
 
