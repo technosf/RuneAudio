@@ -17,7 +17,7 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
 echo -e "$bar Prefetch packages ..."
-pacman -Syw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
+pacman -Syw --noconfirm libnfs icu libwebp gcc wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error readline
 
 echo -e "$bar Get files ..."
 # NO: pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
