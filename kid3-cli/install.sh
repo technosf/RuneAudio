@@ -4,7 +4,7 @@
 
 if [[ -e /usr/bin/kid3-cli ]]; then
 	title "$info Kid3 already installed"
-	redis-cli hset addons kid3 1
+	redis-cli hset addons kid3 1 &> /dev/null
 	exit
 fi
 
