@@ -13,15 +13,17 @@ timestart l
 
 echo -e "$bar Get support files ..."
 
-wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
-cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-bsdtar xvf kid3lib.tar.xz -C /usr/lib
-ln -sf /usr/lib/libreadline.so.8{.0,}
-ln -f /usr/lib/libicudata.so.64{.2,}
-ln -f /usr/lib/libicui18n.so.64{.2,}
-ln -f /usr/lib/libicuio.so.64{.2,}
-ln -f /usr/lib/libicuuc.so.64{.2,}
+if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
+	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
+	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
+	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
+	bsdtar xvf kid3lib.tar.xz -C /usr/lib
+	ln -sf /usr/lib/libreadline.so.8{.0,}
+	ln -f /usr/lib/libicudata.so.64{.2,}
+	ln -f /usr/lib/libicui18n.so.64{.2,}
+	ln -f /usr/lib/libicuio.so.64{.2,}
+	ln -f /usr/lib/libicuuc.so.64{.2,}
+fi
 
 echo -e "$bar Get package files ..."
 
