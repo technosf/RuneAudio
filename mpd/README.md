@@ -7,22 +7,20 @@ Upgrade MPD to latest version, 0.3:0.19.17 / 0.4b:0.19.19 to **0.21.4** (as of 2
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`
 - Fix issues in normal upgrade (but broken Midori):
 	- fix missing libs
-		- libcrypto.so.1.0
-		- libssl.so.1.0
+		- libcrypto
+		- libssl
+		- libicu*
+		- libreadline
 	- remove package conflicts
 		- mpd-rune
 		- ffmpeg-rune
 		- ashuffle-rune
 	- install missing packages
-		- gcc-libs
+		- gcc
 		- ffmpeg
-		- icu
 		- libnfs
 		- libwebp
 		- wavpack
-	- python
-		- switch to python2
-		- install flask
 	- fix systemd unknown lvalue
 	- fix mpd.log permission
 - **mpc** will be upgraded as well
