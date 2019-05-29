@@ -1,5 +1,36 @@
 ## kid3-cli 
 
+[**Kid3**](https://kid3.sourceforge.io/)
+```sh
+# all format by common tag names
+kid3-cli \
+	-c 'set artist "ARTIST"' \
+	-c 'set album "ALBUM"' \
+	-c 'set albumartist "ALBUMARTIST"' \
+	-c 'set composer "COMPOSER"' \
+	-c 'set genre "GENRE"' \
+	-c 'set title "TITLE"' \
+	-c 'set tracknumber "TRACK"' \
+	"/path/file"
+	
+# remove ID3v1
+kid3-cli -c 'remove 1' "/path/file"
+```
+
+[**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
+
+| FLAC        | ID3v2  | RIFF | Kid3 name   |
+| ----------- | ----   | ---- | ----------- |
+| ARTIST      | TPE1   | IART | artist      
+| ALBUM       | TALB   | IPRD | album       |
+| ALBUMARTIST | TPE2   |      | albumartist |
+| COMPOSER    | TCOM   | IMUS | composer    |
+| GENRE       | TCON   | IGNR | genre       |
+| TITLE       | TIT2   | INAM | title       |
+| TRACKNUMBER | TRCK   | IPRT | tracknumber |
+
+`*.wav` files use RIFF
+
 **Build**
 ```sh
 pacman -Sy
@@ -14,12 +45,4 @@ rm kid3-cli.tar.gz
 cd kid3-cli
 
 makepkg -A --skipinteg
-```
-
-**Install**
-```sh
-file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$file
-pacman -U --noconfirm $file
-rm $file
 ```
