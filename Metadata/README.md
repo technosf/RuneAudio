@@ -1,4 +1,4 @@
-## Metadata Editing
+## Metadata
 
 ### ALL tags
 [**Kid3**](https://kid3.sourceforge.io/)
