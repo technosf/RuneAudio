@@ -13,9 +13,9 @@ fi
 title -l '=' "$bar Install $( tcolor Kid3 ) ..."
 timestart l
 
-echo -e "$bar Get support files ..."
-
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
+	echo -e "$bar Get support files ..."
+	
 	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
 	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
 	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
