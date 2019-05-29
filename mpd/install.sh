@@ -17,30 +17,25 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
 echo -e "$bar Prefetch packages ..."
-pkg="libnfs libwebp gcc wavpack ffmpeg pacman python2-pip mpd mpc libmpdclient libgcrypt libgpg-error"
-if [[ $( redis-cli get release ) == 0.4b ]]; then
-	pkg="$pkg icu readline"
-	# fix python3 issue by swith to python2
-	ln -sf /usr/bin/python{2.7,}
-	# fix symlink version
-	ln -sf /usr/lib/libreadline.so{,.7}
-	pacman -S --noconfirm python2-pip
-	ln -sf /usr/bin/pip{2,}
-	pip install flask
-fi
+
 cp /etc/mpd.conf{,.backup}
 
+pkg="libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error"
 pacman -Syw --noconfirm $pkg
 
-echo -e "$bar Get files ..."
+echo -e "$bar Get support files ..."
+
 # NO: pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
-if [[ ! -e /usr/bin/kid3-cli ]]; then
-	file=libcryptossl.tar.xz
-	wgetnc https://github.com/rern/_assets/raw/master/$file
+if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
+	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
 	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
 	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-	bsdtar xvf $file -C /usr/lib
-	rm $file
+	bsdtar xvf kid3lib.tar.xz -C /usr/lib
+	ln -sf /usr/lib/libreadline.so.8{.0,}
+	ln -f /usr/lib/libicudata.so.64{.2,}
+	ln -f /usr/lib/libicui18n.so.64{.2,}
+	ln -f /usr/lib/libicuio.so.64{.2,}
+	ln -f /usr/lib/libicuuc.so.64{.2,}
 fi
 
 echo -e "$bar Remove conflict packages ..."
