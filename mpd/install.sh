@@ -21,10 +21,14 @@ pacman -Syw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python
 
 echo -e "$bar Get files ..."
 # NO: pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
-wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
-chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
+if [[ ! -e /usr/bin/kid3-cli ]]; then
+	file=libcryptossl.tar.xz
+	wgetnc https://github.com/rern/_assets/raw/master/$file
+	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
+	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
+	bsdtar xvf $file -C /usr/lib
+	rm $file
+fi
 
 # fix python3 issue by swith to python2
 ln -sf /usr/bin/python{2.7,}
