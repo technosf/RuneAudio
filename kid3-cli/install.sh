@@ -11,20 +11,19 @@ fi
 title -l '=' "$bar Install $( tcolor Kid3 ) ..."
 timestart l
 
-if [[ ! -e /lib/libicudata.so.64.2 ]]; then
-	echo -e "$bar Get package files ..."
+echo -e "$bar Get support files ..."
 
-	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
-	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-	bsdtar xvf kid3lib.tar.xz -C /usr/lib
-	ln -sf /usr/lib/libreadline.so.8{.0,}
-	ln -f /usr/lib/libicudata.so.64{.2,}
-	ln -f /usr/lib/libicui18n.so.64{.2,}
-	ln -f /usr/lib/libicuio.so.64{.2,}
-	ln -f /usr/lib/libicuuc.so.64{.2,}
-	rm kid3lib.tar.xz
-fi
+wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
+cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
+cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
+bsdtar xvf kid3lib.tar.xz -C /usr/lib
+ln -sf /usr/lib/libreadline.so.8{.0,}
+ln -f /usr/lib/libicudata.so.64{.2,}
+ln -f /usr/lib/libicui18n.so.64{.2,}
+ln -f /usr/lib/libicuio.so.64{.2,}
+ln -f /usr/lib/libicuuc.so.64{.2,}
+
+echo -e "$bar Get package files ..."
 
 wgetnc https://github.com/rern/_assets/raw/master/kid3pkg1.tar
 wgetnc https://github.com/rern/_assets/raw/master/kid3pkg2.tar
@@ -41,7 +40,7 @@ else
 fi
 pacman -U --noconfirm pkg/*
 
-rm -rf kid3pkg* pkg*
+rm -rf kid3* pkg*
 
 redis-cli hset addons kid3 1 &> /dev/null
 
