@@ -11,7 +11,7 @@ if [[ -e /usr/bin/kid3-cli ]]; then
 fi
 
 title -l '=' "$bar Install $( tcolor Kid3 ) ..."
-timestart l
+timestart
 
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	echo -e "$bar Get support files ..."
@@ -48,4 +48,5 @@ rm -rf kid3* pkg*
 
 redis-cli hset addons kid3 1 &> /dev/null
 
+timestop
 title -l '=' "$bar $( tcolor Kid3 ) installed successfully."
