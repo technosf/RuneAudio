@@ -14,7 +14,7 @@ if [[ $installed == '[installed]' ]]; then
 fi
 
 title -l '=' "$bar Upgrade MPD ..."
-timestart l
+timestart
 
 echo -e "$bar Prefetch packages ..."
 
