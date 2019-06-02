@@ -23,7 +23,7 @@ cp /etc/mpd.conf{,.backup}
 pkg="libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error"
 pacman -Syw --noconfirm $pkg
 
-echo -e "$bar Get support files ..."
+echo -e "$bar Get supporting files ..."
 
 # NO: pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
