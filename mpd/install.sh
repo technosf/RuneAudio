@@ -4,7 +4,7 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-pkg=$( pacman -Ss '^mpd$' | head -n1 )
+pkg=$( pacman -Ss '^mpd$' | head -1 )
 version=$( echo $pkg | cut -d' ' -f2 )
 installed=$( echo $pkg | cut -d' ' -f3 )
 
@@ -20,7 +20,12 @@ echo -e "$bar Prefetch packages ..."
 
 cp /etc/mpd.conf{,.backup}
 
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
+
 pkg="libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error"
+(( $glibc == 0 )) && pkg="$pkg glibc"
+
 pacman -Syw --noconfirm $pkg
 
 echo -e "$bar Get supporting files ..."
