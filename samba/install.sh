@@ -3,7 +3,7 @@
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-pkg=$( pacman -Ss '^samba$' | head -n1 )
+pkg=$( pacman -Ss 'samba' | head -n1 )
 version=$( echo $pkg | cut -d' ' -f2 )
 installed=$( echo $pkg | cut -d' ' -f3 )
 
