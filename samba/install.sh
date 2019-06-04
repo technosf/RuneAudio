@@ -22,16 +22,23 @@ timestart
 systemctl stop nmbd smbd
 mv /etc/samba/smb.conf{,.backup}
 
-if ! pacman -Q samba4-rune &> /dev/null; then
-	pacman -S --noconfirm samba
-	mv /etc/samba/smb.conf{,.backup}
-	systemctl restart nmb smb
-	title -l '=' "$bar Samba upgraded successfully to $version"
+pkg=$( pacman -Ss '^samba$' | head -1 )
+version=$( echo $pkg | cut -d' ' -f2 )
+installed=$( echo $pkg | cut -d' ' -f3 )
+
+if [[ $installed == '[installed]' ]]; then
+	title "$info Samba already upgraded to latest version: $version"
 	exit
 fi
 
 echo -e "$bar Prefetch packages ..."
-pacman -Syw libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient
+
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
+
+pkg="libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient"
+(( $glibc == 0 )) && pkg="$pkg glibc"
+pacman -Syw $pkg
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
