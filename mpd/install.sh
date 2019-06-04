@@ -18,7 +18,7 @@ timestart
 
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
 	pacman -Sy mpd
-	if systemctl restartmpd &> /dev/null; then
+	if systemctl restart mpd &> /dev/null; then
 		timestop
 		title -l '=' "$bar MPD upgraded successfully to $version"
 	else
