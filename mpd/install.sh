@@ -16,6 +16,17 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart
 
+if [[ ! $( pacman -Qs mpd-rune ) ]]; then
+	pacman -Sy mpd
+	if systemctl restartmpd &> /dev/null; then
+		timestop
+		title -l '=' "$bar MPD upgraded successfully to $version"
+	else
+		title -l = "$warn MPD upgrade failed."
+	fi
+	exit
+fi
+
 echo -e "$bar Prefetch packages ..."
 
 cp /etc/mpd.conf{,.backup}
@@ -45,7 +56,7 @@ fi
 
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
-pacman -Q mpd-rune &> /dev/null && pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
+pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm $pkg
