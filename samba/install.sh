@@ -19,17 +19,19 @@ fi
 title -l '=' "$bar Upgrade Samba ..."
 timestart
 
-systemctl stop nmbd smbd
-mv /etc/samba/smb.conf{,.backup}
-
-pkg=$( pacman -Ss '^samba$' | head -1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
-
-if [[ $installed == '[installed]' ]]; then
-	title "$info Samba already upgraded to latest version: $version"
+if [[ ! $( pacman -Qs samba4-rune ) ]]; then
+	pacman -Sy samba
+	if systemctl restart nmb smb &> /dev/null; then
+		timestop
+		title -l '=' "$bar Samba upgraded successfully to $version"
+	else
+		title -l = "$warn Samba upgrade failed."
+	fi
 	exit
 fi
+
+systemctl stop nmbd smbd
+mv /etc/samba/smb.conf{,.backup}
 
 echo -e "$bar Prefetch packages ..."
 
