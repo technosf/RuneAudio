@@ -44,7 +44,10 @@ pacman -Syw $pkg
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
-pacman -S --noconfirm glibc ldb libtirpc tdb tevent smbclient samba
+
+pkg="ldb libtirpc tdb tevent smbclient samba"
+(( $glibc == 0 )) && pkg="$pkg glibc"
+pacman -S --noconfirm $pkg
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
