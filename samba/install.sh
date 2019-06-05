@@ -42,6 +42,7 @@ pkg="libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient"
 pacman -Syw $pkg
 
 mv /etc/samba/smb-prod.conf{,.backup}
+rm /etc/samba/smb.conf
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
