@@ -54,9 +54,10 @@ root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
 # remove rune default startup if any
-file=/srv/http/command/rune_SY_wrk
-comment 'start samba services' -n -1 '$kernel ='
-
+if [[ $( redis-cli get release ) != '0.5' ]]; then
+	file=/srv/http/command/rune_SY_wrk
+	comment 'start samba services' -n -1 '$kernel ='
+fi
 if (( $# > 1 )); then
 	file=/etc/samba/smb.conf
 	echo $file
