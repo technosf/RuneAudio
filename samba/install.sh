@@ -37,7 +37,7 @@ echo -e "$bar Prefetch packages ..."
 glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
 [[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
 
-pkg="libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient"
+pkg="libnsl ldb libtirpc tdb tevent smbclient samba libwbclient python"
 (( $glibc == 0 )) && pkg="$pkg glibc"
 pacman -Syw $pkg
 
@@ -114,8 +114,11 @@ fi
 systemctl enable nmb smb
 
 # set samba password
-[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
-(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
+if ! pdbedit -L &> /dev/null; then
+	echo -e "$bar Set Samba password for root ..."
+	[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
+	(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
+fi
 
 timestop
 
