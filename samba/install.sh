@@ -52,13 +52,12 @@ pkg="ldb libtirpc tdb tevent smbclient samba"
 pacman -S --noconfirm $pkg
 pacman -S --noconfirm libwbclient
 
-if ! grep -q '^root' /etc/security/limits.conf; then
-	# fix 'minimum rlimit_max'
-	echo -n '
-	root    soft    nofile    16384
-	root    hard    nofile    16384
-	' >> /etc/security/limits.conf
-fi
+# fix 'minimum rlimit_max'
+echo -n '
+root    soft    nofile    16384
+root    hard    nofile    16384
+' >> /etc/security/limits.conf
+
 # remove rune default startup if any
 if [[ $( redis-cli get release ) != '0.5' ]]; then
 	file=/srv/http/command/rune_SY_wrk
@@ -140,4 +139,4 @@ fi
 printf "%-${l}s - "'\\\\'"$server"'\\'"usbroot > user: root + password\n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
-title -nt "Edit shares: /etc/smb-dev.conf"
+title -nt "Edit shares: /etc/samba/smb.conf"
