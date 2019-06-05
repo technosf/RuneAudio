@@ -42,6 +42,8 @@ pkg="libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient"
 (( $glibc == 0 )) && pkg="$pkg glibc"
 pacman -Syw $pkg
 
+mv /etc/samba/smb-prod.conf{,.backup}
+
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
 
@@ -50,12 +52,13 @@ pkg="ldb libtirpc tdb tevent smbclient samba"
 pacman -S --noconfirm $pkg
 pacman -S --noconfirm libwbclient
 
-# fix 'minimum rlimit_max'
-echo -n '
-root    soft    nofile    16384
-root    hard    nofile    16384
-' >> /etc/security/limits.conf
-
+if ! grep -q '^root' /etc/security/limits.conf; then
+	# fix 'minimum rlimit_max'
+	echo -n '
+	root    soft    nofile    16384
+	root    hard    nofile    16384
+	' >> /etc/security/limits.conf
+fi
 # remove rune default startup if any
 if [[ $( redis-cli get release ) != '0.5' ]]; then
 	file=/srv/http/command/rune_SY_wrk
@@ -98,10 +101,8 @@ if (( $# > 1 )); then
 	chmod 755 $mnt/$read
 	chmod 777 $mnt/$readwrite
 else
-	mv /etc/samba/smb.conf{.backup,}
+	mv mv /etc/samba/smb-prod.conf{.backup,}
 fi
-
-systemctl daemon-reload
 
 echo -e "$bar Start Samba ..."
 if ! systemctl restart nmb smb &> /dev/null; then
