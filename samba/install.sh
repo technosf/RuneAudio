@@ -31,7 +31,6 @@ if [[ ! $( pacman -Qs samba4-rune ) ]]; then
 fi
 
 systemctl stop nmbd smbd
-mv /etc/samba/smb.conf{,.backup}
 
 echo -e "$bar Prefetch packages ..."
 
@@ -101,7 +100,7 @@ if (( $# > 1 )); then
 	chmod 755 $mnt/$read
 	chmod 777 $mnt/$readwrite
 else
-	mv mv /etc/samba/smb-prod.conf{.backup,}
+	mv /etc/samba/smb{-prod.conf.backup,.conf}
 fi
 
 echo -e "$bar Start Samba ..."
