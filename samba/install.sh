@@ -37,7 +37,7 @@ echo -e "$bar Prefetch packages ..."
 glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
 [[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
 
-pkg="libnsl ldb libtirpc tdb tevent smbclient samba libwbclient python"
+pkg="libnsl ldb libtirpc tdb tevent smbclient libwbclient python"
 (( $glibc == 0 )) && pkg="$pkg glibc"
 pacman -Syw $pkg
 
