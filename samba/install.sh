@@ -42,7 +42,6 @@ pkg="libnsl ldb libtirpc tdb tevent smbclient samba libwbclient python"
 pacman -Syw $pkg
 
 mv /etc/samba/smb-prod.conf{,.backup}
-rm /etc/samba/smb.conf
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
@@ -100,7 +99,8 @@ if (( $# > 1 )); then
 	chmod 755 $mnt/$read
 	chmod 777 $mnt/$readwrite
 else
-	mv /etc/samba/smb{-prod.conf.backup,.conf}
+	mv /etc/samba/smb-prod.conf{.backup,}
+	ln -sf /etc/samba/smb{-prod,}.conf
 fi
 
 echo -e "$bar Start Samba ..."
