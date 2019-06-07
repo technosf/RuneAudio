@@ -22,8 +22,9 @@
 |         |         |----c.mp3
 |         |         |----d.mp3
 |         |----/Others
+|         |----.mpdignore
 |----/Webradio
-|----.mpdignore
+
 ```
 **Exclude all except `Music` at USB root**
 ```sh
