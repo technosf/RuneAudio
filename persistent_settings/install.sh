@@ -45,24 +45,12 @@ ln -sf "$pathnew/mpd.conf" /etc
 chown -h mpd:audio /etc/mpd.conf
 redis-cli set mpdconfhash $( md5sum /etc/mpd.conf | cut -d' ' -f1 ) &> /dev/null
 
-addons=$( redis-cli hgetall addons )
-redis-cli save &> /dev/null
-systemctl stop redis
-moveDirLink /var/lib/redis redis:redis
-
-file=/usr/lib/systemd/system/redis.service
-commentS 'ExecStartPre'
-commentS 'RestartSec'
-commentS 'StartLimit'
-path=${pathsettings:0:12}
-mount=$( systemctl list-units | grep "$path" | head -1 | awk '{ print $1 }' )
-appendS '^Description' "After=network.target $mount"
-
-systemctl daemon-reload
-systemctl restart redis rune_PL_wrk
-
-redis-cli del addons &> /dev/null
-redis-cli hmset addons $addons &> /dev/null
+if ! grep -q "$pathsettings/redis" /etc/redis.conf; then
+mkdir -p $pathsettings/redis
+redis-cli config set dir $pathsettings/redis &> /dev/null
+redis-cli config rewrite &> /dev/null
+[[ ! -e $pathsettings/redis/rune.rdb ]] && redis-cli bgsave &> /dev/null
+fi
 
 installfinish $@
 
