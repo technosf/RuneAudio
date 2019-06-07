@@ -37,7 +37,7 @@ ls | sed '/Music/ d' | tr ' ' '\n' > .mpdignore
 ```sh
 find /mnt/MPD/USB/rootdir/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
 ```
-- `-iname artwork*` case insensitive name
+- `-iname artwork*` case insensitive name with wildcard
 - `-type d` only directory
 - `-execdir` run command in found directory
 - `sh -c` child shell (`-execdir` cannot run command with arguments)
