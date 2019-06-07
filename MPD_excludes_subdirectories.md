@@ -1,4 +1,4 @@
-### MPD - Exclude subdirectories on update
+### MPD - Exclude subdirectories from database
 
 **Exclude all except `Music` at USB root**
 ```sh
