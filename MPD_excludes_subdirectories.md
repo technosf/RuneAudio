@@ -19,6 +19,7 @@
 |         |    |    |----a.mp3
 |         |    |    |----b.mp3
 |         |    |----/B
+|         |    |    |----/artworks
 |         |         |----c.mp3
 |         |         |----d.mp3
 |         |----/Others
@@ -34,10 +35,9 @@ ls | sed '/Music/ d' | tr ' ' '\n' > .mpdignore
 
 **Exclude all `Artwork*` and `artwork*` subdirectories in `Music`**
 ```sh
-find /mnt/MPD/USB/rootdir/Music -iname artwork* -type d -execdir sh -c 'echo -e "Artwork*\nartwork*" > .mpdignore' \;
+find /mnt/MPD/USB/rootdir/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
 ```
 - `-iname artwork*` case insensitive name
 - `-type d` only directory
 - `-execdir` run command in found directory
 - `sh -c` child shell (`-execdir` cannot run command with arguments)
-- `{}` path of found directory
