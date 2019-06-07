@@ -27,6 +27,7 @@ fi
 pathsettings=$( readlink -f $imgsettings )
 rm -rf $imgsettings
 
+echo -e "$bar Move Redis ..."
 if ! grep -q "$pathsettings/redis" /etc/redis.conf; then
     mkdir -p $pathsettings/redis
     redis-cli config set dir $pathsettings/redis &> /dev/null
