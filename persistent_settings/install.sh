@@ -27,6 +27,17 @@ fi
 pathsettings=$( readlink -f $imgsettings )
 rm -rf $imgsettings
 
+if ! grep -q "$pathsettings/redis" /etc/redis.conf; then
+    mkdir -p $pathsettings/redis
+    redis-cli config set dir $pathsettings/redis &> /dev/null
+    redis-cli config rewrite &> /dev/null
+    if [[ -e $pathsettings/redis/rune.rdb ]]; then
+        systemctl restart redis
+    else
+        redis-cli bgsave &> /dev/null
+    fi
+fi
+
 moveDirLink() { # $1-pathold $2-chown
 	echo -e "$bar Move $1"
 	dirold=$( basename $1 )
@@ -44,17 +55,6 @@ moveDirLink /var/lib/mpd mpd:audio
 ln -sf "$pathnew/mpd.conf" /etc
 chown -h mpd:audio /etc/mpd.conf
 redis-cli set mpdconfhash $( md5sum /etc/mpd.conf | cut -d' ' -f1 ) &> /dev/null
-
-if ! grep -q "$pathsettings/redis" /etc/redis.conf; then
-    mkdir -p $pathsettings/redis
-    redis-cli config set dir $pathsettings/redis &> /dev/null
-    redis-cli config rewrite &> /dev/null
-    if [[ -e $pathsettings/redis/rune.rdb ]]; then
-        systemctl restart redis
-    else
-        redis-cli bgsave &> /dev/null
-    fi
-fi
 
 installfinish $@
 
