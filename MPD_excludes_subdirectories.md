@@ -15,13 +15,15 @@
 |         |    |    |    |----p.jpg
 |         |    |    |    |----q.jpg
 |         |    |    |----.mpdignore
-|         |    |    |----b.mp3
 |         |    |    |----a.mp3
 |         |    |    |----b.mp3
 |         |    |----/B
-|         |    |    |----/artworks
-|         |         |----c.mp3
-|         |         |----d.mp3
+|         |         |----/artworks
+|         |         |    |----r.jpg
+|         |         |    |----s.jpg
+|         |         |----.mpdignore
+|         |         |----c.flac
+|         |         |----d.flac
 |         |----/Others
 |         |----.mpdignore
 |----/Webradio
