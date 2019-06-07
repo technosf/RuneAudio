@@ -1,6 +1,6 @@
 ### MPD - Exclude subdirectories on update
 
-**Exclude all except `Music` for USB root**
+**Exclude all except `Music` at USB root**
 ```sh
 cd /mnt/MPD/USB/rootdir
 ls | sed '/Music/ d' | tr ' ' '\n' > .mpdignore
