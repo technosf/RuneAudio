@@ -1,5 +1,30 @@
 ### MPD - Exclude subdirectories from database
 
+**Directory Tree**
+```sh
+/mnt
+|----/MPD
+|----/LocalStorage
+|----/NAS
+|----/USB
+|    .----/rootdir
+|         |----/Movies
+|         |----/Music
+|         |    |----/A
+|         |    |    |----/Artwork
+|         |    |    |    |----p.jpg
+|         |    |    |    .----q.jpg
+|         |    |    |----.mpdignore
+|         |    |    |----b.mp3
+|         |    |    |----a.mp3
+|         |    |    .----b.mp3
+|         |    .----/B
+|         |         |----c.mp3
+|         |         .----d.mp3
+|         .----/Others
+|----/Webradio
+.----.mpdignore
+```
 **Exclude all except `Music` at USB root**
 ```sh
 cd /mnt/MPD/USB/rootdir
