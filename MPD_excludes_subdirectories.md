@@ -33,7 +33,7 @@ cd /mnt/MPD/USB/rootdir
 ls | sed '/Music/ d' | tr ' ' '\n' > .mpdignore
 ```
 
-**Exclude all `Artwork*` and `artwork*` subdirectories in `Music`**
+**Exclude all `Artwork` and `artworks` subdirectories in `Music`**
 ```sh
 find /mnt/MPD/USB/rootdir/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
 ```
