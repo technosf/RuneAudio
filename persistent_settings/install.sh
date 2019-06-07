@@ -46,10 +46,14 @@ chown -h mpd:audio /etc/mpd.conf
 redis-cli set mpdconfhash $( md5sum /etc/mpd.conf | cut -d' ' -f1 ) &> /dev/null
 
 if ! grep -q "$pathsettings/redis" /etc/redis.conf; then
-mkdir -p $pathsettings/redis
-redis-cli config set dir $pathsettings/redis &> /dev/null
-redis-cli config rewrite &> /dev/null
-[[ ! -e $pathsettings/redis/rune.rdb ]] && redis-cli bgsave &> /dev/null
+    mkdir -p $pathsettings/redis
+    redis-cli config set dir $pathsettings/redis &> /dev/null
+    redis-cli config rewrite &> /dev/null
+    if [[ -e $pathsettings/redis/rune.rdb ]]; then
+        systemctl restart redis
+    else
+        redis-cli bgsave &> /dev/null
+    fi
 fi
 
 installfinish $@
