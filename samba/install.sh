@@ -96,7 +96,6 @@ else
 	ln -sf /etc/samba/smb{-prod,}.conf
 fi
 
-echo -e "$bar Start Samba ..."
 if ! systemctl restart nmb smb &> /dev/null; then
 	title -l = "$warn Samba upgrade failed."
 	exit
