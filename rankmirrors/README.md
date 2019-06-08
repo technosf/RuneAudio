@@ -8,6 +8,8 @@ Fix packages download errors:
 - ranked by download speed and latency
 - update mirrorlist file, **/etc/pacman.d/mirrorlist** (with original backup)
 
+Remarks: Multiple runs > test file cached > same download speed
+
 **Rank**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
