@@ -34,21 +34,14 @@ systemctl stop nmbd smbd
 
 echo -e "$bar Prefetch packages ..."
 
-glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
-[[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
-
-pkg="libnsl ldb libtirpc tdb tevent smbclient libwbclient python"
-(( $glibc == 0 )) && pkg="$pkg glibc"
-pacman -Syw $pkg
-
 mv /etc/samba/smb-prod.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm --force libnsl
 
-pkg="ldb libtirpc tdb tevent smbclient samba"
-(( $glibc == 0 )) && pkg="$pkg glibc"
-pacman -S --noconfirm $pkg
+pacman -Sy --noconfirm --force libnsl
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
+pacman -S --noconfirm ldb libtirpc tdb tevent python smbclient samba
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
