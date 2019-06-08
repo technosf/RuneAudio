@@ -3,30 +3,30 @@
 **Directory Tree**
 ```sh
 /mnt
-|----/MPD
-|----/LocalStorage
-|----/NAS
-|----/USB
-|    |----/rootdir
-|         |----/Movies
-|         |----/Music
-|         |    |----/A
-|         |    |    |----/Artwork
-|         |    |    |    |----p.jpg
-|         |    |    |    |----q.jpg
-|         |    |    |----.mpdignore
-|         |    |    |----a.mp3
-|         |    |    |----b.mp3
-|         |    |----/B
-|         |         |----/artworks
-|         |         |    |----r.jpg
-|         |         |    |----s.jpg
-|         |         |----.mpdignore
-|         |         |----c.flac
-|         |         |----d.flac
-|         |----/Others
-|         |----.mpdignore
-|----/Webradio
+├────/MPD
+├────/LocalStorage
+├────/NAS
+├────/USB
+│    └────/rootdir
+│         ├────/Movies
+│         ├────/Music
+│         │    ├────/A
+│         │    │    ├────/Artwork
+│         │    │    │    ├────/p.jpg
+│         │    │    │    └────q.jpg
+│         │    │    ├────.mpdignore
+│         │    │    ├────a.mp3
+│         │    │    └────b.mp3
+│         │    └─----/B
+│         │         ├────/artworks
+│         │         │    ├────r.jpg
+│         │         │    └────s.jpg
+│         │         ├────.mpdignore
+│         │         ├────c.flac
+│         │         └────d.flac
+│         ├────/Others
+│         └────.mpdignore
+└────/Webradio
 
 ```
 **Exclude all except `Music` at USB root**
