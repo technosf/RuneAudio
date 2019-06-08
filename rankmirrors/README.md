@@ -1,6 +1,6 @@
 rankmirrors.sh
 ---
-_for ArchLinuxArm (tested on RuneAudio 0.3, 0.4b and 0.5_  
+_for ArchLinuxArm (tested on RuneAudio 0.3, 0.4b and 0.5)_  
   
 Fix packages download errors:  
 - get current `mirrorlist` from ArchLinuxArm source
