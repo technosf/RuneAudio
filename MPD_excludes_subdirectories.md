@@ -3,41 +3,41 @@
 **Directory Tree**
 ```sh
 /mnt
-├────/MPD
-├────/LocalStorage
-├────/NAS
-├────/USB
-│    └────/rootdir
-│         ├────/Movies
-│         ├────/Music
-│         │    ├────/A
-│         │    │    ├────/Artwork
-│         │    │    │    ├────p.jpg
-│         │    │    │    └────q.jpg
-│         │    │    ├────.mpdignore
-│         │    │    ├────a.mp3
-│         │    │    └────b.mp3
-│         │    └─----/B
-│         │         ├────/artworks
-│         │         │    ├────r.jpg
-│         │         │    └────s.jpg
-│         │         ├────.mpdignore
-│         │         ├────c.flac
-│         │         └────d.flac
-│         ├────/Others
-│         └────.mpdignore
-└────/Webradio
+└────/MPD
+     ├────/LocalStorage
+     ├────/NAS
+     ├────/USB
+     │    └────/root
+     │         ├────/Movies
+     │         ├────/Music
+     │         │    ├────/A
+     │         │    │    ├────/Artwork
+     │         │    │    │    ├────p.jpg
+     │         │    │    │    └────q.jpg
+     │         │    │    ├────.mpdignore
+     │         │    │    ├────a.mp3
+     │         │    │    └────b.mp3
+     │         │    └─----/B
+     │         │         ├────/artworks
+     │         │         │    ├────r.jpg
+     │         │         │    └────s.jpg
+     │         │         ├────.mpdignore
+     │         │         ├────c.flac
+     │         │         └────d.flac
+     │         ├────/Others
+     │         └────.mpdignore
+     └────/Webradio
 
 ```
 **Exclude all except `Music` at USB root**
 ```sh
-cd /mnt/MPD/USB/rootdir
+cd /mnt/MPD/USB/root
 ls | sed '/Music/ d' | tr ' ' '\n' > .mpdignore
 ```
 
 **Exclude all `Artwork` and `artworks` subdirectories in `Music`**
 ```sh
-find /mnt/MPD/USB/rootdir/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
+find /mnt/MPD/USB/root/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
 ```
 - `-iname artwork*` case insensitive name with wildcard
 - `-type d` only directory
