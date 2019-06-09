@@ -19,6 +19,10 @@ fi
 title -l '=' "$bar Upgrade Samba ..."
 timestart
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+chmod +x rankmirrors.sh
+./rankmirrors.sh
+
 if [[ ! $( pacman -Qs samba4-rune ) ]]; then
 	pacman -Sy samba
 	if systemctl restart nmb smb &> /dev/null; then
@@ -31,9 +35,6 @@ if [[ ! $( pacman -Qs samba4-rune ) ]]; then
 fi
 
 systemctl stop nmbd smbd
-
-echo -e "$bar Prefetch packages ..."
-
 mv /etc/samba/smb-prod.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
