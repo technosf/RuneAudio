@@ -2,11 +2,11 @@
 
 . /srv/http/addonstitle.sh
 
-pkg=$( pacman -Ss '^pacman$' | head -n1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
+rankmirrors
 
-if [[ $installed == '[installed]' ]]; then
+packagestatus '^mpd$' # $version, $installed
+
+if [[ $installed ]]; then
 	title "$info Pacman already upgraded to latest version: $version"
 	exit
 fi
