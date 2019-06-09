@@ -6,7 +6,7 @@ alias=kern
 
 rankmirrors
 
-packagestatus '^mpd$' # $version, $installed
+packagestatus '^raspberrypi-firmware$' # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info Kernel already upgraged to latest version: $version"
