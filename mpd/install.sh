@@ -16,8 +16,12 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+chmod +x rankmirrors.sh
+./rankmirrors.sh
+
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
-	pacman -Sy mpd
+	pacman -S mpd
 	if systemctl restart mpd &> /dev/null; then
 		timestop
 		title -l '=' "$bar MPD upgraded successfully to $version"
@@ -27,17 +31,7 @@ if [[ ! $( pacman -Qs mpd-rune ) ]]; then
 	exit
 fi
 
-echo -e "$bar Prefetch packages ..."
-
 cp /etc/mpd.conf{,.backup}
-
-glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
-[[ $glibc == '[installed]' ]] && glibc=1 || glibc=0
-
-pkg="libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error"
-(( $glibc == 0 )) && pkg="$pkg glibc"
-
-pacman -Syw --noconfirm $pkg
 
 echo -e "$bar Get supporting files ..."
 
@@ -59,7 +53,10 @@ echo -e "$bar Remove conflict packages ..."
 pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
 echo -e "$bar Install MPD ..."
-pacman -S --noconfirm $pkg
+
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
+pacman -S --noconfirm libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error
 
 cp /etc/mpd.conf{.backup,}
 
