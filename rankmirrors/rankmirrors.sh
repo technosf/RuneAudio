@@ -56,7 +56,7 @@ for server in ${servers[@]}; do # download from each mirror
 	server0='Server = '$server'/$arch/$repo'
 	speed=$(( dl / sec ))
 	dl_server="$dl_server$server0 $speed kB/s $latency ms\n"
-	printf "%6d. %-23s : %6d kB/s %6s ms\n" $i ${server/archlinux*}.. $speed $latency
+	printf "%6d. %-23s :%7d kB/s%5s ms\n" $i ${server/archlinux*}.. $speed $latency
 	
 	rm -f $tmpdir/* # remove downloaded file
 done
