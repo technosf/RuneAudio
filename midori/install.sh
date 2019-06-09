@@ -4,7 +4,7 @@
 
 rankmirrors
 
-packagestatus '^midori$' # $version, $installed
+packagestatus midori # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info Midori already upgraded to latest version: $version"
