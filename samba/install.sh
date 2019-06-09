@@ -5,7 +5,7 @@
 
 rankmirrors
 
-packagestatus '^samba$' # $version, $installed
+packagestatus samba # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info Samba already upgraded to latest version: $version"
