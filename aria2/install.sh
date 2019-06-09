@@ -9,11 +9,15 @@ alias=aria
 
 installstart $@
 
+rankmirrors
+
 getuninstall
 
 echo -e "$bar Aria2 package ..."
-[[ -n $( pacman -Qu | grep glibc ) ]] && pacman -Sy --noconfirm glibc
-pacman -Sy --noconfirm aria2
+
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
+pacman -S --noconfirm aria2
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
