@@ -6,7 +6,7 @@ rm $0
 
 rankmirrors
 
-packagestatus '^mpd$' # $version, $installed
+packagestatus mpd # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info MPD already upgraded to latest version: $version"
