@@ -4,7 +4,7 @@
 
 rankmirrors
 
-packagestatus '^mpd$' # $version, $installed
+packagestatus '^pscman$' # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info Pacman already upgraded to latest version: $version"
