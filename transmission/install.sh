@@ -10,6 +10,8 @@ alias=tran
 
 installstart $@
 
+rankmirrors
+
 getuninstall
 
 if [[ ! -e /usr/bin/kid3-cli ]]; then
