@@ -47,12 +47,16 @@ for server in ${servers[@]}; do # download from each mirror
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
 	ping=$( ping -c 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
-	[[ -z $ping ]] && ping=
+	if [[ -n $ping ]]; then
+		latency=$( printf %.0f $ping )
+	else
+		latency=
+	fi
 	
 	server0='Server = '$server'/$arch/$repo'
 	speed=$(( dl / sec ))
-	dl_server="$dl_server$server0 $speed kB/s $ping ms\n"
-	printf "%3d. %-24s : %5d kB/s %9s ms\n" $i ${server/archlinux*}.. $speed $ping
+	dl_server="$dl_server$server0 $speed kB/s $latency ms\n"
+	printf "%3d. %-24s : %5d kB/s %9s ms\n" $i ${server/archlinux*}.. $speed $latency
 	
 	rm -f $tmpdir/* # remove downloaded file
 done
