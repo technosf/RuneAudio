@@ -4,6 +4,10 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+chmod +x rankmirrors.sh
+./rankmirrors.sh
+
 pkg=$( pacman -Ss '^mpd$' | head -1 )
 version=$( echo $pkg | cut -d' ' -f2 )
 installed=$( echo $pkg | cut -d' ' -f3 )
@@ -15,10 +19,6 @@ fi
 
 title -l '=' "$bar Upgrade MPD ..."
 timestart
-
-wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
-chmod +x rankmirrors.sh
-./rankmirrors.sh
 
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
 	pacman -S mpd
