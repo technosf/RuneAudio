@@ -13,8 +13,7 @@ rm $0
 
 timestart
 
-echo
-echo -e "$bar Get mirrorlist ..."
+echo -e "\n$bar Get latest mirrorlist of package servers ..."
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
 tmplist=/tmp/mirrorlist
 echo $( grep 'Generated' $tmplist | cut -d' ' -f2- )
@@ -34,9 +33,8 @@ fi
 readarray servers < "$tmplist"
 
 title -l = $bar Rank package servers ...
-echo
-echo Test ${#servers[@]} servers @ $sec seconds download + 3 pings:
-echo
+
+echo -e "\nTest ${#servers[@]} servers @ $sec seconds download + 3 pings:\n"
 
 dlfile='armv7h/community/community.db' # download test file
 tmpdir=/tmp/rankmirrors
@@ -51,28 +49,26 @@ for server in ${servers[@]}; do # download from each mirror
 	ping=$( ping -c 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
 	[[ -z $ping ]] && ping=
 	
-	server0='Server = '$server'/$arch/$repo' # for ranked mirrorlist file
+	server0='Server = '$server'/$arch/$repo'
 	speed=$(( dl / sec ))
-	dl_server="$dl_server$server0 $dl $ping\n" # with download amount for ranking
+	dl_server="$dl_server$server0 $speed kB/s $ping ms\n"
 	printf "%3d. %-24s : %5d kB/s %9s ms\n" $i ${server/archlinux*}.. $speed $ping
 	
 	rm -f $tmpdir/* # remove downloaded file
 done
 
-rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k5n )
-rankfile=$( echo -e "$rank" | cut -d' ' -f1-3 ) # keep '1st-3rd column' 'devided by space' (remove 1st column)
+rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k6,6n )
+rankfile=$( echo -e "$rank" | cut -d' ' -f1-3 )
 
-echo
-echo -e "$info Top 3 package servers ranked by speed and latency:"
-echo
-echo -e "$rankfile" | head -3
-echo
+echo -e "\n$info Top 3 package servers ranked by speed and latency:\n"
+echo -e "$rank" | head -3 | sed 's/Server = \|\/\$arch.*repo//g' | column -t -s' ' -R2,4
+
 list=/etc/pacman.d/mirrorlist
 [[ ! -e $list.backup ]] && cp $list $list.backup
 echo -e "$rankfile" > $list
 rm -rf $tmpdir
 
-echo -e "$bar Update package database ..."
+echo -e "\n$bar Update package database ..."
 
 rm -f /var/lib/pacman/db.lck
 pacman -Sy
