@@ -13,6 +13,8 @@ rm $0
 
 timestart
 
+title -l = $bar Rank mirror package servers ...
+
 echo -e "\n$bar Get latest mirrorlist of package servers ..."
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
 tmplist=/tmp/mirrorlist
@@ -31,8 +33,6 @@ else
 fi
 
 readarray servers < "$tmplist"
-
-title -l = $bar Rank package servers ...
 
 echo -e "\nTest ${#servers[@]} servers @ $sec seconds download + 3 pings:\n"
 
