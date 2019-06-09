@@ -13,7 +13,7 @@ rm $0
 
 timestart
 
-title -l = $bar Rank mirror package servers ...
+title -l = $bar Rank Mirror Package Servers ...
 
 echo -e "\n$bar Get latest mirrorlist of package servers ..."
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
