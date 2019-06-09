@@ -4,7 +4,7 @@
 
 rankmirrors
 
-packagestatus '^mpd$' # $version, $installed
+packagestatus '^redis$' # $version, $installed
 
 if [[ $installed ]]; then
 	title "$info Redis already upgraded to latest version: $version"
