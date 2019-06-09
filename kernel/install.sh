@@ -4,11 +4,11 @@ alias=kern
 
 . /srv/http/addonstitle.sh
 
-pkg=$( pacman -Ss 'linux-raspberrypi$' | head -n1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
+rankmirrors
 
-if [[ $installed == '[installed]' ]]; then
+packagestatus '^mpd$' # $version, $installed
+
+if [[ $installed ]]; then
 	title "$info Kernel already upgraged to latest version: $version"
 	exit
 fi
