@@ -24,7 +24,7 @@ chmod +x rankmirrors.sh
 ./rankmirrors.sh
 
 if [[ ! $( pacman -Qs samba4-rune ) ]]; then
-	pacman -Sy samba
+	pacman -S samba
 	if systemctl restart nmb smb &> /dev/null; then
 		timestop
 		title -l '=' "$bar Samba upgraded successfully to $version"
@@ -39,7 +39,7 @@ mv /etc/samba/smb-prod.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
 
-pacman -Sy --noconfirm --force libnsl
+pacman -S --noconfirm --force libnsl
 glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
 [[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
 pacman -S --noconfirm ldb libtirpc tdb tevent python smbclient samba
