@@ -4,15 +4,11 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
-chmod +x rankmirrors.sh
-./rankmirrors.sh
+rankmirrors
 
-pkg=$( pacman -Ss '^mpd$' | head -1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
+packagestatus '^mpd$' # $version, $installed
 
-if [[ $installed == '[installed]' ]]; then
+if [[ $installed ]]; then
 	title "$info MPD already upgraded to latest version: $version"
 	exit
 fi
