@@ -3,15 +3,11 @@
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
-chmod +x rankmirrors.sh
-./rankmirrors.sh
+rankmirrors
 
-pkg=$( pacman -Ss 'samba' | head -n1 )
-version=$( echo $pkg | cut -d' ' -f2 )
-installed=$( echo $pkg | cut -d' ' -f3 )
+packagestatus '^samba$' # $version, $installed
 
-if [[ $installed == '[installed]' ]]; then
+if [[ $installed ]]; then
 	title "$info Samba already upgraded to latest version: $version"
 	exit
 fi
