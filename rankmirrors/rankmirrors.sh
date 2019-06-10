@@ -2,7 +2,7 @@
 
 rm $0
 
-(( $# == 0 )) && sec=5 || sec=$1
+(( $# == 0 )) && sec=3 || sec=$1
 
 # rankmirrors.sh
 # mitigate download errors by enable(uncomment) and 
