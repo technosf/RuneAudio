@@ -14,6 +14,8 @@ rankmirrors
 
 getuninstall
 
+glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
+[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
 pacman -Sy --noconfirm openssl-cryptodev libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
