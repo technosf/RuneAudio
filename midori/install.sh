@@ -26,7 +26,7 @@ fi
 
 rankmirrors
 
-pacman -S --noconfirm midori
+pacman -S --needed --noconfirm midori
 
 if grep '^chromium' /root/.xinitrc; then
 	echo -e "$bar Disable Chromium ..."
