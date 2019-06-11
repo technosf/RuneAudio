@@ -65,7 +65,12 @@ rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k6,6n )
 rankfile=$( echo -e "$rank" | cut -d' ' -f1-3 )
 
 echo -e "\n$info Top 3 package servers ranked by speed and latency:\n"
-echo -e "$rank" | head -3 | sed 's/Server = \|\/\$arch.*repo//g' | column -t -s' ' -R2,4 | sed 's/ \( kB\/s\)\| \( ms\)/\1\2/g'
+
+lines=$( echo -e "$rank" | head -3 | sed 's/Server = \|\/\$arch.*repo//g' )
+for i in 1 2 3; do
+	fields=( $( echo "$lines" | sed -n "$i p" ) )
+	printf "%-33s%7d kB/s%5s ms\n" ${fields[0]} ${fields[1]} ${fields[2]}
+done
 
 list=/etc/pacman.d/mirrorlist
 [[ ! -e $list.backup ]] && cp $list $list.backup
