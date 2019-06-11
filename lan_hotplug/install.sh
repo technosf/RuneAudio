@@ -7,7 +7,7 @@ alias=lanh
 
 installstart $@
 
-pacman -Sy --noconfirm ifplugd
+pacman -Sy --needed --noconfirm ifplugd
 
 redis-cli hset addons lanh 1 &> /dev/null # mark as upgraded - disable button
 
