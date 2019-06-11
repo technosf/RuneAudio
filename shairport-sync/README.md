@@ -5,9 +5,7 @@ Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with
 **Install**
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-pacman -Sy libconfig
+pacman -Sy openssl-cryptodev libconfig
 pacman -U shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
 ```
 
