@@ -20,7 +20,7 @@ title -l '=' "$bar Upgrade Samba ..."
 timestart
 
 if [[ ! $( pacman -Qs samba4-rune ) ]]; then
-	pacman -S samba
+	pacman -S --needed --noconfirm samba
 	if systemctl restart nmb smb &> /dev/null; then
 		timestop
 		title -l '=' "$bar Samba upgraded successfully to $version"
@@ -36,8 +36,8 @@ mv /etc/samba/smb-prod.conf{,.backup}
 pacman -R --noconfirm samba4-rune
 
 pacman -S --noconfirm --force libnsl
-pacman -S --noconfirm ldb libtirpc tdb tevent python smbclient samba
-pacman -S --noconfirm libwbclient
+pacman -S -needed --noconfirm ldb libtirpc tdb tevent python smbclient samba
+pacman -S -needed --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
 echo -n '
