@@ -17,14 +17,12 @@ if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	echo -e "$bar Get supporting files ..."
 	
 	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
-	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
 	bsdtar xvf kid3lib.tar.xz -C /usr/lib
 	ln -sf /usr/lib/libreadline.so.8{.0,}
-	ln -f /usr/lib/libicudata.so.64{.2,}
-	ln -f /usr/lib/libicui18n.so.64{.2,}
-	ln -f /usr/lib/libicuio.so.64{.2,}
-	ln -f /usr/lib/libicuuc.so.64{.2,}
+	ln -sf /usr/lib/libicudata.so.64{.2,}
+	ln -sf /usr/lib/libicui18n.so.64{.2,}
+	ln -sf /usr/lib/libicuio.so.64{.2,}
+	ln -sf /usr/lib/libicuuc.so.64{.2,}
 fi
 
 echo -e "$bar Get package files ..."
@@ -38,11 +36,11 @@ mv pkg/{pcre*,harfbuzz*,freetype2*} pkg4
 mv pkg/{gstreamer*,orc*} pkg5
 
 if [[ $( redis-cli get release ) == 0.4b ]]; then
-	pacman -U --noconfirm pkg4/*
+	pacman -U --needed --noconfirm pkg4/*
 else
-	pacman -U --noconfirm pkg5/*
+	pacman -U --needed --noconfirm pkg5/*
 fi
-pacman -U --noconfirm pkg/*
+pacman -U --needed --noconfirm pkg/*
 
 rm -rf kid3* pkg*
 
