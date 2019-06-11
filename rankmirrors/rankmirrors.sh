@@ -13,7 +13,7 @@ rm $0
 
 timestart
 
-title -l = $bar Rank Mirror Package Servers ...
+(( $# > 0 )) && title -l = $bar Rank Mirror Package Servers ...
 
 echo -e "\n$bar Get latest mirrorlist of package servers ..."
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
@@ -81,6 +81,8 @@ echo -e "\n$bar Update package database ..."
 
 rm -f /var/lib/pacman/db.lck
 pacman -Sy
+
+(( $# == 0 )) && exit
 
 timestop
 title -l = "$bar Mirror list updated and ranked successfully."
