@@ -55,13 +55,13 @@ for server in ${servers[@]}; do # download from each mirror
 	
 	server0='Server = '$server'/$arch/$repo'
 	speed=$(( dl / sec ))
-	dl_server="$dl_server$server0 $speed kB/s $latency ms\n"
+	dl_server="$dl_server$server0 $speed $latency\n"
 	printf "%6d. %-23s :%7d kB/s%5s ms\n" $i ${server/archlinux*}.. $speed $latency
 	
 	rm -f $tmpdir/* # remove downloaded file
 done
 
-rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k6,6n )
+rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k5n )
 rankfile=$( echo -e "$rank" | cut -d' ' -f1-3 )
 
 echo -e "\n$info Top 3 package servers ranked by speed and latency:\n"
