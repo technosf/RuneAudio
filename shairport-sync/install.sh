@@ -11,8 +11,6 @@ installstart
 
 getuninstall
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport-sync.js -P /srv/http/assets/js
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport-sync.php -P /srv/http/shairport-sync.php
 chmod +x /srv/http/shairport-sync.php
