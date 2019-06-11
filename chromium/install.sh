@@ -13,7 +13,7 @@ rankmirrors
 
 getuninstall
 
-pacman -S --noconfirm chromium nss harfbuzz freetype2 zlib libjpeg-turbo
+pacman -S --needed --noconfirm chromium nss harfbuzz freetype2 zlib libjpeg-turbo
 
 echo -e "$bar Modify file ..."
 
