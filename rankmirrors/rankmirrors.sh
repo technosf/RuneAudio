@@ -46,7 +46,7 @@ for server in ${servers[@]}; do # download from each mirror
 	timeout $sec wget -q -P $tmpdir $server/$dlfile &
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
-	ping=$( ping -c 3 -w 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
+	ping=$( ping -4 -c 3 -w 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
 	if [[ -n $ping ]]; then
 		latency=$( printf %.0f $ping )
 	else
