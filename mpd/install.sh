@@ -39,10 +39,10 @@ if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	bsdtar xvf kid3lib.tar.xz -C /usr/lib
 	rm kid3lib.tar.xz
 	ln -sf /usr/lib/libreadline.so.8{.0,}
-	ln -f /usr/lib/libicudata.so.64{.2,}
-	ln -f /usr/lib/libicui18n.so.64{.2,}
-	ln -f /usr/lib/libicuio.so.64{.2,}
-	ln -f /usr/lib/libicuuc.so.64{.2,}
+	ln -sf /usr/lib/libicudata.so.64{.2,}
+	ln -sf /usr/lib/libicui18n.so.64{.2,}
+	ln -sf /usr/lib/libicuio.so.64{.2,}
+	ln -sf /usr/lib/libicuuc.so.64{.2,}
 fi
 
 echo -e "$bar Remove conflict packages ..."
