@@ -14,11 +14,7 @@ rankmirrors
 
 getuninstall
 
-glibc=$( pacman -Ss glibc | head -1 | cut -d' ' -f4 )
-[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
-openssl=$( pacman -Ss openssl-cryptodev | head -1 | cut -d' ' -f4 )
-[[ $openssl != '[installed]' ]] && pacman -S --noconfirm glibc
-pacman -Sy --noconfirm libevent transmission-cli
+pacman -S --noconfirm libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
