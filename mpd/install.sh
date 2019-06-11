@@ -33,9 +33,9 @@ cp /etc/mpd.conf{,.backup}
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	echo -e "$bar Get supporting files ..."
 	
-	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
-	bsdtar xvf kid3lib.tar.xz -C /usr/lib
-	rm kid3lib.tar.xz
+	wgetnc https://github.com/rern/_assets/raw/master/libiculibreadline.tar.xz
+	bsdtar xvf libiculibreadline.tar.xz -C /usr/lib
+	rm libiculibreadline.tar.xz
 	ln -sf /usr/lib/libreadline.so.8{.0,}
 	ln -sf /usr/lib/libicudata.so.64{.2,}
 	ln -sf /usr/lib/libicui18n.so.64{.2,}
