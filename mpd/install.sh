@@ -33,11 +33,6 @@ cp /etc/mpd.conf{,.backup}
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	echo -e "$bar Get supporting files ..."
 	
-	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
-	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-	bsdtar xvf kid3lib.tar.xz -C /usr/lib
-	rm kid3lib.tar.xz
 	ln -sf /usr/lib/libreadline.so.8{.0,}
 	ln -f /usr/lib/libicudata.so.64{.2,}
 	ln -f /usr/lib/libicui18n.so.64{.2,}
@@ -51,8 +46,6 @@ pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
 echo -e "$bar Install MPD ..."
 
-glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
-[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
 pacman -S --noconfirm libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error
 
 cp /etc/mpd.conf{.backup,}
