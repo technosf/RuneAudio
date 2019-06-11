@@ -17,7 +17,7 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart
 
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
-	pacman -S mpd
+	pacman -S --needed --noconfirm mpd
 	if systemctl restart mpd &> /dev/null; then
 		timestop
 		title -l '=' "$bar MPD upgraded successfully to $version"
