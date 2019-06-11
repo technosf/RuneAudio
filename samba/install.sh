@@ -30,6 +30,15 @@ if [[ ! $( pacman -Qs samba4-rune ) ]]; then
 	exit
 fi
 
+if [[ ! -e /usr/bin/kid3-cli ]]; then
+	file=libcryptossl.tar.xz
+	wgetnc https://github.com/rern/_assets/raw/master/$file
+	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
+	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
+	bsdtar xvf $file -C /usr/lib
+	rm $file
+fi
+
 systemctl stop nmbd smbd
 mv /etc/samba/smb-prod.conf{,.backup}
 
