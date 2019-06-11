@@ -14,16 +14,7 @@ rankmirrors
 
 getuninstall
 
-if [[ ! -e /usr/bin/kid3-cli ]]; then
-	file=libcryptossl.tar.xz
-	wgetnc https://github.com/rern/_assets/raw/master/$file
-	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-	bsdtar xvf $file -C /usr/lib
-	rm $file
-fi
-
-pacman -Sy --noconfirm libevent transmission-cli
+pacman -Sy --noconfirm openssl-cryptodev libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
