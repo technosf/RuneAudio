@@ -15,10 +15,6 @@ title -l '=' "$bar Upgrade Midori ..."
 timestart
 
 if ! pacman -Q midori-rune &> /dev/null; then
-	pacman -Sw --noconfirm enchant fontconfig freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3  gst-plugins-base-libs \
-		harfbuzz harfbuzz-icu hunspell icu libepoxy libgcrypt libgpg-error libsoup libthai libwebp pango zbar \
-		aria2 brotli gobject-introspection-runtime hyphen libpeas webkit2gtk woff2 midori gst-plugins-bad
-
 	file=$( ls -l /lib/libicuuc* | grep -v '^lrw' )
 	file=$( echo $file | cut -d' ' -f9 )
 	ln -sf $file /lib/libicuuc.so.56
@@ -28,7 +24,9 @@ if ! pacman -Q midori-rune &> /dev/null; then
 	ln -sf $file /lib/libicudata.so.56
 fi
 
-yes 2>/dev/null | pacman -S midori
+rankmirrors
+
+pacman -S --noconfirm midori
 
 if grep '^chromium' /root/.xinitrc; then
 	echo -e "$bar Disable Chromium ..."
