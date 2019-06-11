@@ -14,11 +14,6 @@ fi
 title -l '=' "$bar Upgrade Pacman ..."
 timestart
 
-if [[ ! -e /usr/lib/libcrypto.so.1.1 ]]; then
-	wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-	wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-fi
-
 echo -e "$bar Prefetch packages ..."
 pacman -Syw --noconfirm glibc pacman
 
