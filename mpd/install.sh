@@ -46,7 +46,7 @@ pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
 echo -e "$bar Install MPD ..."
 
-pacman -S --noconfirm libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error
+pacman -S --needed --noconfirm libnfs libwebp gcc wavpack ffmpeg pacman mpd mpc libmpdclient libgcrypt libgpg-error
 
 cp /etc/mpd.conf{.backup,}
 
