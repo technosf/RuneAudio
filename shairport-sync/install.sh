@@ -23,8 +23,8 @@ if pacman -Q shairport-sync &> /dev/null; then
 	pacman -R shairport-sync
 fi
 
-pacman -Sy --noconfirm libconfig
-pacman -U --noconfirm $pkg
+pacman -Sy --needed --noconfirm libconfig
+pacman -U --needed --noconfirm $pkg
 rm $pkg
 
 # get dac's output_device

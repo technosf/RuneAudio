@@ -20,7 +20,7 @@ title -l '=' "$bar Upgrade Samba ..."
 timestart
 
 if [[ ! $( pacman -Qs samba4-rune ) ]]; then
-	pacman -S samba
+	pacman -S --needed --noconfirm samba
 	if systemctl restart nmb smb &> /dev/null; then
 		timestop
 		title -l '=' "$bar Samba upgraded successfully to $version"
@@ -30,25 +30,14 @@ if [[ ! $( pacman -Qs samba4-rune ) ]]; then
 	exit
 fi
 
-if [[ ! -e /usr/bin/kid3-cli ]]; then
-	file=libcryptossl.tar.xz
-	wgetnc https://github.com/rern/_assets/raw/master/$file
-	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
-	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
-	bsdtar xvf $file -C /usr/lib
-	rm $file
-fi
-
 systemctl stop nmbd smbd
 mv /etc/samba/smb-prod.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
 
 pacman -S --noconfirm --force libnsl
-glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
-[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
-pacman -S --noconfirm ldb libtirpc tdb tevent python smbclient samba
-pacman -S --noconfirm libwbclient
+pacman -S -needed --noconfirm ldb libtirpc tdb tevent python smbclient samba
+pacman -S -needed --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
 echo -n '

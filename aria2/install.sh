@@ -15,8 +15,6 @@ getuninstall
 
 echo -e "$bar Aria2 package ..."
 
-glibc=$( pacman -Ss 'glibc' | head -1 | cut -d' ' -f4 )
-[[ $glibc != '[installed]' ]] && pacman -S --noconfirm glibc
 pacman -S --noconfirm aria2
 
 if mount | grep -q '/dev/sda1'; then
