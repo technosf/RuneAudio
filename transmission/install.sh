@@ -14,7 +14,7 @@ rankmirrors
 
 getuninstall
 
-pacman -S --noconfirm libevent transmission-cli
+pacman -S --needed --noconfirm libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
