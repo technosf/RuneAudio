@@ -14,11 +14,8 @@ fi
 title -l '=' "$bar Upgrade Pacman ..."
 timestart
 
-echo -e "$bar Prefetch packages ..."
-pacman -Syw --noconfirm glibc pacman
-
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm glibc pacman
+pacman -S -needed --noconfirm pacman
 
 timestop
 
