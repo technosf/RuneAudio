@@ -14,7 +14,7 @@ fi
 title -l '=' "$bar Upgrade Redis ..."
 timestart
 
-pacman -S --noconfirm redis
+pacman -S --needeed --noconfirm redis
 
 sed -i -e 's/User=.*/User=root/
 ' -e 's/Group=.*/Group=root/
