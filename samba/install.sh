@@ -36,8 +36,7 @@ mv /etc/samba/smb-prod.conf{,.backup}
 pacman -R --noconfirm samba4-rune
 
 pacman -S --noconfirm libnsl
-pacman -S --needed --noconfirm ldb libtirpc tdb tevent python smbclient samba
-pacman -S --needed --noconfirm libwbclient
+pacman -S --needed --noconfirm ldb libtirpc tdb tevent python smbclient samba libwbclient
 
 # fix 'minimum rlimit_max'
 echo -n '
