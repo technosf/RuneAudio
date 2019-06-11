@@ -26,7 +26,7 @@ file=nginx-1.14.0-1-armv7h.pkg.tar.xz
 echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
-pacman -U --noconfirm $file
+pacman -U --needed --noconfirm $file
 
 rm $file
 mv /etc/nginx/nginx.conf{.backup,}
