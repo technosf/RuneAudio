@@ -50,7 +50,7 @@ for server in ${servers[@]}; do # download from each mirror
 	if [[ -n $ping ]]; then
 		latency=$( printf %.0f $ping )
 	else
-		latency=
+		latency=999
 	fi
 	
 	server0='Server = '$server'/$arch/$repo'
