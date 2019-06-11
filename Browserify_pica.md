@@ -5,12 +5,7 @@
 ## Convert
 Warning: **MPD** will be broken so it must be upgraded afterward.
 ```sh
-pacman -Syw --noconfirm openssl
-tmpopenssl=/tmp/openssl
-mkdir $tmpopenssl
-bsdtar xf /var/cache/pacman/pkg/openssl* -C $tmpopenssl
-cp $tmpopenssl/usr/lib/{libcrypto.so.1.1,libssl.so.1.1} /lib
-rm -r $tmpopenssl
+pacman -S --noconfirm openssl-cryptodev
 pacman -S --noconfirm npm icu libuv libtirpc
 
 npm install -g browserify pica babelify @babel/core @babel/preset-env
