@@ -43,7 +43,7 @@ rm -rf $tmpdir && mkdir $tmpdir
 i=0
 for server in ${servers[@]}; do # download from each mirror
 	(( i++ ))
-	timeout $sec wget -q -P $tmpdir $server/$dlfile &
+	timeout $sec wget -q --no-cache -P $tmpdir $server/$dlfile &
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
 	ping=$( ping -4 -c 3 -w 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
