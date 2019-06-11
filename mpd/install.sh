@@ -29,10 +29,10 @@ fi
 
 cp /etc/mpd.conf{,.backup}
 
-echo -e "$bar Get supporting files ..."
-
 # NO: pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
+	echo -e "$bar Get supporting files ..."
+	
 	wgetnc https://github.com/rern/_assets/raw/master/kid3lib.tar.xz
 	cp /usr/lib/libcrypto.so.1.1{,backup} &> /dev/null
 	cp /usr/lib/libssl.so.1.1{,backup} &> /dev/null
