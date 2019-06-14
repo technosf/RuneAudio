@@ -15,7 +15,7 @@ timestart
 
 if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 	echo -e "$bar Get supporting files ..."
-	
+	# pacman -S icu readline - breaks MPD
 	wgetnc https://github.com/rern/_assets/raw/master/libiculibreadline.tar.xz
 	bsdtar xvf libiculibreadline.tar.xz -C /usr/lib
 	rm libiculibreadline.tar.xz
