@@ -32,7 +32,7 @@ rm master.zip
 
 ln -s $path /srv/http
 # disable UI language feature
-sed '/determinePreferredLanguage/ s|^|//|' /srv/http/aria2/app.js
+sed -i '/determinePreferredLanguage/ s|^|//|' /srv/http/aria2/app.js
 
 # modify file
 file=/etc/nginx/nginx.conf
