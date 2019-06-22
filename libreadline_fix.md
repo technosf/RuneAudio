@@ -1,4 +1,4 @@
-
+**Fix needed latest version of `readline`**
 - Upgrade samba
 ```sh
 pacman -Sy
