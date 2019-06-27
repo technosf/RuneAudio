@@ -1,15 +1,12 @@
 NGINX with pushstream
 ---
 
-(ArchLinuxArm: Install [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm))
 ```sh
 # on RuneAudio
 useradd alarm
-
-mkdir -p /home/alarm/nginx
+mkdir -p /home/alarm/nginx/src
 su alarm
 cd
-mkdir nginx
 cd nginx
 ```
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`
@@ -20,12 +17,14 @@ cd nginx
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl geoip)
 ...
+#_common_flags=(
+++    --add-module=nginx-push-stream-module
+...
+#}
 #build() {
 ...
 --    --with-mail
 --    --with-mail_ssl_module
-...
-++    --add-module=/home/alarm/nginx/nginx-push-stream-module \
 ...
 #}
 --check() {
@@ -35,8 +34,8 @@ cd nginx
 #package() {
 ...
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
-++  install -Dm644 /home/alarm/nginx/service "$pkgdir"/usr/lib/systemd/system/nginx.service
-++  install -Dm644 /home/alarm/nginx/logrotate "$pkgdir"/etc/logrotate.d/nginx
+++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
+++  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
 
 --  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
 
