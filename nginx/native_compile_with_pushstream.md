@@ -9,8 +9,8 @@ chown -R alarm:alarm /home/alarm
 su alarm
 cd /home/alarm/nginx
 ```
-- [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`
-- `Source Files` > copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
+- [NGINX source files](https://archlinuxarm.org/packages/armv7h/nginx/files)
+- Copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
 - Edit `PKGBUILD`:
 ```sh
 ...
