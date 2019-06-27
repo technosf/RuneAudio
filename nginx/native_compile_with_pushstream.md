@@ -4,21 +4,26 @@ NGINX with pushstream
 ```sh
 # on RuneAudio
 useradd alarm
-mkdir -p /home/alarm/nginx/src
-chown -R alarm:alarm /home/alarm
+mkdir -p /home/x/nginx
+chown -R x:x /home/x
 su alarm
-cd /home/alarm/nginx
+cd /home/x/nginx
 ```
 - [NGINX source files](https://archlinuxarm.org/packages/armv7h/nginx/files)
 - Copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
 - Edit `PKGBUILD`:
 ```sh
 ...
+++pushstreamver=0.5.4
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl geoip)
 ...
+#source=(...
+...
+++    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
+#)
 #_common_flags=(
-++    --add-module=$srcdir/nginx-push-stream-module
+++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 ...
 #}
 #build() {
@@ -54,7 +59,5 @@ pacman -Sy --needed base-devel pcre zlib guile git wget openssl mercurial perl-g
 
 ### Compile
 ```sh
-git clone https://github.com/wandenberg/nginx-push-stream-module.git src/nginx-push-stream-module
-
 makepkg -A --skipinteg
 ```
