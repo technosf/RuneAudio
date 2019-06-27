@@ -4,7 +4,7 @@ NGINX with pushstream
 ```sh
 # on RuneAudio
 useradd alarm
-mkdir -p /home/alarm/nginx
+mkdir -p /home/alarm/nginx/src
 chown -R alarm:alarm /home/alarm
 su alarm
 cd /home/alarm/nginx
@@ -18,7 +18,7 @@ cd /home/alarm/nginx
 ++depends=(pcre zlib openssl geoip)
 ...
 #_common_flags=(
-++    --add-module=/home/alarm/nginx/nginx-push-stream-module
+++    --add-module=$srcdir/nginx-push-stream-module
 ...
 #}
 #build() {
@@ -54,7 +54,7 @@ pacman -Sy --needed base-devel pcre zlib guile git wget openssl mercurial perl-g
 
 ### Compile
 ```sh
-git clone https://github.com/wandenberg/nginx-push-stream-module.git
+git clone https://github.com/wandenberg/nginx-push-stream-module.git src/nginx-push-stream-module
 
 makepkg -A --skipinteg
 ```
