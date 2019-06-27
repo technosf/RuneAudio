@@ -35,8 +35,8 @@ cd nginx
 #package() {
 ...
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
-++  install -Dm644 service "$pkgdir"/usr/lib/systemd/system/nginx.service
-++  install -Dm644 logrotate "$pkgdir"/etc/logrotate.d/nginx
+++  install -Dm644 /home/alarm/nginx/service "$pkgdir"/usr/lib/systemd/system/nginx.service
+++  install -Dm644 /home/alarm/nginx/logrotate "$pkgdir"/etc/logrotate.d/nginx
 
 --  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
 
