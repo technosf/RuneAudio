@@ -27,6 +27,7 @@ echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
 pacman -U --needed --noconfirm $file
+pacman -Sy iptables
 
 rm $file
 mv /etc/nginx/nginx.conf{.backup,}
