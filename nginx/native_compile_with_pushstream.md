@@ -4,10 +4,10 @@ NGINX with pushstream
 ```sh
 # on RuneAudio
 useradd alarm
-mkdir -p /home/alarm/nginx/src
+mkdir -p /home/alarm/nginx
+chown -R alarm:alarm /home/alarm
 su alarm
-cd
-cd nginx
+cd /home/alarm/nginx
 ```
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`
 - `Source Files` > copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
@@ -18,7 +18,7 @@ cd nginx
 ++depends=(pcre zlib openssl geoip)
 ...
 #_common_flags=(
-++    --add-module=nginx-push-stream-module
+++    --add-module=/home/alarm/nginx/nginx-push-stream-module
 ...
 #}
 #build() {
