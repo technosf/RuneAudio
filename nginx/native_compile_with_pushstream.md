@@ -17,9 +17,6 @@ cd nginx
 - Edit `PKGBUILD`:
 ```sh
 ...
---arch=(x86_64)
-++arch=(armv7h)
-...
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl geoip)
 ...
@@ -28,14 +25,8 @@ cd nginx
 --    --with-mail
 --    --with-mail_ssl_module
 ...
-++    --add-module=/home/alarm/nginx/nginx-push-stream-module
-#  make
+++    --add-module=/home/alarm/nginx/nginx-push-stream-module \
 ...
-#package() {
-...
-++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
-++  install -Dm644 service "$pkgdir"/usr/lib/systemd/system/nginx.service
-++  install -Dm644 logrotate "$pkgdir"/etc/logrotate.d/nginx
 #}
 --check() {
 --  cd nginx-tests
@@ -43,6 +34,9 @@ cd nginx
 --}
 #package() {
 ...
+++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
+++  install -Dm644 service "$pkgdir"/usr/lib/systemd/system/nginx.service
+++  install -Dm644 logrotate "$pkgdir"/etc/logrotate.d/nginx
 
 --  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
 
