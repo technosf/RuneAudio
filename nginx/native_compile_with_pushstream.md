@@ -1,14 +1,18 @@
 NGINX with pushstream
 ---
 
-- Install [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm)
-- [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`  
-- create new directory
+(ArchLinuxArm: Install [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm))
 ```sh
+# on RuneAudio
+useradd alarm
+
+mkdir -p /home/alarm/nginx
 su alarm
 cd
+mkdir nginx
 cd nginx
 ```
+- [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`
 - `Source Files` > copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
 - Edit `PKGBUILD`:
 ```sh
@@ -50,8 +54,9 @@ cd nginx
 ```
 
 ### Prepare environment
+(On RuneAudio, upgrade MPD first.)
 ```sh
-pacman -Sy base-devel pcre zlib guile git wget openssl mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
+pacman -Sy --needed base-devel pcre zlib guile git wget openssl mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg libutil-linux nettle
 ```
 
 ### Compile
