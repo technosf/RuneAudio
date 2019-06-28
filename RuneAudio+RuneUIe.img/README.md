@@ -43,7 +43,7 @@ wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
 chmod +x pishrink.sh
 pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
-- Mount `RuneAudio+RuneUIe.img`
+- Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
 fd=$( fdisk -u -l RuneAudio+RuneUIe.img )
 unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
