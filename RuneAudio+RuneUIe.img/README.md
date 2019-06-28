@@ -45,16 +45,14 @@ pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
 - Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
-fd=$( fdisk --byte -lo Start RuneAudio+RuneUIe.img )
-unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
 # root
-start2=$( echo "$fd" | tail -1 )
+start2=$( fdisk --byte -lo Start RuneAudio+RuneUIe.img | tail -1 )
 mkdir -p /media/root
-mount -o loop,offset=$(( unitbyte * start2 )) RuneAudio+RuneUIe.img /media/root
+mount -o loop,offset=$start2 RuneAudio+RuneUIe.img /media/root
 # boot
-start1=$( echo "$fd" | tail -2 | head -1 )
+start1=$( fdisk --byte -lo Start RuneAudio+RuneUIe.img | tail -2 | head -1 )
 mkdir -p /media/boot
-mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
+mount -o loop,offset=$start1 RuneAudio+RuneUIe.img /media/boot
 ```
 
 ### Conversion addons
