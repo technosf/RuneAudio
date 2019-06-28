@@ -31,7 +31,7 @@ mpd update
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/expand.sh -P /root
 chmod +x /root/expand.sh
 # systemd unit file
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd/system
 systemctl enable expand
 # install parted
 pacman -Sy parted
