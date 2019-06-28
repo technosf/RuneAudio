@@ -45,14 +45,14 @@ pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
 - Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
-fd=$( fdisk -u -l RuneAudio+RuneUIe.img )
+fd=$( fdisk --byte -lo Start RuneAudio+RuneUIe.img )
 unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
 # root
-start2=$( echo "$fd" | grep '\.img2' | cut -d' ' -f7 )
+start2=$( echo "$fd" | tail -1 )
 mkdir -p /media/root
 mount -o loop,offset=$(( unitbyte * start2 )) RuneAudio+RuneUIe.img /media/root
 # boot
-start1=$( echo "$fd" | grep '\.img1' | cut -d' ' -f7 )
+start1=$( echo "$fd" | tail -2 | head -1 )
 mkdir -p /media/boot
 mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
 ```
