@@ -1,16 +1,16 @@
 **systemd run once method**
 ```sh
 # systemd unit file
-/lib/systemd/expand.service
+wget https://github.com/rern/RuneAudio/raw/master/expand_partition/systemd/expand.service -P /lib/systemd
 systemctl enable expand
 
 # fdisk script
-/root/expand.sh
+wget https://github.com/rern/RuneAudio/raw/master/expand_partition/systemd/expand.sh -P /root
 chmod +x /root/expand.sh
 
 # if not already available - 'partprobe' to avoid reboot
-/usr/bin/partprobe
+wget https://github.com/rern/RuneAudio/raw/master/expand_partition/systemd/partprobe -P /usr/bin
 chmod +xr /usr/bin/partprobe
-/usr/lib/libparted.so.2.0.1
-ln -s /usr/lib/libparted.so.2.0.1 /usr/lib/libparted.so.2
+wget https://github.com/rern/RuneAudio/raw/master/expand_partition/systemd/libparted.so.2.0.1 -P /lib
+ln -s /lib/libparted.so.2.0.1 /lib/libparted.so.2
 ```
