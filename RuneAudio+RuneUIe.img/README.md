@@ -15,11 +15,31 @@
 	- mpd update
 
 ### Startup script
-  - expand partition
-	- makeDirLink : bookmarks, playlists, webradios, webradiopl
-	- mpd update
-	- count
+- expand partition
+```sh
+# fdisk script
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/expand.sh -P /root
+chmod +x /root/expand.sh
+# systemd unit file
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd
+systemctl enable expand
+# install parted
+pacman -Sy parted
+```
 
+- makeDirLink : bookmarks, playlists, webradios, webradiopl
+- mpd update
+- count
+
+### Image file
+- Disk32 Image File - read SD card to \*.img
+- [PiShrink](https://github.com/Drewsif/PiShrink) - shrink image file size
+```sh
+wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
+chmod +x pishrink.sh
+pishrink.sh -s source.img destination.img
+```
+	
 ### Conversion addons
 	- playlists, webradios, bookmarks
   
