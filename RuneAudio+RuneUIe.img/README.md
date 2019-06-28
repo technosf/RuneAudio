@@ -27,16 +27,16 @@ mpd update
 ### Startup script
 - expand partition
 ```sh
+. /srv/http/addonstitle.sh
 # fdisk script
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/expand.sh -P /root
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/expand.sh -P /root
 chmod +x /root/expand.sh
 # systemd unit file
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd/system
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd/system
 systemctl enable expand
 # install parted
 pacman -Sy parted
 # makeDirLink
-. /srv/http/addonstitle.sh
 makeDirLink bookmarks
 makeDirLink coverarts
 makeDirLink playlists
@@ -52,7 +52,7 @@ mpd update
 - Disk32 Image File - read SD card to `read.img`
 - [PiShrink](https://github.com/Drewsif/PiShrink) - shrink image file size (`-s` skip autoresize)
 ```sh
-wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
+wgetnc https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
 chmod +x pishrink.sh
 pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
