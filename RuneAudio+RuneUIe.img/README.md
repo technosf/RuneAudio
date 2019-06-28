@@ -58,5 +58,5 @@ mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
 ```
 
 ### Conversion addons
-	- playlists, webradios, bookmarks
+- playlists, webradios, bookmarks
   
