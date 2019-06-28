@@ -6,13 +6,18 @@
 - NGINX 1.16.0
 
 ## Reset
-- mirrorlist reset - replace /etc/pacman.d/mirrorlist
-- remove /srv/http/assets/img/{bookmarks,coverarts,playlists,webradios,webradiopl,tmp}
-- clear packages cache - rm /var/cache/pacman/pkg/*
-- mpd database reset : 
-	- rm /var/lib/mpd/* /var/lib/mpd/playlists/*
-	- unmount usb drive
-	- mpd update
+```sh
+# mirrorlist reset
+wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
+# remove special directories
+rm -r /srv/http/assets/img/{bookmarks,coverarts,playlists,webradios,webradiopl,tmp}
+# clear packages cache
+rm /var/cache/pacman/pkg/*
+# mpd database reset
+rm /var/lib/mpd/* /var/lib/mpd/playlists/*
+umount /dev/sda1
+mpd update
+```
 
 ### Startup script
 - expand partition
@@ -25,11 +30,18 @@ wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand
 systemctl enable expand
 # install parted
 pacman -Sy parted
+# makeDirLink
+. /srv/http/addonstitle.sh
+makeDirLink coverarts
+makeDirLink bookmarks
+makeDirLink playlists
+makeDirLink tmp
+makeDirLink webradiopl
+makeDirLink webradios
+# update mpd database
+mpd update
+/srv/http/enhancecount.sh
 ```
-
-- makeDirLink : bookmarks, playlists, webradios, webradiopl
-- mpd update
-- count
 
 ### Image file
 - Disk32 Image File - read SD card to `read.img`
