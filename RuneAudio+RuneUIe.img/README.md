@@ -32,12 +32,12 @@ pacman -Sy parted
 - count
 
 ### Image file
-- Disk32 Image File - read SD card to \*.img
-- [PiShrink](https://github.com/Drewsif/PiShrink) - shrink image file size
+- Disk32 Image File - read SD card to `read.img`
+- [PiShrink](https://github.com/Drewsif/PiShrink) - shrink image file size (`-s` skip autoresize)
 ```sh
 wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
 chmod +x pishrink.sh
-pishrink.sh -s source.img destination.img
+pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
 	
 ### Conversion addons
