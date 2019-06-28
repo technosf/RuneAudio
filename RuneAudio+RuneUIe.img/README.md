@@ -27,25 +27,14 @@ wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist
 ### Startup script
 - expand partition
 ```sh
-# fdisk script
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/expand.sh -P /root
-chmod +x /root/expand.sh
+# run once script
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/runonce.sh -P /root
+chmod +x /root/runonce.sh
 # systemd unit file
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/expand.service -P /lib/systemd/system
-systemctl enable expand
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /lib/systemd/system
+systemctl enable runonce
 # install parted
 pacman -Sy parted
-# makeDirLink
-. /srv/http/addonstitle.sh
-makeDirLink bookmarks
-makeDirLink coverarts
-makeDirLink playlists
-makeDirLink tmp
-makeDirLink webradiopl
-makeDirLink webradios
-# update mpd database
-mpd update
-/srv/http/enhancecount.sh
 ```
 
 ### Image file
