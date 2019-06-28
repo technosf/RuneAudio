@@ -21,5 +21,5 @@ mpd update
 /srv/http/enhancecount.sh
 
 systemctl disable expand
-rm /lib/systemd/system/expand.service
+rm /lib/systemd/system/runonce.service
 systemctl daemon-reload
