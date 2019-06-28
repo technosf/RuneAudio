@@ -45,7 +45,15 @@ wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
 chmod +x pishrink.sh
 pishrink.sh -s read.img RuneAudio+RuneUIe.img
 ```
-	
+- Mount `RuneAudio+RuneUIe.img`
+```sh
+fd=$( fdisk -u -l RuneAudio+RuneUIe.img )
+unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
+start=$( echo "$fd" | grep '\.img2' | cut -d' ' -f7 )
+mkdir -p /media/rune
+mount -o loop,offset=$(( $unitbyte * $start )) RuneAudio+RuneUIe.img /media/rune
+```
+
 ### Conversion addons
 	- playlists, webradios, bookmarks
   
