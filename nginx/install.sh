@@ -6,7 +6,7 @@ alias=ngin
 
 . /srv/http/addonstitle.sh
 
-if [[ $( nginx -v ) == 'nginx version: nginx/1.16.0' ]]; then
+if grep -q 'rewrite /css/(.*)   ' /etc/nginx/nginx.conf; then
 	redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 	title "$info NGINX already upgraded."
 	exit
