@@ -9,5 +9,5 @@ partprobe /dev/mmcblk0
 resize2fs /dev/mmcblk0p2
 
 systemctl disable expand
-rm /etc/systemd/system/expand.service
+rm /lib/systemd/system/expand.service
 systemctl daemon-reload
