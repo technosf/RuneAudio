@@ -22,7 +22,7 @@ mv /usr/lib/systemd/system/nginx.service{,.backup}
 
 echo -e "$bar Get NGINX packages ..."
 
-file=nginx-1.14.0-1-armv7h.pkg.tar.xz
+file=nginx-1.16.0-1-armv7h.pkg.tar.xz
 echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
