@@ -1,14 +1,14 @@
 **systemd run once method**
 ```sh
-# systemd startup service
-/etc/systemd/expand.service
-ln -s /etc/systemd/expand.service /etc/systemd/system/multi-user.target.wants/expand.service
+# systemd unit file
+/lib/systemd/expand.service
+systemctl enable expand
 
 # fdisk script
 /root/expand.sh
 chmod +x /root/expand.sh
 
-# 'partprobe' to avoid reboot
+# if not already available - 'partprobe' to avoid reboot
 /usr/bin/partprobe
 chmod +xr /usr/bin/partprobe
 /usr/lib/libparted.so.2.0.1
