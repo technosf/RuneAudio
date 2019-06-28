@@ -1,5 +1,4 @@
 [Unit]
-Description=Expand root partition to full SD card
 After=multi-user.target
 
 [Service]
