@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/root/expand.sh
+ExecStart=/root/runonce.sh
 
 [Install]
 WantedBy=multi-user.target
