@@ -50,11 +50,11 @@ fd=$( fdisk -lo Start RuneAudio+RuneUIe.img )
 unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
 start2=$( echo "$fd" | tail -1 )
 mkdir -p /media/root
-mount -o loop,offset=$start2 RuneAudio+RuneUIe.img /media/root
+mount -o loop,offset=$(( unitbyte * start2 )) RuneAudio+RuneUIe.img /media/root
 # boot
 start1=$( echo "$fd" | tail -2 | head -1 )
 mkdir -p /media/boot
-mount -o loop,offset=$start1 RuneAudio+RuneUIe.img /media/boot
+mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
 
 # remount - get /dev/loop#
 losetup -a
