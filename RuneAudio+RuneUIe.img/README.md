@@ -15,7 +15,7 @@
 # mirrorlist reset
 wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 # remove special directories
-rm -r /srv/http/assets/img/{bookmarks,coverarts,playlists,webradios,webradiopl,tmp}
+rm -r /srv/http/assets/img/{bookmarks,coverarts,playlists,tmp,webradiopl,webradios}
 # clear packages cache
 rm /var/cache/pacman/pkg/*
 # mpd database reset
@@ -37,8 +37,8 @@ systemctl enable expand
 pacman -Sy parted
 # makeDirLink
 . /srv/http/addonstitle.sh
-makeDirLink coverarts
 makeDirLink bookmarks
+makeDirLink coverarts
 makeDirLink playlists
 makeDirLink tmp
 makeDirLink webradiopl
