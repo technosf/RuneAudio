@@ -18,8 +18,7 @@ makeDirLink webradios
 
 # update mpd database
 mpd update
-/srv/http/enhancecount.sh
+/srv/http/enhancecount.sh 1
 
-systemctl disable expand
-rm /lib/systemd/system/runonce.service
+rm /etc/systemd/system/runonce.service
 systemctl daemon-reload
