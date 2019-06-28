@@ -26,7 +26,7 @@ file=nginx-1.16.0-1-armv7h.pkg.tar.xz
 echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
-pacman -U --needed --noconfirm $file
+pacman -U --noconfirm $file
 pacman -Sy iptables
 
 rm $file
