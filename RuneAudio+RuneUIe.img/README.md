@@ -1,9 +1,14 @@
 ## RuneAudio+RuneUIe.img
 
-### Upgrade
-- MPD 0.21.10
-- Samba 4.10.5
-- NGINX 1.16.0
+### Install and upgrade
+- Addons
+- RuneUI Enhancement
+- RuneUI Metadata Tag Editor
+- Login Logo for SSH Terminal
+- USB DAC Plug and Play
+- MPD Upgrade
+- Samba Upgrade
+- NGINX Upgrade
 
 ## Reset
 ```sh
