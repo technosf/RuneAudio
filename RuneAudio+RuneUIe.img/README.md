@@ -33,8 +33,6 @@ chmod +x /root/runonce.sh
 # systemd unit file
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /lib/systemd/system
 systemctl enable runonce
-# install parted
-pacman -Sy parted
 ```
 
 ### Image file
