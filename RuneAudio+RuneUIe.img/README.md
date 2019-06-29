@@ -4,6 +4,7 @@
 - Addons
 - RuneUI Enhancement
 - RuneUI Metadata Tag Editor
+- RuneUI Lyrics
 - Login Logo for SSH Terminal
 - USB DAC Plug and Play
 - MPD Upgrade
@@ -13,7 +14,7 @@
 ## Reset
 ```sh
 # remove special directories
-rm -r /srv/http/assets/img/{bookmarks,coverarts,playlists,tmp,webradiopl,webradios}
+rm -r /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 # clear packages cache
 rm /var/cache/pacman/pkg/*
 # mpd database reset
