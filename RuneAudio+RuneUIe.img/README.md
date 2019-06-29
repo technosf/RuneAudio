@@ -18,9 +18,9 @@ rm -r /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,
 # clear packages cache
 rm /var/cache/pacman/pkg/*
 # mpd database reset
-rm /var/lib/mpd/* /var/lib/mpd/playlists/*
+rm /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 umount /dev/sda1
-mpd update
+mpc update
 # mirrorlist reset
 wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 ```
