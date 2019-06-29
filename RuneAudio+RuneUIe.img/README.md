@@ -31,7 +31,7 @@ wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/systemd/runonce.sh -P /root
 chmod +x /root/runonce.sh
 # systemd unit file
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /lib/systemd/system
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
 systemctl enable runonce
 ```
 
