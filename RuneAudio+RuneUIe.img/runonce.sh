@@ -9,6 +9,7 @@ resize2fs /dev/mmcblk0p2
 
 # wait for usb/nas drive mounted
 sleep 10
+[[ -z $( ls -A /mnt/MPD/USB ) && -z $( ls -A /mnt/MPD/NAS ) ]] && sleep 5
 
 # makeDirLink
 . /srv/http/addonstitle.sh
