@@ -55,13 +55,8 @@ start1=$( echo "$fd" | tail -2 | head -1 )
 mkdir -p /media/boot
 mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
 
-# get /dev/loopN
-losetup -a
-
-# unmount
-losetup -d /dev/loopN
-
 # remount
+losetup -a # get /dev/loopN
 mount /dev/loopN /media/root
 ```
 
