@@ -17,7 +17,7 @@ makeDirLink webradiopl
 makeDirLink webradios
 
 # update mpd database
-{ mpd update;\
+{ mpc update;\
 	albumartist=$( mpc list albumartist | awk NF | wc -l );\
 	composer=$( mpc list composer | awk NF | wc -l );\
 	genre=$( mpc list genre | awk NF | wc -l );\
