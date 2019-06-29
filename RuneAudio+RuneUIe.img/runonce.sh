@@ -14,6 +14,7 @@ sleep 10
 . /srv/http/addonstitle.sh
 makeDirLink bookmarks
 makeDirLink coverarts
+makeDirLink lyrics
 makeDirLink playlists
 makeDirLink tmp
 makeDirLink webradiopl
