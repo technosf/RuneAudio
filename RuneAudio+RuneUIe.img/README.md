@@ -36,11 +36,11 @@ systemctl enable runonce
 ```
 
 ### Image file
-- Disk32 Image File - read SD card to `RuneAudio+RuneUIe.img`
+- Windows: Disk32 Image File - read SD card to `RuneAudio+RuneUIe.img`
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
 chmod +x shrinkimg.sh
-shrinkimg.sh RuneAudio+RuneUIe.img
+./shrinkimg.sh RuneAudio+RuneUIe.img
 ```
 - Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
@@ -55,8 +55,14 @@ start1=$( echo "$fd" | tail -2 | head -1 )
 mkdir -p /media/boot
 mount -o loop,offset=$(( unitbyte * start1 )) RuneAudio+RuneUIe.img /media/boot
 
-# remount - get /dev/loop#
+# get /dev/loopN
 losetup -a
+
+# unmount
+losetup -d /dev/loopN
+
+# remount
+mount /dev/loopN /media/root
 ```
 
 ### Conversion addons
