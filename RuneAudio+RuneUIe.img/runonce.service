@@ -1,5 +1,6 @@
 [Unit]
-After=multi-user.target mpd.service
+After=multi-user.target
+ConditionPathIsMountPoint=/mnt/MPD
 
 [Service]
 Type=idle
