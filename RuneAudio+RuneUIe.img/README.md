@@ -36,12 +36,11 @@ systemctl enable runonce
 ```
 
 ### Image file
-- Disk32 Image File - read SD card to `read.img`
-- [PiShrink](https://github.com/Drewsif/PiShrink) - shrink image file size (`-s` skip autoresize)
+- Disk32 Image File - read SD card to `RuneAudio+RuneUIe.img`
 ```sh
-wget https://github.com/Drewsif/PiShrink/raw/master/pishrink.sh
-chmod +x pishrink.sh
-pishrink.sh -s read.img RuneAudio+RuneUIe.img
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
+chmod +x shrinkimg.sh
+shrinkimg.sh RuneAudio+RuneUIe.img
 ```
 - Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
