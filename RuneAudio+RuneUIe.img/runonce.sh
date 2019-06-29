@@ -17,8 +17,11 @@ makeDirLink webradiopl
 makeDirLink webradios
 
 # update mpd database
-mpd update
-/srv/http/enhancecount.sh 1
+{ mpd update;\
+	albumartist=$( mpc list albumartist | awk NF | wc -l );\
+	composer=$( mpc list composer | awk NF | wc -l );\
+	genre=$( mpc list genre | awk NF | wc -l );\
+	redis-cli set mpddb "$albumartist $composer $genre"; } &
 
 systemctl disable runonce
 rm /etc/systemd/system/runonce.service
