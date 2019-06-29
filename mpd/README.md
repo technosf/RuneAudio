@@ -1,9 +1,9 @@
 MPD Upgrade
 ---
-_Tested on RuneAudio 0.3 and 0.4b_
+_Tested on RuneAudio 0.5b_
 
-Upgrade MPD to latest version, 0.3:0.19.17 / 0.4b:0.19.19 to **0.21.4** (as of 20190104). (changelog: [www.musicpd.org](www.musicpd.org))
-- RuneAudio installed customized MPD 0.19 which cannot be upgraded normally
+Upgrade MPD to latest version, **0.21.10** (as of 20190606). (changelog: [www.musicpd.org](www.musicpd.org))
+- RuneAudio installed customized MPD which cannot be upgraded normally
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`
 - Fix issues in normal upgrade (but broken Midori):
 	- fix missing libs
