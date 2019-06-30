@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # usage: mountimg FILE.img [1]
-1 - /boot partition
+# 1 - /boot partition
 
 img=$1
 
