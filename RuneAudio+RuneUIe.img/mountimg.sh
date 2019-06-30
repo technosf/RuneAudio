@@ -17,4 +17,4 @@ else                    # boot
 fi
 mkdir -p $path
 mount -o loop,offset=$(( unitbyte * start )) "$img" $mntpoint
-echo "Partition available at $mntpoint
+echo "Partition available at $mntpoint"
