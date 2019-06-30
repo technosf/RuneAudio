@@ -5,17 +5,18 @@
 title -l '=' "$bar Setup SD card for image file ..."
 
 # remove special directories
-rm -r /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
+rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
 # clear packages cache
-rm /var/cache/pacman/pkg/*
+rm -f /var/cache/pacman/pkg/*
 
 # mpd database reset
-rm /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
+rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 umount /dev/sda1
 mpc update
 
 # mirrorlist reset
+rm /etc/pacman.d/*
 wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 
 # run once script
