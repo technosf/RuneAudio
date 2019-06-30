@@ -1,4 +1,4 @@
-Install Addons Menu with PuTTY
+Install Addons with PuTTY
 ---
 
 - download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) `<< click`
