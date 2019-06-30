@@ -26,9 +26,6 @@ minsize=$((minsize + 100))
 resize2fs -p "$loopback" $minsize
 if [[ $? != 0 ]]; then
   echo "ERROR: resize2fs failed..."
-  mount "$loopback" "$mountdir"
-  mv "$mountdir/etc/rc.local.bak" "$mountdir/etc/rc.local"
-  umount "$mountdir"
   losetup -d "$loopback"
   exit -7
 fi
