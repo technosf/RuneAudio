@@ -25,21 +25,14 @@ chmod +x shrinkimg.sh
 ```
 - Mount `RuneAudio+RuneUIe.img` for editing
 ```sh
-img=RuneAudio+RuneUIe.img
-fd=$( fdisk -lo Start "$img" )
-unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
-# root
-start2=$( echo "$fd" | tail -1 )
-mkdir -p /media/root
-mount -o loop,offset=$(( unitbyte * start2 )) "$img" /media/root
-# boot
-start1=$( echo "$fd" | tail -2 | head -1 )
-mkdir -p /media/boot
-mount -o loop,offset=$(( unitbyte * start1 )) "$img" /media/boot
+wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/mountimg.sh
+chmod +x mountimg.sh
 
-# remount
-losetup -a # get /dev/loopN
-mount /dev/loopN /media/root
+# root
+./mountimg.sh RuneAudio+RuneUIe.img
+
+# /boot
+./mountimg.sh RuneAudio+RuneUIe.img 1
 ```
 
 ### Conversion addons
