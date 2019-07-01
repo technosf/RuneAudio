@@ -20,11 +20,11 @@ rm /etc/pacman.d/*
 wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 
 # run once script
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
+wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
 
 # systemd unit file
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
+wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
 systemctl enable runonce
 
 echo -e "$bar SD card ready for read to image file."
