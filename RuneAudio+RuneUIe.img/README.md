@@ -35,6 +35,11 @@ chmod +x mountimg.sh
 
 # /boot
 ./mountimg.sh RuneAudio+RuneUIe.img 1
+
+# umount
+umount /media/root
+umount media/boot
+kpartx -dv RuneAudio+RuneUIe.img
 ```
 
 ### Conversion addons
