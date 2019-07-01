@@ -13,7 +13,7 @@
 
 ### Setup
 ```sh
-wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh 
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh 
 ```
 
 ### Image file
@@ -26,14 +26,14 @@ wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 - PC - Disk32 Image File - from SD card to `RuneAudio+RuneUIe.img`
 - Shrink image file
 ```sh
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
 chmod +x shrinkimg.sh
 ./shrinkimg.sh RuneAudio+RuneUIe.img
 ```
 
 ## In-place edit image file
 ```sh
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/mountimg.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/mountimg.sh
 chmod +x mountimg.sh
 
 # root
