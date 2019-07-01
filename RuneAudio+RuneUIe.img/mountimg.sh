@@ -15,6 +15,6 @@ else                    # boot
   start=$( echo "$fd" | tail -2 | head -1 )
   mntpoint=/media/boot
 fi
-mkdir -p $path
+mkdir -p $mntpoint
 mount -o loop,offset=$(( unitbyte * start )) "$img" $mntpoint
 echo "Partition available at $mntpoint"
