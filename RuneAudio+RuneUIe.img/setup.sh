@@ -14,6 +14,7 @@ done
 mpc volume 50
 
 echo -e "\n$bar Reset MPD database ..."
+redis-cli del mpddb &> /dev/null
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 umount /dev/sda1
 mpc update
