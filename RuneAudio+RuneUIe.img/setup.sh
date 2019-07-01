@@ -22,7 +22,7 @@ echo -e "\n$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 
-echo -e "\n$bar Startup script ..."
+echo -e "\n$bar Startup setup script ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
 wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
