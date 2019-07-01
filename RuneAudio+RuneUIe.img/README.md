@@ -17,7 +17,8 @@ wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.
 ```
 
 ### Image file
-- Windows: Disk32 Image File - read SD card to `RuneAudio+RuneUIe.img`
+- Read SD card to `RuneAudio+RuneUIe.img` with Disk32 Image File
+- Shrink image file
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
 chmod +x shrinkimg.sh
