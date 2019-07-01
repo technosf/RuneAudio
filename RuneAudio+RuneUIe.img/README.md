@@ -23,7 +23,8 @@ wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrink
 chmod +x shrinkimg.sh
 ./shrinkimg.sh RuneAudio+RuneUIe.img
 ```
-- Mount `RuneAudio+RuneUIe.img` for editing
+
+## In-place edit image file
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/mountimg.sh
 chmod +x mountimg.sh
