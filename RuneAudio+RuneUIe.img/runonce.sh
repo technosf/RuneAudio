@@ -8,8 +8,9 @@ partprobe /dev/mmcblk0
 resize2fs /dev/mmcblk0p2
 
 # wait for usb/nas drive mounted
-sleep 10
-[[ -z $( ls -A /mnt/MPD/USB ) && -z $( ls -A /mnt/MPD/NAS ) ]] && sleep 5
+while [[ -z $( ls -A /mnt/MPD/USB ) && -z $( ls -A /mnt/MPD/NAS ) ]]; do
+	sleep 1
+done
 
 # makeDirLink
 . /srv/http/addonstitle.sh
