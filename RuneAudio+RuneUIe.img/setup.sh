@@ -17,12 +17,12 @@ mpc update
 
 echo -e "$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
-wget https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
+wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 
 echo -e "$bar Startup script ..."
-wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
-wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
 systemctl enable runonce
 
 title "$bar SD card ready for read to image file."
