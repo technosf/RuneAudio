@@ -18,7 +18,9 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 
 ### Image file
 **GParted**
-- Unmount SD card ext4 partition - in Nautilus after open GParted or by command line
+- Unmount SD card ext4 partition
+	- in Nautilus after open GParted > GParted menu > Refresh devices (avoid SD card ejected)
+	- or by command line
 - Resize to minimum + 50MB
 - PC - Disk32 Image File > `Read only allocated partition` from SD card to `RuneAudio+RuneUIe.img`
 
