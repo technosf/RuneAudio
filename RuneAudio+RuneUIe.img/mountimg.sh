@@ -3,18 +3,15 @@
 # usage: mountimg FILE.img [1]
 # 1 - /boot partition
 
-img=$1
-
-fd=$( fdisk -lo Start "$img" )
-unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
-
 if (( $# == 1 ])); then  # root
-  start=$( echo "$fd" | tail -1 )
+  loop=2
   mntpoint=/media/root
-else                    # boot
-  start=$( echo "$fd" | tail -2 | head -1 )
+else                     # boot
+  loop=1
   mntpoint=/media/boot
 fi
+
+kpartx -av $1
 mkdir -p $mntpoint
-mount -o loop,offset=$(( unitbyte * start )) "$img" $mntpoint
+mount /dev/mapper/loop0p$loop $mntpoint
 echo "Partition available at $mntpoint"
