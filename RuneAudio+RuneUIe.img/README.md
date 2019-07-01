@@ -17,7 +17,13 @@ wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 ```
 
 ### Image file
-- Read SD card to `RuneAudio+RuneUIe.img` with Disk32 Image File
+**GParted**
+- Unmount SD card ext4 partition
+- Resize to minimum + 50MB
+- PC - Disk32 Image File > `Read only allocated partition` from SD card to `RuneAudio+RuneUIe.img`
+
+**or**
+- PC - Disk32 Image File - from SD card to `RuneAudio+RuneUIe.img`
 - Shrink image file
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
