@@ -15,5 +15,5 @@ fi
 
 kpartx -a "$1"
 mkdir -p $mntpoint
-mount /dev/mapper/$loop $mntpoint
+mount /dev/mapper/${loop: -1} $mntpoint
 echo "Partition available at $mntpoint"
