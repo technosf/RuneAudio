@@ -13,7 +13,7 @@
 
 ### Setup
 ```sh
-wget https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh 
+wget -qn --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh 
 ```
 
 ### Image file
