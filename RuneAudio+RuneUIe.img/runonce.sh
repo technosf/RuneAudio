@@ -8,8 +8,10 @@ partprobe /dev/mmcblk0
 resize2fs /dev/mmcblk0p2
 
 # wait for usb/nas drive mounted
-while [[ -z $( ls -A /mnt/MPD/USB ) && -z $( ls -A /mnt/MPD/NAS ) ]]; do
+i=0
+while [[ -z $( ls -A /mnt/MPD/USB ) && -z $( ls -A /mnt/MPD/NAS ) && $i -lt 30 ]]; do
 	sleep 1
+	(( i++ ))
 done
 
 # makeDirLink
