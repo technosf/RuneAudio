@@ -33,12 +33,12 @@ chmod +x mountimg.sh
 # root
 ./mountimg.sh RuneAudio+RuneUIe.img
 
-# /boot
+# boot ( /boot )
 ./mountimg.sh RuneAudio+RuneUIe.img 1
 
 # umount
 umount /media/root
-umount media/boot
+umount /media/boot
 kpartx -dv RuneAudio+RuneUIe.img
 ```
 
