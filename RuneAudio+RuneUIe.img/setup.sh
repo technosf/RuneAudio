@@ -8,7 +8,10 @@ echo -e "\n$bar Remove special directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
 echo -e "\n$bar Reset MPD playback options ..."
-mpc volume 50; mpc repeat 0; mpc random 0; mpc single 0; mpc consume 0
+for opt in repeat random single consume; do
+	mpc $opt 0 &> /dev/null
+done
+mpc volume 50
 
 echo -e "\n$bar Reset MPD database ..."
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
