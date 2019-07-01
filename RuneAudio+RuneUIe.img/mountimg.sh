@@ -8,7 +8,7 @@ img=$1
 fd=$( fdisk -lo Start "$img" )
 unitbyte=$( echo "$fd" | grep '^Units' | cut -d' ' -f8 )
 
-if [[ $# == 1 ]]; then  # root
+if (( $# == 1 ])); then  # root
   start=$( echo "$fd" | tail -1 )
   mntpoint=/media/root
 else                    # boot
