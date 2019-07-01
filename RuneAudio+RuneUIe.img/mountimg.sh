@@ -6,10 +6,10 @@
 loops=$( kpartx -l "$1" )
 
 if (( $# == 1 )); then  # root
-  loop=$( echo $loops | tail -1 | cut -d' ' -f1 )
+  loop=$( echo "$loops" | tail -1 | cut -d' ' -f1 )
   mntpoint=/media/root
 else                     # boot
-  loop=$( echo $loops | head -1 | cut -d' ' -f1 )
+  loop=$( echo "$loops" | head -1 | cut -d' ' -f1 )
   mntpoint=/media/boot
 fi
 
