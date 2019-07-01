@@ -3,7 +3,7 @@
 # usage: mountimg FILE.img [1]
 # 1 - /boot partition
 
-if (( $# == 1 ])); then  # root
+if (( $# == 1 )); then  # root
   loop=2
   mntpoint=/media/root
 else                     # boot
