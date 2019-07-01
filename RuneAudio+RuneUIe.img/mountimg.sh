@@ -3,15 +3,17 @@
 # usage: mountimg FILE.img [1]
 # 1 - /boot partition
 
+loops=$( kpartx -l "$1" )
+
 if (( $# == 1 )); then  # root
-  loop=2
+  loop=$( echo $loops | tail -1 | cut -d' ' -f1 )
   mntpoint=/media/root
 else                     # boot
-  loop=1
+  loop=$( echo $loops | head -1 | cut -d' ' -f1 )
   mntpoint=/media/boot
 fi
 
-kpartx -av $1
+kpartx -a "$1"
 mkdir -p $mntpoint
-mount /dev/mapper/loop0p$loop $mntpoint
+mount /dev/mapper/$loop $mntpoint
 echo "Partition available at $mntpoint"
