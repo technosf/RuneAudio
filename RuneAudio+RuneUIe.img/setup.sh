@@ -17,9 +17,10 @@ redis-cli set lastmpdvolume 50 &> /dev/null
 redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD database ..."
-
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
-umount /dev/sda1
+while read -r mountdev; do
+	umount -l $mountdev
+done < <( awk '$2 ~ "^/mnt/MPD/" { print $1 }' /proc/mounts )
 mpc update
 
 echo -e "\n$bar Clear packages cache ..."
