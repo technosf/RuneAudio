@@ -18,10 +18,12 @@ redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD database ..."
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
+systemctl stop mpd
 mounts=$( cat /proc/mounts | grep '/mnt/MPD/' | cut -d' ' -f1 )
 for dev in $mounts; do
 	umount -l $dev
 done
+systemctl start mpd
 mpc update
 
 echo -e "\n$bar Clear packages cache ..."
