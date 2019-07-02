@@ -7,6 +7,18 @@ echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
 partprobe /dev/mmcblk0
 resize2fs /dev/mmcblk0p2
 
+# makeDirLink
+. /srv/http/addonstitle.sh
+
+makeDirLink netctl
+dir=/srv/http/assets/img/netctl
+if [[ -n $( ls -A $dir ) ]]; then
+	cp -f $dir/* /etc/netctl
+	for profile in $( ls $dir ); do
+		netctl start "$( basename $profile )"
+	done
+fi
+
 # wait for usb/nas drive mounted
 i=0
 while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 30 )); do
@@ -14,8 +26,6 @@ while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 30 )); do
 	(( i++ ))
 done
 
-# makeDirLink
-. /srv/http/addonstitle.sh
 makeDirLink bookmarks
 makeDirLink coverarts
 makeDirLink lyrics
