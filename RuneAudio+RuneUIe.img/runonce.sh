@@ -17,7 +17,6 @@ done
 # makeDirLink
 . /srv/http/addonstitle.sh
 makeDirLink bookmarks
-makeDirLink data
 makeDirLink coverarts
 makeDirLink lyrics
 makeDirLink playlists
