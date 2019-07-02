@@ -11,7 +11,7 @@ echo -e "\n$bar Reset MPD settings ..."
 for opt in repeat random single consume; do
 	mpc $opt 0 &> /dev/null
 done
-mpc volume 50
+mpc volume 50 &> /dev/null
 mpc clear
 redis-cli set lastmpdvolume 50 &> /dev/null
 redis-cli del mpddb &> /dev/null
