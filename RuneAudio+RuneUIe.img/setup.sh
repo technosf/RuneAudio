@@ -7,14 +7,17 @@ title -l '=' "$bar Setup SD card for image file ..."
 echo -e "\n$bar Remove special directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
-echo -e "\n$bar Reset MPD playback options ..."
+echo -e "\n$bar Reset MPD settings ..."
 for opt in repeat random single consume; do
 	mpc $opt 0 &> /dev/null
 done
 mpc volume 50
+mpc clear
+redis-cli set lastmpdvolume 50 &> /dev/null
+redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD database ..."
-redis-cli del mpddb &> /dev/null
+
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 umount /dev/sda1
 mpc update
