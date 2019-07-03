@@ -16,6 +16,7 @@ wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 rm -r /etc/nginx/html
 echo -e "y \n" | pacman -U $file
 pacman -S --noconfirm iptables
+ln -s /lib/libip4tc.so.{2.0.0,0}
 
 rm $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -P /etc/nginx
