@@ -28,8 +28,9 @@ echo -e "y \n" | pacman -U $file
 pacman -Sy iptables
 
 rm $file
-wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -P /etc/nginx
 mv /etc/nginx/html/50x.html{,.backup}
+wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -P /etc/nginx
+wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/50x.html -P /srv/http
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 
