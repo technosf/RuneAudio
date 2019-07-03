@@ -26,11 +26,13 @@ makeDirLink webradiopl
 makeDirLink webradios
 
 # update mpd database
-{ mpc update;\
-	albumartist=$( mpc list albumartist | awk NF | wc -l );\
-	composer=$( mpc list composer | awk NF | wc -l );\
-	genre=$( mpc list genre | awk NF | wc -l );\
-	redis-cli set mpddb "$albumartist $composer $genre"; } &
+if grep -q '/mnt/MPD/' /proc/mounts; then
+	{ mpc update;\
+		albumartist=$( mpc list albumartist | awk NF | wc -l );\
+		composer=$( mpc list composer | awk NF | wc -l );\
+		genre=$( mpc list genre | awk NF | wc -l );\
+		redis-cli set mpddb "$albumartist $composer $genre"; } &
+fi
 
 systemctl disable runonce
 rm /etc/systemd/system/runonce.service
