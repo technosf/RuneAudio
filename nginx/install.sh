@@ -18,7 +18,7 @@ echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
 echo -e "y \n" | pacman -U $file
-pacman -Sy iptables
+pacman -S --noconfirm iptables
 
 rm $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -P /etc/nginx
