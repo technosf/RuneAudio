@@ -4,12 +4,6 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-if grep -q 'rewrite /css/(.*)   ' /etc/nginx/nginx.conf; then
-	redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
-	title "$info NGINX already upgraded."
-	exit
-fi
-
 title -l '=' "$bar Upgrade NGINX ..."
 timestart
 
