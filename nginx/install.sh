@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 . /srv/http/addonstitle.sh
 
 if grep -q 'rewrite /css/(.*)   ' /etc/nginx/nginx.conf; then
