@@ -1,5 +1,10 @@
 ## RuneAudio+RuneUIe.img
 
+### Before install
+- Connect WiFi > restart to get it connected
+- Delete `test` profile: `rm /etc/netctl/test`
+- Remove connected WiFi
+
 ### Install and upgrade
 - Addons
 - RuneUI Enhancement
