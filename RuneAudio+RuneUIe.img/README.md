@@ -3,6 +3,7 @@
 ### Install and upgrade
 - Addons
 - RuneUI Enhancement
+	- Enable only Accesspoint for initial setup through WiFi
 - RuneUI Metadata Tag Editor
 - RuneUI Lyrics
 - Login Logo for SSH Terminal
