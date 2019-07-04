@@ -29,6 +29,13 @@ mpc update
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
 
+echo -e "\n$bar Delete unnecessary files ..."
+rm /srv/http/assets/css/*.old
+rm /srv/http/assets/js/*.orig
+rm -r /srv/http/assets/less
+rm -rf /usr/lib/python2.7/test /usr/lib/python3.6/test /usr/lib/python3.7/test
+rm -r /usr/share/{doc,gtk-doc,info,man}
+
 echo -e "\n$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
