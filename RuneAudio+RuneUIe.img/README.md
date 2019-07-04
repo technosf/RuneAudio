@@ -16,7 +16,7 @@
 rm /srv/http/assets/css/*.old
 rm /srv/http/assets/js/*.orig
 rm -r /srv/http/assets/less
-rm -r /usr/lib/python2.7/test /usr/lib/python3.6/test
+rm -rf /usr/lib/python2.7/test /usr/lib/python3.6/test /usr/lib/python3.7/test
 rm -r /usr/share/{doc,gtk-doc,info,man}
 ```
 
