@@ -8,9 +8,9 @@ echo -e "\n$bar Unlink special directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
 echo -e "\n$bar Delete unnecessary files ..."
-rm /srv/http/assets/css/*.old
-rm /srv/http/assets/js/*.orig
-rm -r /srv/http/assets/less
+rm -f /srv/http/assets/css/*.old
+rm -f /srv/http/assets/js/*.orig
+rm -rf /srv/http/assets/less
 
 echo -e "\n$bar Reset MPD settings ..."
 for opt in repeat random single consume; do
