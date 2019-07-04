@@ -5,7 +5,7 @@
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Verify connected WiFi
 - Delete `test` profile: `rm /etc/netctl/test`
-- `Disconnect-delete` connected WiFi
+- `Disconnect-Delete` connected WiFi
 
 ### Install and upgrade
 - Addons
