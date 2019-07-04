@@ -19,13 +19,13 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 ### Image file
 **GParted**
 - Unmount SD card ext4 partition
-	- in Nautilus after open GParted > GParted menu > Refresh devices (avoid SD card ejected)
+	- in **Nautilus** after open **GParted** > GParted menu > Refresh devices (avoid SD card ejected)
 	- or by command line
 - Resize to minimum + 50MB
-- PC - Disk32 Image File > `Read only allocated partition` from SD card to `RuneAudio+RuneUIe.img`
+- **Win32 Disk Imager** > `Read only allocated partition` from SD card to `RuneAudio+RuneUIe.img`
 
 **or**
-- PC - Disk32 Image File - from SD card to `RuneAudio+RuneUIe.img`
+- **Win32 Disk Imager** - from SD card to `RuneAudio+RuneUIe.img`
 - Shrink image file
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/shrinkimg.sh
@@ -49,7 +49,4 @@ umount /media/root
 umount /media/boot
 kpartx -dv RuneAudio+RuneUIe.img
 ```
-
-### Conversion addons
-- playlists, webradios, bookmarks
   
