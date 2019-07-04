@@ -1,7 +1,9 @@
 ## RuneAudio+RuneUIe.img
 
 ### Before install
-- Connect WiFi > restart to get it connected
+- Connect WiFi (result - none connected, fixed by reboot in next step)
+- `/dev` page > `gitpull` to update RuneUI > auto reboot
+- Verify connected WiFi
 - Delete `test` profile: `rm /etc/netctl/test`
 - Remove connected WiFi
 
