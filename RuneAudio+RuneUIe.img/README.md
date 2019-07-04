@@ -11,6 +11,13 @@
 - Samba Upgrade
 - NGINX Upgrade
 
+### Delete unnecessary directories
+```sh
+rm -r /srv/http/assets/less
+rm -r /usr/lib/python2.7/test /usr/lib/python3.6/test
+rm -r /usr/share/{doc,gtk-doc,info,man}
+```
+
 ### Setup SD card to common state
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh 
