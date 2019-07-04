@@ -85,4 +85,4 @@ version=$( mpd -V | head -n1 | cut -d'(' -f2 | cut -d')' -f1 )
 
 title -l '=' "$bar MPD upgraded successfully to $version"
 
-mpc update &
+{ mpc update; curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1 } &
