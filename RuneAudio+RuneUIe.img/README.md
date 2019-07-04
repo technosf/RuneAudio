@@ -11,6 +11,9 @@
 - MPD Upgrade
 - Samba Upgrade
 - NGINX Upgrade
+```sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/nginx/install.sh -O - | sh 
+```
 
 ### Setup SD card to common state
 ```sh
