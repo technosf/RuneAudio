@@ -38,7 +38,7 @@ sed -i '/determinePreferredLanguage/ s|^|//|' /srv/http/aria2/app.js
 file=/etc/nginx/nginx.conf
 echo $file
 
-if ! grep -q '^#.*\s*rewrite' $file; then
+if ! grep -q '^#.*\s*rewrite\|#upgraded' $file; then
 	commentS '^\s*rewrite'
 	string=$( cat <<'EOF'
             rewrite /css/(.*) /assets/css/$1 break;
