@@ -25,6 +25,9 @@ makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
+systemctl disable runonce
+rm /etc/systemd/system/runonce.service
+
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
 	mpc rescan
@@ -35,7 +38,3 @@ if grep -q '/mnt/MPD/' /proc/mounts; then
 	redis-cli set mpddb "$albumartist $composer $genre"
 	curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1
 fi
-
-systemctl disable runonce
-rm /etc/systemd/system/runonce.service
-systemctl daemon-reload
