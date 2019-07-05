@@ -27,13 +27,13 @@ makeDirLink webradios
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
-	{ mpc rescan;\
-		mpc idle update;\
-		albumartist=$( mpc list albumartist | awk NF | wc -l );\
-		composer=$( mpc list composer | awk NF | wc -l );\
-		genre=$( mpc list genre | awk NF | wc -l );\
-		redis-cli set mpddb "$albumartist $composer $genre";\
-		curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1; } &
+	mpc rescan
+	mpc idle update
+	albumartist=$( mpc list albumartist | awk NF | wc -l )
+	composer=$( mpc list composer | awk NF | wc -l )
+	genre=$( mpc list genre | awk NF | wc -l )
+	redis-cli set mpddb "$albumartist $composer $genre"
+	curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1
 fi
 
 systemctl disable runonce
