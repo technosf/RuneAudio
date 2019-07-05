@@ -1,6 +1,7 @@
 ## RuneAudio+RuneUIe.img
 
 ### Before install
+- Fix access point startup failed - `systemctl disable hostapd`
 - Connect WiFi (result - none connected, fixed by reboot in next step)
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Verify connected WiFi
