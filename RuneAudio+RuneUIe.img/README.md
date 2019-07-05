@@ -2,16 +2,12 @@
 
 ### Before install
 - Fix access point startup failed - `systemctl disable hostapd`
-- Connect WiFi (result - none connected, fixed by reboot in next step)
-- `/dev` page > `gitpull` to update RuneUI > auto reboot
-- Verify connected WiFi
 - Delete `test` profile: `rm /etc/netctl/test`
-- `Disconnect-Delete` connected WiFi
+- `/dev` page > `gitpull` to update RuneUI > auto reboot
 
 ### Install and upgrade
 - Addons
-- RuneUI Enhancement
-	- Enable only Accesspoint for initial setup through WiFi
+- RuneUI Enhancement (Enable only Accesspoint for initial setup through WiFi)
 - RuneUI Metadata Tag Editor
 - RuneUI Lyrics
 - Login Logo for SSH Terminal
