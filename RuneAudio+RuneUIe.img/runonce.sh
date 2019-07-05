@@ -27,7 +27,8 @@ makeDirLink webradios
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
-	{ mpc rescan --wait;\
+	{ mpc rescan;\
+		mpc idle update;\
 		albumartist=$( mpc list albumartist | awk NF | wc -l );\
 		composer=$( mpc list composer | awk NF | wc -l );\
 		genre=$( mpc list genre | awk NF | wc -l );\
