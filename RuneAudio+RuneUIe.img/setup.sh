@@ -4,7 +4,7 @@
 
 title -l '=' "$bar Setup SD card for image file ..."
 
-echo -e "\n$bar Unlink special directories ..."
+echo -e "\n$bar Unlink extra directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
 echo -e "\n$bar Delete unnecessary files ..."
