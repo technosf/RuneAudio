@@ -2,6 +2,14 @@
 
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
+- Fix `readline` and `icu`
+```sh
+pacman -Sy
+pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
+pacman -S --needed $pkg awk readline
+pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
+pacman -S --needed $pkg icu
+```
 
 ### Install and upgrade
 - Addons
