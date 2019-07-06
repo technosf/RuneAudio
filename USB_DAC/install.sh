@@ -68,6 +68,7 @@ unitfile() {
     cat << EOF > $file
 [Unit]
 Description=Hotplug USB DAC
+After=multi-user.target
 [Service]
 Type=oneshot
 ExecStart=/root/usbdac $1
