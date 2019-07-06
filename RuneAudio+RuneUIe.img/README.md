@@ -2,13 +2,15 @@
 
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
-- Fix `readline` and `icu`
+- Fix `readline` and `icu`, upgrade Chromium
 ```sh
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
+
+pacman -S chromium nettle freetype2
 ```
 
 ### Install and upgrade
