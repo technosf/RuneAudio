@@ -14,7 +14,7 @@ pacman -S chromium nettle freetype2
 sed -i -e '/chromium/ {
 s/^/#/
 a\
-chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disable-gpu --incognito
+chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disable-gpu --incognito --test-type
 }' /etc/X11/xinit/xinitrc
 ```
 
