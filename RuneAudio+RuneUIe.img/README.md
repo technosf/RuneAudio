@@ -11,11 +11,17 @@ pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 
 pacman -S chromium nettle freetype2
+sed -i -e '/chromium/ {
+s/^/#/
+a\
+chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disable-gpu --incognito
+}' /etc/X11/xinit/xinitrc
 ```
 
 ### Install and upgrade
 - Addons
-- RuneUI Enhancement (Enable only Accesspoint for initial setup through WiFi)
+- RuneUI Enhancement
+	- Enable for initial setup: accesspoint and local browser
 - RuneUI Metadata Tag Editor
 - RuneUI Lyrics
 - Login Logo for SSH Terminal
