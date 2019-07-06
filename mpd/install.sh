@@ -44,6 +44,7 @@ if [[ ! -e /usr/lib/libicudata.so.64.2 ]]; then
 fi
 
 echo -e "$bar Remove conflict packages ..."
+sed -i 's/ashuffle \|ffmpeg \|mpd //g' /etc/pacman.conf
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
 pacman -Rdd --noconfirm ashuffle-rune ffmpeg-rune mpd-rune libsystemd
 
