@@ -1,8 +1,6 @@
 ## RuneAudio+RuneUIe.img
 
 ### Before install
-- Fix access point startup failed - `systemctl disable hostapd`
-- Delete `test` profile: `rm /etc/netctl/test`
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 
 ### Install and upgrade
