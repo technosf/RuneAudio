@@ -2,21 +2,15 @@
 
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
-- Fix `readline` and `icu`, upgrade Chromium
+- Fix `readline` and `icu`
 ```sh
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
-
-pacman -S chromium nettle freetype2
-sed -i -e '/chromium/ {
-s/^/#/
-a\
-chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disable-gpu --incognito --test-type
-}' /etc/X11/xinit/xinitrc
 ```
+- Remove Chromium, install Midori
 
 ### Install and upgrade
 - Addons
