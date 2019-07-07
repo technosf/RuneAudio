@@ -27,11 +27,17 @@ chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disab
 - Login Logo for SSH Terminal
 - USB DAC Plug and Play
 - MPD Upgrade
-- Midori Upgrade
 - Samba Upgrade
 - NGINX Upgrade
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/nginx/install.sh -O - | sh 
+```
+- Midori Upgrade
+```sh
+pacman -S midori
+sed -i -e '/chromium/ s/^/#/
+' -e '/midori/ s/^#//
+' /etc/X11/xinit/xinitrc
 ```
 
 ### Setup SD card to common state
