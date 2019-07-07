@@ -38,7 +38,7 @@ zoom=$( redis-cli hget settings zoom )
 file=/root/.xinitrc
 echo $file
 
-commentS 'midori'
+commentS '^midori'
 
 string=$( cat <<EOF
 chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
