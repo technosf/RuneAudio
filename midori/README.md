@@ -34,7 +34,7 @@ killall Xorg
 rm /root/.config/midori/history.db-shm
 
 # start x and midori
-xinit &> /dev/null &
+startx &> /dev/null &
 ```
 (manual refresh may needed)
 
