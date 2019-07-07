@@ -27,6 +27,7 @@ chromium --no-sandbox --start-fullscreen --force-device-scale-factor=1.8 --disab
 - Login Logo for SSH Terminal
 - USB DAC Plug and Play
 - MPD Upgrade
+- Midori Upgrade
 - Samba Upgrade
 - NGINX Upgrade
 ```sh
