@@ -2,13 +2,17 @@
 
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
-- Fix `readline` and `icu`
+- Fixes
 ```sh
+# readlind and icu
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
+
+# hostapd
+systemctl disable hostapd
 ```
 
 ### Install and upgrade
