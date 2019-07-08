@@ -8,4 +8,3 @@ Chromium Browser
 - upgrade `ffmpeg` + `mpd` > install `chromium`
 - fix ipv6 probing
 - fix scaling
-- run `without matchbox-window-manager`
