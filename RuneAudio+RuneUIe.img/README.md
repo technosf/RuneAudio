@@ -2,6 +2,7 @@
 
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
+- Edit `IgnorePkg` in `/etc/pacman.conf`
 - Fixes
 ```sh
 # readlind and icu - icu upgrade also upgrade Chromium but has to be purged - reinstalled
