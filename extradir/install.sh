@@ -4,19 +4,16 @@
 
 title -l '=' "$bar Restore extra directories ..."
 
-makeLink() {
-	direxist=$( find /mnt/MPD/ -maxdepth 3 -type d -name $1 )
+for dir in bookmarks coverarts lyrics playlists tmp webradiopl webradios; do
+	direxist=$( find /mnt/MPD/ -maxdepth 3 -type d -name $dir )
 	if [[ -e "$direxist" ]]; then
-		rm -r /srv/http/assets/img/$1
+		rm -r /srv/http/assets/img/$dir
 		ln -s "$direxist" /srv/http/assets/img/
 		echo $dir
 	else
-		echo -e "$warn $1 not found."
+		echo -e "$info Extra directories not found."
+		exit
 	fi
-}
-
-for dir in bookmarks coverarts lyrics playlists tmp webradiopl webradios; do
-	makeLink $dir
 done
 
 title "$bar Extra directories restored successfully."
