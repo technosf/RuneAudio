@@ -6,11 +6,16 @@ rm $0
 
 title -l '=' "$bar Change zoom level of local browser ..."
 
-if ! grep -q '^chromium' /root/.xinitrc; then
+if grep -q '^midori' /root/.xinitrc; then
 	sed -i "s/^\(zoom-level=\).*/\1$1/" /root/.config/midori/config
 else
-	file=/etc/X11/xinit/start_chromium.sh
-	[[ ! -e $file ]] && file=/root/.xinitrc
+	if ! grep -q calibrator /etc/X11/xinit/xinitrc; then
+		file=/etc/X11/xinit/xinitrc
+	elif [[ ! -e /etc/X11/xinit/start_chromium.sh ]]
+		file=/etc/X11/xinit/start_chromium.sh
+	else
+		file=/root/.xinitrc
+	fi
 	sed -i "s/\(force-device-scale-factor=\).*/\1$1/" $file
 fi
 
