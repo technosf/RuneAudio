@@ -1,0 +1,18 @@
+#!/bin/bash
+export XDG_CACHE_HOME="/tmp/.cache" &
+export DISPLAY=":0" &
+
+# start the touchscreen calibration utility for some screens (Pollin 7" tft)
+# for this to work you have to disable loading midori 
+#xinput_calibrator &
+
+xset dpms 0 0 0 &
+xset s off &
+xset -dpms &
+
+#matchbox-window-manager -use_cursor no &
+
+# keyboard shortcuts
+#xbindkeys -X ":0" &
+
+exec chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1.8
