@@ -11,6 +11,12 @@ Chromium Browser
 
 **Run without matchbox-window-manager**
 ```sh
+# fix: Only console users are allowed to run the X server
+cat << EOF > /etc/X11/Xwrapper.config
+allowed_users=anybody
+needs_root_rights=yes
+EOF
+
 mkdir -p /home/http
 cat << EOF > /home/http/.xinitrc
 #!/bin/bash
