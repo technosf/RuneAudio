@@ -19,6 +19,6 @@ else
 	sed -i "s/\(force-device-scale-factor=\).*/\1$1/" $file
 fi
 
-restartlocalbrowser
+[[ $( redis-cli get local_browser ) == 1 || $( redis-cli hget local_browser enable ) == 1 ]] && restartlocalbrowser
 
 title -nt "$info Zoom level of local browser changed to $1"
