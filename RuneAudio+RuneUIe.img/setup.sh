@@ -50,4 +50,4 @@ systemctl enable runonce
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 
-title "$bar SD card ready for read to image file."
+title "$bar SD card ready for read for image file."
