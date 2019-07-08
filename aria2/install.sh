@@ -45,7 +45,6 @@ if ! grep -q '^#.*\s*rewrite\|#upgraded' $file; then
             rewrite /fonts/(.*) /assets/fonts/$1 break;
             rewrite /img/(.*) /assets/img/$1 break;
             rewrite /js/(.*) /assets/js/$1 break;
-            rewrite /less/(.*) /assets/less/$1 break;
 EOF
 )
 	appendS -n +7 'listen 80 '
