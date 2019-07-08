@@ -4,7 +4,7 @@
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Fixes
 ```sh
-# readlind and icu
+# readlind and icu - icu upgrade also upgrade Chromium but has to be purged - reinstalled
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline
