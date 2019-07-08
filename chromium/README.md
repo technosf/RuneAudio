@@ -17,13 +17,7 @@ allowed_users=anybody
 needs_root_rights=yes
 EOF
 
-mkdir -p /home/http
-cat << EOF > /home/http/.xinitrc
-#!/bin/bash
-exec chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1.8
-EOF
-chown -R http:http /home/http
 
-su http
-startx -- -nocursor
+exec chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1.8
+
 ```
