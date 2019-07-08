@@ -47,6 +47,17 @@ cat << EOF > /etc/X11/Xwrapper.config
 allowed_users=anybody
 needs_root_rights=yes
 EOF
+
+# hide options in settings
+. /srv/http/addonsedit.sh
+file=/srv/http/app/templates/settings.php
+commentH 'local_browserBox'
+commentH -n -2 local_browserBox
+commentH -n -1 'local_browserName' 'local_browserName'
+string=$( cat <<'EOF'
+                <div class="hide" id="local_browserName">
+EOF
+appendH 'local_browserName'
 ```
 
 ### Setup SD card to common state
