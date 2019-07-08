@@ -28,13 +28,7 @@ pacman -S midori
 - MPD Upgrade
 - Samba Upgrade
 - NGINX Upgrade
-```sh
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/nginx/install.sh -O - | sh 
-```
 - Midori Upgrade
-```sh
-pacman -S midori
-```
 - Edit `/etc/X11/xinit/xinitrc`
 
 
