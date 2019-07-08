@@ -1,6 +1,8 @@
 #!/bin/bash
 
 rm $0
+systemctl disable runonce
+rm /etc/systemd/system/runonce.service
 
 # expand partition
 echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
@@ -25,9 +27,6 @@ makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
-systemctl disable runonce
-rm /etc/systemd/system/runonce.service
-
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
 	mpc rescan
@@ -38,3 +37,5 @@ if grep -q '/mnt/MPD/' /proc/mounts; then
 	redis-cli set mpddb "$albumartist $composer $genre"
 	curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1
 fi
+
+startx &> /dev/null &
