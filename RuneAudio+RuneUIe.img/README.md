@@ -3,6 +3,13 @@
 ### Before install
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Edit `IgnorePkg` in `/etc/pacman.conf`
+- Silent boot
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/cmdline.txt -O /boot/cmdline.txt
+sed -i -e 's/\(disable_splash=\)0/\11/
+' -e '/disable_overscan/ s/^#//
+' /boot/config.txt
+
+
 - Fixes
 ```sh
 # readlind and icu - icu upgrade also upgrade Chromium but has to be purged - reinstalled
