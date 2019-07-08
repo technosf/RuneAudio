@@ -9,6 +9,10 @@
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline nettle wget
+
+# fix for php-fpm
+ln -s /lib/libreadline.so.{8.0,7}
+
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 
