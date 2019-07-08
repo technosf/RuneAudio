@@ -10,15 +10,6 @@ pacman -S --needed $pkg awk readline
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 ```
-- Upgrade Chromium
-```sh
-# purge before reinstall
-pacman -Rsn chromium
-pacman -S chromium
-sed -i '/User=http/ s/^#//' /usr/lib/systemd/system/local-browser.service
-systemctl daemon-reload
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/xinitrc -O /etc/X11/xinit/xinitrc
-```
 
 ### Install and upgrade
 - Addons
@@ -31,9 +22,15 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 - MPD Upgrade
 - Samba Upgrade
 - NGINX Upgrade
-- Midori Upgrade
-- Edit `/etc/X11/xinit/xinitrc`
-
+- Chromium Upgrade
+```sh
+# purge before reinstall
+pacman -Rsn chromium
+pacman -S chromium
+sed -i '/User=http/ s/^#//' /usr/lib/systemd/system/local-browser.service
+systemctl daemon-reload
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/xinitrc -O /etc/X11/xinit/xinitrc
+```
 
 ### Setup SD card to common state
 ```sh
