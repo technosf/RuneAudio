@@ -37,5 +37,3 @@ if grep -q '/mnt/MPD/' /proc/mounts; then
 	redis-cli set mpddb "$albumartist $composer $genre"
 	curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1
 fi
-
-startx &> /dev/null &
