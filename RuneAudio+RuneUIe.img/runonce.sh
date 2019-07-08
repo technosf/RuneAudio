@@ -13,7 +13,6 @@ while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 30 )); do
 	sleep 1
 	(( i++ ))
 done
-sleep 1
 
 # makeDirLink
 . /srv/http/addonstitle.sh
