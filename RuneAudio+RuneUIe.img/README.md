@@ -40,7 +40,7 @@ pacman -S chromium freetype2
 sed -i '/User=http/ s/^#//' /usr/lib/systemd/system/local-browser.service
 systemctl daemon-reload
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/xinitrc -O /etc/X11/xinit/xinitrc
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/chromium/xinitrc -O /etc/X11/xinit/xinitrc
 
 # fix: Only console users are allowed to run the X server
 cat << EOF > /etc/X11/Xwrapper.config
