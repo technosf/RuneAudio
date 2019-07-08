@@ -11,7 +11,7 @@ resize2fs /dev/mmcblk0p2
 
 # wait for usb/nas drive mounted
 i=0
-while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 30 )); do
+while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 45 )); do
 	sleep 1
 	(( i++ ))
 done
