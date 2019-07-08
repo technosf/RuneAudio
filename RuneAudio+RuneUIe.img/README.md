@@ -34,10 +34,9 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/nginx/inst
 - Midori Upgrade
 ```sh
 pacman -S midori
-sed -i -e '/chromium/ s/^/#/
-' -e '/midori/ s/^#//
-' /etc/X11/xinit/xinitrc
 ```
+- Edit `/etc/X11/xinit/xinitrc`
+
 
 ### Setup SD card to common state
 ```sh
