@@ -11,7 +11,7 @@ if grep -q '^midori' /root/.xinitrc; then
 else
 	if ! grep -q calibrator /etc/X11/xinit/xinitrc; then
 		file=/etc/X11/xinit/xinitrc
-	elif [[ ! -e /etc/X11/xinit/start_chromium.sh ]]
+	elif [[ ! -e /etc/X11/xinit/start_chromium.sh ]]; then
 		file=/etc/X11/xinit/start_chromium.sh
 	else
 		file=/root/.xinitrc
