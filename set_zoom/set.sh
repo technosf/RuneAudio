@@ -20,8 +20,6 @@ else
 fi
 
 echo -e "$bar Restart local browser ..."
-killall Xorg &> /dev/null
-sleep 3
-xinit &> /dev/null &
+restartlocalbrowser
 
 title -nt "$info Zoom level of local browser changed to $1"
