@@ -48,6 +48,6 @@ chmod +x /root/runonce.sh
 wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
 systemctl enable runonce
 
-curl -s -v -X POST 'http://localhost/pub?id=reload' -d 1
+curl --silent -s -v -X POST 'http://localhost/pub?id=reload' -d 1
 
 title "$bar SD card ready for read to image file."
