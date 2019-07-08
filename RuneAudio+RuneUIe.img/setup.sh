@@ -4,12 +4,6 @@
 
 title -l '=' "$bar Setup SD card for image file ..."
 
-echo -e "\n$bar Silent boot ..."
-wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/cmdline.txt -O /boot/cmdline.txt
-sed -i -e 's/\(disable_splash=\)0/\11
-' -e '/disable_overscan/ s/^#//
-' /boot/config.txt
-
 echo -e "\n$bar Unlink extra directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
 
