@@ -13,9 +13,6 @@ rm -f /srv/http/assets/css/*.old
 rm -f /srv/http/assets/js/*.orig
 rm -rf /srv/http/assets/less
 
-echo -e "\n$bar Fix access point startup ..."
-systemctl disable hostapd
-
 echo -e "\n$bar Reset MPD settings ..."
 for opt in repeat random single consume; do
 	mpc $opt 0 &> /dev/null
