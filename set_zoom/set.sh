@@ -19,7 +19,6 @@ else
 	sed -i "s/\(force-device-scale-factor=\).*/\1$1/" $file
 fi
 
-echo -e "$bar Restart local browser ..."
 restartlocalbrowser
 
 title -nt "$info Zoom level of local browser changed to $1"
