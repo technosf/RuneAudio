@@ -1,8 +1,6 @@
 #!/bin/bash
 
 rm $0
-systemctl disable runonce
-rm /etc/systemd/system/runonce.service
 
 # expand partition
 echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
@@ -26,6 +24,9 @@ makeDirLink playlists
 makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
+
+systemctl disable runonce
+rm /etc/systemd/system/runonce.service
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
