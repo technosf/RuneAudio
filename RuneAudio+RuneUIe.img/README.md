@@ -8,7 +8,7 @@
 # readlind and icu - icu upgrade also upgrade Chromium but has to be purged - reinstalled
 pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
-pacman -S --needed $pkg awk readline
+pacman -S --needed $pkg awk readline nettle wget
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 
