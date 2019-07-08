@@ -27,24 +27,33 @@ sed -i 's/ ipv6.disable=1//' $file
 file=/boot/config.txt
 echo $file
 
+commentS '^disable_overscan'
+
 string=$( cat <<'EOF'
 disable_overscan=1
 EOF
 )
 appendS '$'
 # -----------------------------------------------------------------------------
-# replace midori with chromium
-zoom=$( redis-cli hget settings zoom )
-file=/root/.xinitrc
-echo $file
+# xinit
+if grep -q '^midori' /root/.xinitrc; then
+	file=/root/.xinitrc
+else
+	if ! grep -q calibrator /etc/X11/xinit/xinitrc; then
+		file=/etc/X11/xinit/xinitrc
+	elif [[ ! -e /etc/X11/xinit/start_chromium.sh ]]
+		file=/etc/X11/xinit/start_chromium.sh
+	else
+		file=/root/.xinitrc
+	fi
+fi
+wgetnc https://github.com/rern/RuneAudio/raw/master/chromium/xinitrc -O $file
 
-commentS '^midori'
-
-string=$( cat <<EOF
-chromium --no-sandbox --disable-gpu --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
+# fix: Only console users are allowed to run the X server
+cat << EOF > /etc/X11/Xwrapper.config
+allowed_users=anybody
+needs_root_rights=yes
 EOF
-)
-appendS '$'
 
 installfinish $@
 
