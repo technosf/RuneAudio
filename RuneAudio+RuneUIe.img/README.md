@@ -11,6 +11,11 @@ pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 ```
 - Remove Chromium, install Midori
+```sh
+pacman -R chromium
+pacman -S midori
+```
+- Edit `/etc/X11/xinit/xinitrc`
 
 ### Install and upgrade
 - Addons
