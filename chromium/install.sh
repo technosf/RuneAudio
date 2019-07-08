@@ -41,7 +41,7 @@ echo $file
 commentS '^midori'
 
 string=$( cat <<EOF
-chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
+chromium --no-sandbox --disable-gpu --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
 EOF
 )
 appendS '$'
