@@ -36,16 +36,13 @@ EOF
 appendS '$'
 # -----------------------------------------------------------------------------
 # xinit
-if grep -q '^midori' /root/.xinitrc; then
-	file=/root/.xinitrc
+if [[ -e /etc/X11/xinit/xinitrc ]]; then
+	file=/etc/X11/xinit/xinitrc
+	rm -f /etc/X11/xinit/start_chromium*
 else
-	if -e /etc/X11/xinit/xinitrc; then
-		file=/etc/X11/xinit/xinitrc
-		rm -f /etc/X11/xinit/start_chromium*
-	else
-		file=/root/.xinitrc
-	fi
+	file=/root/.xinitrc
 fi
+
 wgetnc https://github.com/rern/RuneAudio/raw/master/chromium/xinitrc -O $file
 
 # fix: Only console users are allowed to run the X server
