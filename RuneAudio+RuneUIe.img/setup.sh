@@ -1,8 +1,10 @@
 #!/bin/bash
 
+rm $0
+
 . /srv/http/addonstitle.sh
 
-title -l '=' "$bar Setup SD card for image file ..."
+title -l '=' "$bar Rune0.5+RuneUIe Reset ..."
 
 echo -e "\n$bar Unlink extra directories ..."
 rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
@@ -47,4 +49,5 @@ systemctl enable runonce
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 
-title "$bar SD card ready for read for image file."
+title "$bar Rune0.5+RuneUIe Reset successfully."
+title -nt "$info Close Addons and reboot for initial setup."
