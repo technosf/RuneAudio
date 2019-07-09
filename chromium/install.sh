@@ -11,7 +11,12 @@ installstart $@
 
 rankmirrors
 
-getuninstall
+packagestatus '^chromium$' # $version, $installed
+
+if [[ $installed ]]; then
+	title "$info Chromium already upgraded to latest version: $version"
+	exit
+fi
 
 # purge for 0.5
 [[ $( chromium -version | cut -d' ' -f2 ) < 75.0.3770.100 ]] && pacman -Rsn --noconfirm chromium 2> /dev/null
