@@ -61,8 +61,8 @@ WantedBy=multi-user.target
 EOF
 fi
 
-if [[ -e /etc/X11/xinit/xinitrc ]]; then
-	file=/etc/X11/xinit/xinitrc
+file=/etc/X11/xinit/xinitrc
+if [[ -e $file ]]; then
 	rm -f /etc/X11/xinit/start_chromium*
 else
 	file=/root/.xinitrc
@@ -78,8 +78,9 @@ xset dpms 0 0 0 &
 xset s off &
 xset -dpms &
 
+xsetroot -solid "#000000" &
 matchbox-window-manager -use_cursor no &
-chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1
+chromium --app=http://localhost --kiosk --disable-gpu --force-device-scale-factor=1
 
 # keyboard shortcuts
 #xbindkeys -X ":0" &
