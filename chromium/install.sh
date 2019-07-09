@@ -47,6 +47,7 @@ EOF
 # for 0.5
 file=/lib/systemd/system/local-browser.service
 if [[ -e $file ]]; then
+	echo $file
 	cat << EOF > $file
 [Unit]
 Description=Local Chromium Browser
@@ -64,6 +65,7 @@ WantedBy=multi-user.target
 EOF
 
 	file=/srv/http/app/templates/settings.php
+	echo $file
 	
 	commentH 'local_browserBox'
 	commentH -n -2 local_browserBox
@@ -80,6 +82,7 @@ fi
 
 file=/etc/X11/xinit/xinitrc
 [[ ! -e $file ]] && file=/root/.xinitrc
+echo $file
 
 cat << EOF > $file
 #!/bin/bash
