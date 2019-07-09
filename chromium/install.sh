@@ -62,14 +62,23 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
+
+	file=/srv/http/app/templates/settings.php
+	
+	commentH 'local_browserBox'
+	commentH -n -2 local_browserBox
+	commentH -n -1 'local_browserName' 'local_browserName'
+	
+	string=$( cat <<'EOF'
+					<div class="hide" id="local_browserName">
+	EOF
+	appendH 'local_browserName'
+	
+	rm -f /etc/X11/xinit/start_chromium*
 fi
 
 file=/etc/X11/xinit/xinitrc
-if [[ -e $file ]]; then
-	rm -f /etc/X11/xinit/start_chromium*
-else
-	file=/root/.xinitrc
-fi
+[[ ! -e $file ]] && file=/root/.xinitrc
 
 cat << EOF > $file
 #!/bin/bash
