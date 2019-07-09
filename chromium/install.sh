@@ -84,7 +84,7 @@ file=/etc/X11/xinit/xinitrc
 [[ ! -e $file ]] && file=/root/.xinitrc
 echo $file
 
-cat << EOF > $file
+cat << 'EOF' > $file
 #!/bin/bash
 
 export XDG_CACHE_HOME="/tmp/.cache" &
