@@ -85,11 +85,7 @@ EOF
 	rm -f /etc/X11/xinit/start_chromium*
 fi
 
-file=/etc/X11/xinit/xinitrc
-[[ ! -e $file ]] && file=/root/.xinitrc
-echo $file
-
-cat << 'EOF' > $file
+cat << 'EOF' > /etc/X11/xinit/xinitrc
 #!/bin/bash
 
 export XDG_CACHE_HOME="/tmp/.cache" &
