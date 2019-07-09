@@ -35,7 +35,12 @@ EOF
 )
 appendS '$'
 # -----------------------------------------------------------------------------
-# xinit
+# fix: Only console users are allowed to run the X server
+cat << EOF > /etc/X11/Xwrapper.config
+allowed_users=anybody
+needs_root_rights=yes
+EOF
+
 if [[ -e /etc/X11/xinit/xinitrc ]]; then
 	file=/etc/X11/xinit/xinitrc
 	rm -f /etc/X11/xinit/start_chromium*
@@ -43,13 +48,24 @@ else
 	file=/root/.xinitrc
 fi
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/chromium/xinitrc -O $file
+cat << EOF > $file
+#!/bin/bash
 
-# fix: Only console users are allowed to run the X server
-cat << EOF > /etc/X11/Xwrapper.config
-allowed_users=anybody
-needs_root_rights=yes
+export XDG_CACHE_HOME="/tmp/.cache" &
+export DISPLAY=":0" &
+
+xset dpms 0 0 0 &
+xset s off &
+xset -dpms &
+
+matchbox-window-manager -use_cursor no &
+chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1
+
+# keyboard shortcuts
+#xbindkeys -X ":0" &
 EOF
+
+cp $file /srv/http/app/config/_os/etc/X11/xinit/xinitrc
 
 installfinish $@
 
