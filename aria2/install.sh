@@ -50,7 +50,7 @@ EOF
 	appendS -n +7 'listen 80 '
 fi
 
-string=$( cat <<EOF
+string=$( cat <<'EOF'
         location /aria2 {
             root /var/www;
         }
