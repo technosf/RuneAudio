@@ -5,13 +5,10 @@
 - Edit `IgnorePkg` in `/etc/pacman.conf`
 - Silent boot
 ```sh
+sed -i -e 's/\(disable_splash=\)0/\11/' /boot/config.txt
 cat << 'EOF' > /boot/cmdline.txt
 root=/dev/mmcblk0p2 rw rootwait console=ttyAMA0,115200 console=tty3 selinux=0 plymouth.enable=0 fsck.repair=yes smsc95xx.turbo_mode=N dwc_otg.lpm_enable=0 kgdboc=ttyAMA0,115200 elevator=noop quiet loglevel=0 logo.nologo vt.global_cursor_default=0
 EOF
-
-sed -i -e 's/\(disable_splash=\)0/\11/
-' -e '/disable_overscan/ s/^#//
-' /boot/config.txt
 ```
 - Fixes
 ```sh
