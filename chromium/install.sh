@@ -65,8 +65,6 @@ chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-
 #xbindkeys -X ":0" &
 EOF
 
-cp $file /srv/http/app/config/_os/etc/X11/xinit/xinitrc
-
 installfinish $@
 
 reinitsystem
