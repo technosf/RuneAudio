@@ -70,8 +70,9 @@ EOF
 	commentH -n -1 'local_browserName' 'local_browserName'
 	
 	string=$( cat <<'EOF'
-					<div class="hide" id="local_browserName">
-	EOF
+				<div class="hide" id="local_browserName">
+EOF
+)
 	appendH 'local_browserName'
 	
 	rm -f /etc/X11/xinit/start_chromium*
