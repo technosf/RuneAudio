@@ -25,6 +25,7 @@ redis-cli set lastmpdvolume 50 &> /dev/null
 redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD database ..."
+systemctl stop mpd
 rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 
 echo -e "\n$bar Clear packages cache ..."
