@@ -13,7 +13,10 @@ rankmirrors
 
 getuninstall
 
-pacman -S --needed --noconfirm chromium nss harfbuzz freetype2 zlib libjpeg-turbo
+# purge for 0.5
+[[ $( chromium -version | cut -d' ' -f2 ) < 75.0.3770.100 ]] && pacman -Rsn --noconfirm chromium 2> /dev/null
+
+pacman -S --needed --noconfirm chromium freetype2
 
 echo -e "$bar Modify file ..."
 
