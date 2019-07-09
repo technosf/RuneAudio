@@ -39,10 +39,9 @@ appendS '$'
 if grep -q '^midori' /root/.xinitrc; then
 	file=/root/.xinitrc
 else
-	if ! grep -q calibrator /etc/X11/xinit/xinitrc; then
+	if -e /etc/X11/xinit/xinitrc; then
 		file=/etc/X11/xinit/xinitrc
-	elif [[ ! -e /etc/X11/xinit/start_chromium.sh ]]
-		file=/etc/X11/xinit/start_chromium.sh
+		rm -f /etc/X11/xinit/start_chromium*
 	else
 		file=/root/.xinitrc
 	fi
