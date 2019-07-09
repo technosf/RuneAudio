@@ -9,7 +9,7 @@ xset -dpms &
 
 xsetroot -solid "#000000" &
 matchbox-window-manager -use_cursor no &
-chromium --app=http://localhost --kiosk --start-fullscreen --disable-gpu --force-device-scale-factor=1
+chromium --app=http://localhost --kiosk --disable-gpu --force-device-scale-factor=1
 
 # keyboard shortcuts
 #xbindkeys -X ":0" &
