@@ -7,8 +7,8 @@ xset dpms 0 0 0 &
 xset s off &
 xset -dpms &
 
-matchbox-window-manager &
-exec chromium --app=http://localhost --kiosk --start-fullscreen --disable-gpu --force-device-scale-factor=1
+matchbox-window-manager -use_cursor no &
+chromium --app=http://localhost --start-fullscreen --disable-gpu --force-device-scale-factor=1
 
 # keyboard shortcuts
 #xbindkeys -X ":0" &
