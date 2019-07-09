@@ -78,7 +78,6 @@ xset dpms 0 0 0 &
 xset s off &
 xset -dpms &
 
-xsetroot -solid "#000000" &
 matchbox-window-manager -use_cursor no &
 chromium --app=http://localhost --kiosk --disable-gpu --force-device-scale-factor=1
 
