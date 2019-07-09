@@ -19,7 +19,7 @@ if [[ $installed ]]; then
 fi
 
 # purge for 0.5
-[[ $( chromium -version | cut -d' ' -f2 ) < 75.0.3770.100 ]] && pacman -Rsn --noconfirm chromium 2> /dev/null
+[[ -e /usr/bin/chromium && $( chromium -version | cut -d' ' -f2 ) < 75.0.3770.100 ]] && pacman -Rsn --noconfirm chromium 2> /dev/null
 
 pacman -S --needed --noconfirm chromium freetype2
 
