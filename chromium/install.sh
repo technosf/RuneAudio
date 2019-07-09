@@ -41,6 +41,26 @@ allowed_users=anybody
 needs_root_rights=yes
 EOF
 
+# for 0.5
+file=/lib/systemd/system/local-browser.service
+if [[ -e $file ]]; then
+	cat << EOF > $file
+[Unit]
+Description=Local Chromium Browser
+After=network.target
+
+[Service]
+Type=simple
+User=http
+ExecStart=/usr/bin/startx
+ExecStop=/usr/bin/killall Xorg
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+fi
+
 if [[ -e /etc/X11/xinit/xinitrc ]]; then
 	file=/etc/X11/xinit/xinitrc
 	rm -f /etc/X11/xinit/start_chromium*
