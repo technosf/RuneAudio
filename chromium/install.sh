@@ -39,7 +39,7 @@ EOF
 appendS '$'
 # -----------------------------------------------------------------------------
 # fix: Only console users are allowed to run the X server
-cat << EOF > /etc/X11/Xwrapper.config
+cat << 'EOF' > /etc/X11/Xwrapper.config
 allowed_users=anybody
 needs_root_rights=yes
 EOF
@@ -48,7 +48,7 @@ EOF
 file=/lib/systemd/system/local-browser.service
 if [[ -e $file ]]; then
 	echo $file
-	cat << EOF > $file
+	cat << 'EOF' > $file
 [Unit]
 Description=Local Chromium Browser
 After=network.target
