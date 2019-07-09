@@ -21,7 +21,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_par
 - Probe new partition with **partprobe** (by **Parted**)  
 - Resize to new partition with **resize2fs**   
 
-**Script**
+**Script - Expand /dev/mmcblk0p2**
 ```sh
 echo -e "d\n\nn\n\n\n\n\nw" | fdisk /dev/mmcblk0 &>/dev/null
 partprobe /dev/mmcblk0
