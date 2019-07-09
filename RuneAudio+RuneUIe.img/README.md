@@ -4,12 +4,15 @@
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Edit `IgnorePkg` in `/etc/pacman.conf`
 - Silent boot
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/cmdline.txt -O /boot/cmdline.txt
+```sh
+cat << 'EOF' > /boot/cmdline.txt
+root=/dev/mmcblk0p2 rw rootwait console=ttyAMA0,115200 console=tty3 selinux=0 plymouth.enable=0 fsck.repair=yes smsc95xx.turbo_mode=N dwc_otg.lpm_enable=0 kgdboc=ttyAMA0,115200 elevator=noop quiet loglevel=0 logo.nologo vt.global_cursor_default=0
+EOF
+
 sed -i -e 's/\(disable_splash=\)0/\11/
 ' -e '/disable_overscan/ s/^#//
 ' /boot/config.txt
-
-
+```
 - Fixes
 ```sh
 # readlind and icu - icu upgrade also upgrade Chromium but has to be purged - reinstalled
@@ -39,33 +42,6 @@ systemctl disable hostapd
 - Samba Upgrade
 - NGINX Upgrade
 - Chromium Upgrade
-```sh
-# purge before reinstall
-pacman -Rsn chromium
-pacman -S chromium freetype2
-
-sed -i '/User=http/ s/^#//' /usr/lib/systemd/system/local-browser.service
-systemctl daemon-reload
-
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/chromium/xinitrc -O /etc/X11/xinit/xinitrc
-
-# fix: Only console users are allowed to run the X server
-cat << EOF > /etc/X11/Xwrapper.config
-allowed_users=anybody
-needs_root_rights=yes
-EOF
-
-# hide options in settings
-. /srv/http/addonsedit.sh
-file=/srv/http/app/templates/settings.php
-commentH 'local_browserBox'
-commentH -n -2 local_browserBox
-commentH -n -1 'local_browserName' 'local_browserName'
-string=$( cat <<'EOF'
-                <div class="hide" id="local_browserName">
-EOF
-appendH 'local_browserName'
-```
 
 ### Setup SD card to common state
 ```sh
