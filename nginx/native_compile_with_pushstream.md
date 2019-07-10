@@ -9,7 +9,7 @@ chown -R x:x /home/x
 su alarm
 cd /home/x/nginx
 ```
-- [NGINX source files](https://archlinuxarm.org/packages/armv7h/nginx/files)
+- NGINX source files: https://archlinuxarm.org/packages/armv7h/nginx/files
 - Copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)
 - Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 - Edit `PKGBUILD`:
