@@ -8,7 +8,8 @@ rm /etc/shairport-sync.conf \
 	/usr/lib/systemd/system/shairport-sync.service \
 	/usr/share/man/man7/shairport-sync.7.gz
 
-pacman -Sy shairport-sync
+# install with compiled packaged --with-metadata
+pacman -U shairport-sync-x.x.x-x-armv7h.pkg.tar.xz
 
 # fix - Failed to determine user credentials: No such process
 systemctl daemon-reexec
