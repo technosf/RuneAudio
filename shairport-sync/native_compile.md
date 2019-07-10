@@ -6,7 +6,7 @@ su alarm
 cd
 mkdir shairport-sync
 
-# get source files: https://archlinuxarm.org/packages/armv7h/shairport-sync
+# get source files: https://archlinuxarm.org/packages/armv7h/shairport-sync (with last empty line without whitespace)
 
 makepkg -A
 ```
