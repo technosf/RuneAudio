@@ -55,7 +55,7 @@ string=$( cat <<'EOF'
 			$newArray = wrk_replaceTextLine($file, '', 'force-device-scale-factor', 'chromium --app=http://localhost --kiosk --incognito --disable-gpu --force-device-scale-factor='.$args);
 EOF
 )
-insert 'zoomfactor'
+append 'zoomfactor'
 # -----------------------------------------------------------------------------
 # fix: Only console users are allowed to run the X server
 cat << 'EOF' > /etc/X11/Xwrapper.config
