@@ -43,6 +43,20 @@ EOF
 )
 appendS '$'
 # -----------------------------------------------------------------------------
+file=/srv/http/app/libs/runeaudio.php
+echo $file
+
+comment "start_chromium.sh'"
+
+comment 'app=http'
+
+string=$( cat <<'EOF'
+			$file = '/etc/X11/xinit/xinitrc';
+			$newArray = wrk_replaceTextLine($file, '', 'force-device-scale-factor', 'chromium --app=http://localhost --kiosk --incognito --disable-gpu --force-device-scale-factor='.$args);
+EOF
+)
+insert 'zoomfactor'
+# -----------------------------------------------------------------------------
 # fix: Only console users are allowed to run the X server
 cat << 'EOF' > /etc/X11/Xwrapper.config
 allowed_users=anybody
