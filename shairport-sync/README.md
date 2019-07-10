@@ -1,16 +1,24 @@
 ### Shairport Sync
 
-Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `---with-metadata` for metadata retrieval.
-
 **Install**
 ```sh
-wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
-pacman -Sy openssl-cryptodev libconfig
-pacman -U shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
+# 0.5 - remove existing files
+rm /etc/shairport-sync.conf \
+	/usr/bin/shairport-sync \
+	/usr/lib/systemd/system/shairport-sync.service \
+	/usr/share/man/man7/shairport-sync.7.gz
+
+pacman -Sy shairport-sync
+
+# fix - Failed to determine user credentials: No such process
+systemctl daemon-reexec
 ```
 
 **Configure**
 ```sh
+# fix - Failed to determine user credentials: No such process
+systemctl daemon-reexec
+
 # set usable volume range
 sed -i '/name = "%H"/ i\
     volume_range_db = 50;
