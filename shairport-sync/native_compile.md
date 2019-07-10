@@ -8,5 +8,7 @@ mkdir shairport-sync
 
 # get source files: https://archlinuxarm.org/packages/armv7h/shairport-sync (with last empty line without whitespace)
 
+# add  --with-metadata
+
 makepkg -A
 ```
