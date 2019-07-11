@@ -3,7 +3,7 @@
 $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 if ( $argv[ 1 ] === 'off' ) {
-	exec( '/usr/bin/sudo /usr/bin/systemctl start mpd; /usr/bin/killall enhanceshairport &> /dev/null &' );
+	exec( '/usr/bin/sudo /usr/bin/systemctl start mpd; /usr/bin/killall shairport &> /dev/null &' );
 	$redis->set( 'activePlayer', 'MPD' );
 	exit();
 }
@@ -36,13 +36,10 @@ while ( 1 ) {
 	if ( $i === 0 ) {
 		$i = 1;
 		$code = hex2bin( $std );
-		echo $code;
 	} else {
 		$i = 0;
 		$data = base64_decode( $std );
-		echo $data;
-		$status[ 'cover' ] = '';
-		
+//		$status[ 'cover' ] = '';
 		if ( $code === 'asar' ) {
 			$status[ 'currentartist' ] = $data;
 		} else if ( $code === 'minm' ) {
@@ -50,11 +47,9 @@ while ( 1 ) {
 		} else if ( $code === 'asal' ) {
 			$status[ 'currentalbum' ] = $data;
 		} else if ( $code === 'PICT' ) {
-			exec( '/usr/bin/rm -f /srv/http/assets/img/airplay.*.jpg' );
-			$status[ 'cover' ] = '/srv/http/assets/img/airplay.'.time().'.jpg';
-			$fopen = fopen( $status[ 'cover' ], 'wb' );
-			fwrite( $fopen, $data );
-			fclose( $fopen );
+			exec( '/usr/bin/rm -f /srv/http/assets/img/airplay.*' );
+			$coverfile = '/srv/http/assets/img/airplay.'.time();
+			file_put_contents( $coverfile );
 		} else if ( $code === 'prgr' ) { // each send end with 'prgr'
 			$progress = explode( '/', $data );
 			$status[ 'elapsed' ] = round( ( $progress[ 0 ] - $progress[ 1 ] ) / 44100 );
