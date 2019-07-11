@@ -15,8 +15,8 @@ rm $file
 
 # on/off script
 wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/enhanceshairport -P /srv/http
-chown http:http /srv/http/shairport
-chmod 755 /srv/http/shairport
+chown http:http /srv/http/enhanceshairport
+chmod 755 /srv/http/enhanceshairport
 ```
 
 **Configure**
