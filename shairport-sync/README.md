@@ -56,5 +56,7 @@ cat /tmp/shairport-sync-metadata
 # 50494354  PICT    coverart           coverart = 'url( "data:image/jpeg;base64,$DATA" )'; // no conversion
 
 # shairport-sync-metadata-reader
+wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-metadata-reader -P /usr/local/bin
+chmod 755 /usr/local/bin/shairport-sync-metadata-reader
 shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 ```
