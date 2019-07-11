@@ -5,8 +5,7 @@
 # 0.5 - remove existing files
 rm /etc/shairport-sync.conf \
 	/usr/bin/shairport-sync \
-	/usr/lib/systemd/system/shairport-sync.service \
-	/usr/share/man/man7/shairport-sync.7.gz
+	/usr/lib/systemd/system/shairport-sync.service
 
 # install with compiled packaged --with-metadata
 file=shairport-sync-3.3.1-1-armv7h.pkg.tar.xz
