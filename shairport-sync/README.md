@@ -48,7 +48,7 @@ cat /tmp/shairport-sync-metadata
 # U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 # ...
 # ----------------------------------------------------------------------------------------------------------------
-# hex       hex2bin DATA                      JS coversion and usage 
+# hex       hex2bin type   field              JS coversion and usage 
 # ----------------------------------------------------------------------------------------------------------------
 # 61736172  asar    base64 artist             artist   = atob( DATA );
 # 6d696e6d  minm    base64 song               song     = atob( DATA );
