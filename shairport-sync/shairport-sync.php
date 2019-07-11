@@ -2,7 +2,7 @@
 <?php
 include('/srv/http/app/libs/runeaudio.php');
 $redis = new Redis();
-$redis->connect( '/tmp/redis.sock' );
+$redis->pconnect( '127.0.0.1' );
 
 if ( $argv[ 1 ] === 'off' ) {
 	wrk_stopAirplay($redis);
@@ -33,7 +33,7 @@ $replace = array(
 $airplay_handle = fopen( '/tmp/shairport-sync-metadata', 'r' );
 stream_set_blocking( $airplay_handle, false );
 $i = 0;
-while ( 1 ) ) {
+while ( 1 ) {
 	$line = fgets( $airplay_handle );
 	$std = preg_replace( array_keys( $replace ), array_values( $replace ), $line );
 	if ( !$std ) continue;
@@ -55,7 +55,7 @@ while ( 1 ) ) {
 		} else if ( $code === 'prgr' ) { // each send end with 'prgr'
 			$progress = explode( $data );
 			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
-			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
+			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 );
 			$status[ 'cover' ] = '/srv/http/assets/img/airplay'.$progress[ 0 ].'.jpg';
 			ui_render( 'airplay', json_encode( $status ) );
 			// append start time to filename to avoid cache
