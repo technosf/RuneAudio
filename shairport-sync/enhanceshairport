@@ -3,7 +3,7 @@
 $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 if ( $argv[ 1 ] === 'off' ) {
-	exec( '/usr/bin/sudo /usr/bin/systemctl start mpd; /usr/bin/killall shairport &> /dev/null &' );
+	exec( '/usr/bin/sudo /usr/bin/systemctl start mpd; /usr/bin/killall enhanceshairport &> /dev/null &' );
 	$redis->set( 'activePlayer', 'MPD' );
 	exit();
 }
