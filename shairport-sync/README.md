@@ -14,7 +14,7 @@ pacman -U $file
 rm $file
 
 # on/off script
-wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport -P /srv/http
+wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/enhanceshairport -P /srv/http
 chown http:http /srv/http/shairport
 chmod 755 /srv/http/shairport
 ```
@@ -26,8 +26,8 @@ sed -i 's/^User=.*/User=http/; s/Group=.*/Group=http/' /usr/lib/systemd/system/s
 
 # config
 sed -i '/run_this_before_play_begins/ i\
-	run_this_before_play_begins = "/srv/http/shairport &";
-	run_this_after_play_ends = "/srv/http/shairport off &";
+	run_this_before_play_begins = "/srv/http/enhanceshairport &";
+	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
 ' /etc/shairport-sync.conf
 
 # fix if needed - Failed to determine user credentials: No such process
