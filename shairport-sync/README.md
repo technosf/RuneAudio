@@ -48,13 +48,13 @@ cat /tmp/shairport-sync-metadata
 # U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 # ...
 # ----------------------------------------------------------------------------------------------------------------
-# hex       hex2bin field              base64 (JS coversion)
+# hex       hex2bin field              base64 (PHP/JS decode)
 # ----------------------------------------------------------------------------------------------------------------
-# 61736172  asar    artist             artist   = atob( DATA );
-# 6d696e6d  minm    song               song     = atob( DATA );
-# 6173616c  asal    album              album    = atob( DATA );
-# 70726772  prgr    elapsed/start/end  st_el_en = atob( DATA ).split( '/' ); second = st_el_en[ n ] / 44100;
-# 50494354  PICT    coverart           coverart = 'url( "data:image/jpeg;base64,DATA" )'; // no conversion
+# 61736172  asar    artist             base64_decode( $DATA ) / atob( DATA );
+# 6d696e6d  minm    song               base64_decode( $DATA ) / atob( DATA );
+# 6173616c  asal    album              base64_decode( $DATA ) / atob( DATA );
+# 70726772  prgr    elapsed/start/end  base64_decode( $DATA ) / atob( DATA );
+# 50494354  PICT    coverart           coverart = 'url( "data:image/jpeg;base64,$DATA" )'; // no conversion
 
 # shairport-sync-metadata-reader
 shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
