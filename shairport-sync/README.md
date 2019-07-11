@@ -11,7 +11,10 @@ rm /etc/shairport-sync.conf \
 # install with compiled packaged --with-metadata
 pacman -U shairport-sync-x.x.x-x-armv7h.pkg.tar.xz
 
-# fix - Failed to determine user credentials: No such process
+# set user as http
+sed 's/^User=.*/User=http/; s/Group=.*/Group=http/' /usr/lib/systemd/system/shairport-sync.service
+
+# fix if needed - Failed to determine user credentials: No such process
 systemctl daemon-reexec
 ```
 
