@@ -21,8 +21,9 @@ chmod 755 /srv/http/enhanceshairport
 
 **Configure**
 ```sh
-# set user as http
-sed -i 's/^User=.*/User=http/; s/Group=.*/Group=http/' /usr/lib/systemd/system/shairport-sync.service
+# set sudoers.d for user shairport-sync
+echo 'shairport-sync ALL=NOPASSWD: ALL' >> /etc/sudoers.d/http
+chmod +w /srv/http/assets/img
 
 # config
 sed -i '/run_this_before_play_begins/ i\
