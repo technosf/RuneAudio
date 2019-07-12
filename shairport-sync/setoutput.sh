@@ -1,5 +1,11 @@
 #!/bin/bash
 
+rm $0
+
+. /srv/http/addonstitle.sh
+
+title "$info Set AirPlay output ..."
+
 sessioncontrol=$( cat <<'EOF'
 sessioncontrol = {
 	run_this_before_play_begins = "/srv/http/enhanceshairport &";
@@ -32,3 +38,5 @@ fi
 echo "$string" > /etc/shairport-sync.conf
 
 systemctl restart shairport-sync
+
+title "$info AirPlay output changed to $ao"
