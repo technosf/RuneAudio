@@ -17,25 +17,26 @@ rm $file
 wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/enhanceshairport -P /srv/http
 chown http:http /srv/http/enhanceshairport
 chmod 755 /srv/http/enhanceshairport
-```
 
-**Configure**
-```sh
 # set sudoers.d for user shairport-sync
 echo 'shairport-sync ALL=NOPASSWD: ALL' >> /etc/sudoers.d/http
+
+# permission to write coverart
 chmod +w /srv/http/assets/img
 
 # config
-sed -i '/run_this_before_play_begins/ i\
-	run_this_before_play_begins = "/srv/http/enhanceshairport &";
+sed -i -e '/run_this_before_play_begins/ i\
+	run_this_before_play_begins = "/srv/http/enhanceshairport &";\
 	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
+' -e '/output_device =/ i\
+	output_device = "hw:0"; // aplay -l | grep '^card'
 ' /etc/shairport-sync.conf
 
 # fix if needed - Failed to determine user credentials: No such process
 systemctl daemon-reexec
 ```
 
-**Usage**
+**Metadata**
 ```sh
 # start
 systemctl start shairport-sync
