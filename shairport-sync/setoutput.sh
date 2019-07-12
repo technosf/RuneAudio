@@ -34,8 +34,10 @@ EOF
 )
 fi
 
+file=/etc/shairport-sync.conf
+[[ ! -e $file ]] && $file.backup
 # set config
-echo "$string" > /etc/shairport-sync.conf
+echo "$string" > $file
 
 systemctl restart shairport-sync
 
