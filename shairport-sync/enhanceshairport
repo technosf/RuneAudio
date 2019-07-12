@@ -1,32 +1,24 @@
 #!/usr/bin/php
 <?php
+function pushstream( $channel, $data ) {
+	$ch = curl_init( 'http://localhost/pub?id='.$channel );
+	curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json' ) );
+	curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $data, JSON_NUMERIC_CHECK ) );
+	curl_exec( $ch );
+	curl_close( $ch );
+}
+
 $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
 if ( $argv[ 1 ] === 'off' ) {
+	pushstream( 'airplay', 0 );
 	exec( '/usr/bin/sudo /usr/bin/systemctl start mpd; /usr/bin/killall enhanceshairport &> /dev/null &' );
 	$redis->set( 'activePlayer', 'MPD' );
 	exit();
 }
 
 // set output_device
-$ao = $redis->get( 'ao' );
-if ( substr( $ao, 0, 12 ) == 'bcm2835 ALSA' ) {
-	$output = '
-	output_device = "hw:0";
-	mixer_control_name = "PCM"';
-} else {
-	$card = exec( "/usr/bin/aplay -l | grep xCORE | cut -d':' -f1 | cut -d' ' -f2" );
-	$formats = array( 'U8', 'S8', 'S16', 'S24', 'S24_3LE', 'S24_3BE', 'S32' );
-	foreach( $formats as $format ) {
-		$std = exec( "usr/bin/sudo /usr/bin/cat /dev/urandom | timeout 1 /usr/bin/aplay -q -f $format 2>&1" );
-		if ( !$std ) $output_format = $format;
-		$output = '
-		output_device = "hw:$card";
-		output_format = "$output_format"';
-	}
-}
-exec( "/usr/bin/sudo /usr/bin/sed -i '/output_device = \"default\"/ i\$output' /etc/shairport-sync.conf" );
-exec( '/usr/bin/sudo /usr/bin/systemctl stop mpd; /usr/bin/systemctl restart shairport-sync' );
+exec( '/usr/bin/sudo /usr/bin/systemctl stop mpd' );
 $redis->set( 'activePlayer', 'Airplay' );
 
 /* stdout stream from /tmp/shairport-sync-metadata fifo/named pipe:
@@ -36,13 +28,6 @@ $redis->set( 'activePlayer', 'Airplay' );
 U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 ...
 */
-function pushstream( $channel, $data ) {
-	$ch = curl_init( 'http://localhost/pub?id='.$channel );
-	curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json' ) );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $data, JSON_NUMERIC_CHECK ) );
-	curl_exec( $ch );
-	curl_close( $ch );
-}
 
 $metadata = fopen( '/tmp/shairport-sync-metadata', 'r' );
 $code = '';
@@ -57,24 +42,16 @@ while ( 1 ) {
 			$code = 'Title';
 		} else if ( strpos( $line, '6173616c' ) ) {
 			$code = 'Album';
-		} else if ( strpos( $line, '70726772' ) ) {
-			$code = 'progress';
 		} else if ( strpos( $line, '50494354' ) ) {
 			$code = 'coverart';
 		}
 		if ( $code && strpos( $line, '</data></item>' ) ) {
 			$data = str_replace( '</data></item>', '', $line );
-			if ( $code === 'progress' ) {
-				$progress = explode( '/', base64_decode( $data ) );
-				$time = round( ( $progress[ 2 ] - $progress[ 1 ] ) / 44100 );
-				$redis->hMset( 'airplaymeta', array( 'Time' => $time, 'T0' => time() ) ); // T0 - for elapsed calculation
-			} else if ( $code === 'coverart' ) {
-				exec( '/usr/bin/rm -f /srv/http/assets/img/airplaycoverart' );
+			if ( $code === 'coverart' ) {
 				$coverart = 'data:image/jpeg;base64,'.$data; // airplay - only jpeg
 				file_put_contents( '/srv/http/assets/img/airplaycoverart', $coverart );
 			} else {
-				$status = base64_decode( $data );
-				$redis->hSet( 'airplaymeta', $code, $status );
+				$redis->hSet( 'airplaymeta', $code, base64_decode( $data ) );
 				pushstream( 'airplay', 1 );
 			}
 			$code = '';
