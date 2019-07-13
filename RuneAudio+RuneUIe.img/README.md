@@ -28,9 +28,15 @@ systemctl disable hostapd amixer-webui
 rm -r /usr/share/amixer-webui
 
 # fix - pip
-ln -sf /usr/bin/pip{2,}
+pacman -Rdd python-pip python
+pacman -S python2 python-pip
+ln -s /usr/bin/python{2.7,}
+ln -s /usr/bin/pip{2.7,}
 
 # upgrades
+rm /etc/shairport-sync.conf \
+	/usr/bin/shairport-sync \
+	/usr/lib/systemd/system/shairport-sync.service
 file=shairport-sync-3.3.1-1-armv7h.pkg.tar.xz
 wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
 pacman -U $file
