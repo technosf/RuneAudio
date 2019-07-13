@@ -36,7 +36,7 @@ wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
 pacman -U $file
 rm $file
 
-pacman -S hostapd ifplugd
+pacman -S hostapd ifplugd dnsmasq
 ```
 
 ### Install and upgrade
