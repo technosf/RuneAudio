@@ -26,12 +26,12 @@ file=/srv/http/assets/img/airplaycoverart
 touch $file
 chown shairport-sync:shairport-sync $file
 
-# config
+# config ( output_device = "hw:N" - aplay -l | grep "^card" )
 sed -i -e '/run_this_before_play_begins/ i\
 	run_this_before_play_begins = "/srv/http/enhanceshairport &";\
 	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
 ' -e '/output_device =/ i\
-	output_device = "hw:0"; // aplay -l | grep "^card"
+	output_device = "hw:0";
 ' /etc/shairport-sync.conf
 
 # fix if needed - Failed to determine user credentials: No such process
