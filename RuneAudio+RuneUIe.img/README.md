@@ -23,8 +23,9 @@ ln -s /lib/libreadline.so.{8.0,7}
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 
-# hostapd
-systemctl disable hostapd
+# hostapd, alsa webui
+systemctl disable hostapd amixer-webui
+rm -r /usr/share/amixer-webui
 ```
 
 ### Install and upgrade
