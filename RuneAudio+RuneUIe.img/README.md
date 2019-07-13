@@ -26,6 +26,9 @@ pacman -S --needed $pkg icu
 # hostapd, alsa webui
 systemctl disable hostapd amixer-webui
 rm -r /usr/share/amixer-webui
+
+# pip
+ln -sf /usr/bin/pip{2,}
 ```
 
 ### Install and upgrade
