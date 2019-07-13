@@ -41,7 +41,7 @@ systemctl daemon-reexec
 # start
 systemctl start shairport-sync
 
-# standard named pipe cat
+# data from fifo / named pipe
 cat /tmp/shairport-sync-metadata
 # ...
 # <item><type>636f7265</type><code>6173616c</code><length>18</length>
@@ -49,7 +49,7 @@ cat /tmp/shairport-sync-metadata
 # U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 # ...
 # ----------------------------------------------------------------------------------------------------------------
-# hex       hex2bin field              base64 (PHP/JS decode)
+# hex       hex2bin field              base64 decode - PHP / JS
 # ----------------------------------------------------------------------------------------------------------------
 # 61736172  asar    artist             base64_decode( $DATA ) / atob( DATA );
 # 6d696e6d  minm    song               base64_decode( $DATA ) / atob( DATA );
