@@ -50,4 +50,6 @@ alsa = {
 }
 EOF
 
+systemctl daemon-reload
+
 title "$bar Shairport Sync upgraded successfully."
