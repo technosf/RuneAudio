@@ -53,12 +53,13 @@ EOF
 $file=/srv/http/command/rune_SY_wrk
 echo $file
 
-comment 'systemctl start rune_SSM_wrk' 'systemctl stop rune_SSM_wrk'
+comment 'systemctl start rune_SSM_wrk' -n +1 'systemctl stop rune_SSM_wrk'
 
 string=$( cat <<'EOF'
 						sysCmd('systemctl start shairportmeta');
 					} else if ($job->action == 'stop') {
 						sysCmd('systemctl stop shairportmeta');
+					}
 EOF
 )
 insert 'systemctl start rune_SSM_wrk'
