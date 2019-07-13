@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias=aria
+alias=shai
 
 . /srv/http/addonstitle.sh
 . /srv/http/addonsedit.sh
@@ -49,7 +49,21 @@ alsa = {
 	output_device = "hw:0";
 }
 EOF
+#---------------------------------------------------------------
+$file=/srv/http/command/rune_SY_wrk
+echo $file
+
+comment 'systemctl start rune_SSM_wrk' 'systemctl stop rune_SSM_wrk'
+
+string=$( cat <<'EOF'
+						sysCmd('systemctl start shairportmeta');
+					} else if ($job->action == 'stop') {
+						sysCmd('systemctl stop shairportmeta');
+EOF
+)
+insert 'systemctl start rune_SSM_wrk'
 
 systemctl daemon-reload
+systemctl restart shairport-sync
 
 title "$bar Shairport Sync upgraded successfully."
