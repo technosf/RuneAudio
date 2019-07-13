@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if (( $# > 1 )); then
+if (( $# > 0 )); then
 	systemctl start mpd
 	redis-cli set activePlayer MPD
 	curl -s -X POST 'http://localhost/pub?id=airplay' -d 0
