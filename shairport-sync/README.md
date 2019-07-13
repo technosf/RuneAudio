@@ -13,10 +13,23 @@ wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
 pacman -U $file
 rm $file
 
-# (alrady in RuneUIe)
-# on/off script 
-# set sudoers.d for user shairport-sync
-# fix coverart write permission
+# systemd unit file
+cat << 'EOF' > /lib/systemd/system/shairport-meta.service
+[Unit]
+Description=Shairport-sync Metadata 
+After=network.target redis.target shairport-sync.service
+
+[Service]
+ExecStart=/srv/http/enhanceshairportmeta.php
+
+[Install]
+WantedBy=multi-user.target
+
+echo 'shairport-sync ALL=NOPASSWD: ALL' > /etc/sudoers.d/shairport-sync
+
+file=/srv/http/assets/img/airplaycoverart
+touch $file
+chown shairport-sync:shairport-sync $file
 
 # config ( output_device = "hw:N" - aplay -l | grep "^card" )
 file=/etc/shairport-sync.conf
