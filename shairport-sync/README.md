@@ -19,10 +19,12 @@ chown http:http /srv/http/enhanceshairport
 chmod 755 /srv/http/enhanceshairport
 
 # set sudoers.d for user shairport-sync
-echo 'shairport-sync ALL=NOPASSWD: ALL' >> /etc/sudoers.d/http
+echo 'shairport-sync ALL=NOPASSWD: ALL' > /etc/sudoers.d/shairport-sync
 
-# permission to write coverart
-chmod +w /srv/http/assets/img
+# fix write permission
+file=/srv/http/assets/img/airplaycoverart
+touch $file
+chown shairport-sync:shairport-sync $file
 
 # config
 sed -i -e '/run_this_before_play_begins/ i\
