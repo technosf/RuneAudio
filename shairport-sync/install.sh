@@ -9,6 +9,8 @@ installstart $@
 
 Title -l '=' "$bar Upgrade Shairport Sync ..."
 
+active=$( systemctl is-active shairport-sync )
+
 rm /etc/shairport-sync.conf \
 	/usr/bin/shairport-sync \
 	/usr/lib/systemd/system/shairport-sync.service
@@ -65,6 +67,6 @@ EOF
 insert 'systemctl start rune_SSM_wrk'
 
 systemctl daemon-reload
-systemctl restart shairport-sync
+[[ $active ]] && systemctl restart shairport-sync
 
 title "$bar Shairport Sync upgraded successfully."
