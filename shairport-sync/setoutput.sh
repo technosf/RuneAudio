@@ -6,38 +6,15 @@ rm $0
 
 title "$info Set AirPlay output ..."
 
-sessioncontrol=$( cat <<'EOF'
-sessioncontrol = {
-	run_this_before_play_begins = "/srv/http/enhanceshairport &";
-	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
-}
-EOF
-)
 # get dac's output_device
 ao=$( redis-cli get ao )
 if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
-	string=$( cat <<EOF
-$sessioncontrol
-alsa = {
-	output_device = "hw:0";
-}
-EOF
-)
+	card=0
 else
-	output_device=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
-	string=$( cat <<EOF
-$sessioncontrol
-alsa = {
-	output_device = "hw:$output_device";
-}
-EOF
-)
+	card=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
 fi
 
-file=/etc/shairport-sync.conf
-[[ ! -e $file ]] && $file.backup
-# set config
-echo "$string" > $file
+sed -i -e "s/\s*output_device = .*/	output_device = \"hw:$card\";" /etc/shairport-sync.conf
 
 systemctl restart shairport-sync
 
