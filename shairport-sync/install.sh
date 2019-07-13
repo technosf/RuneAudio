@@ -24,7 +24,7 @@ pacman -U $file
 rm $file
 
 # systemd unit file
-cat << 'EOF' > /lib/systemd/system/shairport-meta.service
+cat << 'EOF' > /etc/systemd/system/shairport-meta.service
 [Unit]
 Description=Shairport Sync Metadata 
 After=network.target redis.target shairport-sync.service
