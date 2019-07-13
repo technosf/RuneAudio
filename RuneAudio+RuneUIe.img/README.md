@@ -28,10 +28,9 @@ systemctl disable hostapd amixer-webui
 rm -r /usr/share/amixer-webui
 
 # fix - pip
-pacman -Rdd python-pip python
-pacman -S python2 python-pip
 ln -s /usr/bin/python{2.7,}
 ln -s /usr/bin/pip{2.7,}
+pacman -S python2 python-pip
 
 # upgrades
 rm /etc/shairport-sync.conf \
