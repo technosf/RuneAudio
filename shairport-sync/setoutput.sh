@@ -14,7 +14,7 @@ else
 	card=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
 fi
 
-sed -i -e "s/\s*output_device = .*/	output_device = \"hw:$card\";/" /etc/shairport-sync.conf
+sed -i "s/\s*output_device = .*/    output_device = \"hw:$card\";/" /etc/shairport-sync.conf
 
 systemctl restart shairport-sync
 
