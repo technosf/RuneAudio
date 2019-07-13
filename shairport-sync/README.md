@@ -13,26 +13,23 @@ wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
 pacman -U $file
 rm $file
 
-# on/off script
-wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/enhanceshairport -P /srv/http
-chown http:http /srv/http/enhanceshairport
-chmod 755 /srv/http/enhanceshairport
-
+# (alrady in RuneUIe)
+# on/off script 
 # set sudoers.d for user shairport-sync
-echo 'shairport-sync ALL=NOPASSWD: ALL' > /etc/sudoers.d/shairport-sync
-
-# fix write permission
-file=/srv/http/assets/img/airplaycoverart
-touch $file
-chown shairport-sync:shairport-sync $file
+# fix coverart write permission
 
 # config ( output_device = "hw:N" - aplay -l | grep "^card" )
-sed -i -e '/run_this_before_play_begins/ i\
-	run_this_before_play_begins = "/srv/http/enhanceshairport &";\
+file=/etc/shairport-sync.conf
+mv $file{.backup}
+cat << 'EOF' > $file
+sessioncontrol = {
+	run_this_before_play_begins = "/srv/http/enhanceshairport &";
 	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
-' -e '/output_device =/ i\
+}
+alsa = {
 	output_device = "hw:0";
-' /etc/shairport-sync.conf
+}
+EOF
 
 # fix if needed - Failed to determine user credentials: No such process
 systemctl daemon-reexec
