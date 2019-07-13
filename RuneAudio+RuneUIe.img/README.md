@@ -17,18 +17,26 @@ pacman -Sy
 pkg=$( pacman -Qi readline | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg awk readline nettle wget
 
-# fix for php-fpm
+# fix - php-fpm
 ln -s /lib/libreadline.so.{8.0,7}
 
 pkg=$( pacman -Qi icu | grep '^Required By' | cut -d':' -f2 )
 pacman -S --needed $pkg icu
 
-# hostapd, alsa webui
+# fix - hostapd, alsa webui
 systemctl disable hostapd amixer-webui
 rm -r /usr/share/amixer-webui
 
-# pip
+# fix - pip
 ln -sf /usr/bin/pip{2,}
+
+# upgrades
+file=shairport-sync-3.3.1-1-armv7h.pkg.tar.xz
+wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
+pacman -U $file
+rm $file
+
+pacman -S hostapd ifplugd
 ```
 
 ### Install and upgrade
