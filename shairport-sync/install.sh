@@ -11,6 +11,8 @@ Title -l '=' "$bar Upgrade Shairport Sync ..."
 
 active=$( systemctl is-active shairport-sync )
 
+systemctl stop shairport-sync
+
 rm /etc/shairport-sync.conf \
 	/usr/bin/shairport-sync \
 	/usr/lib/systemd/system/shairport-sync.service
