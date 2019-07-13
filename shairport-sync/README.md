@@ -23,7 +23,6 @@ file=/etc/shairport-sync.conf
 mv $file{,.backup}
 cat << 'EOF' > $file
 sessioncontrol = {
-	run_this_before_play_begins = "/srv/http/enhanceshairport &";
 	run_this_after_play_ends = "/srv/http/enhanceshairport off &";
 }
 alsa = {
