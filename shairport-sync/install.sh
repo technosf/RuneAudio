@@ -60,9 +60,9 @@ echo $file
 comment 'systemctl start rune_SSM_wrk' -n +1 'systemctl stop rune_SSM_wrk'
 
 string=$( cat <<'EOF'
-						sysCmd('systemctl start shairportmeta');
+						sysCmd('systemctl start shairport-meta');
 					} else if ($job->action == 'stop') {
-						sysCmd('systemctl stop shairportmeta');
+						sysCmd('systemctl stop shairport-meta');
 					}
 EOF
 )
