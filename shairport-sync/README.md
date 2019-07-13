@@ -20,7 +20,7 @@ rm $file
 
 # config ( output_device = "hw:N" - aplay -l | grep "^card" )
 file=/etc/shairport-sync.conf
-mv $file{.backup}
+mv $file{,.backup}
 cat << 'EOF' > $file
 sessioncontrol = {
 	run_this_before_play_begins = "/srv/http/enhanceshairport &";
