@@ -173,22 +173,6 @@ while (1) {
 					}
 					$redis->sRem('w_lock', $jobID);
 					break;
-				case 'dlna':
-					$redis->sAdd('w_lock', $jobID);
-					if (($job->args->name !== $redis->hGet('dlna', 'name')) OR ($job->args->queueowner !== $redis->hGet('dlna', 'queueowner'))) {
-						$redis->hSet('dlna', 'name', $job->args->name);
-						$redis->hSet('dlna', 'queueowner', $job->args->queueowner);
-						wrk_upmpdcli($redis, $redis->hGet('dlna', 'name'), $redis->hGet('dlna', 'queueowner'));
-					}
-					if ($job->action === 'start') {
-						sysCmd('systemctl restart upmpdcli');
-						$redis->hSet('dlna', 'enable', 1);
-					} else {
-						sysCmd('systemctl stop upmpdcli');
-						$redis->hSet('dlna', 'enable', 0);
-					}
-					$redis->sRem('w_lock', $jobID);
-					break;
 				case 'hostname':
 					$redis->sAdd('w_lock', $jobID);
 					wrk_changeHostname($redis, $job->args);
