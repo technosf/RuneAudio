@@ -59,7 +59,7 @@ pacman -S hostapd ifplugd dnsmasq
 - Chromium Upgrade
 - Shairport Sync Upgrade
 
-### Setup SD card to common state
+### Reset to common state
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh
 ```
