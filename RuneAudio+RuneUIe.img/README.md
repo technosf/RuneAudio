@@ -1,6 +1,7 @@
 ## RuneAudio+RuneUIe.img
 
 ### Before install
+- Set accesspoint name to `RuneAudio`
 - `/dev` page > `gitpull` to update RuneUI > auto reboot
 - Edit `IgnorePkg` in `/etc/pacman.conf`
 - Silent boot
