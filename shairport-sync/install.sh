@@ -52,20 +52,6 @@ alsa = {
 	output_device = "hw:0";
 }
 EOF
-#---------------------------------------------------------------
-$file=/srv/http/command/rune_SY_wrk
-echo $file
-
-comment 'systemctl start rune_SSM_wrk' -n +1 'systemctl stop rune_SSM_wrk'
-
-string=$( cat <<'EOF'
-						sysCmd('systemctl start shairport-meta');
-					} else if ($job->action == 'stop') {
-						sysCmd('systemctl stop shairport-meta');
-					}
-EOF
-)
-insert 'systemctl start rune_SSM_wrk'
 
 systemctl daemon-reload
 [[ $active ]] && systemctl restart shairport-sync
