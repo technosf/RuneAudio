@@ -20,7 +20,7 @@ while ( 1 ) {
 		if ( $code && strpos( $line, '</data></item>' ) ) {
 			$data = str_replace( '</data></item>', '', $line );
 			if ( $code === 'coverart' ) {
-				exec( '/usr/bin/sudo -u http /usr/bin/echo "data:image/jpeg;base64,'.$data.'" > /srv/http/assets/img/airplaycoverart' );
+				exec( '/usr/bin/sudo /usr/bin/echo "data:image/jpeg;base64,'.$data.'" > /srv/http/assets/img/airplaycoverart' );
 			} else {
 				exec( '/usr/bin/sudo /usr/bin/redis-cli hset airplaymeta '.$code.' "'.base64_decode( $data ).'"' );
 				if ( $code === 'Title' ) exec( "/usr/bin/sudo /usr/bin/curl -s -X POST 'http://localhost/pub?id=airplay' -d 2" );
