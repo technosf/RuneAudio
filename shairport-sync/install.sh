@@ -46,8 +46,8 @@ file=/etc/shairport-sync.conf
 mv $file{,.backup}
 cat << 'EOF' > $file
 sessioncontrol = {
-	run_this_before_play_begins = "/srv/http/shairportstartstop.sh &";
-	run_this_after_play_ends = "/srv/http/shairportstartstop.sh stop &";
+	run_this_before_play_begins = "/srv/http/shairportstartstop.sh";
+	run_this_after_play_ends = "/srv/http/shairportstartstop.sh stop";
 }
 alsa = {
 	output_device = "hw:0";
