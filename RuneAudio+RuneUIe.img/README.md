@@ -57,6 +57,7 @@ pacman -S hostapd ifplugd dnsmasq
 - Samba Upgrade
 - NGINX Upgrade
 - Chromium Upgrade
+- Shairport Sync Upgrade
 
 ### Setup SD card to common state
 ```sh
