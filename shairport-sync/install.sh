@@ -23,7 +23,9 @@ wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
 pacman -U $file
 rm $file
 
-# systemd unit file
+sed -i 's/\(^User=\).*/\1http/; s/\(^Group=\).*/\1http/' /usr/lib/systemd/system/shairport-sync.service
+
+# metadata unit file
 cat << 'EOF' > /etc/systemd/system/shairport-meta.service
 [Unit]
 Description=Shairport Sync Metadata 
@@ -31,15 +33,12 @@ After=network.target redis.target shairport-sync.service
 
 [Service]
 ExecStart=/srv/http/shairportmeta.php
+User=http
+Group=http
 
 [Install]
 WantedBy=multi-user.target
-
-echo 'shairport-sync ALL=NOPASSWD: ALL' > /etc/sudoers.d/shairport-sync
-
-file=/srv/http/assets/img/airplaycoverart
-touch $file
-chown shairport-sync:shairport-sync $file
+EOF
 
 # config ( output_device = "hw:N" - aplay -l | grep "^card" )
 file=/etc/shairport-sync.conf
