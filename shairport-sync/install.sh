@@ -24,7 +24,7 @@ chown http:http /srv/http/shairport*
 chmod 755 /srv/http/shairport*
 file=shairport-sync-3.3.1-1-armv7h.pkg.tar.xz
 wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/$file
-pacman -U $file
+pacman -U --noconfirm $file
 rm $file
 
 sed -i 's/\(^User=\).*/\1http/; s/\(^Group=\).*/\1http/' /usr/lib/systemd/system/shairport-sync.service
