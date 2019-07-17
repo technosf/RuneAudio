@@ -7,7 +7,7 @@ alias=shai
 
 installstart $@
 
-Title -l '=' "$bar Upgrade Shairport Sync ..."
+title -l '=' "$bar Upgrade Shairport Sync ..."
 
 active=$( systemctl is-active shairport-sync )
 
