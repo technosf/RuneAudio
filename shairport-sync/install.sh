@@ -58,6 +58,6 @@ alsa = {
 EOF
 
 systemctl daemon-reload
-[[ $active ]] && systemctl restart shairport-sync
+[[ $active ]] && systemctl restart shairport-sync shairport-meta
 
 title "$bar Shairport Sync upgraded successfully."
