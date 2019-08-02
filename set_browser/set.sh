@@ -19,4 +19,4 @@ redis-cli hset settings browser $1 &> /dev/null
 
 title -nt "$info Local browser switched to $( tcolor $browser )"
 
-clearcache
+[[ $( redis-cli hget local_browser enable ) == 1 ]] && restartlocalbrowser
