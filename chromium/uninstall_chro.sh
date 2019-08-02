@@ -23,4 +23,4 @@ restorefile $files
 
 uninstallfinish $@
 
-clearcache
+[[ $( redis-cli get local_browser ) == 1 ]] && restartlocalbrowser
