@@ -77,7 +77,6 @@ if ! systemctl restart mpd &> /dev/null; then
 	exit
 fi
 
-clearcache
 systemctl restart rune_PL_wrk
 
 timestop
