@@ -23,4 +23,4 @@ restorefile $files
 
 uninstallfinish $@
 
-[[ $( redis-cli get local_browser ) == 1 ]] && restartlocalbrowser
+[[ $( redis-cli hget local_browser enable ) == 1 ]] && restartlocalbrowser
