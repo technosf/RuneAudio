@@ -17,7 +17,7 @@ if (( $# > 1 )); then
     dsd_native_type "2"'
 		elif grep dsd_usb /etc/mpd.conf; then
 			dsd='
-    dsd_usb "yes"'
+    dsd_usb         "yes"'
 		fi
 		string=$( cat <<EOF
 audio_output {
