@@ -1,0 +1,42 @@
+#!/bin/bash
+
+. /srv/http/settings/acards/acards_details
+
+if (( $# > 1 )); then
+	aplay=$( aplay -l | grep card | tail -1 )
+	# gets last line which is new power-on card
+	target=$( echo $aplay | awk -F'[][]' '{print $2}' )
+	device=$( echo $aplay | sed 's/card \(.*\):.*device \(.*\):.*/hw:\1,\2/' )
+	name="${extlabel[$target]}"
+	existing=$( mpc outputs | grep enabled | awk -F'[()]' '{print $2}' )
+	redis-cli set aodefault "$existing"
+	if ! grep -q "$target" /etc/mpd.conf; then
+		if grep dsd_native /etc/mpd.conf; then
+			dsd='
+    dsd_native      "yes"
+    dsd_native_type "2"'
+		elif grep dsd_usb /etc/mpd.conf; then
+			dsd='
+    dsd_usb "yes"'
+		fi
+		string=$( cat <<EOF
+audio_output {
+    name            "$target"
+    type            "alsa"
+    device          "$device"
+    auto_resample   "no"
+    auto_format     "no"$dsd
+}
+EOF
+)
+		echo $string >> /etc/mpd.conf
+	fi
+	systemctl restart mpd
+	mpc 
+else
+	target=$( redis-cli get aodefault )
+	name="${extlabel[$target]}"
+fi
+
+mpc enable only "$target"
+curl -s -X POST 'http://localhost/pub?id=notify' -d '{ "title": "Audio Output Switched", "text": "'"$name"'", "icon": "output" }'
