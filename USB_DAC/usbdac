@@ -1,22 +1,16 @@
 #!/bin/bash
 
-. /srv/http/settings/acards/acards_details
-
 if (( $# > 1 )); then
-	aplay=$( aplay -l | grep card | tail -1 )
-	# gets last line which is new power-on card
-	name=$( echo $aplay | awk -F'[][]' '{print $2}' )
-	device=$( echo $aplay | sed 's/card \(.*\):.*device \(.*\):.*/hw:\1,\2/' )
-	subdevice=${device: -1}
-	target="$name"_(( subdevice + 1 ))
-	existing=$( mpc outputs | grep enabled | awk -F'[()]' '{print $2}' )
-	redis-cli set aodefault "$existing"
-	/srv/http/settings/acards/acards_switch.sh "$target" $device
+	enabled=$( mpc outputs | grep enabled | awk -F'[()]' '{print $2}' )
+	redis-cli set aodefault "$enabled"
+	aplay=$( aplay -l | grep card | tail -1 ) # last line = new power-on card
+	sysname=$( echo $aplay | awk -F'[][]' '{print $2}' )
+	name=$( grep extlabel "/src/http/settings/acards/dac/$sysname" | cut -d: -f2- )
+	/src/http/settings/acards/acards_mpdconf.sh
 else
-	target=$( redis-cli get aodefault )
-	name="${extlabel[$target]}"
-	mpc enable only "$target"
+	name=$( redis-cli get aodefault )
 fi
 
+mpc enable only "$name"
 
 curl -s -X POST 'http://localhost/pub?id=notify' -d '{ "title": "Audio Output Switched", "text": "'"$name"'", "icon": "output" }'
