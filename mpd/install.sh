@@ -19,6 +19,7 @@ timestart
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
 	pacman -S --needed --noconfirm mpd
 	if systemctl restart mpd &> /dev/null; then
+		[[ -e /etc/systemd/system/enhanceidle ]] && systemctl restart enhanceidle
 		timestop
 		title -l '=' "$bar MPD upgraded successfully to $version"
 	else
@@ -73,6 +74,7 @@ systemctl daemon-reload
 
 echo -e "$bar Start MPD ..."
 if ! systemctl restart mpd &> /dev/null; then
+	[[ -e /etc/systemd/system/enhanceidle ]] && systemctl restart enhanceidle
 	title -l = "$warn MPD upgrade failed."
 	exit
 fi
