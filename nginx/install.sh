@@ -21,8 +21,6 @@ ln -s /lib/libip4tc.so.{2.0.0,0}
 rm $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -P /etc/nginx
 wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/50x.html -P /etc/nginx/html
-chown http:http /srv/http/50x.html
-rm -r /etc/nginx/html
 
 echo -e "$bar Restart NGINX ..."
 
