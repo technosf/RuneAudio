@@ -21,7 +21,6 @@ for opt in repeat random single consume; do
 done
 mpc volume 50 &> /dev/null
 mpc clear
-redis-cli set lastmpdvolume 50 &> /dev/null
 redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD database ..."
@@ -30,6 +29,7 @@ rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
+rm -r /srv/http/.cache/chromium/Default/*
 
 echo -e "\n$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
