@@ -38,7 +38,20 @@ wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorli
 echo -e "\n$bar Startup setup script ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
-wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.service -P /etc/systemd/system
+
+cat << 'EOF' > /etc/systemd/system/runonce.service
+[Unit]
+After=udevil.service
+
+[Service]
+Type=idle
+ExecStartPre=/bin/sleep 5
+ExecStart=/root/runonce.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl enable runonce
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
