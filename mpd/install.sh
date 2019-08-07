@@ -17,6 +17,7 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart
 
 if [[ ! $( pacman -Qs mpd-rune ) ]]; then
+	chown mpd:audio /var/log/runeaudio/mpd.log
 	pacman -S --needed --noconfirm mpd
 	if systemctl restart mpd &> /dev/null; then
 		[[ -e /etc/systemd/system/enhanceidle ]] && systemctl restart enhanceidle
@@ -68,7 +69,7 @@ sed -i -e 's/User=mpd/User=root/
 
 # fix missing directory
 mkdir -p /var/lib/mpd/playlists
-chown mpd:audio /var/lib/mpd/playlists
+chown mpd:audio /var/lib/mpd/playlists /var/log/runeaudio/mpd.log 
 
 systemctl daemon-reload
 
