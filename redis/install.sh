@@ -14,15 +14,16 @@ fi
 title -l '=' "$bar Upgrade Redis ..."
 timestart
 
+mv /etc/redis.conf{,.backup}
+
 pacman -S --needeed --noconfirm redis
 
-sed -i -e 's/User=.*/User=root/
-' -e 's/Group=.*/Group=root/
-' -e '/CapabilityBoundingSet/,/LimitNOFILE/ d
-' /lib/systemd/system/redis.service
+sed -i 's/^\(dbfilename \).*/\1rune.rdb/' /etc/redis.conf
 
-systemctl daemon-reload
-systemctl restart redis
+if ! systemctl restart redis; then
+	title -l = "$warn Redis upgrade failed."
+	exit
+fi
 
 timestop
 
