@@ -74,7 +74,7 @@ chown mpd:audio /var/lib/mpd/playlists /var/log/runeaudio/mpd.log
 systemctl daemon-reload
 
 echo -e "$bar Start MPD ..."
-if ! systemctl restart mpd &> /dev/null; then
+if ! systemctl restart mpd; then
 	title -l = "$warn MPD upgrade failed."
 	exit
 fi
