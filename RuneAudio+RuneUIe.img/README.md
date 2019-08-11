@@ -32,7 +32,7 @@ ln -sf /usr/bin/pip{2.7,}
 pacman -S python2 python2-pip
 
 # upgrades
-pacman -S hostapd ifplugd dnsmasq
+pacman -S alsa-utils dnsmasq hostapd ifplugd
 ```
 
 ### Install and upgrade
@@ -48,6 +48,7 @@ pacman -S hostapd ifplugd dnsmasq
 - NGINX Upgrade
 - Chromium Upgrade
 - Shairport Sync
+- Redis
 
 ### Reset to common state
 ```sh
