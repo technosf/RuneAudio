@@ -27,4 +27,6 @@ fi
 
 timestop
 
-title -l '=' "$bar Redis upgraded to $version successfully."
+version=$( redis-cli -v | cut -d' ' -f2 )
+
+title -l '=' "$bar Redis upgraded successfully to $version"
