@@ -75,12 +75,15 @@ systemctl daemon-reload
 
 echo -e "$bar Start MPD ..."
 if ! systemctl restart mpd &> /dev/null; then
-	[[ -e /etc/systemd/system/enhanceidle ]] && systemctl restart enhanceidle
 	title -l = "$warn MPD upgrade failed."
 	exit
 fi
 
-systemctl restart rune_PL_wrk
+if [[ -e /etc/systemd/system/mpdidle.service ]]; then
+	systemctl restart mpdidle
+else
+	systemctl restart rune_PL_wrk
+fi
 
 timestop
 
