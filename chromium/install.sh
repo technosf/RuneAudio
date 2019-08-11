@@ -33,9 +33,8 @@ sed -i 's/ ipv6.disable=1//' $file
 # -----------------------------------------------------------------------------
 # remove black border on local screen
 file=/boot/config.txt
-echo $file
-
-commentS '^disable_overscan'
+if ! grep -q '^disable_overscan=1'; then
+	echo $file
 
 string=$( cat <<'EOF'
 disable_overscan=1
