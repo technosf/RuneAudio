@@ -104,6 +104,22 @@ createThumbnail() {
 	done
 	
 	if [[ -z $cuefile ]]; then
+
+#	files=( "$dir/*" )
+#	for file in "${files[@]}"; do
+#		ext=${file##*.}
+#		if [[ $ext == wav ]]; then
+#			wavefile=1
+#			continue
+#		fi
+#		
+#		mimetype=$( file -b --mime-type $file | cut -d/ -f )
+#		if [[ $mimetype == audio || $ext == dsf || $ext == dff ]]; then
+#			audiofile=1
+#			getcoverart #####
+#		fi
+#	done
+
 		coverfile=$( $scandirphp "$dir" )
 		if [[ ${coverfile:0:4} != '/srv' ]]; then
 			echo "  $coverfile"
