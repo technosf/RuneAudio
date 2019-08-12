@@ -30,15 +30,16 @@ kid3-cli -c 'select /path/file' \
 
 [**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
 
-| FLAC        | ID3v2  | RIFF | Kid3 name   |
-| ----------- | ----   | ---- | ----------- |
-| ARTIST      | TPE1   | IART | artist      
-| ALBUM       | TALB   | IPRD | album       |
-| ALBUMARTIST | TPE2   |      | albumartist |
-| COMPOSER    | TCOM   | IMUS | composer    |
-| GENRE       | TCON   | IGNR | genre       |
-| TITLE       | TIT2   | INAM | title       |
-| TRACKNUMBER | TRCK   | IPRT | tracknumber |
+| FLAC          | ID3v2  | RIFF | Kid3 name   |
+| ------------- | ----   | ---- | ----------- |
+| ARTIST        | TPE1   | IART | artist      
+| ALBUM         | TALB   | IPRD | album       |
+| ALBUMARTIST   | TPE2   |      | albumartist |
+| COMPOSER      | TCOM   | IMUS | composer    |
+| GENRE         | TCON   | IGNR | genre       |
+| TITLE         | TIT2   | INAM | title       |
+| TRACKNUMBER   | TRCK   | IPRT | tracknumber |
+| VORBISCOMMENT | APIC   | APIC | PICTURE     |
 
 `*.wav` files use RIFF
 
