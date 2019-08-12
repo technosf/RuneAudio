@@ -1,36 +1,7 @@
 ## Metadata
 
-### ALL tags
-[**Kid3**](https://kid3.sourceforge.io/)
-```sh
-# all format by common tag names
-kid3-cli \
-	-c 'set artist "ARTIST"' \
-	-c 'set album "ALBUM"' \
-	-c 'set albumartist "ALBUMARTIST"' \
-	-c 'set composer "COMPOSER"' \
-	-c 'set genre "GENRE"' \
-	-c 'set title "TITLE"' \
-	-c 'set tracknumber "TRACK"' \
-	"/path/file"
-	
-# remove ID3v1
-kid3-cli -c 'remove 1' "/path/file"
-```
-
-[**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
-
-| FLAC        | ID3v2  | RIFF | Kid3 name   |
-| ----------- | ----   | ---- | ----------- |
-| ARTIST      | TPE1   | IART | artist      
-| ALBUM       | TALB   | IPRD | album       |
-| ALBUMARTIST | TPE2   |      | albumartist |
-| COMPOSER    | TCOM   | IMUS | composer    |
-| GENRE       | TCON   | IGNR | genre       |
-| TITLE       | TIT2   | INAM | title       |
-| TRACKNUMBER | TRCK   | IPRT | tracknumber |
-
-`*.wav` files use RIFF
+### ALL tags and tags mapping
+[**Kid3**](https://github.com/rern/RuneAudio/tree/master/kid3-cli)
 
 ### FLAC tags
 [**metaflac**](https://xiph.org/flac/documentation_tools_metaflac.html)
