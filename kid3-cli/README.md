@@ -3,28 +3,29 @@
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
 # all format by common tag names
-kid3-cli -c 'select "/path/file"' \
+# double quotes for arguments with spaces
+
+# set tags
+kid3-cli -c 'select /path/file' \
 	-c 'set artist "ARTIST"' \
 	-c 'set album "ALBUM"' \
 	-c 'set albumartist "ALBUMARTIST"' \
 	-c 'set composer "COMPOSER"' \
 	-c 'set genre "GENRE"' \
 	-c 'set title "TITLE"' \
-	-c 'set tracknumber "TRACK"'
+	-c 'set tracknumber "TRACK"' \
+	-c 'set picture:/path/source'
 	
-# set coverart
-kid3-cli -c 'select "/path/file"' \
-	-c 'set picture:"/path/source"
-# get coverart
-kid3-cli -c 'select "/path/file"' \
-	-c 'get picture:"/path/destination"'
-# remove coverart
-kid3-cli -c 'select "/path/file"' \
-	-c 'remove picture'
-
-# remove ID3v1
-kid3-cli -c 'select "/path/file"' \
-	-c 'remove 1'
+# get tags
+kid3-cli -c 'select /path/file' \
+	-c 'get artist' \
+	-c 'get picture:/path/destination'
+	
+# remove tags
+kid3-cli -c 'select /path/file' \
+	-c 'remove artist' \
+	-c 'remove picture' \
+	-c 'remove 1' \ # remove ID3v1
 ```
 
 [**Tag Mapping**](https://kid3.sourceforge.io/kid3_en.html#table-frame-list)
