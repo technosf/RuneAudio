@@ -114,9 +114,8 @@ createThumbnail() {
 			fi
 
 			mimetype=$( file -b --mime-type $file | cut -d/ -f )
-			if [[ $mimetype == audio || $ext == dsf || $ext == dff ]]; then
-				audiofile=1
-
+			[[ $mimetype != audio && $ext != dsf && $ext != dff ]] && continue
+			
 			covers='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 			for cover in $covers; do
 				coverfile="$dir/$cover"
