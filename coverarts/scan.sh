@@ -13,16 +13,6 @@ timestart
 
 Sstart=$( date +%s )
 
-# create temporary file to let bash run php with arguments
-scandirphp=/tmp/scandir.php
-cat << 'EOF' > $scandirphp
-#!/usr/bin/php
-<?php
-require_once( '/srv/http/enhancegetcover.php' );
-echo getCoverFile( $argv[ 1 ], 'scancover' );
-EOF
-chmod +x $scandirphp
-
 createThumbnail() {
 	mpdpath=${dir:9}
 	echo
@@ -104,7 +94,38 @@ createThumbnail() {
 	done
 	
 	if [[ -z $cuefile ]]; then
-		coverfile=$( $scandirphp "$dir" )
+		files=( "$dir/*" )
+		for file in "${files[@]}"; do
+			ext=${file##*.}
+			if [[ $ext == wav ]]; then
+				wavefile=1
+				continue
+			fi
+			# skip non-audio files
+			mimetype=$( file -b --mime-type $file | cut -d/ -f )
+			[[ $mimetype != audio && $ext != dsf && $ext != dff ]] && continue # dsd mimetype not consistent
+			
+			# find cover file
+			covers='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
+			for cover in $covers; do
+				coverfile="$dir/$cover"
+				if [[ -e "$coverfile" ]]; then
+					found=1
+					break
+				fi
+			done
+			[[ $found ]] && break
+			
+			# find embedded
+			tmpfile=/srv/http/tmp/coverart
+			kid3-cli -c "select '$file'" -c "get picture:$tmpfile"
+			if [[ -e $tmpfile ]]; then
+				mimetype=$( file -b --mime-type $tmpfile )
+				coverfile="$tmpfile.$mimetype"
+				break
+			fi
+		done
+		
 		if [[ ${coverfile:0:4} != '/srv' ]]; then
 			echo "  $coverfile"
 			return
