@@ -135,7 +135,7 @@ createThumbnail() {
 				coverfile="$tmpfile.$mimetype"
 				break
 			fi
-		fi
+		done
 #####
 		#coverfile=$( $scandirphp "$dir" )
 		if [[ ${coverfile:0:4} != '/srv' ]]; then
