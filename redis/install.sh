@@ -19,7 +19,7 @@ mv /etc/redis.conf{,.backup}
 pacman -S --needeed --noconfirm redis
 
 sed -i 's/^\(dbfilename \).*/\1rune.rdb/' /etc/redis.conf
-sed -i 's/^After=.*/After=enhancestartup.service/' /usr/lib/systemd/system/redis.service
+[[ -e /srv/http/enhancestartup ]] && sed -i 's/^After=.*/After=enhancestartup.service/' /usr/lib/systemd/system/redis.service
 
 if ! systemctl restart redis; then
 	title -l = "$warn Redis upgrade failed."
