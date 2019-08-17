@@ -8,10 +8,14 @@ partprobe /dev/mmcblk0
 resize2fs /dev/mmcblk0p2
 
 # wait for usb/nas drive mounted
-i=0
-while ! grep -q '/mnt/MPD/' /proc/mounts && (( $i < 5 )); do
-	sleep 1
+while $( sleep 1 ); do
+	grep -q '/mnt/MPD/USB' /proc/mounts && break
+	
 	(( i++ ))
+	if (( i > 5 )); then
+		curl -s -X POST 'http://localhost/pub?id=notify' -d '{ "title": "USB Drive", "text": "No USB drive found.", "icon": "usbdrive" }'
+		break
+	fi
 done
 
 # makeDirLink
