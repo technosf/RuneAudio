@@ -29,7 +29,7 @@ rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
-rm -r /srv/http/.cache/chromium/Default/*
+rm -rf /srv/http/.cache/chromium/Default/*
 
 echo -e "\n$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
