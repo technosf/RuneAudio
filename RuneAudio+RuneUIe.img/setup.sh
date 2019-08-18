@@ -32,8 +32,9 @@ rm -f /var/cache/pacman/pkg/*
 rm -rf /srv/http/.cache/chromium/Default/*
 
 echo -e "\n$bar Clear mountpoints ..."
-mount=$( mount | grep /mnt/MPD | cut -d' ' -f3 )
-readarray -t mountpoints <<<"$mount"
+mountnas=$( ls -d /mnt/MPD/NAS/*/ )
+mountusb=$( ls -d /mnt/MPD/USB/*/ )
+readarray -t mountpoints <<<"$mountnas$mountusb"
 for mountpoint in "${mountpoints[@]}"; do
 	umount -l "$mountpoint"
 	rmdir "$mountpoint"
