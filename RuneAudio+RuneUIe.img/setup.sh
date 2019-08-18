@@ -32,12 +32,12 @@ rm -f /var/cache/pacman/pkg/*
 rm -rf /srv/http/.cache/chromium/Default/*
 
 echo -e "\n$bar Clear mountpoints ..."
-mountnas=$( ls -d /mnt/MPD/NAS/*/ )
-mountusb=$( ls -d /mnt/MPD/USB/*/ )
-readarray -t mountpoints <<<"$mountnas$mountusb"
+mountnas=$( ls -d /mnt/MPD/NAS/*/ 2> \dev/null )
+mountusb=$( ls -d /mnt/MPD/USB/*/ 2> \dev/null )
+readarray -t mountpoints <<<"$mountnas $mountusb"
 for mountpoint in "${mountpoints[@]}"; do
 	umount -l "$mountpoint"
-	rmdir "$mountpoint"
+	rmdir "$mountpoint" &> /dev/null
 done
 
 echo -e "\n$bar Reset mirrorlist ..."
