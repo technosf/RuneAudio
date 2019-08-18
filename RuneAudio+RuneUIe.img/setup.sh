@@ -31,6 +31,14 @@ echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
 rm -rf /srv/http/.cache/chromium/Default/*
 
+echo -e "\n$bar Clear mountpoints ..."
+mount=$( mount | grep /mnt/MPD | cut -d' ' -f3 )
+readarray -t mountpoints <<<"$mount"
+for mountpoint in "${mountpoints[@]}"; do
+	umount -l "$mountpoint"
+	rmdir "$mountpoint"
+done
+
 echo -e "\n$bar Reset mirrorlist ..."
 rm /etc/pacman.d/*
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
