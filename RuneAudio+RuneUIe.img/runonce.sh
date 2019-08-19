@@ -23,16 +23,11 @@ done
 
 makeDirLink bookmarks
 makeDirLink coverarts
-makeDirLink databases
 makeDirLink lyrics
 makeDirLink playlists
 makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
-
-cp -f /var/lib/mpd/{mpdstate,sticker.sql} /srv/http/assets/img/databases
-
-systemctl enable --now enhancestartup
 
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
