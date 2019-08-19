@@ -23,7 +23,7 @@ done
 
 makeDirLink bookmarks
 makeDirLink coverarts
-makeDirLink data
+makeDirLink databases
 makeDirLink lyrics
 makeDirLink playlists
 makeDirLink tmp
