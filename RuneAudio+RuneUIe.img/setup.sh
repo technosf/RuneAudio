@@ -63,8 +63,6 @@ EOF
 
 systemctl enable runonce
 
-systemctl disable enhancestartup # re-enable after setup databases directory by runeonce
-
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 
 title "$bar Rune0.5+RuneUIe Reset successfully."
