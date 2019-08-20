@@ -34,7 +34,7 @@ chown -R mpd:audio /srv/http/assets/img/mpd
 
 makeDirLink redis
 dir=/srv/http/assets/img/redis
-chown -R redis:rdis $dir
+chown -R redis:redis $dir
 [[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
 
 systemctl disable --now runonce
