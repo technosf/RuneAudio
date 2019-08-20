@@ -6,9 +6,6 @@ rm $0
 
 title -l '=' "$bar Rune0.5+RuneUIe Reset ..."
 
-echo -e "\n$bar Unlink extra directories ..."
-rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,playlists,tmp,webradiopl,webradios}
-
 echo -e "\n$bar Delete unnecessary files ..."
 rm -f /etc/netctl/test
 rm -f /srv/http/assets/css/*.old
@@ -25,9 +22,11 @@ redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset database ..."
 systemctl stop mpd
-rm -f /srv/http/assets/img/mpd/mpd.db
 redis-cli save
 cp /srv/http/assets/img/redis/* /var/lib/redis
+
+echo -e "\n$bar Unlink extra directories ..."
+rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,mpd,playlists,redis,tmp,webradiopl,webradios}
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
