@@ -31,19 +31,8 @@ makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
-makeDirLink mpd
-chown -RhL mpd:audio /srv/http/assets/img/mpd
-
-makeDirLink redis
-dir=/srv/http/assets/img/redis
-[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
-chown -RhL redis:redis $dir
-
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
-
-systemctl enable enhancestartup
-/srv/http/enhancestartup.sh
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
