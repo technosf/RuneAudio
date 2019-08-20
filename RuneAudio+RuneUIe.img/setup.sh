@@ -63,6 +63,7 @@ WantedBy=multi-user.target
 EOF
 
 systemctl enable runonce
+systemctl disable enhancestartup
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 
