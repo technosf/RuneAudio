@@ -34,8 +34,8 @@ chown -R mpd:audio /srv/http/assets/img/mpd
 
 makeDirLink redis
 dir=/srv/http/assets/img/redis
-chown -R redis:redis $dir
 [[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
+chown -RL redis:redis $dir
 
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
