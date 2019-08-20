@@ -22,7 +22,7 @@ redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset database ..."
 systemctl stop mpd
-redis-cli save
+redis-cli save &> /dev/null
 cp /srv/http/assets/img/redis/* /var/lib/redis
 
 echo -e "\n$bar Unlink extra directories ..."
