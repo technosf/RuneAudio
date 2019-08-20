@@ -31,7 +31,7 @@ makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
-systemctl disable --now runonce
+systemctl disable runonce
 rm /etc/systemd/system/runonce.service
 
 # update mpd database
