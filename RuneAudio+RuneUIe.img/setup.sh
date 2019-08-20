@@ -20,8 +20,7 @@ mpc volume 50 &> /dev/null
 mpc clear
 redis-cli del mpddb &> /dev/null
 
-echo -e "\n$bar Reset database ..."
-systemctl stop mpd
+echo -e "\n$bar Reset Redis ..."
 redis-cli save &> /dev/null
 cp /srv/http/assets/img/redis/* /var/lib/redis
 
