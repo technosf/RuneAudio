@@ -13,10 +13,8 @@ rm -f /srv/http/assets/js/*.orig
 rm -rf /srv/http/assets/less
 
 echo -e "\n$bar Reset MPD settings ..."
-for opt in repeat random single consume; do
-	mpc $opt 0 &> /dev/null
-done
 mpc volume 50 &> /dev/null
+mpc repeat 0; mpc random 0; mpc single 0; mpc consume 0
 mpc clear
 redis-cli del mpddb &> /dev/null
 
