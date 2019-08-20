@@ -33,6 +33,7 @@ makeDirLink webradios
 
 systemctl disable runonce
 rm /etc/systemd/system/runonce.service
+systemctl daemon-reload
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
