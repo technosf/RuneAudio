@@ -18,7 +18,7 @@ mpc clear
 redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset MPD Databas ..."
-rm /var/lib/d/mpd.db
+rm /var/lib/mpd/mpd.db
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
