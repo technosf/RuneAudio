@@ -17,8 +17,10 @@ mpc -q volume 50; mpc -q repeat 0; mpc -q random 0; mpc -q single 0; mpc -q cons
 mpc clear
 redis-cli del mpddb &> /dev/null
 
-echo -e "\n$bar Reset MPD Databas ..."
+echo -e "\n$bar Reset MPD Database ..."
+systemctl stop mpd
 rm /var/lib/mpd/mpd.db
+systemctl start mpd
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
