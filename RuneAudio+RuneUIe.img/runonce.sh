@@ -33,6 +33,8 @@ makeDirLink mpd
 makeDirLink redis
 chown -R mpd:audio /srv/http/assets/img/mpd
 chown -R redis:rdis /srv/http/assets/img/redis
+cp /var/lib/mpd/mpd.db /srv/http/assets/img/mpd
+cp /var/lib/redis/* /srv/http/assets/img/redis
 
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
