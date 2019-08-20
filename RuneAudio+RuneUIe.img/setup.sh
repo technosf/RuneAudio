@@ -21,9 +21,6 @@ echo -e "\n$bar Reset Redis ..."
 redis-cli save &> /dev/null
 cp /srv/http/assets/img/redis/* /var/lib/redis
 
-echo -e "\n$bar Unlink extra directories ..."
-rm -rf /srv/http/assets/img/{bookmarks,coverarts,lyrics,mpd,playlists,redis,tmp,webradiopl,webradios}
-
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
 rm -rf /srv/http/.cache/chromium/Default/*
