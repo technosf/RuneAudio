@@ -34,12 +34,13 @@ mounts=( $( ls -d /mnt/MPD/NAS/*/ 2> /dev/null ) )
 if (( ${#mounts[@]} > 0 )); then
 	for mount in "${mounts[@]}"; do
 		umount -l "$mount"
+		rmdir "$mount"
 	done
 fi
 mounts=( $( ls -d /mnt/MPD/USB/*/ 2> /dev/null ) )
 if (( ${#mounts[@]} > 0 )); then
 	for mount in "${mounts[@]}"; do
-		udevil umount "$mount"
+		udevil umount -l "$mount"
 	done
 fi
 
