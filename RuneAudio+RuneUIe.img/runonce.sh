@@ -32,7 +32,7 @@ makeDirLink webradiopl
 makeDirLink webradios
 
 makeDirLink mpd
-chown -Rh mpd:audio /srv/http/assets/img/mpd
+chown -RhL mpd:audio /srv/http/assets/img/mpd
 
 makeDirLink redis
 dir=/srv/http/assets/img/redis
