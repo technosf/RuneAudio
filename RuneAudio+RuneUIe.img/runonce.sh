@@ -40,7 +40,8 @@ chown -R redis:rdis $dir
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
 
-systemctl enable --now enhancestartup
+systemctl enable enhancestartup
+/srv/http/enhancestartup.sh
 
 # update mpd database
 if grep -q '/mnt/MPD/' /proc/mounts; then
