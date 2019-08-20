@@ -23,9 +23,11 @@ mpc volume 50 &> /dev/null
 mpc clear
 redis-cli del mpddb &> /dev/null
 
-echo -e "\n$bar Reset MPD database ..."
+echo -e "\n$bar Reset database ..."
 systemctl stop mpd
-rm -f /var/lib/mpd/mpd.db /var/lib/mpd/playlists/*
+rm -f /srv/http/assets/img/mpd/mpd.db
+redis-cli save
+cp /srv/http/assets/img/redis/* /var/lib/redis
 
 echo -e "\n$bar Clear packages cache ..."
 rm -f /var/cache/pacman/pkg/*
