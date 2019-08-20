@@ -30,10 +30,12 @@ makeDirLink webradiopl
 makeDirLink webradios
 
 makeDirLink mpd
-makeDirLink redis
 chown -R mpd:audio /srv/http/assets/img/mpd
-chown -R redis:rdis /srv/http/assets/img/redis
-[[ -z $( ls /srv/http/assets/img/redis ) ]] && cp /var/lib/redis/* /srv/http/assets/img/redis
+
+makeDirLink redis
+dir=/srv/http/assets/img/redis
+chown -R redis:rdis $dir
+[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
 
 systemctl disable --now runonce
 rm /etc/systemd/system/runonce.service
