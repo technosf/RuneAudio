@@ -26,10 +26,13 @@ done
 makeDirLink bookmarks
 makeDirLink coverarts
 makeDirLink lyrics
+makeDirLink mpd
 makeDirLink playlists
 makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
+
+chown -RhL mpd:audio /srv/http/assets/img/mpd
 
 systemctl disable runonce
 
