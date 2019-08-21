@@ -28,11 +28,16 @@ makeDirLink coverarts
 makeDirLink lyrics
 makeDirLink mpd
 makeDirLink playlists
+makeDirLink redis
 makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
 chown -RhL mpd:audio /srv/http/assets/img/mpd
+
+dir=/srv/http/assets/img/redis
+[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
+chown -RhL redis:redis /srv/http/assets/img/redis
 
 systemctl disable runonce
 
