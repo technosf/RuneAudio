@@ -33,7 +33,8 @@ makeDirLink tmp
 makeDirLink webradiopl
 makeDirLink webradios
 
-chown -RL mpd:audio /srv/http/assets/img/mpd
+dir=/srv/http/assets/img/mpd
+chown -R mpd:audio $dir "$( readlink -f "$dir" )"
 
 dir=/srv/http/assets/img/redis
 [[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
