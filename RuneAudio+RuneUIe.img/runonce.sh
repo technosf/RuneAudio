@@ -45,15 +45,18 @@ systemctl restart mpd redis
 systemctl disable runonce
 
 # update mpd database
-if [[ -e /srv/http/assets/img/mpd/mpd.db ]]; then
-	/srv/http/count.sh
-else
-	mpc rescan
-	mpc idle update
+setCount() {
 	albumartist=$( mpc list albumartist | awk NF | wc -l )
 	composer=$( mpc list composer | awk NF | wc -l )
 	genre=$( mpc list genre | awk NF | wc -l )
 	redis-cli set mpddb "$albumartist $composer $genre"
+}
+if [[ -e /srv/http/assets/img/mpd/mpd.db ]]; then
+	setCount
+else
+	mpc rescan
+	mpc idle update
+	setCount
 	curl -s -X POST 'http://localhost/pub?id=reload' -d 1
 fi
 
