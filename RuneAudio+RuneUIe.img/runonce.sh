@@ -38,11 +38,7 @@ chown -RhL mpd:audio /srv/http/assets/img/mpd
 dir=/srv/http/assets/img/redis
 [[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
 chown -RhL redis:redis /srv/http/assets/img/redis
-sed -i '/^dir/ {
-s/^/#/
-a\dir /srv/http/assets/img/redis/
-}
-' /etc/redis.conf
+sed -i -e '\|^#dir /srv/http/assets/img/redis/| s|^#||' -e '\|^dir /var/lib/redis/| s|^|#|' /etc/redis.conf
 
 systemctl restart mpd redis
 systemctl disable runonce
