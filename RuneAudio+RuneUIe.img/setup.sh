@@ -10,7 +10,6 @@ echo -e "\n$bar Reset MPD settings ..."
 
 mpc -q volume 50; mpc -q repeat 0; mpc -q random 0; mpc -q single 0; mpc -q consume 0
 mpc clear
-rm -f /var/lib/mpd/mpd.db
 redis-cli del mpddb &> /dev/null
 
 echo -e "\n$bar Reset Database ..."
