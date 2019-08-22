@@ -40,6 +40,10 @@ if (( ${#mounts[@]} > 0 )); then
 	done
 fi
 
+echo -e "\n$bar Remove extra directories ..."
+
+find /srv/http/assets/img/ -xtype l -delete
+
 echo -e "\n$bar Reset mirrorlist ..."
 
 rm /etc/pacman.d/*
