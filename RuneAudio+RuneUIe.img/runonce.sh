@@ -45,7 +45,9 @@ systemctl restart mpd redis
 systemctl disable runonce
 
 # update mpd database
-if [[ ! -e /srv/http/assets/img/mpd/mpd.db ]]; then
+if [[ -e /srv/http/assets/img/mpd/mpd.db ]]; then
+	/srv/http/count.sh
+else
 	mpc rescan
 	mpc idle update
 	albumartist=$( mpc list albumartist | awk NF | wc -l )
