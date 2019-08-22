@@ -37,7 +37,7 @@ chown -RL mpd:audio /srv/http/assets/img/mpd
 
 dir=/srv/http/assets/img/redis
 [[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
-chown -RL redis:redis /srv/http/assets/img/redis
+chown -R redis:redis $dir "$( readlink -f "$dir" )"
 sed -i -e '\|^#dir /srv/http/assets/img/redis/| s|^#||' -e '\|^dir /var/lib/redis/| s|^|#|' /etc/redis.conf
 
 systemctl restart mpd redis
