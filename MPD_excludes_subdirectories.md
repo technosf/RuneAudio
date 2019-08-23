@@ -37,7 +37,7 @@ ls | grep -v Music | tr ' ' '\n' >> .mpdignore
 
 **Exclude all `Artwork` and `artworks` subdirectories in `Music`**
 ```sh
-find /mnt/MPD/USB/root/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore' \;
+find /mnt/MPD/USB/root/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore'
 ```
 - `-iname artwork*` case insensitive name with wildcard
 - `-type d` only directory
