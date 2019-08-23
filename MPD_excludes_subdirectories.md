@@ -35,6 +35,10 @@ label="usb label"
 dir="music directory"
 cd "/mnt/MPD/USB/$label"
 ls | grep -v "$dir" | tr ' ' '\n' >> .mpdignore
+
+cat .mpdignore
+# Movies
+# Others
 ```
 
 **Exclude all `Artwork` and `artworks` subdirectories in `Music`**
