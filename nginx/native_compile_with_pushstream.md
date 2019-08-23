@@ -1,5 +1,6 @@
 NGINX with pushstream
 ---
+Native compile.
 
 ```sh
 # on RuneAudio
