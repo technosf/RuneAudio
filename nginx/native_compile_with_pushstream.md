@@ -3,10 +3,10 @@ NGINX with pushstream
 
 ```sh
 # on RuneAudio
-useradd alarm
+useradd x
 mkdir -p /home/x/nginx
 chown -R x:x /home/x
-su alarm
+su x
 cd /home/x/nginx
 ```
 - NGINX source files: https://archlinuxarm.org/packages/armv7h/nginx/files
