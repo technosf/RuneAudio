@@ -52,11 +52,9 @@ cd /home/x/nginx
 #}
 ```
 
-### Prepare environment
-(On RuneAudio, upgrade MPD first.)
+### Prepare build environment
 ```sh
-pacman -Sy --needed base-devel ffmpeg guile git libutil-linux memcached mercurial nettle \
-    openssl pcre perl-cache-memcached perl-fcgi perl-gd perl-io-socket-ssl wget zlib
+pacman -Sy --needed base-devel guile git libutil-linux memcached mercurial perl-cache-memcached perl-fcgi perl-gd perl-io-socket-ssl
 ```
 
 ### Compile
