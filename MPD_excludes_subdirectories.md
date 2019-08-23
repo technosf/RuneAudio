@@ -31,13 +31,17 @@
 ```
 **Exclude all except `Music` at USB root**
 ```sh
-cd /mnt/MPD/USB/root
-ls | grep -v Music | tr ' ' '\n' >> .mpdignore
+label="usb label"
+dir="music directory"
+cd "/mnt/MPD/USB/$label"
+ls | grep -v "$dir" | tr ' ' '\n' >> .mpdignore
 ```
 
 **Exclude all `Artwork` and `artworks` subdirectories in `Music`**
 ```sh
-find /mnt/MPD/USB/root/Music -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore'
+label="usb label"
+dir="music directory"
+find "/mnt/MPD/USB/$label/$dir" -iname artwork* -type d -execdir sh -c 'echo -e "?rtwork*" > .mpdignore'
 ```
 - `-iname artwork*` case insensitive name with wildcard
 - `-type d` only directory
