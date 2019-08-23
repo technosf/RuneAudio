@@ -32,7 +32,7 @@
 **Exclude all except `Music` at USB root**
 ```sh
 cd /mnt/MPD/USB/root
-ls | grep -v Music' | tr ' ' '\n' > .mpdignore
+ls | grep -v Music | tr ' ' '\n' > .mpdignore
 ```
 
 **Exclude all `Artwork` and `artworks` subdirectories in `Music`**
