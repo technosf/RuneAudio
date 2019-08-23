@@ -1,4 +1,5 @@
 ### MPD - Exclude subdirectories from database
+`.mpdignore` contains ignored sibling directories
 
 **Directory Tree**
 ```sh
