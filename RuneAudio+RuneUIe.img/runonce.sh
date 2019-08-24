@@ -14,7 +14,7 @@ while $( sleep 1 ); do
 	grep -q '/mnt/MPD/USB' /proc/mounts && break
 	
 	(( i++ ))
-	if (( i > 5 )); then
+	if (( i > 10 )); then
 		curl -s -X POST 'http://localhost/pub?id=notify' -d '{ "title": "USB Drive", "text": "No USB drive found.", "icon": "usbdrive" }'
 		break
 	fi
