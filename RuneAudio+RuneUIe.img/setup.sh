@@ -31,6 +31,7 @@ if (( ${#mounts[@]} > 0 )); then
 	for mount in "${mounts[@]}"; do
 		umount -l "$mount"
 		rmdir "$mount"
+		sed -i "|$mount| d" /etc/fstab
 	done
 fi
 mounts=( $( ls -d /mnt/MPD/USB/*/ 2> /dev/null ) )
