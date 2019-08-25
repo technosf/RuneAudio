@@ -50,7 +50,7 @@ pacman -S alsa-utils dnsmasq hostapd ifplugd
 - Shairport Sync
 - Redis
 
-### Reset to common state
+### Hard reset to initial state
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/setup.sh -O - | sh
 ```
@@ -58,7 +58,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/RuneAudio%
 ### Image file
 **GParted**
 - SD card ext4 partition > right-click > unmount
-- Resize to minimum + 50MB
+- Resize to minimum + ~50MB
 
 **Win32 Disk Imager**
 - `Read only allocated partition` from SD card to `RuneAudio+RuneUIe.img`
