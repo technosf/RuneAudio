@@ -1,5 +1,19 @@
 USB DAC Unmute
 ---
+List mixer controls
+```sh
+# device list
+aplay -l | grep '^card'
+
+# amixer list - numid ( names: amixer -c <card#> scontrols )
+amixer -c <card#> controls
+
+# master volume numid
+amixer -c <card#> controls | grep "Playback Volume'$" | cut -d',' -f1
+
+# set volume level 50%
+amixer -c <card#> cset <numid=#> 50%
+```
 
 Fix mute USB DAC  
 
