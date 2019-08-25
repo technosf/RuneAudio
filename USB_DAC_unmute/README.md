@@ -7,14 +7,28 @@ Fix mute USB DAC
 # device list
 aplay -l | grep '^card'
 
-# amixer list - numid ( names: amixer -c <card#> scontrols )
-amixer -c <card#> controls
+# name list
+cardnum=1
+amixer -c $cardnum scontrols
+# unmute $name
+amixer -c $cardnum sset "$name" unmute
+
+# unmute all
+cardnum=1
+scontrols=$( amixer -c $cardnum scontrols | awk -F"['']" '{print $2}' | awk '!a[$0]++' )
+readarray -t mixers <<<"$scontrols"
+for mixer in "${mixers[@]}"; do
+	amixer -c $cardnum sset "$mixer" unmute
+done
+
+# amixer list - numid
+amixer -c $cardnum controls
 
 # master volume numid
-amixer -c <card#> controls | grep "Playback Volume'$" | cut -d',' -f1
+numid=$( amixer -c $cardnum controls | grep "Playback Volume'$" | cut -d',' -f1 )
 
 # set volume level 50%
-amixer -c <card#> cset <numid=#> 50%
+amixer -c $cardnum cset $numid 50%
 ```
  
 **ALSA mixer**  
