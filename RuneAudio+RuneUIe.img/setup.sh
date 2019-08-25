@@ -61,7 +61,6 @@ After=udevil.service
 
 [Service]
 Type=idle
-ExecStartPre=/bin/sleep 5
 ExecStart=/root/runonce.sh
 
 [Install]
