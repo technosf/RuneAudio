@@ -1,6 +1,8 @@
 USB DAC Unmute
 ---
-List mixer controls
+Fix mute USB DAC 
+
+**amixer**
 ```sh
 # device list
 aplay -l | grep '^card'
@@ -14,10 +16,8 @@ amixer -c <card#> controls | grep "Playback Volume'$" | cut -d',' -f1
 # set volume level 50%
 amixer -c <card#> cset <numid=#> 50%
 ```
-
-Fix mute USB DAC  
-
-**ALSA configuration**  
+ 
+**ALSA mixer**  
 ```sh
 alsamixer
 ```
