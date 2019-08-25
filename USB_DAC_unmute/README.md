@@ -3,8 +3,9 @@ USB DAC Unmute
 Fix mute USB DAC 
 
 **amixer**
+- `mute`, `unmute` with `Simple mixer control` names only
 ```sh
-# device list
+# cardnum list
 aplay -l | grep '^card'
 
 # name list
