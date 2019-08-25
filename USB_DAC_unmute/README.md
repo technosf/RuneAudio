@@ -16,7 +16,7 @@ amixer -c $cardnum sset "$name" unmute
 
 # unmute all
 cardnum=1
-scontrols=$( amixer -c $cardnum scontrols | grep -v Mic | awk -F"['']" '{print $2}' | awk '!a[$0]++' )
+scontrols=$( amixer -c $cardnum scontents | grep -B1 'pvolume' | grep 'Simple' | awk -F"['']" '{print $2}' )
 readarray -t mixers <<<"$scontrols"
 for mixer in "${mixers[@]}"; do
 	amixer -c $cardnum sset "$mixer" unmute
