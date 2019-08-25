@@ -8,7 +8,7 @@ Fix mute USB DAC
 # cardnum list
 aplay -l | grep '^card'
 
-# name list
+# name list - Simple mixer control
 cardnum=1
 amixer -c $cardnum scontrols
 # unmute $name
