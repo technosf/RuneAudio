@@ -46,6 +46,7 @@ systemctl disable runonce
 
 # reset I2S setting
 redis-cli set audiooutput 'bcm2835 ALSA_1'
+redis-cli del i2sname i2ssysname
 
 # update mpd database
 setCount() {
