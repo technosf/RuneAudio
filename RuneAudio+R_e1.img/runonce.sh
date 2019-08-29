@@ -2,6 +2,9 @@
 
 rm $0
 
+# reset I2S setting
+redis-cli set audiooutput 'bcm2835 ALSA_1'
+
 # expand partition
 if [[ $( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' ) > 0 ]]; then
 	echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
