@@ -46,7 +46,22 @@ systemctl disable runonce
 
 # reset I2S setting
 redis-cli set audiooutput 'bcm2835 ALSA_1'
-redis-cli del i2sname i2ssysname
+redis-cli del AccessPoint activePlayer ao ao0  audiooutput0 dirble i2sname i2ssysname librandom mixer_type
+
+# set .mpdignore for extra directories
+file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
+if [[ ! -e "$file" ]]; then
+echo 'bookmarks
+coverarts
+gpio
+lyrics
+mpd
+playlists
+redis
+tmp
+webradiopl
+webradios' > "$file"
+fi
 
 # update mpd database
 setCount() {
