@@ -9,6 +9,7 @@ title -l '=' "$bar Rune0.5+RuneUIe Reset ..."
 echo -e "\n$bar Clear I2S module ..."
 
 'sed -i'/^dtoverlay/ d' /boot/config.txt
+redis-cli set audiooutput 'bcm2835 ALSA_1'
 #--------------------------------------------------------
 echo -e "\n$bar Reset MPD settings ..."
 
