@@ -59,7 +59,7 @@ wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorli
 #--------------------------------------------------------
 echo -e "\n$bar Startup setup script ..."
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BRuneUIe.img/runonce.sh -P /root
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
 
 cat << 'EOF' > /etc/systemd/system/runonce.service
