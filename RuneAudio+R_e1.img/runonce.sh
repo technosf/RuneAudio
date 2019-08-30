@@ -63,9 +63,6 @@ webradiopl
 webradios' > "$file"
 fi
 
-# fix systemd upgrade
-[[ -L /etc/resolv.conf ]] || ln -sf /{run/systemd/resolve,etc}/resolv.conf
-
 # update mpd database
 setCount() {
 	albumartist=$( mpc list albumartist | awk NF | wc -l )
