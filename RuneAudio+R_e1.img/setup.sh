@@ -4,7 +4,9 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-title -l '=' "$bar Rune0.5+RuneUIe Reset ..."
+name='RuneAudio+R e1'
+
+title -l '=' "$bar $name Reset ..."
 #--------------------------------------------------------
 echo -e "\n$bar Clear I2S module ..."
 
@@ -78,5 +80,5 @@ systemctl enable runonce
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 #--------------------------------------------------------
-title "$bar Rune0.5+RuneUIe Reset successfully."
+title "$bar $name Reset successfully."
 title -nt "$info Close Addons and reboot for initial setup."
