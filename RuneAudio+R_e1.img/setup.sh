@@ -23,8 +23,6 @@ redis-cli del mpddb &> /dev/null
 #--------------------------------------------------------
 echo -e "\n$bar Reset Database ..."
 
-redis-cli save
-redis-cli bgsave
 cp /srv/http/assets/img/redis/* /var/lib/redis
 sed -i -e '\|^dir /srv/http/assets/img/redis/| s|^|#|' -e '\|^#dir /var/lib/redis/| s|^#||' /etc/redis.conf
 #--------------------------------------------------------
