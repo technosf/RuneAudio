@@ -7,6 +7,7 @@ rm $0
 name='RuneAudio+R e1'
 
 title -l '=' "$bar $name Reset ..."
+
 #--------------------------------------------------------
 echo -e "\n$bar Clear I2S module ..."
 
@@ -78,5 +79,11 @@ systemctl enable runonce
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 #--------------------------------------------------------
+echo -e "\n$bar Startup dialog box ..."
+
+wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
+sed -i '/logo =/ i\include "runonce.php";' /srv/http/indexbody.php
+#--------------------------------------------------------
+
 title "$bar $name Reset successfully."
 title -nt "$info Close Addons and reboot for initial setup."
