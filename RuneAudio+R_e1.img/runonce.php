@@ -1,6 +1,14 @@
 <script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
+<script src="/assets/js/vendor/pushstream.min.<?=$time?>.js"></script>
 <script src="assets/js/info.<?=$time?>.js"></script>
 <script>
+pushstream = new PushStream( { modes: 'websocket' } );
+pushstream.addChannel( 'reload' );
+pushstream.connect();
+pushstream.onmessage = function() {
+	location.href= '/';
+}
+
 function clearRunonce() {
 	$.post( 'commands.php', { bash: [
 		  'curl -s -X POST "http://localhost/pub?id=reload" -d 1'
