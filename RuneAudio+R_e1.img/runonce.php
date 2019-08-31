@@ -5,11 +5,12 @@
 pushstream = new PushStream( { modes: 'websocket' } );
 pushstream.addChannel( 'runonce' );
 pushstream.connect();
-pushstream.onmessage = function() {
-	location.href = page;
+pushstream.onmessage = function( data ) {
+	location.reload();
 }
 
 function clearRunonce() {
+	pushstream.disconnect();
 	$.post( 'commands.php', { bash: [
 		  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
 		, 'rm -f /srv/http/runonce.php'
@@ -25,12 +26,11 @@ info( {
 	, cancellabel : 'No'
 	, cancel      : function() {
 		clearRunonce();
-		page = '/';
-		//location.reload();
+		location.reload();
 	}
 	, ok          : function() {
 		clearRunonce();
-		page = 'indexsettings.php?p=network';
+		location.href = 'indexsettings.php?p=network';
 	}
 } );
 </script>
