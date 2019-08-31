@@ -6,7 +6,7 @@ pushstream = new PushStream( { modes: 'websocket' } );
 pushstream.addChannel( 'runonce' );
 pushstream.connect();
 pushstream.onmessage = function() {
-	location.href= '/';
+	location.reload();
 }
 
 function clearRunonce() {
