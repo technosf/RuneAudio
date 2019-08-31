@@ -6,7 +6,7 @@ pushstream = new PushStream( { modes: 'websocket' } );
 pushstream.addChannel( 'runonce' );
 pushstream.connect();
 pushstream.onmessage = function() {
-	location.reload();
+	location.href = page;
 }
 
 function clearRunonce() {
@@ -25,11 +25,12 @@ info( {
 	, cancellabel : 'No'
 	, cancel      : function() {
 		clearRunonce();
-		location.reload();
+		page = '/';
+		//location.reload();
 	}
 	, ok          : function() {
 		clearRunonce();
-		location.href='indexsettings.php?p=network';
+		page = 'indexsettings.php?p=network';
 	}
 } );
 </script>
