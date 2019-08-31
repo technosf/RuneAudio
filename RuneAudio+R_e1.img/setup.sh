@@ -55,11 +55,11 @@ find /srv/http/assets/img/ -xtype l -delete
 echo -e "\n$bar Reset mirrorlist ..."
 
 rm /etc/pacman.d/*
-wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
+wget -q https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /etc/pacman.d
 #--------------------------------------------------------
 echo -e "\n$bar Startup setup script ..."
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /root
+wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /root
 chmod +x /root/runonce.sh
 
 cat << 'EOF' > /etc/systemd/system/runonce.service
@@ -80,7 +80,7 @@ curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 #--------------------------------------------------------
 echo -e "\n$bar Startup dialog box ..."
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
+wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
 sed -i '/password &&/ i\//include "runonce.php";' /srv/http/indexbody.php
 #--------------------------------------------------------
 
