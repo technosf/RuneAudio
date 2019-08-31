@@ -1,10 +1,6 @@
 <script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
 <script src="assets/js/info.<?=$time?>.js"></script>
 <script>
-	$.post( 'commands.php', { bash: [
-		  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
-		, 'rm /srv/http/runonce.php'
-	] } );
 	info( {
 		  icon    : 'rune'
 		, title   : 'RuneAudio'
@@ -18,6 +14,14 @@
 			location.href='indexsettings.php?p=network';
 		}
 	} )
+	setTimeout( function() {
+		$.post( 'commands.php', { bash: [
+			  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
+			, 'rm /srv/http/runonce.php'
+		] }, function() {
+			$( '#infoCancel' ).click();
+		} );
+	}, 15000 );
 </script>
 </body>
 </html>
