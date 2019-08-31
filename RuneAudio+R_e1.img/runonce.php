@@ -10,7 +10,7 @@ function clearRunonce() {
 info( {
 	  icon        : 'rune'
 	, title       : 'RuneAudio'
-	, message     : 'Welcome to RuneAudio'
+	, message     : 'Welcome!'
 				   +'<br><br>Show <wh>Web user interface</wh> connection'
 				   +'<br>for remote devices?'
 	, cancellabel : 'No'
