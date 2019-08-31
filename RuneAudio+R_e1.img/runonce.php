@@ -4,7 +4,7 @@
 function clearRunonce() {
 	$.post( 'commands.php', { bash: [
 		  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
-		, 'rm /srv/http/runonce.php'
+		, 'rm -f /srv/http/runonce.php'
 	] }	);
 }
 info( {
