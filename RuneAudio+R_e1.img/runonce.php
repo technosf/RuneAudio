@@ -3,7 +3,8 @@
 <script>
 function clearRunonce() {
 	$.post( 'commands.php', { bash: [
-		  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
+		  'curl -s -X POST "http://localhost/pub?id=reload" -d 1'
+		, "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
 		, 'rm -f /srv/http/runonce.php'
 	] }	);
 }
@@ -22,11 +23,7 @@ info( {
 		clearRunonce();
 		location.href='indexsettings.php?p=network';
 	}
-} )
-setTimeout( function() {
-	clearRunonce();
-	$( '#infoCancel' ).click();
-}, 15000 );
+} );
 </script>
 </body>
 </html>
