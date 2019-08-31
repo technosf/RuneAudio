@@ -3,7 +3,7 @@
 <script src="assets/js/info.<?=$time?>.js"></script>
 <script>
 pushstream = new PushStream( { modes: 'websocket' } );
-pushstream.addChannel( 'refresh' );
+pushstream.addChannel( 'runonce' );
 pushstream.connect();
 pushstream.onmessage = function() {
 	location.href= '/';
@@ -11,9 +11,9 @@ pushstream.onmessage = function() {
 
 function clearRunonce() {
 	$.post( 'commands.php', { bash: [
-		  'curl -s -X POST "http://localhost/pub?id=refresh" -d 1'
-		, "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
+		  "sed -i '/runonce.php/ d' /srv/http/indexbody.php"
 		, 'rm -f /srv/http/runonce.php'
+		, 'curl -s -X POST "http://localhost/pub?id=runonce" -d 1'
 	] }	);
 }
 info( {
