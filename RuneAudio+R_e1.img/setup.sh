@@ -9,6 +9,11 @@ name='RuneAudio+R e1'
 title -l '=' "$bar $name Reset ..."
 
 #--------------------------------------------------------
+if journalctl -b | grep -q '(mmcblk0p1): Volume was not properly unmounted'; then
+	echo -e "\n$bar Fix mmcblk0 dirty bit from unproperly unmount..."
+	fsck.fat -trawl /dev/mmcblk0p1
+fi
+#--------------------------------------------------------
 echo -e "\n$bar Clear I2S module ..."
 
 sed -i -e '/^dtoverlay/ d
