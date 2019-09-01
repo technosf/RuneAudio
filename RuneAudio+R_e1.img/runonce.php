@@ -21,9 +21,9 @@ info( {
 	  icon        : 'rune'
 	, title       : 'RuneAudio'
 	, message     : 'Welcome!'
-				   +'<br><br>Show <wh>Web user interface</wh> connection'
-				   +'<br>for remote devices?'
-	, cancellabel : 'No'
+				   +'<br><br>Show <wh>Web user interface</wh> URL'
+				   +'<br>for remote device connection?'
+	, cancellabel : 'Skip'
 	, cancel      : function() {
 		clearRunonce();
 		location.reload();
