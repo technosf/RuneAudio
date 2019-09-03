@@ -2,6 +2,8 @@
 <script src="/assets/js/vendor/pushstream.min.<?=$time?>.js"></script>
 <script src="assets/js/info.<?=$time?>.js"></script>
 <script>
+count = 0;
+	
 pushstream = new PushStream( { modes: 'websocket' } );
 pushstream.addChannel( 'runonce' );
 pushstream.connect();
@@ -17,6 +19,25 @@ function clearRunonce() {
 		, 'curl -s -X POST "http://localhost/pub?id=runonce" -d 1'
 	] }	);
 }
+function getStatus() {
+	count++;
+	$.post( 'commands.php', { bash: 'systemctl is-active hostapd' }, function( data ) {
+		if ( data === 'active' || count === 3 ) {
+			location.href = 'indexsettings.php?p=network';
+		} else {
+			waitAccesspoint();
+		}
+	} );
+}
+function waitAccesspoint() {
+	info( {
+		  icon        : 'rune'
+		, title       : 'RuneAudio'
+		, message     : 'RPi access point is starting.'
+					   +'<br>Please wait a few seconds ...'
+		, ok          : getStatus
+	} );	
+}
 info( {
 	  icon        : 'rune'
 	, title       : 'RuneAudio'
@@ -30,7 +51,7 @@ info( {
 	}
 	, ok          : function() {
 		clearRunonce();
-		location.href = 'indexsettings.php?p=network';
+		getStatus();
 	}
 } );
 </script>
