@@ -64,32 +64,13 @@ wget -q https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorl
 #--------------------------------------------------------
 echo -e "\n$bar Startup setup script ..."
 
-wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /root
-chmod +x /root/runonce.sh
-
-cat << 'EOF' > /etc/systemd/system/runonce.service
-[Unit]
-After=udevil.service
-
-[Service]
-Type=idle
-ExecStart=/root/runonce.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl enable runonce
-
-systemctl disable --now local-browser # re-enable by runonce.sh
-
-curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
+wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /srv/http
+chmod +x /srv/http/runonce.sh
 #--------------------------------------------------------
-echo -e "\n$bar Startup dialog box ..."
+#echo -e "\n$bar Startup dialog box ..."
 
-wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
-sed -i '/password &&/ i\include "runonce.php";' /srv/http/indexbody.php
+#wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
+#sed -i '/password &&/ i\include "runonce.php";' /srv/http/indexbody.php
 #--------------------------------------------------------
 
 title "$bar $name Reset successfully."
-title -nt "$info Close Addons and reboot for initial setup."
