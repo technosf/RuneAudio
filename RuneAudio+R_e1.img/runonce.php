@@ -1,9 +1,10 @@
+<div id="loader"><svg viewBox="0 0 480.2 144.2"><?=$logo?></svg></div>
 <script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
 <script src="/assets/js/vendor/pushstream.min.<?=$time?>.js"></script>
 <script src="assets/js/info.<?=$time?>.js"></script>
 <script>
 count = 0;
-	
+
 pushstream = new PushStream( { modes: 'websocket' } );
 pushstream.addChannel( 'runonce' );
 pushstream.connect();
@@ -30,13 +31,16 @@ function getStatus() {
 	} );
 }
 function waitAccesspoint() {
-	info( {
-		  icon        : 'rune'
-		, title       : 'RuneAudio'
-		, message     : 'RPi access point is starting.'
-					   +'<br>Please wait a few seconds ...'
-		, ok          : getStatus
-	} );	
+	$( '#loader' ).removeClass( 'hide' );
+	setTimeout( function() {
+		info( {
+			  icon        : 'rune'
+			, title       : 'RuneAudio'
+			, message     : 'RPi access point is starting.'
+						   +'<br>Please wait a few seconds ...'
+			, ok          : getStatus
+		} );
+	}, 5000 );
 }
 info( {
 	  icon        : 'rune'
