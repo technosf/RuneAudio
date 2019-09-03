@@ -67,10 +67,5 @@ echo -e "\n$bar Startup setup script ..."
 wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.sh -P /srv/http
 chmod +x /srv/http/runonce.sh
 #--------------------------------------------------------
-#echo -e "\n$bar Startup dialog box ..."
-
-#wget -q https://github.com/rern/RuneAudio/raw/master/RuneAudio%2BR_e1.img/runonce.php -P /srv/http
-#sed -i '/password &&/ i\include "runonce.php";' /srv/http/indexbody.php
-#--------------------------------------------------------
 
 title "$bar $name Reset successfully."
