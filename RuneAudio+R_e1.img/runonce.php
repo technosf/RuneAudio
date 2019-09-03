@@ -23,12 +23,12 @@ function clearRunonce() {
 function getStatus() {
 	count++;
 	$.post( 'commands.php', { bash: 'systemctl is-active hostapd' }, function( data ) {
-		if ( data === 'active' || count === 3 ) {
+		if ( data[ 0 ] === 'active' || count === 3 ) {
 			location.href = 'indexsettings.php?p=network';
 		} else {
 			waitAccesspoint();
 		}
-	} );
+	}, 'json' );
 }
 function waitAccesspoint() {
 	$( '#loader' ).removeClass( 'hide' );
