@@ -63,7 +63,9 @@ webradiopl
 webradios' > "$file"
 fi
 
-# update mpd database
+systemctl enable --now local-browser
+
+# update mpd count
 setCount() {
 	albumartist=$( mpc list albumartist | awk NF | wc -l )
 	composer=$( mpc list composer | awk NF | wc -l )
