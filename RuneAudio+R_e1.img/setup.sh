@@ -81,7 +81,7 @@ EOF
 
 systemctl enable runonce
 
-systemctl disable local-browser
+systemctl disable --now local-browser
 
 curl --silent -s -X POST 'http://localhost/pub?id=reload' -d 1
 #--------------------------------------------------------
