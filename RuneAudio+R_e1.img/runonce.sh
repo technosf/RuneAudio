@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm $0
-sed '/runonce/ d' /srv/http/startup.sh
 
 # makeDirLink
 . /srv/http/addonstitle.sh
