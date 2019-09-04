@@ -19,7 +19,7 @@ echo -e "\n$bar Clear I2S module ..."
 sed -i -e '/^dtoverlay/ d
 ' -e '/^dtparam=i2s=on/ s/^/#/
 ' /boot/config.txt
-redis-cli set audiooutput 'bcm2835 ALSA_1'
+redis-cli set audiooutput 'bcm2835 ALSA_1' &> /dev/null
 #--------------------------------------------------------
 echo -e "\n$bar Reset MPD settings ..."
 
