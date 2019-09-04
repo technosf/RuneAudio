@@ -31,7 +31,7 @@ echo -e "\n$bar Reset Database ..."
 
 sed -i -e '\|^dir /srv/http/assets/img/redis/| s|^|#|' -e '\|^#dir /var/lib/redis/| s|^#||' /etc/redis.conf
 #--------------------------------------------------------
-echo -e "\n$bar Clear packages cache ..."
+echo -e "\n$bar Clear Chromium and pacman cache ..."
 
 rm -f /var/cache/pacman/pkg/*
 rm -rf /srv/http/.cache/chromium/Default/*
