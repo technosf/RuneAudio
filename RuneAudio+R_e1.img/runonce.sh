@@ -5,34 +5,7 @@ rm $0
 # makeDirLink
 . /srv/http/addonstitle.sh
 
-makeDirLink bookmarks
-makeDirLink coverarts
-makeDirLink lyrics
-makeDirLink mpd
-makeDirLink playlists
-makeDirLink redis
-makeDirLink tmp
-makeDirLink webradiopl
-makeDirLink webradios
-
-dir=/srv/http/assets/img/mpd
-chown -R mpd:audio $dir "$( readlink -f "$dir" )"
-
-dir=/srv/http/assets/img/redis
-[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
-chown -R redis:redis $dir "$( readlink -f "$dir" )"
-sed -i -e '\|^#dir /srv/http/assets/img/redis/| s|^#||' -e '\|^dir /var/lib/redis/| s|^|#|' /etc/redis.conf
-
-systemctl start redis mpd
-
-# reset I2S setting
-redis-cli set audiooutput 'bcm2835 ALSA_1'
-redis-cli del AccessPoint activePlayer ao ao0  audiooutput0 dirble i2sname i2ssysname librandom mixer_type
-
-# set .mpdignore for extra directories
-file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
-if [[ ! -e "$file" ]]; then
-echo 'bookmarks
+dirs='bookmarks
 coverarts
 gpio
 lyrics
@@ -41,8 +14,33 @@ playlists
 redis
 tmp
 webradiopl
-webradios' > "$file"
+webradios'
+
+for dir in $dirs; do
+	extraDir $dir
+done
+
+dir=/srv/http/assets/img/mpd
+chown -R mpd:audio $dir "$( readlink -f "$dir" )"
+
+dir=/srv/http/assets/img/redis
+[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
+chown -R redis:redis $dir "$( readlink -f "$dir" )"
+
+sed -i -e '\|^#dir /srv/http/assets/img/redis/| s|^#||' -e '\|^dir /var/lib/redis/| s|^|#|' /etc/redis.conf
+
+systemctl start redis mpd
+
+# set .mpdignore for extra directories
+file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
+if [[ ! -e "$file" ]]; then
+echo "$dirs" > "$file"
 fi
+
+# reset I2S setting
+redis-cli set audiooutput 'bcm2835 ALSA_1'
+#temp
+redis-cli del AccessPoint activePlayer ao ao0  audiooutput0 dirble i2sname i2ssysname librandom mixer_type
 
 # update mpd count
 setCount() {
