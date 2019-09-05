@@ -31,9 +31,7 @@ fi
 mkdir -p $path/{incomplete,watch}
 
 # custom systemd unit
-ln -sf /lib/systemd/system/tran{smission,}.service
-systemctl stop tran
-systemctl disable tran
+systemctl disable --now transmission
 
 # custom user and env - TRANSMISSION_HOME must be /<path>/transmission-daemon
 dir=/etc/systemd/system/transmission.service.d
@@ -48,8 +46,8 @@ systemctl daemon-reload
 file=$path/settings.json
 rm -f $file
 # create settings.json
-systemctl start tran
-systemctl stop tran
+systemctl start transmission
+systemctl stop transmission
 
 sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
@@ -72,22 +70,17 @@ else
 fi
 
 # web ui alternative
-if [[ $2 == 1 ]]; then
-	echo -e "$bar Get WebUI alternative ..."
-	wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
-	rm -rf $path/web
-	mv /usr/share/transmission/web $path
-	mv $path/web/index{,.original}.html
-	bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $path/web -xf master.zip transmission-web-control-master/src
-	rm master.zip
-	chown -R root:root $path/web
-fi
-
-systemctl daemon-reload
-[[ $3 == 1 ]] && systemctl enable tran
+echo -e "$bar Get WebUI alternative ..."
+wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
+rm -rf $path/web
+mv /usr/share/transmission/web $path
+mv $path/web/index{,.original}.html
+bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $path/web -xf master.zip transmission-web-control-master/src
+rm master.zip
+chown -R root:root $path/web
 
 echo -e "$bar Start Transmission ..."
-if ! systemctl start tran &> /dev/null; then
+if ! systemctl enable --now transmission &> /dev/null; then
 	title -l = "$warn Transmission install failed."
 	exit
 fi
@@ -105,9 +98,5 @@ insertH displaylibrary
 
 installfinish $@
 
-echo "Run: systemctl < start / stop > tran"
-echo "Startup: systemctl < enable / disable > tran"
-echo
 echo "Download directory: $path"
-echo "WebUI: < RuneAudio_IP >:9091"
 title -nt "User: root"
