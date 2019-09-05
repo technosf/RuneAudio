@@ -95,7 +95,7 @@ fi
 file=/srv/http/indexbody.php
 echo $file
 string=$( cat <<'EOF'
-	<a id="transmission"><i class="fa fa-transmission gr"></i>Transmission</a>
+	<a id="transmission"><img src="/assets/img/addons/thumbtran.png">Transmission</a>
 EOF
 )
 insertH displaylibrary
