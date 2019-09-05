@@ -87,8 +87,15 @@ fi
 
 file=/srv/http/indexbody.php
 echo $file
+
 string=$( cat <<'EOF'
-	<a id="transmission">
+$transmission = exec( '/usr/bin/systemctl is-enabled transmission 2> /dev/null' ) === 'enabled' ? 1 : 0;
+EOF
+)
+insertH '// counts'
+
+string=$( cat <<'EOF'
+	<a id="transmission" data-enabled="<?=$transmission?>">
 		<img src="/assets/img/addons/thumbtran.png">Transmission
 		<i class="fa fa-gear submenu settings"></i>
 	</a>
