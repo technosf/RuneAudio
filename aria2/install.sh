@@ -98,7 +98,7 @@ $( '#aria2' ).click( function( e ) {
 			icon       : 'gear'
 			, title    : 'Aria2'
 			, checkbox : { 'Enable on startup': 1 }
-			, checked  : [ 0 ]
+			, checked  : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
 			, ok       : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now aria2' } );
