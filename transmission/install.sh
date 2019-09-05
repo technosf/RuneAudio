@@ -147,7 +147,7 @@ $( '#transmission' ).click( function( e ) {
 		$this
 			.data( 'enabled', 1 )
 			.data( 'active', 1 )
-			.find( 'img' ).css( 'border', 'solid 2px #0f0' );
+			.find( 'img' ).addClass( 'on' );
 		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
 	}
 } );
