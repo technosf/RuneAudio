@@ -88,6 +88,33 @@ EOF
 )
 insertH displaylibrary
 
+file=/srv/http/assets/js/main.js
+echo $file
+
+string=$( cat <<'EOF'
+$( '#aria2' ).click( function( e ) {
+	if ( $( e.target ).hasClass( 'submenu' ) ) {
+		info( {
+			icon       : 'gear'
+			, title    : 'Aria2'
+			, checkbox : { 'Enable on startup': 1 }
+			, checked  : [ 0 ]
+			, ok       : function() {
+				var enable = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' ) ? ' enable --now ' : ' disable --now ';
+				$.post( 'commands.php', { bash: 'systemctl'+ enable + 'aria2' } );
+			}
+		} );
+	} else {
+		$.post( 'commands.php', { bash: 'systemctl start aria2' }, function() {
+			location.href = 'aria2';
+		} );
+		notify( 'Aria2', 'Starting ...', 'gear fa-spin' );
+	}
+} );
+EOF
+)
+insertH '#displaycolor'
+
 installfinish $@
 
 title -nt "Download directory: $path"
