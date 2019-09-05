@@ -75,7 +75,7 @@ echo $file
 string=$( cat <<'EOF'
 	<a id="aria2">
 		<img src="/assets/img/addons/thumbaria.png" style="filter: brightness(1.3)">Aria2
-		<i id="setting-aria2" class="fa fa-gear submenu settings"></i>
+		<i class="fa fa-gear submenu settings"></i>
 	</a>
 EOF
 )
