@@ -21,9 +21,6 @@ if [[ $1 == u ]]; then
 	[[ $( systemctl list-unit-files | grep 'tran.*enable' ) ]] && redis-cli set transtartup 1
 fi
 
-# uninstall package #######################################
-pacman -Rs --noconfirm transmission-cli
-
 # restore file
 echo -e "$bar Restore files ..."
 restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
