@@ -20,12 +20,11 @@ for dir in $dirs; do
 	extraDir $dir
 done
 
-dir=/srv/http/assets/img/mpd
-chown -R mpd:audio $dir "$( readlink -f "$dir" )"
-
 dir=/srv/http/assets/img/redis
-[[ -z $( ls $dir ) ]] && cp /var/lib/redis/* $dir
-chown -R redis:redis $dir "$( readlink -f "$dir" )"
+if [[ -z $( ls $dir ) ]]; then
+	cp /var/lib/redis/* $dir
+	chown -R redis:redis $dir "$( readlink -f "$dir" )"
+fi
 
 sed -i -e '\|^#dir /srv/http/assets/img/redis/| s|^#||' -e '\|^dir /var/lib/redis/| s|^|#|' /etc/redis.conf
 
