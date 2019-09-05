@@ -77,7 +77,7 @@ string=$( cat <<'EOF'
 $aria2 = exec( '/usr/bin/systemctl is-enabled aria2 2> /dev/null' ) === 'enabled' ? 1 : 0;
 EOF
 )
-insertP '// counts'
+insert '// counts'
 
 string=$( cat <<'EOF'
 	<a id="aria2" data-enabled="<?=$aria2?>">
