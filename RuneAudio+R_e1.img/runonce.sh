@@ -31,9 +31,7 @@ systemctl start redis mpd
 
 # set .mpdignore for extra directories
 file="$( ls -d /mnt/MPD/USB/*/ ).mpdignore"
-if [[ ! -e "$file" ]]; then
-echo "$dirs" > "$file"
-fi
+[[ ! -e "$file" ]] && echo "$dirs" > "$file"
 
 # reset I2S setting
 redis-cli set audiooutput 'bcm2835 ALSA_1'
