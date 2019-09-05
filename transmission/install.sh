@@ -117,14 +117,14 @@ $( '#transmission' ).click( function( e ) {
 			, ok       : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now transmission' } );
-				$( this ).data( 'enabled', checked ? 0 : 1 );
+				$( '#transmission' ).data( 'enabled', checked ? 0 : 1 );
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start transmission' }, function() {
 			location.port = 9091;
 		} );
-		$( this ).data( 'enabled', 1 );
+		$( '#transmission' ).data( 'enabled', 1 );
 		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
 	}
 } );
