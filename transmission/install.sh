@@ -98,7 +98,7 @@ string=$( cat <<'EOF'
 	<a id="transmission"><i class="fa fa-transmission gr"></i>Transmission</a>
 EOF
 )
-insertP displaylibrary
+insertH displaylibrary
 
 installfinish $@
 
