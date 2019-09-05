@@ -111,41 +111,7 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#transmission' ).click( function( e ) {
-	var $this = $( this );
-	var active = $this.data( 'active' );
-	if ( $( e.target ).hasClass( 'submenu' ) ) {
-		info( {
-			  icon        : 'gear'
-			, title       : 'Transmission'
-			, checkbox    : { 'Enable on startup': 1 }
-			, checked     : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
-			, buttonlabel : 'Stop'
-			, buttoncolor : '#de810e'
-			, button      : function() {
-				$.post( 'commands.php', { bash: 'systemctl stop transmission' } );
-				$this
-					.data( 'active', 0 )
-					.find( 'img' ).removeClass( 'on' );
-			}
-			, ok          : function() {
-				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
-				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) +' transmission' } );
-				$this.data( 'enabled', checked ? 1 : 0 );
-			}
-			, preshow     : function() {
-				if ( !active ) $( '#infoButton' ).hide();
-			}
-		} );
-	} else {
-		$.post( 'commands.php', { bash: 'systemctl start transmission' }, function() {
-			location.port = 9091;
-		} );
-		$this
-			.data( 'enabled', 1 )
-			.data( 'active', 1 )
-			.find( 'img' ).addClass( 'on' );
-		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
-	}
+	menuPackage( e, $( this ) );
 } );
 EOF
 )
