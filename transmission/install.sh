@@ -91,6 +91,14 @@ if ! systemctl start tran &> /dev/null; then
 	exit
 fi
 
+file=/srv/http/indexbody.php
+echo $file
+string=$( cat <<'EOF'
+	<a id="transmission"><i class="fa fa-transmission gr"></i>Transmission</a>
+EOF
+)
+insertP displaylibrary
+
 installfinish $@
 
 echo "Run: systemctl < start / stop > tran"
