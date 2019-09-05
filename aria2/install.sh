@@ -74,14 +74,15 @@ file=/srv/http/indexbody.php
 echo $file
 
 string=$( cat <<'EOF'
-$aria2 = exec( '/usr/bin/systemctl is-enabled aria2 2> /dev/null' ) === 'enabled' ? 1 : 0;
+$ariaenable = exec( '/usr/bin/systemctl is-enabled aria2' ) === 'enabled' ? 1 : 0;
+$ariaactive = exec( '/usr/bin/systemctl is-active aria2' ) === 'active' ? 1 : 0;
 EOF
 )
 insert '// counts'
 
 string=$( cat <<'EOF'
-	<a id="aria2" data-enabled="<?=$aria2?>">
-		<img src="/assets/img/addons/thumbaria.png" style="filter: brightness(1.3)">Aria2
+	<a id="aria2" data-enabled="<?=$ariaenable?>" data-active="<?=$ariaactive?>">
+		<img src="/assets/img/addons/thumbaria.png" <?=( $ariaactive ? 'class="on"' : '' )?>>Aria2
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
@@ -93,23 +94,43 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#aria2' ).click( function( e ) {
+	var $this = $( this );
+	var active = $this.data( 'active' );
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		info( {
-			icon       : 'gear'
-			, title    : 'Aria2'
-			, checkbox : { 'Enable on startup': 1 }
-			, checked  : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
-			, ok       : function() {
+			  icon        : 'gear'
+			, title       : 'Aria2'
+			, checkbox    : { 'Enable on startup': 1 }
+			, checked     : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
+			, buttonlabel : 'Stop'
+			, buttoncolor : '#de810e'
+			, button      : function() {
+				$.post( 'commands.php', { bash: 'systemctl stop aria2' } );
+				$this
+					.data( 'active', 0 )
+					.find( 'img' ).removeClass( 'on' );
+			}
+			, ok          : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now aria2' } );
-				$( '#aria2' ).data( 'enabled', checked ? 1 : 0 );
+				$this.data( 'enabled', checked ? 1 : 0 );
+			}
+			, preshow     : function() {
+				if ( !active ) {
+					$( '#infoButton' ).hide();
+				} else {
+					$this.find( 'img' ).addClass( 'on' );
+				}
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start aria2' }, function() {
-			location.href = 'aria2';
+			location.port = 9091;
 		} );
-		$( '#aria2' ).data( 'enabled', 1 );
+		$this
+			.data( 'enabled', 1 )
+			.data( 'active', 1 )
+			.find( 'img' ).addClass( 'on' );
 		notify( 'Aria2', 'Starting ...', 'gear fa-spin' );
 	}
 } );
