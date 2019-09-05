@@ -115,14 +115,16 @@ $( '#transmission' ).click( function( e ) {
 			, checkbox : { 'Enable on startup': 1 }
 			, checked  : [ 0 ]
 			, ok       : function() {
-				var enable = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' ) ? ' enable --now ' : ' disable --now ';
-				$.post( 'commands.php', { bash: 'systemctl'+ enable + 'transmission' } );
+				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
+				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now transmission' } );
+				$( this ).data( 'enabled', checked ? 1 : 0 );
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start transmission' }, function() {
 			location.port = 9091;
 		} );
+		$( this ).data( 'enabled', 1 );
 		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
 	}
 } );
