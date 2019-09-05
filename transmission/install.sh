@@ -92,7 +92,7 @@ string=$( cat <<'EOF'
 $transmission = exec( '/usr/bin/systemctl is-enabled transmission 2> /dev/null' ) === 'enabled' ? 1 : 0;
 EOF
 )
-insertH '// counts'
+insertP '// counts'
 
 string=$( cat <<'EOF'
 	<a id="transmission" data-enabled="<?=$transmission?>">
@@ -128,7 +128,7 @@ $( '#transmission' ).click( function( e ) {
 } );
 EOF
 )
-insertH '#displaycolor'
+insert '#displaycolor'
 
 installfinish $@
 
