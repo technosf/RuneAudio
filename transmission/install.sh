@@ -17,6 +17,8 @@ getuninstall
 
 pacman -S --needed --noconfirm libevent transmission-cli
 
+ln -s /lib/libevent-2.1.so.{7.0.0,6}
+
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
 
