@@ -71,6 +71,14 @@ if ! systemctl start aria2 &> /dev/null; then
 	exit
 fi
 
+file=/srv/http/indexbody.php
+echo $file
+string=$( cat <<'EOF'
+	<a id="aria2"><i class="fa fa-aria2 gr"></i>Aria2</a>
+EOF
+)
+insertP displaylibrary
+
 installfinish $@
 
 echo "Run: systemctl < start / stop > aria2"
