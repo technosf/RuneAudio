@@ -22,8 +22,6 @@ systemctl disable aria2
 systemctl stop aria2
 rm -v /etc/systemd/system/aria2.service
 systemctl daemon-reload
-# uninstall package #######################################
-pacman -Rs --noconfirm aria2
 
 # restore file
 echo -e "$bar Restore files ..."
