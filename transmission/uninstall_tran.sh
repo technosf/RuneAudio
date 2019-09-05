@@ -26,7 +26,7 @@ pacman -Rs --noconfirm transmission-cli
 
 # restore file
 echo -e "$bar Restore files ..."
-restorefile /srv/http/indexbody.php
+restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
