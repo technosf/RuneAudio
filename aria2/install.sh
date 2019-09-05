@@ -72,8 +72,15 @@ fi
 
 file=/srv/http/indexbody.php
 echo $file
+
 string=$( cat <<'EOF'
-	<a id="aria2">
+$aria2 = exec( '/usr/bin/systemctl is-enabled aria2 2> /dev/null' ) === 'enabled' ? 1 : 0;
+EOF
+)
+insertH '// counts'
+
+string=$( cat <<'EOF'
+	<a id="aria2" data-enabled="<?=$aria2?>">
 		<img src="/assets/img/addons/thumbaria.png" style="filter: brightness(1.3)">Aria2
 		<i class="fa fa-gear submenu settings"></i>
 	</a>
