@@ -7,7 +7,6 @@ rm $0
 
 dirs='bookmarks
 coverarts
-gpio
 lyrics
 mpd
 playlists
