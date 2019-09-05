@@ -1,6 +1,5 @@
 RuneAudio Transmission
 ---
-_Tested on RuneAudio 0.3, 0.4b, 0.5_
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
 - fix error: `libcrypto.so.1.1` and `libssl.so.1.1`  
@@ -8,15 +7,6 @@ _Tested on RuneAudio 0.3, 0.4b, 0.5_
 
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)   
-
-**start / stop**  
-```
-systemctl < start / stop > transmission
-```
-
-**WebUI**  
-Browser URL:    
-_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)
 
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
