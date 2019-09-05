@@ -9,13 +9,7 @@ alias=aria
 
 installstart $@
 
-rankmirrors
-
 getuninstall
-
-echo -e "$bar Aria2 package ..."
-
-pacman -S --noconfirm --needed aria2
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
