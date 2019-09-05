@@ -112,15 +112,11 @@ $( '#aria2' ).click( function( e ) {
 			}
 			, ok          : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
-				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now aria2' } );
+				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) +' aria2' } );
 				$this.data( 'enabled', checked ? 1 : 0 );
 			}
 			, preshow     : function() {
-				if ( !active ) {
-					$( '#infoButton' ).hide();
-				} else {
-					$this.find( 'img' ).addClass( 'on' );
-				}
+				if ( !active ) $( '#infoButton' ).hide();
 			}
 		} );
 	} else {
