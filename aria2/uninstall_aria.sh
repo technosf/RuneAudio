@@ -27,7 +27,7 @@ pacman -Rs --noconfirm aria2
 
 # restore file
 echo -e "$bar Restore files ..."
-restorefile /etc/nginx/nginx.conf
+restorefile /srv/http/indexbody.php
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
