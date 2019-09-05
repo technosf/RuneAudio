@@ -11,14 +11,7 @@ alias=tran
 
 installstart $@
 
-rankmirrors
-
 getuninstall
-
-pacman -S --needed --noconfirm transmission-cli
-
-# remove conf for non-exist user 'transmission'
-rm /usr/lib/tmpfiles.d/transmission.conf
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
