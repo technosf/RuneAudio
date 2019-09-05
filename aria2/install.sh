@@ -77,7 +77,7 @@ string=$( cat <<'EOF'
 	<a id="aria2"><i class="fa fa-aria2 gr"></i>Aria2</a>
 EOF
 )
-insertP displaylibrary
+insertH displaylibrary
 
 installfinish $@
 
