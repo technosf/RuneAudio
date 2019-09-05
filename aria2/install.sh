@@ -62,11 +62,10 @@ ExecStart=/usr/bin/aria2c
 WantedBy=multi-user.target
 EOF
 
-[[ $1 == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
-redis-cli del ariastartup &> /dev/null
+systemctl daemon-reload
 
 echo -e "$bar Start $title ..."
-if ! systemctl start aria2 &> /dev/null; then
+if ! systemctl enable --now aria2 &> /dev/null; then
 	title -l = "$warn $title install failed."
 	exit
 fi
