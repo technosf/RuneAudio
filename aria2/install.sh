@@ -74,7 +74,7 @@ fi
 file=/srv/http/indexbody.php
 echo $file
 string=$( cat <<'EOF'
-	<a id="aria2"><i class="fa fa-aria2 gr"></i>Aria2</a>
+	<a id="aria2"><img src="/assets/img/addons/thumbaria.png">Aria2</a>
 EOF
 )
 insertH displaylibrary
