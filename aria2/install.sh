@@ -100,14 +100,16 @@ $( '#aria2' ).click( function( e ) {
 			, checkbox : { 'Enable on startup': 1 }
 			, checked  : [ 0 ]
 			, ok       : function() {
-				var enable = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' ) ? ' enable --now ' : ' disable --now ';
-				$.post( 'commands.php', { bash: 'systemctl'+ enable + 'aria2' } );
+				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
+				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now aria2' } );
+				$( this ).data( 'enabled', checked ? 1 : 0 );
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start aria2' }, function() {
 			location.href = 'aria2';
 		} );
+		$( this ).data( 'enabled', 1 );
 		notify( 'Aria2', 'Starting ...', 'gear fa-spin' );
 	}
 } );
