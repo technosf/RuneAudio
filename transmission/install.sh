@@ -90,7 +90,7 @@ echo $file
 string=$( cat <<'EOF'
 	<a id="transmission">
 		<img src="/assets/img/addons/thumbtran.png">Transmission
-		<i id="setting-transmission" class="fa fa-gear submenu settings"></i>
+		<i class="fa fa-gear submenu settings"></i>
 	</a>
 EOF
 )
