@@ -103,6 +103,33 @@ EOF
 )
 insertH displaylibrary
 
+file=/srv/http/assets/js/main.js
+echo $file
+
+string=$( cat <<'EOF'
+$( '#transmission' ).click( function( e ) {
+	if ( $( e.target ).hasClass( 'submenu' ) ) {
+		info( {
+			icon       : 'gear'
+			, title    : 'Transmission'
+			, checkbox : { 'Enable on startup': 1 }
+			, checked  : [ 0 ]
+			, ok       : function() {
+				var enable = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' ) ? ' enable --now ' : ' disable --now ';
+				$.post( 'commands.php', { bash: 'systemctl'+ enable + 'transmission' } );
+			}
+		} );
+	} else {
+		$.post( 'commands.php', { bash: 'systemctl start transmission' }, function() {
+			location.port = 9091;
+		} );
+		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
+	}
+} );
+EOF
+)
+insertH '#displaycolor'
+
 installfinish $@
 
 echo "Download directory: $path"
