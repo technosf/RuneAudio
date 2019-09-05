@@ -91,14 +91,15 @@ file=/srv/http/indexbody.php
 echo $file
 
 string=$( cat <<'EOF'
-$transmission = exec( '/usr/bin/systemctl is-enabled transmission 2> /dev/null' ) === 'enabled' ? 1 : 0;
+$tranenable = exec( '/usr/bin/systemctl is-enabled transmission' ) === 'enabled' ? 1 : 0;
+$tranactive = exec( '/usr/bin/systemctl is-active transmission' ) === 'active' ? 1 : 0;
 EOF
 )
 insert '// counts'
 
 string=$( cat <<'EOF'
-	<a id="transmission" data-enabled="<?=$transmission?>">
-		<img src="/assets/img/addons/thumbtran.png">Transmission
+	<a id="transmission" data-enabled="<?=$tranenable?>" data-active="<?=$tranactive?>">
+		<img src="/assets/img/addons/thumbtran.png" <?=( $tranactive ? 'class="on"' : '' )?>>Transmission
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
@@ -110,23 +111,43 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#transmission' ).click( function( e ) {
+	var $this = $( this );
+	var active = $this.data( 'active' );
 	if ( $( e.target ).hasClass( 'submenu' ) ) {
 		info( {
-			icon       : 'gear'
-			, title    : 'Transmission'
-			, checkbox : { 'Enable on startup': 1 }
-			, checked  : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
-			, ok       : function() {
+			  icon        : 'gear'
+			, title       : 'Transmission'
+			, checkbox    : { 'Enable on startup': 1 }
+			, checked     : [ $( this ).data( 'enabled' ) ? 0 : 1 ]
+			, buttonlabel : 'Stop'
+			, buttoncolor : '#de810e'
+			, button      : function() {
+				$.post( 'commands.php', { bash: 'systemctl stop transmission' } );
+				$this
+					.data( 'active', 0 )
+					.find( 'img' ).removeClass( 'on' );
+			}
+			, ok          : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now transmission' } );
 				$( '#transmission' ).data( 'enabled', checked ? 1 : 0 );
+			}
+			, preshow     : function() {
+				if ( !active ) {
+					$( '#infoButton' ).hide();
+				} else {
+					$this.find( 'img' ).addClass( 'on' );
+				}
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start transmission' }, function() {
 			location.port = 9091;
 		} );
-		$( '#transmission' ).data( 'enabled', 1 );
+		$this
+			.data( 'enabled', 1 )
+			.data( 'active', 1 )
+			.find( 'img' ).css( 'border', 'solid 2px #0f0' );
 		notify( 'Transmission', 'Starting ...', 'gear fa-spin' );
 	}
 } );
