@@ -117,7 +117,7 @@ $( '#transmission' ).click( function( e ) {
 			, ok       : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now transmission' } );
-				$( this ).data( 'enabled', checked ? 1 : 0 );
+				$( this ).data( 'enabled', checked ? 0 : 1 );
 			}
 		} );
 	} else {
