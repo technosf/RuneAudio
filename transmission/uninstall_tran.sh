@@ -23,6 +23,10 @@ fi
 # uninstall package #######################################
 pacman -Rs --noconfirm transmission-cli
 
+# restore file
+echo -e "$bar Restore files ..."
+restorefile /srv/http/indexbody.php
+
 # remove files #######################################
 echo -e "$bar Remove files ..."
 
