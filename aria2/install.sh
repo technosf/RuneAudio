@@ -102,14 +102,14 @@ $( '#aria2' ).click( function( e ) {
 			, ok       : function() {
 				var checked = $( '#infoCheckBox input[ type=checkbox ]' ).prop( 'checked' );
 				$.post( 'commands.php', { bash: 'systemctl '+ ( checked ? 'enable' : 'disable' ) + ' --now aria2' } );
-				$( this ).data( 'enabled', checked ? 0 : 1 );
+				$( '#aria2' ).data( 'enabled', checked ? 1 : 0 );
 			}
 		} );
 	} else {
 		$.post( 'commands.php', { bash: 'systemctl start aria2' }, function() {
 			location.href = 'aria2';
 		} );
-		$( this ).data( 'enabled', 1 );
+		$( '#aria2' ).data( 'enabled', 1 );
 		notify( 'Aria2', 'Starting ...', 'gear fa-spin' );
 	}
 } );
