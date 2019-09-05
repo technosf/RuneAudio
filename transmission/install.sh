@@ -97,7 +97,7 @@ insert '// counts'
 string=$( cat <<'EOF'
 	<a id="transmission" data-enabled="<?=$transmission?>">
 		<img src="/assets/img/addons/thumbtran.png">Transmission
-		<i class="fa fa-gear submenu settings"></i>
+		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
 )
