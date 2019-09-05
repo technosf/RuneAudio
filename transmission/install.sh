@@ -95,7 +95,10 @@ fi
 file=/srv/http/indexbody.php
 echo $file
 string=$( cat <<'EOF'
-	<a id="transmission"><img src="/assets/img/addons/thumbtran.png">Transmission</a>
+	<a id="transmission">
+		<img src="/assets/img/addons/thumbtran.png">Transmission
+		<i id="setting-transmission" class="fa fa-rune submenu settings"></i>
+	</a>
 EOF
 )
 insertH displaylibrary
