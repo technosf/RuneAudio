@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# $1-password; $2-webui alternative; $3-startup
+# $1-password
 
 # change version number in RuneAudio_Addons/srv/http/addonslist.php
 
