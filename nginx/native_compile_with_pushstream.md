@@ -25,14 +25,11 @@ cd /home/x/nginx
 ++    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 #)
 #_common_flags=(
-++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
-...
-#}
-#build() {
 ...
 --    --with-mail
 --    --with-mail_ssl_module
 ...
+++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 #}
 --check() {
 --  cd nginx-tests
