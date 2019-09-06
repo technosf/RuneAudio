@@ -46,7 +46,7 @@ kid3-cli -c 'select /path/file' \
 
 **Build**
 ```sh
-pacman -Sy base-devel qt5-tools extra-cmake-modules jsoncpp
+pacman -Sy --needed base-devel qt5-tools extra-cmake-modules jsoncpp
 
 useradd x
 su x
