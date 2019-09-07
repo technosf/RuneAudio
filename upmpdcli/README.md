@@ -27,3 +27,10 @@ cd upmpdcli
 
 makepkg -A --skipinteg
 ```
+
+`/etc/upmpdcli.conf`
+```sh
+sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
+' -e 's/.*\(ownqueue = \).*/\11
+' /etc/upmpdcli.conf
+```
