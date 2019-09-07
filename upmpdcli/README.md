@@ -2,7 +2,7 @@
 
 An UPnP Audio Media Renderer based on MPD
 ```sh
-pacman -Sy expat
+pacman -Sy expat libmicrohttpd
 
 su x
 
