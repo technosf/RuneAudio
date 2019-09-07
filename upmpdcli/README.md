@@ -2,6 +2,8 @@
 
 An UPnP Audio Media Renderer based on MPD
 ```sh
+pacman -Sy expat
+
 su x
 
 cd \
