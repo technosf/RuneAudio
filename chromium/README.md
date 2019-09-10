@@ -1,6 +1,6 @@
 Chromium Browser
 ---
-(Install Chromium breaks default MPD. MPD Upgrade needed.)  
+As of 20190822, this has been integrated to [**RuneAudio+R e1**](https://github.com/rern/RuneAudio-Re1).
 
 **Chromium** has the least issues as an alternative browser
 - Chromium cannot be installed without `ffmpeg` upgrade
