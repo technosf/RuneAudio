@@ -102,7 +102,7 @@ createThumbnail() {
 				continue
 			fi
 			# skip non-audio files
-			mimetype=$( file -b --mime-type $file | cut -d/ -f )
+			mimetype=$( file -b --mime-type $file | cut -d/ -f1 )
 			[[ $mimetype != audio && $ext != dsf && $ext != dff ]] && continue # dsd mimetype not consistent
 			
 			# find cover file
