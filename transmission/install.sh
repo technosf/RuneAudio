@@ -32,13 +32,13 @@ mkdir -p $dir
 echo "[Service]
 User=root
 Environment=TRANSMISSION_HOME=$path
-Environment=TRANSMISSION_WEB_HOME=$path/web
+Environment=TRANSMISSION_WEB_HOME=/srv/http/transmission
 " > $dir/override.conf
 systemctl daemon-reload
 
 file=$path/settings.json
 rm -f $file
-# create settings.json
+# create new settings.json
 systemctl start transmission
 systemctl stop transmission
 
@@ -65,12 +65,14 @@ fi
 # web ui alternative
 echo -e "$bar Get WebUI alternative ..."
 wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
-rm -rf $path/web
-cp -r /usr/share/transmission/web $path
-mv $path/web/index{,.original}.html
-bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $path/web -xf master.zip transmission-web-control-master/src
+
+dirweb=/srv/http/transmission
+mkdir $dir
+cp -r /usr/share/transmission/web/* $dirweb
+mv $dirweb/index{,.original}.html
+bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $dirweb -xf master.zip transmission-web-control-master/src
 rm master.zip
-chown -R root:root $path/web
+chown -R root:root $dirweb
 
 echo -e "$bar Start Transmission ..."
 if ! systemctl enable --now transmission &> /dev/null; then
