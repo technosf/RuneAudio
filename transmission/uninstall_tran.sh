@@ -7,12 +7,7 @@ alias=tran
 
 uninstallstart $@
 
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	path=$mnt/transmission
-else
-	path=/root/transmission
-fi
+systemctl disable transmission
 
 # restore file
 echo -e "$bar Restore files ..."
