@@ -56,6 +56,8 @@ ExecStart=/usr/bin/aria2c
 WantedBy=multi-user.target
 EOF
 
+chmod 644 $file
+
 systemctl daemon-reload
 
 echo -e "$bar Start $title ..."
