@@ -17,8 +17,8 @@ fi
 # if update, save settings #######################################
 if [[ $1 == u ]]; then
 	cp $path/settings.json /tmp
-	[[ -e $path/web/index.original.html ]] && redis-cli set tranwebui 1
-	[[ $( systemctl list-unit-files | grep 'tran.*enable' ) ]] && redis-cli set transtartup 1
+	[[ -e $path/web/index.original.html ]] && redis-cli set tranwebui 1 &> /dev/null
+	[[ $( systemctl list-unit-files | grep 'tran.*enable' ) ]] && redis-cli set transtartup 1 &> /dev/null
 fi
 
 # restore file
