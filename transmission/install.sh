@@ -90,7 +90,7 @@ insert '// counts'
 
 string=$( cat <<'EOF'
 	<a id="transmission" data-enabled="<?=$tranenable?>" data-active="<?=$tranactive?>">
-		<img src="/assets/img/addons/thumbtran.png" <?=( $tranactive ? 'class="on"' : '' )?>>Transmission
+		<img src="/assets/img/addons/thumbtran.<?=$time?>.png" <?=( $tranactive ? 'class="on"' : '' )?>>Transmission
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
