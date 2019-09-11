@@ -91,7 +91,7 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#aria2' ).click( function( e ) {
-	menuPackage( e, $( this ) );
+	menuPackage( e, $( this ), '/aria2/index.html' );
 } );
 EOF
 )
