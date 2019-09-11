@@ -95,7 +95,7 @@ string=$( cat <<'EOF'
 	</a>
 EOF
 )
-insertH '^\$redis'
+insertH 'displaylibrary'
 
 file=/srv/http/assets/js/main.js
 echo $file
