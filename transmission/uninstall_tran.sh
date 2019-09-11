@@ -17,6 +17,6 @@ restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
 echo -e "$bar Remove files ..."
 
 rm -rv /etc/systemd/system/transmission.service.d
-rm -r $path/web
+rm -rv /srv/http/transmission
 
 uninstallfinish $@
