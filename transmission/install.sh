@@ -67,7 +67,7 @@ echo -e "$bar Get WebUI alternative ..."
 wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
 
 dirweb=/srv/http/transmission
-mkdir $dir
+mkdir $dirweb
 cp -r /usr/share/transmission/web/* $dirweb
 mv $dirweb/index{,.original}.html
 bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $dirweb -xf master.zip transmission-web-control-master/src
