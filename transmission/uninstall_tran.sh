@@ -17,6 +17,8 @@ restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
 echo -e "$bar Remove files ..."
 
 rm -rv /etc/systemd/system/transmission.service.d
-rm -rv /srv/http/transmission
+dirweb=/usr/share/transmission/web
+rm -rv $dirweb/tr-web-control $dirweb/{favicon.ico,index.html,index.mobile.html}
+mv $dirweb/index{.original,}.html
 
 uninstallfinish $@
