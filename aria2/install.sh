@@ -9,14 +9,15 @@ alias=aria
 
 installstart $@
 
+if ! mount | grep -q '/dev/sda1'; then
+	title "$info No USB drive found."
+	exit
+fi
+
 getuninstall
 
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
-	path=$mnt/aria2
-else
-	path=/root/aria2
-fi
+mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
+path=$mnt/aria2
 mkdir -p $path
 
 echo -e "$bar WebUI ..."
