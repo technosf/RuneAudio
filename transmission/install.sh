@@ -11,17 +11,17 @@ alias=tran
 
 installstart $@
 
-getuninstall
-
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 	mkdir -p $mnt/transmission
 	path=$mnt/transmission
-else
-	mkdir -p /root/transmission
-	path=/root/transmission
+	title "$info No USB drive found."
+	exit
 fi
+
 mkdir -p $path/{incomplete,watch}
+
+getuninstall
 
 # custom systemd unit
 systemctl disable --now transmission
