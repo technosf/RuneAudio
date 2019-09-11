@@ -76,7 +76,7 @@ insert '// counts'
 
 string=$( cat <<'EOF'
 	<a id="aria2" data-enabled="<?=$ariaenable?>" data-active="<?=$ariaactive?>">
-		<img src="/assets/img/addons/thumbaria.png" <?=( $ariaactive ? 'class="on"' : '' )?>>Aria2
+		<img src="/assets/img/addons/thumbaria.<?=$time?>.png" <?=( $ariaactive ? 'class="on"' : '' )?>>Aria2
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
