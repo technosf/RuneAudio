@@ -14,13 +14,6 @@ else
 	path=/root/transmission
 fi
 
-# if update, save settings #######################################
-if [[ $1 == u ]]; then
-	cp $path/settings.json /tmp
-	[[ -e $path/web/index.original.html ]] && redis-cli set tranwebui 1 &> /dev/null
-	[[ $( systemctl list-unit-files | grep 'tran.*enable' ) ]] && redis-cli set transtartup 1 &> /dev/null
-fi
-
 # restore file
 echo -e "$bar Restore files ..."
 restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
