@@ -32,7 +32,6 @@ mkdir -p $dir
 echo "[Service]
 User=root
 Environment=TRANSMISSION_HOME=$path
-Environment=TRANSMISSION_WEB_HOME=/srv/http/transmission
 " > $dir/override.conf
 systemctl daemon-reload
 
@@ -66,9 +65,7 @@ fi
 echo -e "$bar Get WebUI alternative ..."
 wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
 
-dirweb=/srv/http/transmission
-mkdir $dirweb
-cp -r /usr/share/transmission/web/* $dirweb
+dirweb=/usr/share/transmission/web
 mv $dirweb/index{,.original}.html
 bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $dirweb -xf master.zip transmission-web-control-master/src
 rm master.zip
