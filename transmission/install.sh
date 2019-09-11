@@ -11,14 +11,14 @@ alias=tran
 
 installstart $@
 
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
-	mkdir -p $mnt/transmission
-	path=$mnt/transmission
+if ! mount | grep -q '/dev/sda1'; then
 	title "$info No USB drive found."
 	exit
 fi
 
+mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
+mkdir -p $mnt/transmission
+path=$mnt/transmission
 mkdir -p $path/{incomplete,watch}
 
 getuninstall
