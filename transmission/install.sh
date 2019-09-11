@@ -101,7 +101,7 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#transmission' ).click( function( e ) {
-	menuPackage( e, $( this ) );
+	menuPackage( e, $( this ), 'http://'+ location.hostname +':9091' );
 } );
 EOF
 )
