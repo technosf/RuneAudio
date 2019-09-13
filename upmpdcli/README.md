@@ -15,6 +15,7 @@ cd libupnpp
 makepkg -A --skipinteg
 
 su
+pacman -R libupnpp-rune upmpdcli-rune
 pacman -U /home/x/libupnpp/libupnpp-0.17.1-1-armv7h.pkg.tar.xz
 
 su x
