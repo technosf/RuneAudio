@@ -3,10 +3,10 @@
 [**Kid3**](https://kid3.sourceforge.io/)
 ```sh
 # all format by common tag names
-# double quotes for arguments with spaces
+# escape double quotes for arguments with spaces
 
 # set tags
-kid3-cli -c 'select /path/file' \
+kid3-cli -c "select \"/path/to file\"" \
 	-c 'set artist "ARTIST"' \
 	-c 'set album "ALBUM"' \
 	-c 'set albumartist "ALBUMARTIST"' \
@@ -17,12 +17,12 @@ kid3-cli -c 'select /path/file' \
 	-c 'set picture:/path/source'
 	
 # get tags
-kid3-cli -c 'select /path/file' \
+kid3-cli -c "select \"/path/to file\"" \
 	-c 'get artist' \
 	-c 'get picture:/path/destination'
 	
 # remove tags
-kid3-cli -c 'select /path/file' \
+kid3-cli -c "select \"/path/to file\"" \
 	-c 'remove artist' \
 	-c 'remove picture' \
 	-c 'remove 1' \ # remove ID3v1
