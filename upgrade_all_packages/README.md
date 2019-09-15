@@ -8,4 +8,11 @@ pacman -U $file
 
 # then upgrade all
 pacman -Syu
+
+# packages that cannot be upgraded
+php-libevent
+php-pthreads 
+php-rune 
+phpiredis-rune 
+phpredis-rune
 ```
