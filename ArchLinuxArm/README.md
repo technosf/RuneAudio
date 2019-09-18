@@ -21,17 +21,7 @@ wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 **Extract files**
 ```sh
 # bsdtar
-apt-cache policy bsdtar
-	# version 3.3+
-apt install bsdtar
-	# otherwise make install
-file=libarchive-N.N.N.tar.gz
-wget https://www.libarchive.org/downloads/$file
-tar xzf $file
-cd ${file/.tar.gz}
-./configure
-make
-sudo make install
+apt install libarchive-tools
 
 # extract
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
