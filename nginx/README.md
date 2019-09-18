@@ -15,55 +15,8 @@ pacman -U $file
 rm $file
 
 pacman -Sy php-fpm
-```
-### `/etc/nginx/nginx.conf`
-```
-worker_processes  1;
 
-events {
-	worker_connections  1024;
-}
+wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.conf -O /etc/nginx/nginx.conf
 
-http {
-	include            mime.types;
-	default_type       application/octet-stream;
-	sendfile           on;
-	keepalive_timeout  65;
-	
-	push_stream_shared_memory_size       16M;
-	push_stream_channel_info_on_publish  off;
-	
-	server {
-		listen      80;
-		root        html;
-		index       index.php index.html index.htm;
-		error_page  500 502 503 504  /50x.html;
-
-		location = /50x.html {
-			root  html;
-		}
-
-		location ~* \.php$ {
-			fastcgi_pass   unix:/run/php-fpm/php-fpm.sock;
-			fastcgi_index  index.php;
-			fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-			include        fastcgi_params;
-		}
-		
-		location /pub {
-			push_stream_publisher      admin;
-			push_stream_channels_path  $arg_id;
-		}
-		location ~ /ws/(.*) {
-			push_stream_subscriber             websocket;
-			push_stream_channels_path          $1;
-			push_stream_message_template       "{\"id\":~id~,\"channel\":\"~channel~\",\"text\":[~text~]}";
-			push_stream_ping_message_interval  10s;
-		}
-	}
-}
-```
-### start
-```sh
 systemctl restart nginx php-fpm
 ```
