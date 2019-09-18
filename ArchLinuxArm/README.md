@@ -30,7 +30,7 @@ rm $file
 
 fat32=<sdcardfat32>
 ext4=<sdcardext4>
-rsync -av --progress alarm/boot/ /media/$fat32/
+rsync -v --progress alarm/boot/ /media/$fat32/
 rsync -av --progress alarm/ /media/$ext4/ --exclude boot
 
 # set root's password to "rune" and allow SSH login
