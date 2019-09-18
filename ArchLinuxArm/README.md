@@ -47,6 +47,9 @@ passwd
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 systemctl reload sshd
 
-# if keyring error, temporarily disable keyring
+# initialize pgp key (May have to wait for "haveged" to make enough entropy.)
+pacman-key --init && pacman-key --populate archlinuxarm
+
+# Or temporarily bypass key verifications
 sed -i '/^SigLevel/ s/^/#/; a\SigLevel    = TrustAll' /etc/pacman.conf
 ```
