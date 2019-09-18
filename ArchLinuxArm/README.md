@@ -45,4 +45,5 @@ passwd
 
 # permit root SSH login
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+systemctl reload sshd
 ```
