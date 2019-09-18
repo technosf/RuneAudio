@@ -18,7 +18,7 @@ wget http://os.archlinuxarm.org/os/$file
 | primary | #1  | BOOT  | fat32  | 100MB    |
 | primary | #2  | ROOT  | ext4   | the rest |
 
-**Extract files**
+**Create SD card**
 ```sh
 # install bsdtar
 sudo su
