@@ -3,14 +3,6 @@ ArchLinuxArm
 
 ### Desktop Linux
 
-**Download**
-- list: http://os.archlinuxarm.org/os/
-```sh
-# RPi 3
-file=ArchLinuxARM-rpi-3-latest.tar.gz
-wget http://os.archlinuxarm.org/os/$file
-```
-
 **Partition SD Card**
 - **Gparted**
 
@@ -19,22 +11,24 @@ wget http://os.archlinuxarm.org/os/$file
 | primary | #1  | BOOT  | fat32  | 100MB    |
 | primary | #2  | ROOT  | ext4   | the rest |
 
-### Create SD card
+**Download**
+- list: http://os.archlinuxarm.org/os/
 ```sh
-# install bsdtar
+user=$( whoami )
 sudo su
-apt install libarchive-tools
 
-# extract
-mkdir alarm
-bsdtar xpvf $file -C alarm
-rm $file
-
-# copy files to SD card
-user=<username>
-cp -rv alarm/boot/* /media/$user/BOOT
-rsync -av --progress alarm/ /media/$user/ROOT/ --exclude boot
+# download - RPi 3
+file=ArchLinuxARM-rpi-3-latest.tar.gz
+wget http://os.archlinuxarm.org/os/$file
 ```
+
+### Flash SD card
+```sh
+# extract
+tar xpvf $file -C /media/$user/ROOT
+mv -r /media/$user/ROOT/boot /media/$user/BOOT
+```
+
 ### Boot
 - SCP/SSH with user|password : alarm|alarm
 ```sh
