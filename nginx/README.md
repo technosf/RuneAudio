@@ -31,8 +31,7 @@ http {
     keepalive_timeout  65;
 
     server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
+        listen       80;
         server_name  localhost;
         root         html;
         index        index.php index.html index.htm;
