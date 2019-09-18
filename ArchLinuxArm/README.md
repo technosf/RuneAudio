@@ -12,7 +12,7 @@ wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 ```
 
 **Partition SD Card**
-- **Gparted** does unmount > partition > format
+- **Gparted**: unmount > partition > format
 ```sh
 # primary #1  BOOT   fat32   100MB  
 # primary #2   ROOT   ext4    the rest
