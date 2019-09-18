@@ -4,6 +4,7 @@ ArchLinuxArm
 ### Desktop Linux
 
 **Download**
+- list: http://os.archlinuxarm.org/os/
 ```sh
 # RPi 3
 file=ArchLinuxARM-rpi-3-latest.tar.gz
