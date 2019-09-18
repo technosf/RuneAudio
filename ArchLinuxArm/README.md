@@ -32,6 +32,6 @@ rsync -av --progress alarm/ /media/<sdcardfat32>/
 rsync -av --progress alarm/ /media/<sdcardext4>/ --exclude boot
 
 # set root's password to "rune" and allow SSH login
-sed -i 's|^root:.*$|root:\\$6\\$CPmm8tpA/CUX3u4G\$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::|' etc/shadow
-sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' media/x/ROOT/etc/ssh/sshd_config
+sed -i 's|^root:.*$|root:\\$6\\$CPmm8tpA/CUX3u4G\$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::|' alarm/etc/shadow
+sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' alarm/etc/ssh/sshd_config
 ```
