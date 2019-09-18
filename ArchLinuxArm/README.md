@@ -35,6 +35,6 @@ sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' alarm/etc/ssh/sshd_config
 
 # copy files to SD card
 user=<username>
-cp -rv alarm/boot /media/$user/BOOT
+cp -rv alarm/boot/* /media/$user/BOOT
 rsync -av --progress alarm/ /media/$user/ROOT/ --exclude boot
 ```
