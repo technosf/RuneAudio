@@ -46,4 +46,7 @@ passwd
 # permit root SSH login
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 systemctl reload sshd
+
+# if keyring error, temporarily disable keyring
+sed -i '/^SigLevel/ s/^/#/; a\SigLevel    = TrustAll' /etc/pacman.conf
 ```
