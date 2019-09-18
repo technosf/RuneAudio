@@ -14,8 +14,11 @@ ArchLinuxArm
 **Download**
 - list: http://os.archlinuxarm.org/os/
 ```sh
-user=$( whoami )
+# get user
+whoami
+
 sudo su
+user=<user> # from previous command
 
 # download - RPi 3
 file=ArchLinuxARM-rpi-3-latest.tar.gz
@@ -29,7 +32,8 @@ apt install bsdtar
 
 # extract
 bsdtar xpvf $file -C /media/$user/ROOT
-mv -r /media/$user/ROOT/boot /media/$user/BOOT
+cp -r --no-preserve=mode,ownership /media/$user/ROOT/boot/* /media/$user/BOOT
+rm -r /media/$user/ROOT/boot/*
 ```
 
 ### Boot
