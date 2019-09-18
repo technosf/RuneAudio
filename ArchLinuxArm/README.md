@@ -24,7 +24,7 @@ wget http://os.archlinuxarm.org/os/$file
 
 ### Flash SD card
 ```sh
-# install bsdtar
+# install bsdtar ("tar" will show lots of errors.)
 apt install bsdtar
 
 # extract
