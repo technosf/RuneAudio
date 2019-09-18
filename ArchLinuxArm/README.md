@@ -25,7 +25,7 @@ apt-cache policy bsdtar
 	# version 3.3+
 apt install bsdtar
 	# otherwise make install
-file=libarchive-3.3.2.tar.gz
+file=libarchive-N.N.N.tar.gz
 wget https://www.libarchive.org/downloads/$file
 tar xzf $file
 cd ${file/.tar.gz}
@@ -43,6 +43,3 @@ rm -r /media/x/ROOT/boot/*
 sed -i 's/^root:.*$/root:$6$CPmm8tpA/CUX3u4G$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::/' /etc/shadow
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
 ```
-
-### RPi Login  
-- id / password : root / rune
