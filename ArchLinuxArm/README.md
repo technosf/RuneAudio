@@ -5,31 +5,33 @@ ArchLinuxArm
 
 **Download**
 ```sh
-# RPi 3 (not for compiling)
-wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
-# RPi 2
-wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+# RPi 3
+file=ArchLinuxARM-rpi-3-latest.tar.gz
+wget http://os.archlinuxarm.org/os/$file
 ```
 
 **Partition SD Card**
-- **Gparted**: unmount > partition > format
+- **Gparted**
 ```sh
-# primary #1  BOOT   fat32   100MB  
+# primary #1   BOOT   fat32   100MB  
 # primary #2   ROOT   ext4    the rest
 ```
 
 **Extract files**
 ```sh
-# bsdtar
+# install bsdtar
+sudo su
 apt install libarchive-tools
 
 # extract
-bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
+mkdir alarm
+bsdtar xpvf $file -C alarm
+rm $file
 
-cp -r --no-preserve=mode,ownership /media/x/ROOT/boot/* /media/x/BOOT
-rm -r /media/x/ROOT/boot/*
+rsync -av --progress alarm/ /media/<sdcardfat32>/
+rsync -av --progress alarm/ /media/<sdcardext4>/ --exclude boot
 
 # set root's password to "rune" and allow SSH login
-sed -i 's/^root:.*$/root:$6$CPmm8tpA/CUX3u4G$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::/' /etc/shadow
-sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
+sed -i 's|^root:.*$|root:\\$6\\$CPmm8tpA/CUX3u4G\$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::|' etc/shadow
+sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' media/x/ROOT/etc/ssh/sshd_config
 ```
