@@ -29,12 +29,11 @@ mkdir alarm
 bsdtar xpvf $file -C alarm
 rm $file
 
-fat32=<sdcardfat32>
-ext4=<sdcardext4>
-rsync -v --progress alarm/boot/ /media/$fat32/
-rsync -av --progress alarm/ /media/$ext4/ --exclude boot
-
 # set root's password to "rune" and allow SSH login
 sed -i 's|^root:.*$|root:\\$6\\$CPmm8tpA/CUX3u4G\$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::|' alarm/etc/shadow
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' alarm/etc/ssh/sshd_config
+
+# copy files to SD card
+rsync -v --progress alarm/boot/ /media/BOOT/
+rsync -av --progress alarm/ /media/ROOT/ --exclude boot
 ```
