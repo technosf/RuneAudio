@@ -12,10 +12,11 @@ wget http://os.archlinuxarm.org/os/$file
 
 **Partition SD Card**
 - **Gparted**
-```sh
-# primary #1   BOOT   fat32   100MB  
-# primary #2   ROOT   ext4    the rest
-```
+
+| Type    | No. | Label | Format | Size     |
+|---------|-----|-------|--------|----------|
+| primary | #1  | BOOT  | fat32  | 100MB    |
+| primary | #2  | ROOT  | ext4   | the rest |
 
 **Extract files**
 ```sh
