@@ -19,7 +19,7 @@ wget http://os.archlinuxarm.org/os/$file
 | primary | #1  | BOOT  | fat32  | 100MB    |
 | primary | #2  | ROOT  | ext4   | the rest |
 
-**Create SD card**
+### Create SD card
 ```sh
 # install bsdtar
 sudo su
@@ -34,10 +34,14 @@ rm $file
 user=<username>
 cp -rv alarm/boot/* /media/$user/BOOT
 rsync -av --progress alarm/ /media/$user/ROOT/ --exclude boot
+```
+### Boot
+- SCP/SSH with user|password : alarm|alarm
+```sh
+# set root's password to "rune"
+su root # root's password: root
+passwd
 
-# after initial boot, set root's password to "rune" and allow SSH login
-# root's password: root
-su root
-sed -i 's|^root:.*$|root:\\$6\\$CPmm8tpA/CUX3u4G\$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::|' /etc/shadow
+# permit root SSH login
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 ```
