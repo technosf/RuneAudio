@@ -24,8 +24,11 @@ wget http://os.archlinuxarm.org/os/$file
 
 ### Flash SD card
 ```sh
+# install bsdtar
+apt install bsdtar
+
 # extract
-tar xpvf $file -C /media/$user/ROOT
+bsdtar xpvf $file -C /media/$user/ROOT
 mv -r /media/$user/ROOT/boot /media/$user/BOOT
 ```
 
