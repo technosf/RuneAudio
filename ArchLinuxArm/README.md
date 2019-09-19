@@ -1,10 +1,10 @@
 ArchLinuxArm
 ---
 
-### Desktop Linux
+On Linux
 
 **Partition SD Card**
-- **Gparted**
+- Gparted
 
 | Type    | No. | Label | Format | Size     |
 |---------|-----|-------|--------|----------|
