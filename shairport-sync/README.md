@@ -1,4 +1,5 @@
 ### Shairport Sync
+[Shairport Sync](https://github.com/mikebrady/shairport-sync) - AirPlay audio player. Shairport Sync adds multi-room capability with Audio Synchronisation
 
 **Note**
 ```sh
