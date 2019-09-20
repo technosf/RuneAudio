@@ -59,7 +59,7 @@ cd /home/x/nginx
 
 ### Prepare build environment
 ```sh
-pacman -Sy --needed base-devel guile git libutil-linux memcached mercurial perl-cache-memcached perl-fcgi perl-gd perl-io-socket-ssl
+pacman -Sy --needed base-devel fakeroot guile git libutil-linux memcached mercurial perl-cache-memcached perl-fcgi perl-gd perl-io-socket-ssl
 ```
 
 ### Compile
