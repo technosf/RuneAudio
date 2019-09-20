@@ -7,7 +7,7 @@
 # ALARM: Kevin Mihelich 
 #  - build armv7h and aarch64 with -fPIC
 
-pkgname=nginx
+pkgname=nginx-pushstream
 pkgver=1.16.1
 pkgrel=1
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
@@ -15,7 +15,7 @@ arch=(x86_64)
 url='https://nginx.org'
 license=(custom)
 pushstreamver=0.5.4
-depends=(pcre zlib openssl geoip)
+depends=(pcre zlib openssl)
 makedepends=(mercurial)
 checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
               memcached ffmpeg inetutils) 
@@ -29,11 +29,13 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/win-utf
         etc/logrotate.d/nginx)
 install=nginx.install
+provides=('nginx')
+conflicts=('nginx')
 source=($url/download/nginx-$pkgver.tar.gz{,.asc}
-        https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
         hg+http://hg.nginx.org/nginx-tests#revision=ddbde6c5b0cd
         service
-        logrotate)
+        logrotate
+		https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz)
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
 md5sums=('45a80f75336c980d240987badc3dcf60'
          'SKIP'
@@ -50,7 +52,6 @@ _common_flags=(
   --with-http_dav_module
   --with-http_degradation_module
   --with-http_flv_module
-  --with-http_geoip_module
   --with-http_gunzip_module
   --with-http_gzip_static_module
   --with-http_mp4_module
@@ -63,19 +64,17 @@ _common_flags=(
   --with-http_v2_module
   --with-pcre-jit
   --with-stream
-  --with-stream_geoip_module
   --with-stream_realip_module
   --with-stream_ssl_module
   --with-stream_ssl_preread_module
   --with-threads
-  --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 )
 
 _stable_flags=(
 )
 
 build() {
-  cd $pkgname-$pkgver
+  cd $provides-$pkgver
 
   [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CFLAGS+=" -fPIC" && CXXFLAGS+=" -fPIC"
 
@@ -103,10 +102,9 @@ build() {
 }
 
 package() {
+  cd $provides-$pkgver
+  make DESTDIR="$pkgdir" install
   mkdir -p "$pkgdir"/usr/lib/systemd/system/
   install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
   install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
-
-  cd $pkgname-$pkgver
-  make DESTDIR="$pkgdir" install
 }
