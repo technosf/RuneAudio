@@ -24,6 +24,7 @@ cd /home/x/nginx
 ...
 ++    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 #)
+
 #_common_flags=(
 ...
 --    --with-http_geoip_module
@@ -35,22 +36,13 @@ cd /home/x/nginx
 ...
 ++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 #}
---check() {
---  cd nginx-tests
---  TEST_NGINX_BINARY="$srcdir/$pkgname-$pkgver/objs/nginx" prove .
---}
+
 #package() {
 ...
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
 ++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
 ++  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
-
---  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
-
---  for i in ftdetect indent syntax; do
---    install -Dm644 contrib/vim/$i/nginx.vim \
---      "$pkgdir/usr/share/vim/vimfiles/$i/nginx.vim"
---  done
+...
 #}
 ```
 
