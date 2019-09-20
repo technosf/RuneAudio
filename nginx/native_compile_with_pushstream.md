@@ -15,11 +15,15 @@ cd /home/x/nginx
 - Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 - Edit `PKGBUILD`:
 ```sh
+--pkgname=nginx
+++pkgname=nginx-pushstream
 ...
 ++pushstreamver=0.5.4
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl)
 ...
+provides=('nginx')
+conflicts=('nginx')
 #source=(...
 ...
 ++    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
@@ -37,7 +41,14 @@ cd /home/x/nginx
 ++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 #}
 
+#build() {
+--  cd $pkgname-$pkgver
+++  cd $provides-$pkgver
+...
+
 #package() {
+--  cd $pkgname-$pkgver
+++  cd $provides-$pkgver
 ...
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
 ++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
