@@ -42,13 +42,6 @@ cd /home/x/nginx
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
 ++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
 ++  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
-...
-#}
-
-#package() {
-...
-++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
-++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
 --  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
 --
 --  for i in ftdetect indent syntax; do
