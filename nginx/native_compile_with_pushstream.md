@@ -10,7 +10,7 @@ chown -R x:x /home/x
 su x
 cd /home/x/nginx
 ```
-- NGINX source files: https://archlinuxarm.org/packages/armv7h/nginx/files
+- NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files/
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
 - Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 - Edit `PKGBUILD`:
