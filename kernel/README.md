@@ -1,3 +1,6 @@
 ### Kernel Update
 
-RuneAudio 0.4b successfully upgraded to **linux-raspberrypi 4.14.97**. (As of 20190205)
+**RuneAudio+R e1.1** was successfully upgraded to **`4.19.71-2-ARCH`**.
+
+### `/boot/overlays`
+- I2S modules: https://github.com/raspberrypi/linux/tree/rpi-4.19.y/arch/arm/boot/dts
