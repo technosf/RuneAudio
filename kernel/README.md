@@ -2,7 +2,7 @@
 
 **RuneAudio+R e1.1** was successfully upgraded to **`4.19.71-2-ARCH`**.
 ```sh
-acman -Sy raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-raspberrypi-headers
+pacman -Sy raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-raspberrypi-headers
 ```
 
 ### `/boot/overlays`
