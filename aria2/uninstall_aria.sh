@@ -7,16 +7,7 @@ alias=aria
 
 uninstallstart $@
 
-systemctl disable aria2
-
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-else
-	mnt=/root
-fi
-
-systemctl disable aria2
-systemctl stop aria2
+systemctl disable --now aria2
 rm -v /etc/systemd/system/aria2.service
 systemctl daemon-reload
 
