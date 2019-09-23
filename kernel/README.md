@@ -5,7 +5,8 @@
 mv /boot/cmdline.txt{,.backup}
 mv /boot/config.txt{,.backup}
 
-pacman -Sy raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-raspberrypi-headers
+pacman -Syu
+pacman -S linux-raspberrypi linux-raspberrypi-headers
 
 mv /boot/cmdline.txt{.backup,}
 mv /boot/config.txt{.backup,}
