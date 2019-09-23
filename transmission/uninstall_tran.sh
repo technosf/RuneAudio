@@ -7,7 +7,7 @@ alias=tran
 
 uninstallstart $@
 
-systemctl disable transmission
+systemctl disable --now transmission
 
 # restore file
 echo -e "$bar Restore files ..."
