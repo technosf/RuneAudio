@@ -46,15 +46,15 @@ kid3-cli -c "select \"/path/to file\"" \
 
 **Build**
 ```sh
-pacman -Sy --needed base-devel qt5-tools extra-cmake-modules jsoncpp libarchive
+pacman -Sy --needed qt5-tools extra-cmake-modules
 
 useradd x
+mkdir /home/x
+chown x:x
 su x
 cd
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/kid3-cli.tar.gz
-bsdtar xf kid3-cli.tar.gz
-rm kid3-cli.tar.gz
-cd kid3-cli
 
-makepkg -A --skipinteg
+git clone https://aur.archlinux.org/kid3-cli.git
+cd kid3-cli
+makepkg
 ```
