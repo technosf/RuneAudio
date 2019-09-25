@@ -8,7 +8,7 @@ rm $0
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
+#. /srv/http/addonsfunctions.sh
 . /srv/http/addonstitle.sh
 
 timestart
