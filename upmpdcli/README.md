@@ -32,6 +32,7 @@ cd
 
 git clone https://aur.archlinux.org/cgit/aur.git/snapshot/libupnpp.tar.gz
 cd libupnpp
+sed -i 's/\(arch=(i686 x86_64\))/\1 armv7h)/' PKGBUILD
 
 makepkg
 
