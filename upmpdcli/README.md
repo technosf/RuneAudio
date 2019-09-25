@@ -1,6 +1,22 @@
 ## upmpdcli
 
 An UPnP Audio Media Renderer based on MPD
+
+### install
+```sh
+libupnpp=libupnpp-0.17.1-1-armv7h.pkg.tar.xz
+upmpdcli=upmpdcli-1.4.2-2-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$libupnpp
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$upmpdcli
+
+pacman -U $libupnpp $upmpdcli
+
+rm $libupnpp $upmpdcli
+
+ln -s /lib/libjsoncpp.so.{21,20}
+```
+
+### Compile
 ```sh
 pacman -Sy expat python-requests recoll python-bottle python-mutagen mutagen aspell-en python-waitress
 
