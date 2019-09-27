@@ -19,6 +19,6 @@ restorefile /srv/http/indexbody.php /srv/http/assets/js/main.js
 echo -e "$bar Remove files ..."
 
 rm -r "$( readlink -f /srv/http/aria2 )/web"
-rm -rv /root/.config/aria2 /srv/http/aria2
+rm -r /root/.config/aria2 /srv/http/aria2
 
 uninstallfinish $@
