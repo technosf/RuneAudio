@@ -11,18 +11,14 @@ alias=tran
 
 installstart $@
 
-if ! mount | grep -q '/dev/sda1'; then
-	title "$info No USB drive found."
-	exit
-fi
-
 getuninstall
 
-mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
-mkdir -p $mnt/transmission
-path=$mnt/transmission
-mkdir -p $path/{incomplete,watch}
-
+mnt=$( mount | grep /dev/sda1 | cut -d' ' -f3 )
+path="$mnt/transmission"
+if [[ ! -e "$path" ]]; then
+	mkdir -p "$path"
+	mkdir -p "$path/{incomplete,watch}"
+fi
 # custom systemd unit
 systemctl disable --now transmission
 
@@ -35,30 +31,31 @@ Environment=TRANSMISSION_HOME=$path
 " > $dir/override.conf
 systemctl daemon-reload
 
-file=$path/settings.json
-rm -f $file
-# create new settings.json
-systemctl start transmission
-systemctl stop transmission
-
-sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
-' -e '/[^{},\{, \}]$/ s/$/, /
-' -e '/^}$/ i\
-"watch-dir": "'"$path"'/watch", \
-"watch-dir-enabled": true
-' $file
-# set password
-if [[ -n $1 && $1 != 0 ]]; then
-	sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-	' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
-	' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+file="$path/settings.json"
+if [[ ! -e "$file" ]]; then
+	# create new settings.json
+	systemctl start transmission
+	systemctl stop transmission
+	
+	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
+	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
+	' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
+	' -e '/[^{},\{, \}]$/ s/$/, /
+	' -e '/^}$/ i\
+	"watch-dir": "'"$path"'/watch", \
+	"watch-dir-enabled": true
 	' $file
-else
-	sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
-	' $file
+	# set password
+	if [[ -n $1 && $1 != 0 ]]; then
+		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
+		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		' $file
+	else
+		sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
+		' $file
+	fi
 fi
 
 # web ui alternative
