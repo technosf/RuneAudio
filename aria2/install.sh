@@ -18,11 +18,11 @@ getuninstall
 
 mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 path=$mnt/aria2
-mkdir -p $path
+mkdir -p $path/web
 
 echo -e "$bar WebUI ..."
 wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
-bsdtar -xf master.zip --strip 2 -C $path ./webui-aria2-master/docs
+bsdtar -xf master.zip --strip 2 -C $path/web ./webui-aria2-master/docs
 rm master.zip
 
 ln -s $path /srv/http
@@ -91,7 +91,7 @@ echo $file
 
 string=$( cat <<'EOF'
 $( '#aria2' ).click( function( e ) {
-	menuPackage( e, $( this ), '/aria2/index.html' );
+	menuPackage( e, $( this ), '/aria2/web/index.html' );
 } );
 EOF
 )
