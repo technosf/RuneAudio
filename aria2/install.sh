@@ -25,7 +25,7 @@ wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
 bsdtar -xf master.zip --strip 2 -C $path/web ./webui-aria2-master/docs
 rm master.zip
 
-ln -s $path /srv/http
+ln -s $path/web /srv/http/aria2
 # disable UI language feature
 sed -i '/determinePreferredLanguage/ s|^|//|' /srv/http/aria2/app.js
 
