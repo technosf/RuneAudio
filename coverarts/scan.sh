@@ -2,10 +2,12 @@
 
 path=$1
 [[ $2 == 1 ]] && removeexist=1
+dircoverarts=/srv/http/data/coverarts
+dirtmp=/srv/http/data/tmp
 
 rm $0
 
-. /srv/http/addonstitle.sh
+. /srv/http/addonsfunctions.sh
 
 [[ $3 == 1 ]] && mpc update
 
@@ -49,7 +51,7 @@ createThumbnail() {
 	fi
 	# "/" not allowed in filename, escape ", "#" and "?" not allowed in img src
 	thumbname=$( echo $thumbname | sed 's/\//|/g; s/#/{/g; s/?/}/g' )
-	thumbfile=$imgcoverarts/$thumbname.jpg
+	thumbfile=$dircoverarts/$thumbname.jpg
 	if (( ${#thumbfile} > 255 )); then
 		(( longname++ ))
 		echo -e "$padR Skip - $thumbfile longer than 255 characters."
@@ -117,7 +119,7 @@ createThumbnail() {
 			[[ $found ]] && break
 			
 			# find embedded
-			tmpfile=/srv/http/tmp/coverart
+			tmpfile=$dirtmp/coverart
 			kid3-cli -c "select '$file'" -c "get picture:$tmpfile"
 			if [[ -e $tmpfile ]]; then
 				mimetype=$( file -b --mime-type $tmpfile )
@@ -160,19 +162,18 @@ padC=$( tcolor '.' 6 6 )
 padY=$( tcolor '.' 3 3 )
 padG=$( tcolor '.' 2 2 )
 padR=$( tcolor '.' 1 1 )
-imgcoverarts=/srv/http/assets/img/coverarts
 coverfiles='cover.jpg cover.png folder.jpg folder.png front.jpg front.png Cover.jpg Cover.png Folder.jpg Folder.png Front.jpg Front.png'
 nonutf8=0
 longname=0
 dup=0
-nonutf8log=/root/list-nonutf8.log
-longnamelog=/root/list-longnames.log
-duplog=/root/list-duplicates.log
+nonutf8log=$dirtmp/list-nonutf8.log
+longnamelog=$dirtmp/list-longnames.log
+duplog=$dirtmp/list-duplicates.log
 echo -e "Non-UTF8 Named Files - $( date +"%D %T" )\n" > $nonutf8log
 echo -e "Too Long Named Files - $( date +"%D %T" )\n" > $longnamelog
 echo -e "Duplicate Artist-Album - $( date +"%D %T" )\n" > $duplog
 
-[[ -n $( ls $imgcoverarts ) ]] && update=Update || update=Create
+[[ -n $( ls $dircoverarts ) ]] && update=Update || update=Create
 coloredname=$( tcolor 'Browse By CoverArt' )
 
 title -l '=' "$bar $update thumbnails for $coloredname ..."
@@ -189,7 +190,7 @@ for dir in "${dirs[@]}"; do
 	percent=$(( $i * 100 / $count ))
 	createThumbnail
 done
-chown -h http:http $imgcoverarts/*
+chown -h http:http $dircoverarts/*
 
 echo -e               "\n\n$padC New thumbnails       : $( tcolor $( numfmt --g $thumb ) )"
 (( $replace )) && echo -e "$padG Replaced thumbnails  : $( tcolor $( numfmt --g $replace ) )"
@@ -213,7 +214,7 @@ else
 	rm $duplog
 fi
 echo
-echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 $imgcoverarts | wc -l ) ) )"
+echo -e                       "      Total thumbnails : $( tcolor $( numfmt --g $( ls -1 $dircoverarts | wc -l ) ) )"
 echo -e  "      Parsed directory : $( tcolor "$path" )"
 
 curl -s -v -X POST 'http://localhost/pub?id=notify' \
@@ -225,7 +226,7 @@ timestop
 title -l '=' "$bar Thumbnails for $coloredname ${update}d successfully."
 
 echo
-echo Thumbnails directory : $( tcolor "$imgcoverarts" )
+echo Thumbnails directory : $( tcolor "$dircoverarts" )
 echo
 echo -e "$bar To change individually:"
 echo "    - CoverArt > long-press thumbnail > coverArt / delete"
