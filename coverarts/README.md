@@ -4,7 +4,7 @@
 Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It will take a while depend on numbers of album for the 1st time. Subsequent updates will be on new/changed album/artist names only.
 
 ### Scope
-- Directory `/srv/http/assets/img/coverarts` for storing thumbnails
+- Directory `/srv/http/data/coverarts` for storing thumbnails
 	- Created when RuneUI Enhancement installed
 	- Priority: USB > NAS > SD 
 	- `ext*` format and write permission
