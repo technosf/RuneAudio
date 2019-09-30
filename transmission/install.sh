@@ -37,10 +37,10 @@ if [[ ! -e "$file" ]]; then
 	systemctl start transmission
 	systemctl stop transmission
 	
-	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-	' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
+	sed -i -e 's|\("download-dir": "\).*|\1$path"|
+	' -e 's|\("incomplete-dir": "\).*|\1$path/incomplete"|
+	' -e 's|\("incomplete-dir-enabled": \).*|\1true|
+	' -e 's|\("rpc-whitelist-enabled": \).*|\1false|
 	' -e '/[^{},\{, \}]$/ s/$/, /
 	' -e '/^}$/ i\
 	"watch-dir": "'"$path"'/watch", \
@@ -48,16 +48,19 @@ if [[ ! -e "$file" ]]; then
 	' $file
 	# set password
 	if [[ -n $1 && $1 != 0 ]]; then
-		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
-		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		sed -i -e 's|\("rpc-authentication-required": \).*|\1true|
+		' -e 's|\("rpc-password": "\).*|\1$1"|
+		' -e 's|\("rpc-username": "\).*|\1root"|
 		' $file
 	else
-		sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
-		' $file
+		sed -i 's|\("rpc-authentication-required": \).*|\1false|' $file
 	fi
-elif [[ -n $1 && $1 != 0 ]]; then
-	sed -i 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|' $file
+else
+	if [[ -n $1 && $1 != 0 ]]; then
+		sed -i 's|\("rpc-password": "\).*|\1$1"|' $file
+	else
+		sed -i 's|\("rpc-authentication-required": \).*|\1false|' $file
+	fi
 fi
 
 # web ui alternative
