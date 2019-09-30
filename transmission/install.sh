@@ -56,6 +56,8 @@ if [[ ! -e "$file" ]]; then
 		sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
 		' $file
 	fi
+elif [[ -n $1 && $1 != 0 ]]; then
+	sed -i 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|' $file
 fi
 
 # web ui alternative
