@@ -20,8 +20,8 @@ whoami
 sudo su
 user=<user> # from previous command
 
-# download - RPi 3
-file=ArchLinuxARM-rpi-3-latest.tar.gz
+# download - RPi2,3
+file=ArchLinuxARM-rpi-2-latest.tar.gz
 wget http://os.archlinuxarm.org/os/$file
 ```
 
