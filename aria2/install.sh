@@ -71,15 +71,15 @@ file=/srv/http/indexbody.php
 echo $file
 
 string=$( cat <<'EOF'
-$ariaenable = exec( '/usr/bin/systemctl is-enabled aria2' ) === 'enabled' ? 1 : 0;
-$ariaactive = exec( '/usr/bin/systemctl is-active aria2' ) === 'active' ? 1 : 0;
+$ariaenable = exec( '/usr/bin/systemctl is-enabled aria2' ) === 'enabled';
+$ariaactive = exec( '/usr/bin/systemctl is-active aria2' ) === 'active' ? ' class="on"' : '';
 EOF
 )
 insert '// counts'
 
 string=$( cat <<'EOF'
 	<a id="aria2" data-enabled="<?=$ariaenable?>" data-active="<?=$ariaactive?>">
-		<img src="/assets/img/addons/thumbaria.<?=$time?>.png" <?=( $ariaactive ? 'class="on"' : '' )?>>Aria2
+		<img src="/assets/img/addons/thumbaria.<?=$time?>.png"<?=$ariaactive?>>Aria2
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
