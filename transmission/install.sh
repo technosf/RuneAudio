@@ -84,14 +84,14 @@ echo $file
 
 string=$( cat <<'EOF'
 $tranenable = exec( '/usr/bin/systemctl is-enabled transmission' ) === 'enabled' ? 1 : 0;
-$tranactive = exec( '/usr/bin/systemctl is-active transmission' ) === 'active' ? 1 : 0;
+$tranactive = exec( '/usr/bin/systemctl is-active transmission' ) === 'active'  ? ' class="on"' : '';
 EOF
 )
 insert '// counts'
 
 string=$( cat <<'EOF'
 	<a id="transmission" data-enabled="<?=$tranenable?>" data-active="<?=$tranactive?>">
-		<img src="/assets/img/addons/thumbtran.<?=$time?>.png" <?=( $tranactive ? 'class="on"' : '' )?>>Transmission
+		<img src="/assets/img/addons/thumbtran.<?=$time?>.png"<?=$tranactive?>>Transmission
 		<i class="fa fa-gear submenu imgicon settings"></i>
 	</a>
 EOF
