@@ -67,36 +67,6 @@ if ! systemctl enable --now aria2 &> /dev/null; then
 	exit
 fi
 
-file=/srv/http/indexbody.php
-echo $file
-
-string=$( cat <<'EOF'
-$ariaenable = exec( '/usr/bin/systemctl is-enabled aria2' ) === 'enabled';
-$ariaactive = exec( '/usr/bin/systemctl is-active aria2' ) === 'active' ? ' class="on"' : '';
-EOF
-)
-insert '// counts'
-
-string=$( cat <<'EOF'
-	<a id="aria2" data-enabled="<?=$ariaenable?>" data-active="<?=$ariaactive?>">
-		<img src="/assets/img/addons/thumbaria.<?=$time?>.png"<?=$ariaactive?>>Aria2
-		<i class="fa fa-gear submenu imgicon settings"></i>
-	</a>
-EOF
-)
-insertH 'displaylibrary'
-
-file=/srv/http/assets/js/main.js
-echo $file
-
-string=$( cat <<'EOF'
-$( '#aria2' ).click( function( e ) {
-	menuPackage( e, $( this ), '/aria2/web/index.html' );
-} );
-EOF
-)
-insert '#displaycolor'
-
 installfinish $@
 
 title -nt "Download directory: $path"
