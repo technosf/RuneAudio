@@ -79,36 +79,6 @@ if ! systemctl enable --now transmission &> /dev/null; then
 	exit
 fi
 
-file=/srv/http/indexbody.php
-echo $file
-
-string=$( cat <<'EOF'
-$tranenable = exec( '/usr/bin/systemctl is-enabled transmission' ) === 'enabled' ? 1 : 0;
-$tranactive = exec( '/usr/bin/systemctl is-active transmission' ) === 'active'  ? ' class="on"' : '';
-EOF
-)
-insert '// counts'
-
-string=$( cat <<'EOF'
-	<a id="transmission" data-enabled="<?=$tranenable?>" data-active="<?=$tranactive?>">
-		<img src="/assets/img/addons/thumbtran.<?=$time?>.png"<?=$tranactive?>>Transmission
-		<i class="fa fa-gear submenu imgicon settings"></i>
-	</a>
-EOF
-)
-insertH 'displaylibrary'
-
-file=/srv/http/assets/js/main.js
-echo $file
-
-string=$( cat <<'EOF'
-$( '#transmission' ).click( function( e ) {
-	menuPackage( e, $( this ), 'http://'+ location.hostname +':9091' );
-} );
-EOF
-)
-insert '#displaycolor'
-
 installfinish $@
 
 echo "Download directory: $path"
