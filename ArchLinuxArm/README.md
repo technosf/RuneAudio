@@ -32,7 +32,7 @@ apt install bsdtar
 
 # extract
 bsdtar xpvf $file -C /media/$user/ROOT
-cp -r --no-preserve=mode,ownership /media/$user/ROOT/boot/* /media/$user/BOOT
+cp -rv --no-preserve=mode,ownership /media/$user/ROOT/boot/* /media/$user/BOOT
 rm -r /media/$user/ROOT/boot/*
 ```
 
@@ -40,7 +40,7 @@ rm -r /media/$user/ROOT/boot/*
 - SCP/SSH with user|password : alarm|alarm
 ```sh
 # set root's password to "rune"
-su root # root's password: root
+su # password: root
 passwd
 
 # permit root SSH login
@@ -60,13 +60,12 @@ sed -i '/^SigLevel/ s/^/#/; a\SigLevel    = TrustAll' /etc/pacman.conf
 pacman -Syu
 
 # packages
-pacman -S alsa-utils avahi cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc \
-	parted php-fpm python python-pip samba shairport-sync sudo udevil wget wpa_supplicant
+pacman -S alsa-utils avahi chromium cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc parted php-fpm python python-pip samba shairport-sync sudo udevil wget
 #cifs-utils nfs-utils
 
 # custom packages
-file=kid3-cli/kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/$file
+file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$file
 pacman -U $file
 rm $file
 
@@ -74,7 +73,7 @@ file=nginx-mainline-pushstream-1.17.3-1-armv7h.pkg.tar.xz
 wget https://github.com/rern/RuneAudio/raw/master/nginx/$file
 pacman -U $file
 rm $file
-touch /var/lib/nginx/client-body # fix - no directory found
+mkdir -p /var/lib/nginx/client-body # fix - no directory found
 
 libupnpp=libupnpp-0.17.1-1-armv7h.pkg.tar.xz
 upmpdcli=upmpdcli-1.4.2-2-armv7h.pkg.tar.xz
