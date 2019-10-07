@@ -40,7 +40,7 @@ rm -r /media/$user/ROOT/boot/*
 - SCP/SSH with user|password : alarm|alarm
 ```sh
 # set root's password to "rune"
-su root # root's password: root
+su # password: root
 passwd
 
 # permit root SSH login
