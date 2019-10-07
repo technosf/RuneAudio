@@ -53,3 +53,41 @@ pacman-key --init && pacman-key --populate archlinuxarm
 # Or temporarily bypass key verifications
 sed -i '/^SigLevel/ s/^/#/; a\SigLevel    = TrustAll' /etc/pacman.conf
 ```
+
+### Install packages
+```sh
+# full upgrade
+pacman -Syu
+
+# packages
+pacman -S alsa-utils avahi cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc \
+	parted php-fpm python python-pip samba shairport-sync sudo udevil wget wpa_supplicant
+#cifs-utils nfs-utils
+
+# custom packages
+file=kid3-cli/kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/$file
+pacman -U $file
+rm $file
+
+file=nginx-mainline-pushstream-1.17.3-1-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/nginx/$file
+pacman -U $file
+rm $file
+touch /var/lib/nginx/client-body # fix - no directory found
+
+libupnpp=libupnpp-0.17.1-1-armv7h.pkg.tar.xz
+upmpdcli=upmpdcli-1.4.2-2-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$libupnpp
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$upmpdcli
+pacman -U $libupnpp $upmpdcli
+rm $libupnpp $upmpdcli
+ln -s /lib/libjsoncpp.so.{21,20} # fix - older link
+```
+
+### Configurations
+```sh
+# set hostname
+hostname runeaudio
+echo runeaudio > /etc/hostname
+```
