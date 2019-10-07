@@ -99,4 +99,5 @@ groupmod -g 92 audio
 mkdir -p /mnt/MPD/{USB,NAS}
 chown mpd:audio /mnt/MPD/{USB,NAS}
 
+systemctl enable avahi-daemon cronie nginx php-fpm startup udevil
 ```
