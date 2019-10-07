@@ -64,8 +64,8 @@ pacman -S alsa-utils avahi chromium cronie dnsmasq ffmpeg gcc hostapd ifplugd mp
 #cifs-utils nfs-utils
 
 # custom packages
-file=kid3-cli/kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/$file
+file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$file
 pacman -U $file
 rm $file
 
@@ -73,7 +73,7 @@ file=nginx-mainline-pushstream-1.17.3-1-armv7h.pkg.tar.xz
 wget https://github.com/rern/RuneAudio/raw/master/nginx/$file
 pacman -U $file
 rm $file
-touch /var/lib/nginx/client-body # fix - no directory found
+mkdir -p /var/lib/nginx/client-body # fix - no directory found
 
 libupnpp=libupnpp-0.17.1-1-armv7h.pkg.tar.xz
 upmpdcli=upmpdcli-1.4.2-2-armv7h.pkg.tar.xz
