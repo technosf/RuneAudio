@@ -61,27 +61,27 @@ pacman -Syu
 
 # packages
 pacman -S alsa-utils avahi chromium cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc parted php-fpm python python-pip samba shairport-sync sudo udevil wget
+
+pip install RPi.GPIO
 #cifs-utils nfs-utils
 
 # custom packages
-file=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$file
-pacman -U $file
-rm $file
-
-file=nginx-mainline-pushstream-1.17.3-1-armv7h.pkg.tar.xz
-wget https://github.com/rern/RuneAudio/raw/master/nginx/$file
-pacman -U $file
-rm $file
-mkdir -p /var/lib/nginx/client-body # fix - no directory found
-
+kid3=kid3-cli-3.7.1-1-armv7h.pkg.tar.xz
 libupnpp=libupnpp-0.17.1-1-armv7h.pkg.tar.xz
+nginx=nginx-mainline-pushstream-1.17.3-1-armv7h.pkg.tar.xz
 upmpdcli=upmpdcli-1.4.2-2-armv7h.pkg.tar.xz
+
+wget https://github.com/rern/RuneAudio/raw/master/kid3-cli/$kid3
+wget https://github.com/rern/RuneAudio/raw/master/nginx/$nginx
 wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$libupnpp
 wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/$upmpdcli
-pacman -U $libupnpp $upmpdcli
-rm $libupnpp $upmpdcli
-ln -s /lib/libjsoncpp.so.{21,20} # fix - older link
+
+pacman -U $kid3 $nginx $libupnpp $upmpdcli
+
+rm $kid3 $nginx $libupnpp $upmpdcli
+
+mkdir -p /var/lib/nginx/client-body # fix - nginx - no directory
+ln -s /lib/libjsoncpp.so.{21,20}    # fix - upmpdcli - older link
 ```
 
 ### Configurations
