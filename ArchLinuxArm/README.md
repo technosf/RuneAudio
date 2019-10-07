@@ -60,7 +60,7 @@ sed -i '/^SigLevel/ s/^/#/; a\SigLevel    = TrustAll' /etc/pacman.conf
 pacman -Syu
 
 # packages
-pacman -S alsa-utils avahi cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc \
+pacman -S alsa-utils avahi chromium cronie dnsmasq ffmpeg gcc hostapd ifplugd mpd mpc \
 	parted php-fpm python python-pip samba shairport-sync sudo udevil wget wpa_supplicant
 #cifs-utils nfs-utils
 
