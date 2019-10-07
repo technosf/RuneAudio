@@ -32,7 +32,7 @@ apt install bsdtar
 
 # extract
 bsdtar xpvf $file -C /media/$user/ROOT
-cp -r --no-preserve=mode,ownership /media/$user/ROOT/boot/* /media/$user/BOOT
+cp -rv --no-preserve=mode,ownership /media/$user/ROOT/boot/* /media/$user/BOOT
 rm -r /media/$user/ROOT/boot/*
 ```
 
