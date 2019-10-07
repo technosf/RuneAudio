@@ -7,7 +7,6 @@
 alias=tran
 
 . /srv/http/addonsfunctions.sh
-. /srv/http/addonsedit.sh
 
 installstart $@
 
