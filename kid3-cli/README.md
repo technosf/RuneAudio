@@ -48,13 +48,13 @@ kid3-cli -c "select \"/path/to file\"" \
 ```sh
 pacman -Sy --needed qt5-tools extra-cmake-modules
 
-useradd x
-mkdir /home/x
-chown x:x
-su x
+useradd alarm
+mkdir /home/alarm
+chown alarm:alarm /home/alarm
+su alarm
 cd
 
 git clone https://aur.archlinux.org/kid3-cli.git
 cd kid3-cli
-makepkg
+makepkg -A
 ```
