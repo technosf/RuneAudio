@@ -1,47 +1,43 @@
-# Maintainer: Bartłomiej Piotrowski 
+# Maintainer:  Giancarlo Razzolini 
+# Contributor:  Bartłomiej Piotrowski 
 # Contributor: Sébastien Luttringer
-# Contributor: Sergej Pupykin 
-# Contributor: Miroslaw Szot 
-# Contributor: Daniel Micay 
+# Contributor: Drew DeVault
 
-# ALARM: Kevin Mihelich 
-#  - build armv7h and aarch64 with -fPIC
-
-pkgname=nginx-pushstream
-pkgver=1.16.1
+pkgname=nginx-mainline-pushstream
+pkgver=1.17.4
 pkgrel=1
-pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
-arch=(x86_64)
+pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server, mainline release'
+arch=('x86_64')
 url='https://nginx.org'
-license=(custom)
+license=('custom')
 pushstreamver=0.5.4
-depends=(pcre zlib openssl)
-makedepends=(mercurial)
-checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
-              memcached ffmpeg inetutils) 
-backup=(etc/nginx/fastcgi.conf
-        etc/nginx/fastcgi_params
-        etc/nginx/koi-win
-        etc/nginx/koi-utf
-        etc/nginx/nginx.conf
-        etc/nginx/scgi_params
-        etc/nginx/uwsgi_params
-        etc/nginx/win-utf
-        etc/logrotate.d/nginx)
+depends=('pcre' 'zlib' 'openssl')
+backup=('etc/nginx/fastcgi.conf'
+        'etc/nginx/fastcgi_params'
+        'etc/nginx/koi-win'
+        'etc/nginx/koi-utf'
+        'etc/nginx/nginx.conf'
+        'etc/nginx/scgi_params'
+        'etc/nginx/uwsgi_params'
+        'etc/nginx/win-utf'
+        'etc/logrotate.d/nginx')
 install=nginx.install
 provides=('nginx')
 conflicts=('nginx')
 source=($url/download/nginx-$pkgver.tar.gz{,.asc}
-        hg+http://hg.nginx.org/nginx-tests#revision=ddbde6c5b0cd
         service
         logrotate
-		https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz)
-validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
-md5sums=('45a80f75336c980d240987badc3dcf60'
+        https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
+)
+validpgpkeys=('B0F4253373F8F6F510D42178520A9993A1C052F8') # Maxim Dounin 
+md5sums=('476a6d0bea58fbeefb5f6d0a81824a43'
          'SKIP'
-         'SKIP'
-         'ba2e3b08ce0f0fff7cced624d0ecf7cc'
+         'ef491e760e7c1ffec9ca25441a150c83'
          '6a01fb17af86f03707c8ae60f98a2dc2')
+sha512sums=('fb7275c47d2416b597415f736771f8f4f3cdbba33728d9ca8ddb56b8266076a5ec5e63c735215a8d022f685b67d663fdaaac0c95db465a82f79f01d502feaa82'
+            'SKIP'
+            '4f90db6b8b5c13762b96ddff9ca4e846762d46b90be27c7c9d54cec6f7f12fc95585f8455919296edb0255405dd80af8ee86780b805631b72eb74ee59f359715'
+            '9232342c0914575ce438c5a8ee7e1c25b0befb457a2934e9cb77d1fe9a103634ea403b57bc0ef0cd6cf72248aee5e5584282cea611bc79198aeac9a65d8df5d7')
 
 _common_flags=(
   --with-compat
@@ -68,17 +64,14 @@ _common_flags=(
   --with-stream_ssl_module
   --with-stream_ssl_preread_module
   --with-threads
-  --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
+  --add-module=/home/alarm/nginx/src/nginx-push-stream-module-$pushstreamver
 )
 
-_stable_flags=(
+_mainline_flags=(
 )
 
 build() {
   cd $provides-$pkgver
-
-  [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CFLAGS+=" -fPIC" && CXXFLAGS+=" -fPIC"
-
   ./configure \
     --prefix=/etc/nginx \
     --conf-path=/etc/nginx/nginx.conf \
@@ -97,7 +90,7 @@ build() {
     --with-cc-opt="$CFLAGS $CPPFLAGS" \
     --with-ld-opt="$LDFLAGS" \
     ${_common_flags[@]} \
-    ${_stable_flags[@]}
+    ${_mainline_flags[@]}
 
   make
 }
@@ -105,7 +98,7 @@ build() {
 package() {
   cd $provides-$pkgver
   make DESTDIR="$pkgdir" install
-  mkdir -p "$pkgdir"/usr/lib/systemd/system/
+  mkdir -p "$pkgdir"/usr/lib/systemd/system
   mkdir -p "$pkgdir"/var/lib/nginx/client-body
   install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
   install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx

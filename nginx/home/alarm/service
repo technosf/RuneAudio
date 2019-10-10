@@ -10,6 +10,7 @@ SyslogLevel=err
 
 ExecStart=/usr/bin/nginx -g 'pid /run/nginx.pid; error_log stderr;'
 ExecReload=/usr/bin/nginx -s reload
+KillSignal=SIGQUIT
 KillMode=mixed
 
 [Install]
