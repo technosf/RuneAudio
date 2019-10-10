@@ -4,11 +4,11 @@ Native compile.
 
 ```sh
 # on RuneAudio
-useradd x
-mkdir -p /home/x/nginx-mainline-pushstream
-chown -R x:x /home/x
-su x
-cd /home/x/nginx-mainline-pushstream
+useradd alarm
+mkdir -p /home/alarm/nginx-mainline-pushstream
+chown -R alarm:alarm /home/alarm
+su alarm
+cd /home/alarm/nginx-mainline-pushstream
 ```
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files/
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
@@ -36,7 +36,7 @@ cd /home/x/nginx-mainline-pushstream
 ...
 --    --with-stream_geoip_module
 ...
-++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
+++    --add-module=/home/alarm/nginx/src/nginx-push-stream-module-$pushstreamver
 #}
 ...
 
