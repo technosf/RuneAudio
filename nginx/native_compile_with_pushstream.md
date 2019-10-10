@@ -5,10 +5,10 @@ Native compile.
 ```sh
 # on RuneAudio
 useradd x
-mkdir -p /home/x/nginx
+mkdir -p /home/x/nginx-mainline-pushstream
 chown -R x:x /home/x
 su x
-cd /home/x/nginx
+cd /home/x/nginx-mainline-pushstream
 ```
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files/
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
@@ -16,14 +16,12 @@ cd /home/x/nginx
 - Edit `PKGBUILD`:
 ```sh
 --pkgname=nginx
-++pkgname=nginx-pushstream
+++pkgname=nginx-mainline-pushstream
 ...
 ++pushstreamver=0.5.4
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl)
 ...
-provides=('nginx')
-conflicts=('nginx')
 #source=(...
 ...
 ++    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
@@ -40,15 +38,9 @@ conflicts=('nginx')
 ...
 ++    --add-module=/home/x/nginx/src/nginx-push-stream-module-$pushstreamver
 #}
-
-#build() {
---  cd $pkgname-$pkgver
-++  cd $provides-$pkgver
 ...
 
 #package() {
---  cd $pkgname-$pkgver
-++  cd $provides-$pkgver
 ...
 ++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
 ++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
