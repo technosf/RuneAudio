@@ -42,7 +42,8 @@ cd /home/x/nginx-mainline-pushstream
 
 #package() {
 ...
-++  mkdir -p "$pkgdir"/usr/lib/systemd/system/
+++  mkdir -p "$pkgdir"/usr/lib/systemd/system
+++  mkdir -p "$pkgdir"/var/lib/nginx/client-body
 ++  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
 ++  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
 --  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
