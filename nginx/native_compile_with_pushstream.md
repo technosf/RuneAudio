@@ -15,7 +15,7 @@ cd /home/x/nginx-mainline-pushstream
 - Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 - Edit `PKGBUILD`:
 ```sh
---pkgname=nginx
+--pkgname=nginx-mainline
 ++pkgname=nginx-mainline-pushstream
 ...
 ++pushstreamver=0.5.4
