@@ -1,6 +1,6 @@
 ## upmpdcli
 
-An UPnP Audio Media Renderer based on MPD
+An UPnP Audio Media Renderer based on MPD. [upmpdcli](https://www.lesbonscomptes.com/upmpdcli/)
 
 ### Install
 ```sh
