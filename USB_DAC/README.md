@@ -32,8 +32,11 @@ UDEV  [2278.355274] unbind   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5 (
 UDEV  [2278.355643] remove   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5 (usb)
 ```
 
+**udev.rules**
+- `ACTION=="add|remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/settings/mpdconf.sh"`
+- from following info:
+
 - `udevadm info --path=/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1 --attribute-walk`
-- Start with attributes of parent devices up to target device.
 ```sh
 Udevadm info starts with the device specified by the devpath and then
 walks up the chain of parent devices. It prints for every device
