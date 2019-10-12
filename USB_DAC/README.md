@@ -33,7 +33,7 @@ UDEV  [2278.355643] remove   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5 (
 ```
 
 - `udevadm info --path=/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1 --attribute-walk`
-- Only attributes under the device, not parents, can be used.
+- Start with attributes of parent devices up to target device.
 ```sh
 Udevadm info starts with the device specified by the devpath and then
 walks up the chain of parent devices. It prints for every device
