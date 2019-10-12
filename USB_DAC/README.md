@@ -6,6 +6,9 @@ Automatically switch to/from MPD Audio output and reload configuration:
 - USB DAC **power on** - switch to **USB DAC**
 - USB DAC **power off** - switch to **preset** Audio output
 
+**Reload new rules**
+- `udevadm control --reload-rules && udevadm trigger`
+
 **Example of events**
 - Power off USB DAC
 - `udevadm monitor --udev`
