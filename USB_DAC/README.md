@@ -31,39 +31,9 @@ UDEV  [2278.347395] remove   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1
 UDEV  [2278.355274] unbind   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5 (usb)
 UDEV  [2278.355643] remove   /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5 (usb)
 ```
-- `udevadm info --path=/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1`
-```sh
-P: /devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1
-L: 0
-E: DEVPATH=/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1
-E: SUBSYSTEM=sound
-E: USEC_INITIALIZED=3069572599
-E: ID_PATH=platform-3f980000.usb-usb-0:1.5:1.0
-E: ID_PATH_TAG=platform-3f980000_usb-usb-0_1_5_1_0
-E: ID_FOR_SEAT=sound-platform-3f980000_usb-usb-0_1_5_1_0
-E: SOUND_INITIALIZED=1
-E: ID_USB_CLASS_FROM_DATABASE=Miscellaneous Device
-E: ID_USB_PROTOCOL_FROM_DATABASE=Interface Association
-E: ID_VENDOR_FROM_DATABASE=XMOS Ltd
-E: ID_VENDOR=XMOS
-E: ID_VENDOR_ENC=XMOS
-E: ID_VENDOR_ID=20b1
-E: ID_MODEL=xCORE_USB_Audio_2.0
-E: ID_MODEL_ENC=xCORE\x20USB\x20Audio\x202.0
-E: ID_MODEL_ID=000a
-E: ID_REVISION=0660
-E: ID_SERIAL=XMOS_xCORE_USB_Audio_2.0
-E: ID_TYPE=audio
-E: ID_BUS=usb
-E: ID_USB_INTERFACES=:010120:010220:fe0101:
-E: ID_USB_INTERFACE_NUM=00
-E: ID_USB_DRIVER=snd-usb-audio
-E: ID_ID=usb-XMOS_xCORE_USB_Audio_2.0-00
-E: SYSTEMD_WANTS=sound.target
-E: SYSTEMD_USER_WANTS=sound.target
-E: TAGS=:seat:systemd:
-```
+
 - `udevadm info --path=/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/sound/card1 --attribute-walk`
+- Only attributes under the device, not parents, can be used.
 ```sh
 Udevadm info starts with the device specified by the devpath and then
 walks up the chain of parent devices. It prints for every device
