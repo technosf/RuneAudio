@@ -184,17 +184,16 @@ find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d
 # omit .mpdignore
 mpdignore=$( find "$path" -mindepth 1 -name .mpdignore -type f )
 if [[ -n $mpdignore ]]; then
-    readarray -t files <<<"$mpdignore"
-    for file in "${files[@]}"; do
-        dir=$( dirname "$file" )
-        mapfile -t ignores < $file
-        for ignore in "${ignores[@]}"; do
-            find+=$'\n'"$dir/$ignore"
-        done
-    done
+	readarray -t files <<<"$mpdignore"
+	for file in "${files[@]}"; do
+		dir=$( dirname "$file" )
+		mapfile -t ignores < $file
+		for ignore in "${ignores[@]}"; do
+			find+=$'\n'"$dir/$ignore"
+		done
+	done
 fi
 find=$( echo "$find" | sort | uniq -u )
-
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
