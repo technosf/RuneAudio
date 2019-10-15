@@ -187,7 +187,7 @@ if [[ -n $mpdignore ]]; then
 	readarray -t files <<<"$mpdignore"
 	for file in "${files[@]}"; do
 		dir=$( dirname "$file" )
-		mapfile -t ignores < $file
+		mapfile -t ignores < "$file"
 		for ignore in "${ignores[@]}"; do
 			find+=$'\n'"$dir/$ignore"
 		done
