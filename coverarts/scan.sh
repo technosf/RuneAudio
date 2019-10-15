@@ -150,14 +150,6 @@ createThumbnail() {
 	(( dummy++ ))
 	echo -e "$padGr #$dummy Dummy - No coverart found."
 }
-ignoreDir() {
-	ignore=()
-	mapfile -t dirs < $path/.mpdignore
-	for dir in "${dirs[@]}"; do
-		ignore+=( "$path/$dir" )
-	done
-	find=$( printf '%s\n' "${find[@]}" "${ignore[@]}" | sort | uniq -u )
-}
 
 cue=
 replace=0
@@ -189,7 +181,20 @@ title -l '=' "$bar $update thumbnails for $coloredname ..."
 echo Base directory: $( tcolor "$path" )
 find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d | sort )
 [[ -z $find ]] && find=$path
-[[ -e $path/.mpdignore ]] && ignoreDir
+# omit .mpdignore
+mpdignore=$( find "$path" -mindepth 1 -name .mpdignore -type f )
+if [[ -n $mpdignore ]]; then
+    readarray -t files <<<"$mpdignore"
+    for file in "${files[@]}"; do
+        dir=$( dirname "$file" )
+        mapfile -t ignores < $file
+        for ignore in "${ignores[@]}"; do
+            find+=$'\n'"$dir/$ignore"
+        done
+    done
+fi
+find=$( echo "$find" | sort | uniq -u )
+
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
