@@ -1,4 +1,4 @@
-Install Addons with PuTTY
+SSH connect RPi with PuTTY
 ---
 
 - download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) `<< click`
@@ -19,12 +19,3 @@ Install Addons with PuTTY
 - `2` **root@192.168.1.22's password:** `rune`
     - press `Enter`
 	- ( password will not show and cursor will not move while typing )
-- `3` **root@runeaudio:~ #** `wget -qN --show-progress https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh`
-    - press `Enter`
-	- ( `copy` the code, from `wget ...` to `... ./install.sh` > `right-click` in **PuTTY** = paste )
-
-<hr>
-
-### Using Addons Menu  
-- Refresh RuneAudio browser
-- `Menu` > `Addons`
