@@ -12,7 +12,7 @@ installstart $@
 
 getuninstall
 
-[[ ! -e /usr/bin/transmission-cli ]] && pacman -Sy transmission-cli
+[[ ! -e /usr/bin/transmission-cli ]] && pacman -Sy --noconfirm transmission-cli
 
 mnt=$( mount | grep /dev/sda1 | cut -d' ' -f3 )
 path="$mnt/transmission"

@@ -15,7 +15,7 @@ fi
 
 getuninstall
 
-[[ ! -e /usr/bin/aria2c ]] && pacman -Sy aria2
+[[ ! -e /usr/bin/aria2c ]] && pacman -Sy --noconfirm aria2
 
 mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 path=$mnt/aria2
