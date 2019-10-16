@@ -8,5 +8,5 @@ cd
 
 git clone https://aur.archlinux.org/matchbox-window-manager.git
 cd matchbox-window-manager
-makepkg
+makepkg -A
 ```
