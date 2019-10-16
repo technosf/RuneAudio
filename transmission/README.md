@@ -2,7 +2,6 @@ RuneAudio Transmission
 ---
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
-- fix error: `libcrypto.so.1.1` and `libssl.so.1.1`  
 - With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
 
 **Install**  
