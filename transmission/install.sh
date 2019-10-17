@@ -74,6 +74,11 @@ bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $dirweb -xf master.zip trans
 rm master.zip
 chown -R root:root $dirweb
 
+# set buffers
+echo 'net.core.rmem_max = 16777216
+net.core.wmem_max = 4194304' > /etc/sysctl.d/buffer.conf
+sysctl --system
+
 echo -e "$bar Start Transmission ..."
 if ! systemctl enable --now transmission &> /dev/null; then
 	title -l = "$warn Transmission install failed."
