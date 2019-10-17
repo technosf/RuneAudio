@@ -9,7 +9,7 @@ rm $0
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
 #. /srv/http/addonsfunctions.sh
-. /srv/http/addonstitle.sh
+[[ -e . /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || .. /srv/http/addonsfunctions.sh
 
 timestart
 
