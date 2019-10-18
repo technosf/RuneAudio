@@ -46,8 +46,6 @@ kid3-cli -c "select \"/path/to file\"" \
 
 **Build**
 ```sh
-pacman -Sy --needed qt5-tools extra-cmake-modules
-
 useradd alarm
 mkdir /home/alarm
 chown alarm:alarm /home/alarm
@@ -56,5 +54,5 @@ cd
 
 git clone https://aur.archlinux.org/kid3-cli.git
 cd kid3-cli
-makepkg -A
+makepkg -A -s  # -s install depends
 ```
