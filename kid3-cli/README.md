@@ -46,9 +46,6 @@ kid3-cli -c "select \"/path/to file\"" \
 
 **Build**
 ```sh
-useradd alarm
-mkdir /home/alarm
-chown alarm:alarm /home/alarm
 su alarm
 cd
 
