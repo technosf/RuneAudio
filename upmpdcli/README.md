@@ -22,24 +22,18 @@ sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
 
 ### Compile
 ```sh
-pacman -Sy expat python-requests recoll python-bottle python-mutagen mutagen aspell-en python-waitress
-
-useradd alarm
-mkdir /home/alarm
-chown alarm:alarm /home/alarm
 su alarm
 cd
 
-git clone https://aur.archlinux.org/cgit/aur.git/snapshot/libupnpp.tar.gz
+git clone https://aur.archlinux.org/libupnpp.git
 cd libupnpp
-sed -i 's/\(arch=(i686 x86_64\))/\1 armv7h)/' PKGBUILD
 
-makepkg -A
+makepkg -A -s
 
-sudo pacman -U /home/alarm/libupnpp/libupnpp-0.17.1-1-armv7h.pkg.tar.xz
+sudo pacman -U /home/alarm/libupnpp/libupnpp*
 
-git clone https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
+git clone https://aur.archlinux.org/upmpdcli.git
 cd upmpdcli
 
-makepkg -A
+makepkg -A -s
 ```
