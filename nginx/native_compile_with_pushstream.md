@@ -4,11 +4,9 @@ Native compile.
 
 ```sh
 # on RuneAudio
-useradd alarm
-mkdir -p /home/alarm/nginx-mainline-pushstream
-chown -R alarm:alarm /home/alarm
 su alarm
-cd /home/alarm/nginx-mainline-pushstream
+mkdir nginx-mainline-pushstream
+cd nginx-mainline-pushstream
 ```
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files/
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
@@ -55,12 +53,7 @@ cd /home/alarm/nginx-mainline-pushstream
 #}
 ```
 
-### Prepare build environment
-```sh
-pacman -Sy --needed base-devel fakeroot guile git libutil-linux memcached mercurial perl-cache-memcached perl-fcgi perl-gd perl-io-socket-ssl
-```
-
 ### Compile
 ```sh
-makepkg -A --skipinteg
+makepkg -A -s --skipinteg
 ```
