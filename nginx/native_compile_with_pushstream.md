@@ -1,9 +1,11 @@
 NGINX with pushstream
 ---
-Native compile.
+Native compile on RPi.
 
 ```sh
-# on RuneAudio
+# 
+pacman -Sy --needed fakeroot
+
 su alarm
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
