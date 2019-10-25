@@ -46,7 +46,7 @@ kid3-cli -c "select \"/path/to file\"" \
 
 **Build**
 ```sh
-pacman -Sy chromaprint id3lib taglib libmp4v2 qt5-multimedia
+pacman -Sy --needed chromaprint extra-cmake-modules id3lib libmp4v2 ninja qt5-multimedia qt5-tools docbook-xsl taglib
 
 su alarm
 cd
