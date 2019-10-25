@@ -13,7 +13,7 @@ cd nginx-mainline-pushstream
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files/
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
 - Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
-- Edit `PKGBUILD`:
+- Edit [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/nginx/home/alarm/PKGBUILD):
 ```sh
 --pkgname=nginx-mainline
 ++pkgname=nginx-mainline-pushstream
