@@ -57,5 +57,5 @@ cd nginx-mainline-pushstream
 
 ### Compile
 ```sh
-makepkg -A -s --skipinteg
+makepkg -A
 ```
