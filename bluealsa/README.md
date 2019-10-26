@@ -1,5 +1,5 @@
 ### Bluetooth Audio ALSA Backend
-[bluealsa](https://github.com/Arkq/bluez-alsa)
+Source: [bluealsa](https://github.com/Arkq/bluez-alsa)
 ```sh
 pacman -Sy --needed base-devel bluez bluez-utils git
 
