@@ -1,18 +1,15 @@
 ### Bluetooth Audio ALSA Backend
 [bluealsa](https://github.com/Arkq/bluez-alsa)
 ```sh
-pacman -Sy --needed base-devel alsa-lib bluez bluez-utils bluez-libs bluez-tools fdkaac sbc
+pacman -Sy --needed base-devel bluez bluez-utils git
 
 su alarm
-wget https://github.com/Arkq/bluez-alsa/archive/v2.0.0.tar.gz
-bsdtar xvf v2.0.0.tar.gz
-rm v2.0.0.tar.gz
-cd bluez-alsa-2.0.0
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/bluez-alsa-git.tar.gz
+bluez-alsa-git.tar.gz
+rm bluez-alsa-git.tar.gz
+cd bluez-alsa-git
 
-autoreconf --install
-mkdir build
-cd build
 ../configure --enable-aac --enable-ofono --enable-debug
-make
-make install
+
+makepkg -A
 ```
