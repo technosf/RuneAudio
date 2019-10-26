@@ -1,6 +1,7 @@
 ### matchbox-window-manager
 
 ```sh
+pacman -Sy --needed base-devel fakeroot make
 su alarm
 cd
 
