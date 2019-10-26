@@ -5,7 +5,11 @@ pacman -Sy --needed base-devel
 su alarm
 cd
 
-git clone https://aur.archlinux.org/matchbox-window-manager.git
+# download snapshot
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/matchbox-window-manager.tar.gz
+bsdtar xvf matchbox-window-manager.tar.gz
+rm matchbox-window-manager.tar.gz
 cd matchbox-window-manager
-makepkg -A -s  # -s install depends
+
+makepkg -A
 ```
