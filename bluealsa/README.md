@@ -1,7 +1,7 @@
 ### Bluetooth Audio ALSA Backend
 
 ```sh
-pacman -Sy --needed base-devel bluez bluez-utils bluez-libs bluez-tools fdkaac sbc
+pacman -Sy --needed base-devel alsa-lib bluez bluez-utils bluez-libs bluez-tools fdkaac sbc
 
 su alarm
 wget https://github.com/Arkq/bluez-alsa/archive/v2.0.0.tar.gz
