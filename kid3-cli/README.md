@@ -51,7 +51,10 @@ pacman -Sy --needed  base-devel chromaprint extra-cmake-modules id3lib libmp4v2 
 su alarm
 cd
 
-git clone https://aur.archlinux.org/kid3-cli.git
+# download snapshot
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
+bsdtar xvf upmpdcli.tar.gz
+rm upmpdcli.tar.gz
 cd kid3-cli
-makepkg -A -s  # -s install depends
+makepkg -A
 ```
