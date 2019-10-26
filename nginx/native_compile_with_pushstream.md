@@ -4,7 +4,7 @@ Native compile on RPi.
 
 ```sh
 # 
-pacman -Sy --needed fakeroot make
+pacman -Sy --needed base-devel fakeroot make
 
 su alarm
 mkdir nginx-mainline-pushstream
