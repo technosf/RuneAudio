@@ -38,5 +38,5 @@ cd
 git clone https://aur.archlinux.org/upmpdcli.git
 cd upmpdcli
 
-makepkg -A -s
+makepkg -A
 ```
