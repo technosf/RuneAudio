@@ -22,7 +22,7 @@ sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
 
 ### Compile
 ```sh
-pacman -Sy --needed base-devel libupnp libmpdclient
+pacman -Sy --needed base-devel fakeroot libupnp libmpdclient make
 
 su alarm
 cd
