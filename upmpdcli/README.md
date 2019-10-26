@@ -24,7 +24,6 @@ sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
 ```sh
 pacman -Sy --needed base-devel aspell-en id3lib jsoncpp libmicrohttpd libmpdclient libupnp mutagen python-bottle python-mutagen python-requests python-setuptools python-waitress recoll
 
-
 su alarm
 cd
 
