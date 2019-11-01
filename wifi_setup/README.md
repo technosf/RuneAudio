@@ -1,7 +1,11 @@
-### Wi-Fi Setup for Headless system
-- Pre-configure before boot
+### Wi-Fi Setup for Headless System
 - No need to connect monitor/TV and keyboard
-- On Linux PC:
+- Pre-configure before boot:
+	- SSID
+	- Password
+	- Security (WPA/WEP/none)
+	
+- On Linux PC: (Filesystem 'root' partition must be labeled as ROOT)
 ```sh
 # switch user to root
 su -
