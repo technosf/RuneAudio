@@ -5,7 +5,10 @@
 	- Password
 	- Security (WPA/WEP/none)
 	
-- On Linux PC: (Filesystem 'root' partition must be labeled as ROOT)
+- On Linux PC:
+	- Insert micro SD card (or USB drive with ROOT partition)
+	- Filesystem 'root' partition must be labeled as ROOT
+	- Open **Files** app - click `ROOT` to mount
 ```sh
 # switch user to root
 su -
