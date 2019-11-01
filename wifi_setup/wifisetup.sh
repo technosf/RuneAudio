@@ -1,12 +1,11 @@
 #!/bin/bash
 
-rm $0
-
 echo -e "\nVerify ROOT path"
 
 ROOT=$( df | grep ROOT | awk '{print $NF}' )
 if [[ -z $ROOT ]]; then
-    echo -e "\nROOT path not found.\n"
+    echo -e "\nROOT path not found."
+	echo -e "Mount ROOT partition > ./wifisetup.sh again.\n"
 	exit
 fi
 
