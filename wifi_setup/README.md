@@ -9,6 +9,7 @@
 	- Insert micro SD card (or USB drive with ROOT partition)
 	- Filesystem 'root' partition must be labeled as ROOT
 	- Open **Files** app - click `ROOT` to mount
+	- Hover mouse over `ROOT` and note the path
 ```sh
 # switch user to root
 su -
