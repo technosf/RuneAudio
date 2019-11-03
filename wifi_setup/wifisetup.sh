@@ -21,21 +21,23 @@ read -rsn1 -p "Confirm and continue? [y/n]: " ans; echo
 
 selectSecurity() {
 	echo Security:
-	tcolor 1 'WPA'
-	tcolor 2 'WEP'
-	tcolor 3 'None'
+	echo -e '  \e[36m1\e[m WPA'
+	echo -e '  \e[36m2\e[m WEP'
+	echo -e '  \e[36m3\e[m None'
 	read -rn 1 -p 'Select [1-3]: ' ans
-	[[ -z $ans ]] || (( $ans > 3 )) && echo -e "\nSelect 1, 2 or 3\n" && selectSecurity
-	if [[ $ans == 1 ]]; then
-		wpa=wpa
-	elif [[ $ans == 2 ]]; then
-		wpa=wep
+	if [[ -z $ans || $ans -gt 3 ]]; then
+		echo -e "\nSelect 1, 2 or 3\n" && selectSecurity
 	else
-		wpa=
+		if [[ $ans == 1 ]]; then
+			wpa=wpa
+		elif [[ $ans == 2 ]]; then
+			wpa=wep
+		else
+			wpa=
+		fi
 	fi
 }
 setCredential() {
-	echo
 	read -p 'SSID: ' ssid
 	read -p 'Password: ' password
 	selectSecurity
@@ -61,9 +63,10 @@ echo '[Unit]
 BindsTo=sys-subsystem-net-devices-wlan0.device
 After=sys-subsystem-net-devices-wlan0.device' > "$dir/profile.conf"
 
+pwd=$PWD
 cd $ROOT/etc/systemd/system/multi-user.target.wants
 ln -s ../../../../lib/systemd/system/netctl@.service "netctl@$ssid.service"
-cd
+cd "$pwd"
 
 # unmount
 umount -l $ROOT && echo -e "\n$ROOT unmounted."
