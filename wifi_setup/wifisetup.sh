@@ -10,10 +10,13 @@ if [[ -z $ROOT ]]; then
 fi
 
 cols=$( tput cols )
-printf %"$cols"s | tr ' ' -
+hr() { printf "\e[36m%*s\e[m\n" $cols | tr ' ' -; }
+
+hr
 echo $( df -h | grep ROOT )
 echo ROOT: $ROOT
-printf %"$cols"s | tr ' ' -
+hr
+
 read -rsn1 -p "Confirm ROOT path? (y/N): " ans; echo
 [[ $ans != Y && $ans != y ]] && exit
 
@@ -39,10 +42,7 @@ setCredential() {
 	read -p 'SSID: ' ssid
 	read -p 'Password: ' password
 	selectSecurity
-	echo
-	printf %"$cols"s | tr ' ' -
-	echo -e "\nSSID: $ssid\nPassword: $password\nSecurity: ${wpa^^}"
-	printf %"$cols"s | tr ' ' -
+	echo -e "\nSSID: $ssid\nPassword: $password\nSecurity: ${wpa^^}\n"
 	read -rn1 -p "Confirm and continue? [y/N]: " ans; echo
 	[[ $ans != Y && $ans != y ]] && setCredential
 }
