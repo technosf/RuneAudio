@@ -53,9 +53,11 @@ profile="Interface=wlan0
 Connection=wireless
 IP=dhcp
 ESSID=\"$ssid\""
-[[ -n $wpa ]] && profile+="Security=$wpa
-Key=$password"
-echo $profile > "$ROOT/etc/netctl/$ssid"
+[[ -n $wpa ]] && profile+="
+Security=$wpa
+Key=$password
+"
+echo "$profile" > "$ROOT/etc/netctl/$ssid"
 
 # enable startup
 pwd=$PWD
