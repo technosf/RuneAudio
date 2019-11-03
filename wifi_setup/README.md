@@ -15,7 +15,7 @@
 su -
 
 # get setup script
-wget https://github.com/rern/RuneAudio/raw/master/wifi_setup/wifisetup.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/wifi_setup/wifisetup.sh
 chmod +x wifisetup.sh
 ./wifisetup.sh
 
