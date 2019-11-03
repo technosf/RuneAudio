@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo -e "\nVerify ROOT path"
-
 ROOT=$( df | grep ROOT | awk '{print $NF}' )
 if [[ -z $ROOT ]]; then
     echo -e "\nROOT path not found."
@@ -13,14 +11,13 @@ cols=$( tput cols )
 hr() { printf "\e[36m%*s\e[m\n" $cols | tr ' ' -; }
 
 hr
-echo $( df -h | grep ROOT )
-echo ROOT: $ROOT
+echo -e "\nSetup Wi-Fi connection ...\n"
 hr
 
+echo -e"\n$( df -h | grep ROOT )"
+echo -e "ROOT: $ROOT\n"
 read -rsn1 -p "Confirm ROOT path? (y/N): " ans; echo
 [[ $ans != Y && $ans != y ]] && exit
-
-echo -e "\nSetup Wi-Fi connection\n"
 
 selectSecurity() {
 	echo Security:
@@ -69,4 +66,8 @@ ln -s ../../../../lib/systemd/system/netctl@.service "netctl@$ssid.service"
 cd
 
 # unmount
-umount -l $ROOT && echo -e "\n$ROOT unmounted.\nMove to Raspberry Pi."
+umount -l $ROOT && echo -e "\n$ROOT unmounted."
+
+echo -e "\n\e[36mWi-Fi setup succesfully.\e[m"
+hr
+
