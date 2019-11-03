@@ -16,7 +16,7 @@ hr
 
 echo -e "\n$( df -h | grep ROOT )"
 echo -e "ROOT: $ROOT\n"
-read -rsn1 -p "Confirm ROOT path? (y/N): " ans; echo
+read -rsn1 -p "Confirm and continue? [y/n]: " ans; echo
 [[ $ans != Y && $ans != y ]] && exit
 
 selectSecurity() {
@@ -39,8 +39,8 @@ setCredential() {
 	read -p 'SSID: ' ssid
 	read -p 'Password: ' password
 	selectSecurity
-	echo -e "\nSSID: $ssid\nPassword: $password\nSecurity: ${wpa^^}\n"
-	read -rn1 -p "Confirm and continue? [y/N]: " ans; echo
+	echo -e "\n\nSSID: \e[36m$ssid\e[m\nPassword: \e[36m$password\e[m\nSecurity: \e[36m${wpa^^}\e[m\n"
+	read -rn1 -p "Confirm and continue? [y/n]: " ans; echo
 	[[ $ans != Y && $ans != y ]] && setCredential
 }
 setCredential
