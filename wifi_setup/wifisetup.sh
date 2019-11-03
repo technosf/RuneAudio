@@ -68,6 +68,6 @@ cd
 # unmount
 umount -l $ROOT && echo -e "\n$ROOT unmounted."
 
-echo -e "\n\e[36mWi-Fi setup succesfully.\e[m"
+echo -e "\n\e[36mWi-Fi setup succesfully.\e[m\n"
 hr
 
