@@ -11,7 +11,7 @@ cols=$( tput cols )
 hr() { printf "\e[36m%*s\e[m\n" $cols | tr ' ' -; }
 
 hr
-echo -e "\nSetup Wi-Fi connection ...\n"
+echo -e "\n\e[36mSetup Wi-Fi connection ...\e[m\n"
 hr
 
 echo -e "\n$( df -h | grep ROOT )"
