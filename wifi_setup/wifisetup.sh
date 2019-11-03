@@ -15,7 +15,7 @@ echo -e "\nSetup Wi-Fi connection ...\n"
 hr
 
 echo -e "\n$( df -h | grep ROOT )"
-echo -e "ROOT: $ROOT\n"
+echo -e "ROOT: \e[36m$ROOT\e[m\n"
 read -rsn1 -p "Confirm and continue? [y/n]: " ans; echo
 [[ $ans != Y && $ans != y ]] && exit
 
