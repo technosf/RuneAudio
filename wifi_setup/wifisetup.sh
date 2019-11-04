@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 ROOT=$( df | grep ROOT | awk '{print $NF}' )
 if [[ -z $ROOT ]]; then
     echo -e "\nROOT path not found."
