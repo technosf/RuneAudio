@@ -66,7 +66,7 @@ pwd=$PWD
 dir=$ROOT/etc/systemd/system/sys-subsystem-net-devices-wlan0.device.wants
 mkdir -p $dir
 cd $dir
-ln -s ../../../../lib/systemd/system/netctl-auto@.service netctl-auto@wlan0.service
+ln -sf ../../../../lib/systemd/system/netctl-auto@.service netctl-auto@wlan0.service
 cd "$pwd"
 
 # unmount
