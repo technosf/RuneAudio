@@ -12,7 +12,7 @@
 	- Hover mouse over `ROOT` and note the path
 ```sh
 # switch user to root
-su -
+su
 
 # get setup script
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/wifi_setup/wifisetup.sh
