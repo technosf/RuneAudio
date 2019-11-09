@@ -70,7 +70,8 @@ ln -sf ../../../../lib/systemd/system/netctl-auto@.service netctl-auto@wlan0.ser
 cd "$pwd"
 
 # unmount
-umount -l $ROOT && echo -e "\n$ROOT unmounted."
+BOOT=$( df | grep ROOT | awk '{print $NF}' )
+umount -l $BOOT && umount -l $ROOT && echo -e "\n$BOOT and $ROOT unmounted."
 
 echo -e "\n\e[36mWi-Fi setup succesfully.\e[m\n"
 hr
