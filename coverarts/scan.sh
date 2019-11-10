@@ -195,7 +195,6 @@ if [[ -n $mpdignore ]]; then
 	done
 fi
 
-find=$( echo "$find" | sort | uniq -u )
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
 echo -e "\n$( tcolor $( numfmt --g $count ) ) Subdirectories"
