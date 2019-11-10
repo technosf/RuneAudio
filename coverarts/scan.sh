@@ -179,7 +179,7 @@ coloredname=$( tcolor 'Browse By CoverArt' )
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
 echo Base directory: $( tcolor "$path" )
-find=$( find "$path" -mindepth 1 ! -empty ! -wholename /mnt/MPD/Webradio -type d | sort )
+find=$( find "$path" -mindepth 1 ! -empty -type d | sort )
 [[ -z $find ]] && find=$path
 # omit .mpdignore
 mpdignore=$( find "$path" -mindepth 1 -name .mpdignore -type f )
