@@ -181,6 +181,7 @@ title -l '=' "$bar $update thumbnails for $coloredname ..."
 echo Base directory: $( tcolor "$path" )
 find=$( find "$path" -mindepth 1 ! -empty -type d | sort )
 [[ -z $find ]] && find=$path
+
 # omit .mpdignore
 mpdignore=$( find "$path" -mindepth 1 -name .mpdignore -type f )
 if [[ -n $mpdignore ]]; then
@@ -189,10 +190,11 @@ if [[ -n $mpdignore ]]; then
 		dir=$( dirname "$file" )
 		mapfile -t ignores < "$file"
 		for ignore in "${ignores[@]}"; do
-			find+=$'\n'"$dir/$ignore"
+			find=$( echo "$find" | grep -v "$dir/$ignore$" )
 		done
 	done
 fi
+
 find=$( echo "$find" | sort | uniq -u )
 readarray -t dirs <<<"$find"
 count=${#dirs[@]}
