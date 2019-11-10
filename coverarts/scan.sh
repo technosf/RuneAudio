@@ -46,7 +46,7 @@ createThumbnail() {
 		fi
 	else
 		album=$( cat "$cuefile" | grep '^TITLE' | cut -d'"' -f2 )
-		artist=$( cat "$cuefile" | grep '^PERFORMER' | cut -d'"' -f2 )
+		artist=$( cat "$cuefile" | grep -m 1 'PERFORMER' | cut -d'"' -f2 )
 		thumbname="$album^^$artist^^${dir/\/mnt\/MPD\/}"
 	fi
 	# "/" not allowed in filename, escape ", "#" and "?" not allowed in img src
