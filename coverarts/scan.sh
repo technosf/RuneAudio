@@ -7,7 +7,7 @@ dirtmp=/srv/http/data/tmp
 
 rm $0
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/addonsfunctions.sh
+. /srv/http/addons-functions.sh
 
 [[ $3 == 1 ]] && mpc update
 
