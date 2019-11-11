@@ -2,8 +2,7 @@
 
 rm $0
 
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
-. /srv/http/addonstitle.sh
+. /srv/http/addons-functions.sh
 
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
