@@ -30,6 +30,8 @@ cd
 git clone https://aur.archlinux.org/libupnpp.git
 cd libupnpp
 
+sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
+
 makepkg -A -s
 
 sudo pacman -U /home/alarm/libupnpp/libupnpp*
@@ -37,6 +39,8 @@ sudo pacman -U /home/alarm/libupnpp/libupnpp*
 cd
 git clone https://aur.archlinux.org/upmpdcli.git
 cd upmpdcli
+
+sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
 makepkg -A
 ```
