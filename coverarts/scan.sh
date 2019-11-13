@@ -122,9 +122,9 @@ createThumbnail() {
 			tmpfile=$dirtmp/coverart
 			kid3-cli -c "select '$file'" -c "get picture:$tmpfile"
 			if [[ -e $tmpfile ]]; then
-				mimetype=$( file -b --mime-type $tmpfile | cut -d/ -f2 )
-				[[ $mimetype == jpeg ]] && mimetype=jpg
-				coverfile="$tmpfile.$mimetype"
+				ext=$( file -b --mime-type $tmpfile | cut -d/ -f2 )
+				[[ $ext == jpeg ]] && ext=jpg
+				coverfile="$tmpfile.$ext"
 				break
 			fi
 		done
@@ -134,6 +134,7 @@ createThumbnail() {
 			return
 		else
 			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+			rm "$coverfile"
 			if [[ $? == 0 ]]; then
 				if [[ $removeexist ]]; then
 					(( replace++ ))
