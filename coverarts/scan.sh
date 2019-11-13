@@ -104,7 +104,7 @@ createThumbnail() {
 				continue
 			fi
 			# skip non-audio files
-			mimetype=$( file -b --mime-type $file | cut -d/ -f1 )
+			mimetype=$( file -b --mime-type "$file" | cut -d/ -f1 )
 			[[ $mimetype != audio && $ext != dsf && $ext != dff ]] && continue # dsd mimetype not consistent
 			
 			# find cover file
@@ -122,7 +122,8 @@ createThumbnail() {
 			tmpfile=$dirtmp/coverart
 			kid3-cli -c "select '$file'" -c "get picture:$tmpfile"
 			if [[ -e $tmpfile ]]; then
-				mimetype=$( file -b --mime-type $tmpfile )
+				mimetype=$( file -b --mime-type $tmpfile | cut -d/ -f2 )
+				[[ $mimetype == jpeg ]] && mimetype=jpg
 				coverfile="$tmpfile.$mimetype"
 				break
 			fi
