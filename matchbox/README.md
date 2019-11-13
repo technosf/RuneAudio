@@ -11,5 +11,7 @@ bsdtar xvf matchbox-window-manager.tar.gz
 rm matchbox-window-manager.tar.gz
 cd matchbox-window-manager
 
+sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
+
 makepkg -A
 ```
