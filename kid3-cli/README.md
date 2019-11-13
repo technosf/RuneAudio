@@ -56,5 +56,8 @@ wget https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
 bsdtar xvf upmpdcli.tar.gz
 rm upmpdcli.tar.gz
 cd kid3-cli
+
+sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
+
 makepkg -A
 ```
