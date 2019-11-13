@@ -9,7 +9,9 @@ bluez-alsa-git.tar.gz
 rm bluez-alsa-git.tar.gz
 cd bluez-alsa-git
 
-sed -i 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/' PKGBUILD
+sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/
+' -e "s/^arch=.*/arch=('any')/
+" PKGBUILD
 
 makepkg -A
 ```
