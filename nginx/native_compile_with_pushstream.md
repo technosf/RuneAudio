@@ -18,6 +18,9 @@ cd nginx-mainline-pushstream
 --pkgname=nginx-mainline
 ++pkgname=nginx-mainline-pushstream
 ...
+--arch=('x86_64')
+++arch=('any')
+...
 ++pushstreamver=0.5.4
 --depends=(pcre zlib openssl geoip mailcap)
 ++depends=(pcre zlib openssl)
