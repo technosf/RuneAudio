@@ -96,7 +96,8 @@ createThumbnail() {
 	done
 	
 	if [[ -z $cuefile ]]; then
-		files=( $( find "$dir" -maxdepth 1 -type f ) )
+		files=$( find "$dir" -maxdepth 1 -type f )
+		readarray -t files <<<"$files"
 		for file in "${files[@]}"; do
 			ext=${file##*.}
 			if [[ $ext == wav ]]; then
