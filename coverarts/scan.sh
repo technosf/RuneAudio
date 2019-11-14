@@ -96,7 +96,7 @@ createThumbnail() {
 	done
 	
 	if [[ -z $cuefile ]]; then
-		files=( "$dir"/* )
+		files=( $( find "$dir" -maxdepth 1 -type f ) )
 		for file in "${files[@]}"; do
 			ext=${file##*.}
 			if [[ $ext == wav ]]; then
@@ -181,7 +181,7 @@ coloredname=$( tcolor 'Browse By CoverArt' )
 title -l '=' "$bar $update thumbnails for $coloredname ..."
 
 echo Base directory: $( tcolor "$path" )
-find=$( find "$path" -mindepth 1 ! -empty -type d | sort )
+find=$( find "$path" -mindepth 1 ! -empty ! -path '*/\.*' -type d | sort )
 [[ -z $find ]] && find=$path
 
 # omit .mpdignore
