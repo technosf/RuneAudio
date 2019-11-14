@@ -119,12 +119,12 @@ createThumbnail() {
 			[[ $found ]] && break
 			
 			# find embedded
-			tmpfile=$dirtmp/coverart
-			kid3-cli -c "select '$file'" -c "get picture:$tmpfile"
-			if [[ -e $tmpfile ]]; then
-				ext=$( file -b --mime-type $tmpfile | cut -d/ -f2 )
+			coverfile=$dirtmp/coverart
+			kid3-cli -c "select '$file'" -c "get picture:$coverfile"
+			if [[ -e $coverfile ]]; then
+				ext=$( file -b --mime-type $coverfile | cut -d/ -f2 )
 				[[ $ext == jpeg ]] && ext=jpg
-				coverfile="$tmpfile.$ext"
+				mv $coverfile{,.$ext}
 				break
 			fi
 		done
