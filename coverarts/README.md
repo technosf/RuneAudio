@@ -1,5 +1,5 @@
 ## RuneAudio+R e - Browse By CoverArt
-*(This addon should run with Library context menu in RuneUI Enhancement.)*  
+*(This addon should run with Library context menu.)*  
 
 Update / Create thumbnails for browsing by coverart from local coverart files or ID3 embedded data. It will take a while depend on numbers of album for the 1st time. Subsequent updates will be on new/changed album/artist names only.
 
