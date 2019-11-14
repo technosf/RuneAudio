@@ -121,7 +121,7 @@ createThumbnail() {
 			
 			# find embedded
 			coverfile=$dirtmp/coverart
-			kid3-cli -c "select '$file'" -c "get picture:$coverfile"
+			kid3-cli -c "select \"$file\"" -c "get picture:$coverfile"
 			if [[ -e $coverfile ]]; then
 				ext=$( file -b --mime-type $coverfile | cut -d/ -f2 )
 				[[ $ext == jpeg ]] && ext=jpg
