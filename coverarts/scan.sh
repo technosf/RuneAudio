@@ -126,25 +126,28 @@ createThumbnail() {
 				ext=$( file -b --mime-type $coverfile | cut -d/ -f2 )
 				[[ $ext == jpeg ]] && ext=jpg
 				mv $coverfile{,.$ext}
+				coverfile=$coverfile.$ext
 				break
 			fi
 		done
 		
-		if [[ ${coverfile:0:4} != '/srv' ]]; then
-			echo "  $coverfile"
-			return
-		else
-			convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
-			rm "$coverfile"
-			if [[ $? == 0 ]]; then
-				if [[ $removeexist ]]; then
-					(( replace++ ))
-					echo -e "$padG #$replace Replace - Existing thumbnail."
-				else
-					(( thumb++ ))
-					echo -e "$padC #$thumb New - Thumbnail created from embedded ID3."
-				fi
+		if [[ -e "$coverfile" ]]; then
+			if [[ ${coverfile:0:4} != '/srv' ]]; then
+				echo "  $coverfile"
 				return
+			else
+				convert "$coverfile" -thumbnail 200x200 -unsharp 0x.5 "$thumbfile"
+				rm "$coverfile"
+				if [[ $? == 0 ]]; then
+					if [[ $removeexist ]]; then
+						(( replace++ ))
+						echo -e "$padG #$replace Replace - Existing thumbnail."
+					else
+						(( thumb++ ))
+						echo -e "$padC #$thumb New - Thumbnail created from embedded ID3."
+					fi
+					return
+				fi
 			fi
 		fi
 	fi
