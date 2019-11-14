@@ -96,7 +96,7 @@ createThumbnail() {
 	done
 	
 	if [[ -z $cuefile ]]; then
-		files=( "$dir/*" )
+		files=( "$dir"/* )
 		for file in "${files[@]}"; do
 			ext=${file##*.}
 			if [[ $ext == wav ]]; then
