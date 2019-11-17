@@ -42,7 +42,7 @@ rm -rf $tmpdir && mkdir $tmpdir
 i=0
 for server in ${servers[@]}; do # download from each mirror
 	(( i++ ))
-	curl --connect-timeout $sec -sLH 'Cache-Control: no-cache' $server/$dlfile -o $tmpdir/community.db
+	curl --connect-timeout $sec -sLo $tmpdir/community.db $server/$dlfile?$RANDOM
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
 	ping=$( ping -4 -c 3 -w 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
