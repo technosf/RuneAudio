@@ -15,7 +15,7 @@ timestart
 (( $# > 0 )) && title -l = $bar Rank Mirror Package Servers ...
 
 echo -e "\n$bar Get latest mirrorlist of package servers ..."
-wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
+curl -Lo /tmp/mirrorlist https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist
 tmplist=/tmp/mirrorlist
 echo $( grep 'Generated' $tmplist | cut -d' ' -f2- )
 
@@ -43,6 +43,7 @@ i=0
 for server in ${servers[@]}; do # download from each mirror
 	(( i++ ))
 	timeout $sec wget -q --no-cache -P $tmpdir $server/$dlfile &
+	curl --connect-timeout $sec -sLH 'Cache-Control: no-cache' $server/$dlfile -o $tmpdir/community.db
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
 	ping=$( ping -4 -c 3 -w 3 ${server/http*\:\/\/} | tail -1 | cut -d'/' -f5 )
