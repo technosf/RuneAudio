@@ -15,7 +15,7 @@ timestart
 (( $# > 0 )) && title -l = $bar Rank Mirror Package Servers ...
 
 echo -e "\n$bar Get latest mirrorlist of package servers ..."
-curl -Lo /tmp/mirrorlist https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist
+curl -sLo /tmp/mirrorlist https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist
 tmplist=/tmp/mirrorlist
 echo $( grep 'Generated' $tmplist | cut -d' ' -f2- )
 
