@@ -42,7 +42,6 @@ rm -rf $tmpdir && mkdir $tmpdir
 i=0
 for server in ${servers[@]}; do # download from each mirror
 	(( i++ ))
-	timeout $sec wget -q --no-cache -P $tmpdir $server/$dlfile &
 	curl --connect-timeout $sec -sLH 'Cache-Control: no-cache' $server/$dlfile -o $tmpdir/community.db
 	wait
 	dl=$( du -c $tmpdir | grep total | awk '{print $1}' ) # get downloaded amount
@@ -57,8 +56,6 @@ for server in ${servers[@]}; do # download from each mirror
 	speed=$(( dl / sec ))
 	dl_server="$dl_server$server0 $speed $latency\n"
 	printf "%6d. %-23s :%7d kB/s%5s ms\n" $i ${server/archlinux*}.. $speed $latency
-	
-	rm -f $tmpdir/* # remove downloaded file
 done
 
 rank=$( echo -e "$dl_server" | grep . | sort -g -k4,4nr -k5n )
