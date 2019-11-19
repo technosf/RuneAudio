@@ -1,7 +1,8 @@
 ### matchbox-window-manager
 
 ```sh
-pacman -Sy --needed base-devel
+pacman -Syu
+pacman -S --needed base-devel
 su alarm
 cd
 
