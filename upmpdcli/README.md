@@ -35,11 +35,12 @@ cd libupnpp
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
-makepkg -A -s
+makepkg -A
 
-pacman -U /home/alarm/libupnpp/libupnpp-N--any.pkg.tar.xz
+su
+pacman -U /home/alarm/libupnpp/libupnpp-*-any.pkg.tar.xz
+su alarm
 
-cd
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
 bsdtar xf upmpdcli.tar.gz
 rm upmpdcli.tar.gz
