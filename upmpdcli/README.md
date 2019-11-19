@@ -23,7 +23,7 @@ sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
 ### Compile
 ```sh
 pacman -Syu
-pacman -S --needed base-devel aspell-en id3lib jsoncpp libmicrohttpd libmpdclient libupnp mutagen python-bottle python-mutagen python-requests python-setuptools python-waitress recoll
+pacman -S --needed base-devel aspell-en id3lib jsoncpp libmicrohttpd libmpdclient libupnp mutagen python-bottle python-mutagen python-requests python-setuptools python-waitress recoll wget
 
 su alarm
 cd
