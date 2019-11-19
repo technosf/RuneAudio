@@ -45,7 +45,7 @@ bsdtar xf upmpdcli.tar.gz
 rm upmpdcli.tar.gz
 cd upmpdcli
 
-sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
+sed -i -e "s/^arch=.*/arch=('any')/" -e "s/'mutagen' //" PKGBUILD
 
 makepkg -A
 ```
