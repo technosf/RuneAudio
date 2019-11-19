@@ -2,7 +2,7 @@
 
 ```sh
 pacman -Syu
-pacman -S --needed base-devel
+pacman -S --needed base-devel wget
 su alarm
 cd
 
