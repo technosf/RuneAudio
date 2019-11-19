@@ -23,12 +23,14 @@ sed -i -e 's/.*\(friendlyname = \).*/\1RuneAudio
 ### Compile
 ```sh
 pacman -Syu
-pacman -S --needed base-devel aspell-en id3lib jsoncpp libmicrohttpd libmpdclient libupnp python-bottle python-mutagen python-requests python-setuptools python-waitress recoll wget
+pacman -S --needed base-devel aspell-en id3lib jsoncpp libmicrohttpd libmpdclient libupnp python-bottle python-mutagen python-requests python-setuptools python-waitress recoll
 
 su alarm
 cd
 
-git clone https://aur.archlinux.org/libupnpp.git
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/libupnpp.tar.gz
+bsdtar xf libupnpp.tar.gz
+rm libupnpp.tar.gz
 cd libupnpp
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
