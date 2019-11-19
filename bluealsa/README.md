@@ -2,10 +2,10 @@
 Source: [bluealsa](https://github.com/Arkq/bluez-alsa)
 ```sh
 pacman -Syu
-pacman -S --needed base-devel bluez bluez-utils git wget
+pacman -S --needed base-devel bluez bluez-utils git
 
 su alarm
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/bluez-alsa-git.tar.gz
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/bluez-alsa-git.tar.gz
 bluez-alsa-git.tar.gz
 rm bluez-alsa-git.tar.gz
 cd bluez-alsa-git
