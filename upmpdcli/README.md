@@ -40,7 +40,9 @@ makepkg -A -s
 sudo pacman -U /home/alarm/libupnpp/libupnpp*
 
 cd
-git clone https://aur.archlinux.org/upmpdcli.git
+caul -O https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
+bsdtar xf upmpdcli.tar.gz
+rm upmpdcli.tar.gz
 cd upmpdcli
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
