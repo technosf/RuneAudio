@@ -1,7 +1,8 @@
 ### Bluetooth Audio ALSA Backend
 Source: [bluealsa](https://github.com/Arkq/bluez-alsa)
 ```sh
-pacman -Sy --needed base-devel bluez bluez-utils git wget
+pacman -Syu
+pacman -S --needed base-devel bluez bluez-utils git wget
 
 su alarm
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/bluez-alsa-git.tar.gz
