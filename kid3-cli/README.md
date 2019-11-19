@@ -47,13 +47,13 @@ kid3-cli -c "select \"/path/to file\"" \
 **Build**
 ```sh
 pacman -Syu
-pacman -S --needed  base-devel chromaprint extra-cmake-modules id3lib libmp4v2 ninja python qt5-multimedia qt5-tools docbook-xsl taglib wget
+pacman -S --needed  base-devel chromaprint extra-cmake-modules id3lib libmp4v2 ninja python qt5-multimedia qt5-tools docbook-xsl taglib
 
 su alarm
 cd
 
 # download snapshot
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/kid3-cli.tar.gz
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/kid3-cli.tar.gz
 bsdtar xvf kid3-cli.tar.gz
 rm kid3-cli.tar.gz
 cd kid3-cli
