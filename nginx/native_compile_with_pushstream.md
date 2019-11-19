@@ -3,8 +3,8 @@ NGINX with pushstream
 Native compile on RPi.
 
 ```sh
-# 
-pacman -Sy --needed base-devel
+pacman -Syu
+pacman -S --needed base-devel
 
 su alarm
 mkdir nginx-mainline-pushstream
