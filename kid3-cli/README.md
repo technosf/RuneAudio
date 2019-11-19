@@ -46,7 +46,7 @@ kid3-cli -c "select \"/path/to file\"" \
 
 **Build**
 ```sh
-pacman -Sy --needed  base-devel chromaprint extra-cmake-modules id3lib libmp4v2 ninja python qt5-multimedia qt5-tools docbook-xsl taglib wget
+pacman -Sy --needed  base-devel chromaprint extra-cmake-modules icu id3lib libmp4v2 ninja python qt5-multimedia qt5-tools docbook-xsl taglib wget
 
 su alarm
 cd
