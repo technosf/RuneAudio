@@ -52,9 +52,9 @@ su alarm
 cd
 
 # download snapshot
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
-bsdtar xvf upmpdcli.tar.gz
-rm upmpdcli.tar.gz
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/kid3-cli.tar.gz
+bsdtar xvf kid3-cli.tar.gz
+rm kid3-cli.tar.gz
 cd kid3-cli
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
