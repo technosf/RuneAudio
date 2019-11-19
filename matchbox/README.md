@@ -17,7 +17,7 @@ sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 makepkg -A
 
 su
-pacman -U libmatchbox-N-
+pacman -U libmatchbox-*-any.pkg.tar.xz
 su alarm
 
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/matchbox-window-manager.tar.gz
