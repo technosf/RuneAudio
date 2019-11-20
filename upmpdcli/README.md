@@ -22,7 +22,7 @@ sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 makepkg
 
 su
-pacman -U /home/alarm/libupnpp/libupnpp-*-any.pkg.tar.xz
+pacman -U /home/alarm/libupnpp/libupnpp*.pkg.tar.xz
 su alarm
 cd
 
