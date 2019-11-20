@@ -6,8 +6,10 @@ NGINX Upgrade with pushstream
 ### compile
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
-- Get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 ```sh
+# get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
+pushstreamver=0.5.4
+
 pacman -Syu
 pacman -S --needed base-devel
 
@@ -16,23 +18,24 @@ mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
 # customize
-sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
-' -e "s/^arch=.*/arch=('any')/
-" -e '/^depends/ s/ geoip mailcap//; i\
-pushstreamver=0.5.4
-' -e '/^source/ a\
-    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
+sed -e 's/\(pkgname=.*\)/\1-pushstream/
+' -e "/^pkgver/ a\
+pushstreamver=$pushstreamver
+" -e "s/^arch=.*/arch=('any')/
+" -e "s/ 'geoip' 'mailcap'//
+" -e '/^source/ a\
+        https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 ' -e '/md5sums/ {N;N;N;d}
 ' -e '/sha512sums/ {N;N;N;d}
 ' -e '/--with-http_geoip_module/ d
 ' -e '/--with-mail/ d
 ' -e '/--with-stream_geoip_module/ d
 ' -e '/--with-threads/ a\
-    --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
+  --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
 ' -e '/make DESTDIR/ a\
-  mkdir -p "$pkgdir"/usr/lib/systemd/system
-  mkdir -p "$pkgdir"/var/lib/nginx/client-body
-  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
+  mkdir -p "$pkgdir"/usr/lib/systemd/system\
+  mkdir -p "$pkgdir"/var/lib/nginx/client-body\
+  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service\
   install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
 ' -e '/nginx.8.gz/,/done/ d
 ' PKGBUILD
