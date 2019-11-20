@@ -10,7 +10,7 @@ sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 su alarm
 cd
 
-# download snapshot
+# libmatchbox - depend
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/libmatchbox.tar.gz
 bsdtar xvf libmatchbox.tar.gz
 rm libmatchbox.tar.gz
