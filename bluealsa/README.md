@@ -14,5 +14,5 @@ sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/
 ' -e "s/^arch=.*/arch=('any')/
 " PKGBUILD
 
-makepkg -A
+makepkg
 ```
