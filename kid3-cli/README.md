@@ -61,7 +61,5 @@ bsdtar xvf kid3-cli.tar.gz
 rm kid3-cli.tar.gz
 cd kid3-cli
 
-sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
-
 makepkg
 ```
