@@ -13,6 +13,9 @@ pushstreamver=0.5.4
 pacman -Syu
 pacman -S --needed base-devel
 
+# utilize 4 cores of cpu
+sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j4"/' /etc/makepkg.conf
+
 su alarm
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
