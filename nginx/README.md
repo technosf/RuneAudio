@@ -41,7 +41,7 @@ pushstreamver=$pushstreamver
 ' PKGBUILD
 
 # set integrity
-makepkg -g >> PKGBUILD
+#makepkg -g >> PKGBUILD
 
-makepkg
+makepkg --skipinteg
 ```
