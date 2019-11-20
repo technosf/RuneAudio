@@ -23,6 +23,7 @@ makepkg
 su
 pacman -U libmatchbox-*-any.pkg.tar.xz
 su alarm
+cd
 
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/matchbox-window-manager.tar.gz
 bsdtar xvf matchbox-window-manager.tar.gz
