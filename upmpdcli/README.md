@@ -5,6 +5,9 @@ An UPnP Audio Media Renderer based on MPD. [upmpdcli](https://www.lesbonscomptes
 pacman -Syu
 pacman -S --needed base-devel aspell-en id3lib git jsoncpp libmicrohttpd libmpdclient libupnp python-bottle python-mutagen python-requests python-setuptools python-waitress recoll
 
+# utilize 4 cores of cpu
+sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j4"/' /etc/makepkg.conf
+
 su alarm
 cd
 
