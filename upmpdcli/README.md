@@ -15,7 +15,7 @@ cd libupnpp
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
-makepkg -A
+makepkg
 
 su
 pacman -U /home/alarm/libupnpp/libupnpp-*-any.pkg.tar.xz
@@ -28,5 +28,5 @@ cd upmpdcli
 
 sed -i -e "s/^arch=.*/arch=('any')/" -e "s/'mutagen' //" PKGBUILD
 
-makepkg -A
+makepkg
 ```
