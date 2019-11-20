@@ -18,7 +18,7 @@ mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
 # customize
-sed -e 's/\(pkgname=.*\)/\1-pushstream/
+sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 ' -e "/^pkgver/ a\
 pushstreamver=$pushstreamver
 " -e "s/^arch=.*/arch=('any')/
