@@ -24,6 +24,7 @@ makepkg
 su
 pacman -U /home/alarm/libupnpp/libupnpp-*-any.pkg.tar.xz
 su alarm
+cd
 
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
 bsdtar xf upmpdcli.tar.gz
