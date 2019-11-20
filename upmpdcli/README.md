@@ -17,7 +17,7 @@ bsdtar xf libupnpp.tar.gz
 rm libupnpp.tar.gz
 cd libupnpp
 
-makepkg
+makepkg -A
 
 su
 pacman -U /home/alarm/libupnpp/libupnpp*.pkg.tar.xz
@@ -31,5 +31,5 @@ cd upmpdcli
 
 sed -i "s/'mutagen' //" PKGBUILD
 
-makepkg
+makepkg -A
 ```
