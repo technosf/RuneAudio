@@ -16,7 +16,7 @@ bsdtar xvf libmatchbox.tar.gz
 rm libmatchbox.tar.gz
 cd libmatchbox
 
-makepkg
+makepkg -A
 
 su
 pacman -U libmatchbox*.pkg.tar.xz
@@ -28,5 +28,5 @@ bsdtar xvf matchbox-window-manager.tar.gz
 rm matchbox-window-manager.tar.gz
 cd matchbox-window-manager
 
-makepkg
+makepkg -A
 ```
