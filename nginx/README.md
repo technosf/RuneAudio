@@ -21,6 +21,8 @@ sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 pushstreamver=0.5.4
 ' -e '/^source/ a\
     https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
+' -e '/SKIP/ i\
+         'SKIP'
 ' -e '/--with-http_geoip_module/ d
 ' -e '/--with-mail/ d
 ' -e '/--with-stream_geoip_module/ d
@@ -34,5 +36,5 @@ pushstreamver=0.5.4
 ' -e '/nginx.8.gz/,/done/ d
 ' PKGBUILD
 
-makepkg --skipinteg
+makepkg
 ```
