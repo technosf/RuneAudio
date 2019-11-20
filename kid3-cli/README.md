@@ -61,5 +61,5 @@ bsdtar xvf kid3-cli.tar.gz
 rm kid3-cli.tar.gz
 cd kid3-cli
 
-makepkg
+makepkg -A
 ```
