@@ -15,5 +15,5 @@ cd bluez-alsa-git
 
 sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/' PKGBUILD
 
-makepkg
+makepkg -A
 ```
