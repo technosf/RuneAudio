@@ -14,7 +14,7 @@ cd libmatchbox
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
-makepkg -A
+makepkg
 
 su
 pacman -U libmatchbox-*-any.pkg.tar.xz
@@ -27,5 +27,5 @@ cd matchbox-window-manager
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
-makepkg -A
+makepkg
 ```
