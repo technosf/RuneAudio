@@ -16,8 +16,6 @@ bsdtar xvf libmatchbox.tar.gz
 rm libmatchbox.tar.gz
 cd libmatchbox
 
-sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
-
 makepkg
 
 su
@@ -29,8 +27,6 @@ curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/matchbox-window-manager.
 bsdtar xvf matchbox-window-manager.tar.gz
 rm matchbox-window-manager.tar.gz
 cd matchbox-window-manager
-
-sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
 makepkg
 ```
