@@ -21,7 +21,7 @@ sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 makepkg
 
 su
-pacman -U libmatchbox-*-any.pkg.tar.xz
+pacman -U libmatchbox*.pkg.tar.xz
 su alarm
 cd
 
