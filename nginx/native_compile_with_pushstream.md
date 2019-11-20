@@ -60,5 +60,24 @@ cd nginx-mainline-pushstream
 
 ### Compile
 ```sh
-makepkg -A --skipinteg
+sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
+' -e "s/^arch=.*/arch=('any')/
+" -e '/^depends/ s/ geoip mailcap//; i\
+pushstreamver=0.5.4
+' -e '/^source/ a\
+    https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
+' -e '/--with-http_geoip_module/ d
+' -e '/--with-mail/ d
+' -e '/--with-stream_geoip_module/ d
+' -e '/--with-threads/ a\
+    --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
+' -e '/make DESTDIR/ a\
+  mkdir -p "$pkgdir"/usr/lib/systemd/system
+  mkdir -p "$pkgdir"/var/lib/nginx/client-body
+  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service
+  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
+' -e '/nginx.8.gz/,/done/ d
+' PKGBUILD
+
+makepkg --skipinteg
 ```
