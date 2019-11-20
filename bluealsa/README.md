@@ -13,9 +13,7 @@ bsdtar xf bluez-alsa-git.tar.gz
 rm bluez-alsa-git.tar.gz
 cd bluez-alsa-git
 
-sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/
-' -e "s/^arch=.*/arch=('any')/
-" PKGBUILD
+sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/' PKGBUILD
 
 makepkg
 ```
