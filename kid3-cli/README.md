@@ -60,5 +60,5 @@ cd kid3-cli
 
 sed -i "s/^arch=.*/arch=('any')/" PKGBUILD
 
-makepkg -A
+makepkg
 ```
