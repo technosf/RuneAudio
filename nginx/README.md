@@ -24,7 +24,6 @@ cd nginx-mainline-pushstream
 sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 ' -e "/^pkgver/ a\
 pushstreamver=$pushstreamver
-" -e "s/^arch=.*/arch=('any')/
 " -e "s/ 'geoip' 'mailcap'//
 " -e '/^source/ a\
         https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
