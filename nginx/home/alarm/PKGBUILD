@@ -7,7 +7,7 @@ pkgname=nginx-mainline-pushstream
 pkgver=1.17.4
 pkgrel=1
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server, mainline release'
-arch=('x86_64')
+arch=('any')
 url='https://nginx.org'
 license=('custom')
 pushstreamver=0.5.4
@@ -25,9 +25,9 @@ install=nginx.install
 provides=('nginx')
 conflicts=('nginx')
 source=($url/download/nginx-$pkgver.tar.gz{,.asc}
+        https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
         service
         logrotate
-        https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 )
 validpgpkeys=('B0F4253373F8F6F510D42178520A9993A1C052F8') # Maxim Dounin 
 md5sums=('476a6d0bea58fbeefb5f6d0a81824a43'
