@@ -11,6 +11,7 @@ sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 su alarm
 cd
 
+# libupnpp - depend
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/libupnpp.tar.gz
 bsdtar xf libupnpp.tar.gz
 rm libupnpp.tar.gz
