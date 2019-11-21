@@ -4,8 +4,8 @@
 pacman -Syu
 pacman -S --needed base-devel startup-notification xsettings-client
 
-# utilize 4 cores of cpu
-sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j4"/' /etc/makepkg.conf
+# utilize all cpu cores
+sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
 cd
