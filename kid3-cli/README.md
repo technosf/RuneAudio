@@ -49,7 +49,7 @@ kid3-cli -c "select \"/path/to file\"" \
 pacman -Syu
 pacman -S --needed  base-devel chromaprint extra-cmake-modules id3lib libmp4v2 ninja python qt5-multimedia qt5-tools docbook-xsl taglib
 
-# utilize all cores of cpu
+# utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
