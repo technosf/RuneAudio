@@ -17,7 +17,7 @@ getuninstall
 
 [[ ! -e /usr/bin/aria2c ]] && pacman -Sy --noconfirm aria2
 
-mnt=$( df | grep /dev/sd | grep -v /$ | tail -1 | cut -d' ' -f1 )
+mnt=$( df | grep /dev/sd | grep -v /$ | tail -1 | awk '{print $NF}' )
 path=$mnt/aria2
 mkdir -p $path/web
 
