@@ -14,7 +14,7 @@ getuninstall
 
 [[ ! -e /usr/bin/transmission-cli ]] && pacman -Sy --noconfirm transmission-cli
 
-mnt=$( df | grep /dev/sd | grep -v /$ | tail -1 | cut -d' ' -f1 )
+mnt=$( df | grep /dev/sd | grep -v /$ | tail -1 | awk '{print $NF}' )
 path="$mnt/transmission"
 if [[ ! -e "$path" ]]; then
 	mkdir -p "$path"
