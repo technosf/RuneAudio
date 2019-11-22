@@ -8,13 +8,16 @@ alias=tran
 
 . /srv/http/addons-functions.sh
 
+mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
+[[ -z $mnt ]] && title "$info No drive for download found." && exit
+[[ ! -w $mnt ]] && title "$info $( tcolot "$mnt" ) has no write permission." && exit
+
 installstart $@
 
 getuninstall
 
 [[ ! -e /usr/bin/transmission-cli ]] && pacman -Sy --noconfirm transmission-cli
 
-mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
 path="$mnt/transmission"
 if [[ ! -e "$path" ]]; then
 	mkdir -p "$path"
