@@ -8,16 +8,14 @@ alias=aria
 
 installstart $@
 
-if ! mount | grep -q '/dev/sda1'; then
-	title "$info No USB drive found."
-	exit
-fi
+mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
+[[ -z $mnt ]] && title "$info No drive for download found." && exit
+[[ ! -w $mnt ]] && title "$info $( tcolot "$mnt" ) has no write permission." && exit
 
 getuninstall
 
 [[ ! -e /usr/bin/aria2c ]] && pacman -Sy --noconfirm aria2
 
-mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
 path=$mnt/aria2
 mkdir -p $path/web
 
