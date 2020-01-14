@@ -23,7 +23,8 @@ cd nginx-mainline-pushstream
 sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 ' -e "/^pkgver/ a\
 pushstreamver=0.5.4
-" -e '/^source/ a\
+" -e '/^install/ d
+' -e '/^source/ a\
         https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 ' -e '/md5sums/ {N;N;N;d}
 ' -e '/sha512sums/ {N;N;N;d}
