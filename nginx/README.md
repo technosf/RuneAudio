@@ -8,7 +8,7 @@ NGINX Upgrade with pushstream
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
 ```sh
 pacman -Syu
-pacman -S --needed base-devel
+pacman -S --needed base-devel geoip mailcap
 
 # utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
