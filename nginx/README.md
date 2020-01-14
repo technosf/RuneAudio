@@ -7,9 +7,6 @@ NGINX Upgrade with pushstream
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files
 - Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
 ```sh
-# get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
-pushstreamver=0.5.4
-
 pacman -Syu
 pacman -S --needed base-devel
 
@@ -20,18 +17,16 @@ su alarm
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
+# get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
+
 # customize
 sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 ' -e "/^pkgver/ a\
-pushstreamver=$pushstreamver
-" -e "s/ 'geoip' 'mailcap'//
+pushstreamver=0.5.4
 " -e '/^source/ a\
         https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 ' -e '/md5sums/ {N;N;N;d}
 ' -e '/sha512sums/ {N;N;N;d}
-' -e '/--with-http_geoip_module/ d
-' -e '/--with-mail/ d
-' -e '/--with-stream_geoip_module/ d
 ' -e '/--with-threads/ a\
   --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
 ' -e '/make DESTDIR/ a\
