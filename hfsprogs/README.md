@@ -7,6 +7,8 @@ pacman -S --needed base-devel
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
+cd
+
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/hfsprogs.tar.gz
 bsdtar xf hfsprogs.tar.gz
 rm hfsprogs.tar.gz
