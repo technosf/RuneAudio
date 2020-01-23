@@ -9,6 +9,7 @@ sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
 cd
+
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/bluez-alsa-git.tar.gz
 bsdtar xf bluez-alsa-git.tar.gz
 rm bluez-alsa-git.tar.gz
