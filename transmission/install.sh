@@ -78,6 +78,7 @@ rm master.zip
 chown -R root:root $dirweb
 
 # set buffers
+echo -e "$bar Set buffer size ..."
 echo 'net.core.rmem_max = 16777216
 net.core.wmem_max = 4194304' > /etc/sysctl.d/buffer.conf
 sysctl --system
