@@ -16,8 +16,7 @@ title -l '=' "$bar Webradio Import ..."
 
 readarray -t files <<<"$files"
 for file in "${files[@]}"; do
-	filename=$( basename "$file" )
-	name="${file%.*}"
+	name=$( basename "$file" .pls )
 	url=$( grep '^File' "$file" | cut -d '=' -f2 )
 	printf "%-30s : $url\n" "$name"
 	echo $name > /srv/http/data/webradios/${url//\//|}
