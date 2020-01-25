@@ -23,3 +23,4 @@ for file in "${files[@]}"; do
 done
 
 title -l '=' "$bar Webradio imported successfully."
+title -nt "Directory /mnt/MPD/Webradio can be deleted."
