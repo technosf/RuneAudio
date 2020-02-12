@@ -5,8 +5,7 @@
 ## Convert
 Warning: **MPD** will be broken so it must be upgraded afterward.
 ```sh
-pacman -S --noconfirm openssl-cryptodev
-pacman -S --noconfirm npm icu libuv libtirpc
+pacman -S --noconfirm --needed openssl-cryptodev icu libuv libtirpc npm openssl-cryptodev
 
 npm install -g browserify pica babelify @babel/core @babel/preset-env
 
