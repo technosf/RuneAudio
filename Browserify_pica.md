@@ -3,15 +3,21 @@
 - [**Browserify**](browserify.org) - Let you require('modules') in the browser by bundling up all dependencies.
 - [**Pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed.
 ```sh
+## install browserify
 pacman -Sy npm
-
 npm install -g browserify
 npm install --save-dev babelify
 npm install --save-dev @babel/core @babel/preset-env
 npm install pica
 
+## convert
+# create require line in a temp file
 echo "    pica = require('pica')();" > entry.js
-browserify entry.js -o /srv/http/assets/js/vendor/pica.js
+
+# browserify convert pica to /path/to/pica.js
+browserify entry.js -o /path/to/pica.js
+
+# remove temp file
 rm entry.js
 ```
 
