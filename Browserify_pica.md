@@ -4,9 +4,12 @@
 
 ## Convert
 ```sh
-pacman -Sy --noconfirm --needed libuv npm
+pacman -Sy npm
 
-npm install -g browserify pica babelify @babel/core @babel/preset-env
+npm install -g browserify
+npm install --save-dev babelify
+npm install --save-dev @babel/core @babel/preset-env
+npm install pica
 
 echo "    pica = require('pica')();" > entry.js
 browserify entry.js -o /srv/http/assets/js/vendor/pica.js
