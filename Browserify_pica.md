@@ -3,9 +3,8 @@
 - [**Pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed.
 
 ## Convert
-Warning: **MPD** will be broken so it must be upgraded afterward.
 ```sh
-pacman -S --noconfirm --needed icu libuv libtirpc npm openssl-cryptodev
+pacman -Sy --noconfirm --needed libuv npm
 
 npm install -g browserify pica babelify @babel/core @babel/preset-env
 
