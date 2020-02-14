@@ -21,9 +21,15 @@ cat /tmp/shairport-sync-metadata
 # <data encoding="base64">
 # U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 # ...
+
 # ----------------------------------------------------------------------------------------------------------------
 # hex       hex2bin field              base64 decode - PHP / JS
 # ----------------------------------------------------------------------------------------------------------------
+# <type>
+# 636f7265  core    AirPlay data
+# 73736e63  ssnc    Shairport-sync data
+#
+# <code>
 # 61736172  asar    artist             base64_decode( $DATA ) / atob( DATA )
 # 6d696e6d  minm    song               base64_decode( $DATA ) / atob( DATA )
 # 6173616c  asal    album              base64_decode( $DATA ) / atob( DATA )
