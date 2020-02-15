@@ -35,7 +35,7 @@ cat /tmp/shairport-sync-metadata
 # 50494354  PICT    coverart           "data:image/jpeg;base64,$DATA" // already base64
 # 70726772  prgr    elapsed/start/end  base64_decode( $DATA ) / atob( DATA )
 # 6d696e6d  minm    title              base64_decode( $DATA ) / atob( DATA )
-#           pvol    volume             base64_decode( $DATA ) / atob( DATA )
+# 70766f6c  pvol    volume             base64_decode( $DATA ) / atob( DATA )
 
 
 
