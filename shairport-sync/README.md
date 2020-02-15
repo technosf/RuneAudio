@@ -30,11 +30,14 @@ cat /tmp/shairport-sync-metadata
 # 73736e63  ssnc    Shairport-sync data
 #
 # <code>
-# 61736172  asar    artist             base64_decode( $DATA ) / atob( DATA )
-# 6d696e6d  minm    song               base64_decode( $DATA ) / atob( DATA )
 # 6173616c  asal    album              base64_decode( $DATA ) / atob( DATA )
-# 70726772  prgr    elapsed/start/end  base64_decode( $DATA ) / atob( DATA )
+# 61736172  asar    artist             base64_decode( $DATA ) / atob( DATA )
 # 50494354  PICT    coverart           "data:image/jpeg;base64,$DATA" // already base64
+# 70726772  prgr    elapsed/start/end  base64_decode( $DATA ) / atob( DATA )
+# 6d696e6d  minm    title              base64_decode( $DATA ) / atob( DATA )
+#           pvol    volume             base64_decode( $DATA ) / atob( DATA )
+
+
 
 # shairport-sync-metadata-reader
 wget -qN https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-metadata-reader -P /usr/local/bin
