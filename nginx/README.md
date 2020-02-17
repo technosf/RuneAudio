@@ -7,7 +7,6 @@ NGINX Upgrade with pushstream
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files
 ```sh
 # remove confilit file (mailcap reinstates it)
-rm /etc/nginx/mime.types
 pacman -Syu
 pacman -S --needed base-devel geoip mailcap
 
@@ -45,4 +44,3 @@ pushstreamver=0.5.4
 
 makepkg -A --skipinteg
 ```
-Note: Backup `/etc/nginx/mime.types` prior upgrade and restore afterwards.
