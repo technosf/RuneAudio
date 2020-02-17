@@ -39,12 +39,7 @@ pushstreamver=0.5.4
 ' -e '/geoip_module/ d
 ' -e '/--with-threads/ a\
   --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
-' -e '/make DESTDIR/ a\
-  mkdir -p "$pkgdir"/usr/lib/systemd/system\
-  mkdir -p "$pkgdir"/var/lib/nginx/client-body\
-  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service\
-  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
-' -e '/nginx.8.gz/,/done/ d
+' -e '/mime.types/ d
 ' PKGBUILD
 
 # set integrity
