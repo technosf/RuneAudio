@@ -21,14 +21,13 @@ makepkg -A
 
 su
 pacman -U /home/alarm/libupnpp/libupnpp*.pkg.tar.xz
+
 su alarm
 cd
-
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
 bsdtar xf upmpdcli.tar.gz
 rm upmpdcli.tar.gz
 cd upmpdcli
-
 sed -i "s/'mutagen' //" PKGBUILD
 
 makepkg -A

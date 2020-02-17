@@ -6,8 +6,10 @@ NGINX Upgrade with pushstream
 ### compile
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files
 ```sh
+# remove confilit file (mailcap reinstates it)
+rm /etc/nginx/mime.types
 pacman -Syu
-pacman -S --needed base-devel
+pacman -S --needed base-devel geoip mailcap
 
 # utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
@@ -29,22 +31,13 @@ getScripts nginx-mainline
 sed -i -e 's/\(pkgname=.*\)/\1-pushstream/
 ' -e "/^pkgver/ a\
 pushstreamver=0.5.4
-" -e "s/ 'geoip' 'mailcap'//
 " -e '/^install/ d
 ' -e '/^source/ a\
         https://github.com/wandenberg/nginx-push-stream-module/archive/$pushstreamver.tar.gz
 ' -e '/md5sums/ {N;N;N;d}
 ' -e '/sha512sums/ {N;N;N;d}
-' -e '/--with-mail/ d
-' -e '/geoip_module/ d
 ' -e '/--with-threads/ a\
   --add-module=/home/alarm/nginx-mainline-pushstream/src/nginx-push-stream-module-$pushstreamver
-' -e '/make DESTDIR/ a\
-  mkdir -p "$pkgdir"/usr/lib/systemd/system\
-  mkdir -p "$pkgdir"/var/lib/nginx/client-body\
-  install -Dm644 $srcdir/service "$pkgdir"/usr/lib/systemd/system/nginx.service\
-  install -Dm644 $srcdir/logrotate "$pkgdir"/etc/logrotate.d/nginx
-' -e '/nginx.8.gz/,/done/ d
 ' PKGBUILD
 
 # set integrity
