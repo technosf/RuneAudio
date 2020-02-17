@@ -54,8 +54,6 @@ sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
 cd
-
-# download snapshot
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/kid3-cli.tar.gz
 bsdtar xvf kid3-cli.tar.gz
 rm kid3-cli.tar.gz
