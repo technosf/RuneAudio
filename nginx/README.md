@@ -45,3 +45,4 @@ pushstreamver=0.5.4
 
 makepkg -A --skipinteg
 ```
+Note: Backup /etc/nginx/mime.types prior upgrade and restore afterwards.
