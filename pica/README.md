@@ -1,7 +1,9 @@
-## Convert
-### Browserify - node pica.js to browser pica.js
+## pica.js
+[**Pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed.
+
+### Browserify - Convert node pica.js to browser pica.js
 - [**Browserify**](browserify.org) - Let you require('modules') in the browser by bundling up all dependencies.
-- [**Pica**](https://github.com/nodeca/pica) - Resize image in browser with high quality and high speed.
+
 ```sh
 ## install browserify
 pacman -Sy npm
