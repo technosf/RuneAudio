@@ -18,9 +18,9 @@ cd
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
-# get build scripts - getScript ARCH/PACKAGE
+# get build scripts - getScript ARCH PACKAGE
 getScript() {
-    url=https://archlinuxarm.org/packages/$1
+    url=https://archlinuxarm.org/packages/$1/$2
     echo Get build script list ...
     files=$( curl -s $url/files | sed -n '/<tbody/,/<\/tbody>/ p' | grep href= | sed 's/.*">\(.*\)<\/a>.*/\1/' )
     echo
@@ -31,7 +31,7 @@ getScript() {
             | sed 's/.*<pre><code>\|<\/code><\/pre>//g' > $file
     done
 }
-getScript armv7h/nginx-mainline
+getScript armv7h nginx-mainline
 
 # get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 
