@@ -17,3 +17,4 @@ sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/' PKGBUILD
 
 makepkg -A
 ```
+Note: upgrade - uninstall existing then install
