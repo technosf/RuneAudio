@@ -5,7 +5,6 @@ NGINX Upgrade with pushstream
 
 ### compile
 - NGINX mainline source files: https://archlinuxarm.org/packages/armv7h/nginx-mainline/files
-- Copy-paste code from each file, direct download not available, to `/home/x/nginx/` (with last empty line without whitespace)
 ```sh
 pacman -Syu
 pacman -S --needed base-devel
@@ -18,9 +17,12 @@ cd
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
-# get build scripts - getScript ARCH PACKAGE
+# get build scripts
+#   getScript PACKAGE 1 - RPi 1, Zero
+#   getScript PACKAGE   - All except RPi 1, Zero
 getScript() {
-    url=https://archlinuxarm.org/packages/$1/$2
+    [[ -z $2 ]] && arch=armv7h || arch=armv6h
+    url=https://archlinuxarm.org/packages/$arch/$1
     echo Get build script list ...
     files=$( curl -s $url/files | sed -n '/<tbody/,/<\/tbody>/ p' | grep href= | sed 's/.*">\(.*\)<\/a>.*/\1/' )
     echo
@@ -31,7 +33,7 @@ getScript() {
             | sed 's/.*<pre><code>\|<\/code><\/pre>//g' > $file
     done
 }
-getScript armv7h nginx-mainline
+getScript nginx-mainline
 
 # get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 
