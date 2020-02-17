@@ -14,6 +14,7 @@ pacman -S --needed base-devel
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
 su alarm
+cd
 mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
