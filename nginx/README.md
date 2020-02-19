@@ -32,9 +32,8 @@ getScripts() {
             | sed 's/.*<pre><code>\|<\/code><\/pre>//g' > $file
     done
 }
+# RPi 1, Zero: getScripts nginx-mainline 1
 getScripts nginx-mainline
-
-# RPi 1, Zero: getScripts nginx-mainline 1 
 
 # get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
 
