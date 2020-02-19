@@ -19,9 +19,10 @@ mkdir nginx-mainline-pushstream
 cd nginx-mainline-pushstream
 
 # get build scripts
-wget https://github.com/rern/RuneAudio/raw/master/Build_packages/getscripts.sh
+curl -O https://github.com/rern/RuneAudio/raw/master/Build_packages/getscripts.sh
 . getscripts.sh
 getScripts nginx-mainline
+
 # RPi 1, Zero: getScripts nginx-mainline 1 
 
 # get pushstream version: https://github.com/wandenberg/nginx-push-stream-module/releases
