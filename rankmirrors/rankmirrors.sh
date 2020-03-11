@@ -8,7 +8,7 @@ rm $0
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
-. /srv/http/addons-functions.sh
+[[ ! -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/addons-functions.sh
 
 timestart
 
