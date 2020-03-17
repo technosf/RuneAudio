@@ -4,7 +4,7 @@
 
 alias=aria
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh
+. /srv/http/addons-functions.sh &> /dev/null
 
 installstart $@
 
