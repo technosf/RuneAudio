@@ -6,7 +6,7 @@
 
 alias=tran
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh
+. /srv/http/addons-functions.sh &> /dev/null
 
 mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
 [[ -z $mnt ]] && title "$info No drive for download found." && exit
