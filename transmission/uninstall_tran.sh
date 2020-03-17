@@ -2,7 +2,7 @@
 
 alias=tran
 
-. /srv/http/addons-functions.sh
+. /srv/http/addons-functions.sh &> /dev/null
 
 uninstallstart $@
 
