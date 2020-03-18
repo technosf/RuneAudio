@@ -2,7 +2,7 @@
 
 alias=aria
 
-. /srv/http/addons-functions.sh &> /dev/null
+[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
 
 uninstallstart $@
 
