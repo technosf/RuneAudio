@@ -27,11 +27,11 @@ amixer -D bluealsa
 ```
 audio_output {
 	name           "Bluetooth"
-	device         "bluealsa"
+	device         "bluealsa:DEV=00:11:67:B6:A9:C4,PROFILE=a2dp"
 	type           "alsa"
-	auto_resample  "yes"
-	auto_format    "yes"
+	auto_resample  "no"
+	auto_format    "no"
 	mixer_control  "JBL Focus 500 - A2DP"
-	mixer_device   "bluealsa"
+	mixer_device   "bluealsa:DEV=00:11:67:B6:A9:C4"
 }
 ```
