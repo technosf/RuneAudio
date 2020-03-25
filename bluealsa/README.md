@@ -19,13 +19,19 @@ makepkg -A
 ```
 Note: upgrade - uninstall existing then install
 
+### mixer devices
+```sh
+amixer -D bluealsa
+```
 ### mpd.conf
 ```
 audio_output {
 	name           "Bluetooth"
-	device         "bluealsa:DEV=00:11:67:B6:A9:C4,PROFILE=a2dp"
+	device         "bluealsa"
 	type           "alsa"
-	mixer_type     "software"
+	auto_resample  "yes"
+	auto_format    "yes"
+	mixer_control  "JBL Focus 500 - A2DP"
+	mixer_device   "bluealsa"
 }
-
 ```
