@@ -18,3 +18,14 @@ sed -i -e 's/\(enable-aac\)/\1 --enable-ofono --enable-debug/' PKGBUILD
 makepkg -A
 ```
 Note: upgrade - uninstall existing then install
+
+### mpd.conf
+```
+audio_output {
+	name           "Bluetooth"
+	device         "bluealsa:DEV=00:11:67:B6:A9:C4,PROFILE=a2dp"
+	type           "alsa"
+	mixer_type     "software"
+}
+
+```
