@@ -21,6 +21,7 @@ Note: upgrade - uninstall existing then install
 
 ### mixer devices
 ```sh
+alsamixer -D bluealsa
 amixer -D bluealsa
 ```
 ### mpd.conf
