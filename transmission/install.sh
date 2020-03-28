@@ -2,11 +2,9 @@
 
 # $1-password
 
-# change version number in RuneAudio_Addons/srv/http/addonslist.php
-
 alias=tran
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
+. /srv/http/bash/addons-functions.sh
 
 mnt=$( df --output=target | grep /mnt/MPD | tail -1 )
 [[ -z $mnt ]] && title "$info No drive for download found." && exit
