@@ -5,10 +5,9 @@ rm $0
 (( $# == 0 )) && sec=3 || sec=$1
 
 # rankmirrors.sh
-# mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
+. /srv/http/bash/addons-functions.sh
 
 timestart
 
