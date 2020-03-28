@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# change version number in RuneAudio_Addons/srv/http/addonslist.php
-
 alias=aria
 
 . /srv/http/bash/addons-functions.sh
