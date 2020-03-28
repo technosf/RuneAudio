@@ -2,7 +2,7 @@
 
 rm $0
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
+. /srv/http/bash/addons-functions.sh
 
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
