@@ -12,7 +12,7 @@ su alarm
 cd
 
 # libupnpp - depend
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/PKGBUILD
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
 
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
