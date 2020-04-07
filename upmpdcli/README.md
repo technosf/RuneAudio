@@ -15,13 +15,12 @@ cd
 mkdir libnpupnp
 cd libnpupnp
 curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
-
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
 makepkg -A --skipinteg
 
 su
-pacman -U /home/alarm/libupnpp/libupnpp*.pkg.tar.xz
+pacman -U /home/alarm/libupnpp/libnpupnp*.pkg.tar.xz
 
 su alarm
 cd
