@@ -12,19 +12,11 @@ su alarm
 cd
 
 # libupnpp - depend
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/libupnpp.tar.gz
-bsdtar xf libupnpp.tar.gz
-rm libupnpp.tar.gz
-cd libupnpp
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/PKGBUILD
 
-# get version from: https://framagit.org/medoc92/libupnpp
-version=2.2
-sed -i -e "s/^\(pkgver=\).*/\1$version/
-" -e 's|^\(source=("\).*|\1https://framagit.org/medoc92/libupnpp/-/archive/master/libupnpp-master.tar.gz"|
-' -e '/sha256sums=/ d
-' PKGBUILD
+# get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
-makepkg -A
+makepkg -A --skipinteg
 
 su
 pacman -U /home/alarm/libupnpp/libupnpp*.pkg.tar.xz
