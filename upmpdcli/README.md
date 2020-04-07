@@ -8,10 +8,9 @@ pacman -S --needed base-devel aspell-en id3lib git jsoncpp libmicrohttpd libmpdc
 # utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
+# libnpupnp - depend 1
 su alarm
 cd
-
-# libnpupnp - depend
 mkdir libnpupnp
 cd libnpupnp
 curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
@@ -22,13 +21,27 @@ makepkg -A --skipinteg
 su
 pacman -U /home/alarm/libupnpp/libnpupnp*.pkg.tar.xz
 
+# libupupp - depend 2
 su alarm
 cd
-curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/upmpdcli.tar.gz
-bsdtar xf upmpdcli.tar.gz
-rm upmpdcli.tar.gz
+mkdir libupupp
+cd libupupp
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libupupp/PKGBUILD
+# get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
+
+makepkg -A --skipinteg
+
+su
+pacman -U /home/alarm/libupupp/libupupp*.pkg.tar.xz
+
+# upmpdcli
+su alarm
+cd
+mkdir upmpdcli
 cd upmpdcli
-sed -i "s/'mutagen' //" PKGBUILD
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/PKGBUILD
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.install
+curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.service
 
 makepkg -A
 ```
