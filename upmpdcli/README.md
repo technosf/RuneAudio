@@ -17,6 +17,13 @@ bsdtar xf libupnpp.tar.gz
 rm libupnpp.tar.gz
 cd libupnpp
 
+# get version from: https://framagit.org/medoc92/libupnpp
+version=2.2
+sed -i -e "s/^\(pkgver=\).*/\1$version/
+" -e 's|^\(source=("\).*|\1https://framagit.org/medoc92/libupnpp/-/archive/master/libupnpp-master.tar.gz"|
+' -e '/sha256sums=/ d
+' PKGBUILD
+
 makepkg -A
 
 su
