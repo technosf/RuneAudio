@@ -13,7 +13,7 @@ su alarm
 cd
 mkdir libnpupnp
 cd libnpupnp
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
 makepkg -A --skipinteg
@@ -26,7 +26,7 @@ su alarm
 cd
 mkdir libupupp
 cd libupupp
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/libupupp/PKGBUILD
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/libupupp/PKGBUILD
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
 makepkg -A --skipinteg
@@ -39,9 +39,9 @@ su alarm
 cd
 mkdir upmpdcli
 cd upmpdcli
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/PKGBUILD
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.install
-curl -O https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.service
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/PKGBUILD
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.install
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.service
 
 makepkg -A
 ```
