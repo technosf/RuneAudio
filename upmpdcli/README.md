@@ -43,5 +43,5 @@ wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/PKGBUILD
 wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.install
 wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.service
 
-makepkg -A
+makepkg -A --skipinteg
 ```
