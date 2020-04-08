@@ -26,7 +26,7 @@ su alarm
 cd
 mkdir libupupp
 cd libupupp
-wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/libupupp/PKGBUILD
+wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/libupnpp/PKGBUILD
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
 makepkg -A --skipinteg
