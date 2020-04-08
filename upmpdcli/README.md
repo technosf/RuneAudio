@@ -19,7 +19,7 @@ wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/libnpupnp/PKGBUILD
 makepkg -A --skipinteg
 
 su
-pacman -U /home/alarm/libupnpp/libnpupnp*.pkg.tar.xz
+pacman -U /home/alarm/libnpupnp/libnpupnp*.pkg.tar.xz
 
 # libupupp - depend 2
 su alarm
