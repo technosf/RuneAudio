@@ -16,6 +16,7 @@ cd snapcast
 
 makepkg -A
 ```
+### Configuration
 **mpd.conf**
 ```sh
 audio_output {
@@ -25,4 +26,8 @@ audio_output {
 	format         "48000:16:2"
 	mixer_type     "software"
 }
+```
+**/tmp/snapfifo**
+```sh
+touch /tmp/snapfifo
 ```
