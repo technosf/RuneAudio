@@ -27,10 +27,6 @@ audio_output {
 	mixer_type     "software"
 }
 ```
-**/tmp/snapfifo**
-```sh
-touch /tmp/snapfifo
-```
 **Server**
 ```sh
 systemctl start snapserver
