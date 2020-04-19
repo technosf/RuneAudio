@@ -31,3 +31,11 @@ audio_output {
 ```sh
 touch /tmp/snapfifo
 ```
+**Server**
+```sh
+systemctl start snapserver
+```
+**Client**
+```sh
+snapclient -h IPADDRESS
+```
