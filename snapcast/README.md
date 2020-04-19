@@ -37,5 +37,5 @@ systemctl start snapserver
 ```
 **Client**
 ```sh
-snapclient -h IPADDRESS
+systemctl start snapclient
 ```
