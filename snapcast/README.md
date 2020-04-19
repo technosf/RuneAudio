@@ -16,3 +16,13 @@ cd snapcast
 
 makepkg -A
 ```
+**mpd.conf**
+```sh
+audio_output {
+	type           "fifo"
+	name           "snapcast"
+	path           "/tmp/snapfifo"
+	format         "48000:16:2"
+	mixer_type     "software"
+}
+```
