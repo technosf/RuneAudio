@@ -7,6 +7,12 @@ pacman -S --needed base-devel boost libffi
 # utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
 
+# RPi Zero, 1 - setup swap file
+dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+chmod 666 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
 su alarm
 cd
 curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/snapcast.tar.gz
