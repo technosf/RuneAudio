@@ -15,3 +15,4 @@ rm spotifyd.tar.gz
 cd spotifyd
 
 makepkg -A
+```
