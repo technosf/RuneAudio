@@ -6,4 +6,13 @@ pacman -S --needed base-devel cargo
 
 # utilize all cpu cores
 sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$( nproc )'"/' /etc/makepkg.conf
- makepkg -A
+
+su alarm
+cd
+curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/spotifyd.tar.gz
+bsdtar xf spotifyd.tar.gz
+rm spotifyd.tar.gz
+cd spotifyd
+
+makepkg -A
+```
