@@ -14,5 +14,7 @@ bsdtar xf spotifyd.tar.gz
 rm spotifyd.tar.gz
 cd spotifyd
 
+sed -i 's|\(systemd/\)user|\1system|' PKGBUILD
+
 makepkg -A
 ```
