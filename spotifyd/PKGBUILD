@@ -33,7 +33,7 @@ _package_feature() {
   # Create a package for a particular feature.
   cargo install --locked --root "$pkgdir/usr" --path "$srcdir/$pkgbase-$pkgver" --features "$1"
   rm "$pkgdir/usr/.crates.toml"
-  install -D -m 644 "$srcdir/$pkgbase-$pkgver/contrib/spotifyd.service" "$pkgdir/usr/lib/systemd/user/spotifyd.service"
+  install -D -m 644 "$srcdir/$pkgbase-$pkgver/contrib/spotifyd.service" "$pkgdir/usr/lib/systemd/system/spotifyd.service"
 }
 
 package_spotifyd() {
