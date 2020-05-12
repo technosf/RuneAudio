@@ -2,7 +2,7 @@
 
 rm $0
 
-[[ -e /srv/http/addons-functions.sh ]] && . /srv/http/addons-functions.sh || . /srv/http/bash/addons-functions.sh
+. /srv/http/bash/addons-functions.sh
 
 # all files include sub-directory
 files=$( find /mnt/MPD/Webradio -type f 2> /dev/null )
