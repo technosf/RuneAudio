@@ -24,9 +24,12 @@ Note: upgrade - uninstall existing then install
 alsamixer -D bluealsa
 amixer -D bluealsa
 ```
-### MAC
+### MAC addresss
 ```sh
 bluetoothctl devices
+
+# paired
+bluetoothctl paired-devices | cut -d' ' -f2
 ```
 ### mpd.conf
 ```
