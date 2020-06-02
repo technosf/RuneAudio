@@ -24,6 +24,10 @@ Note: upgrade - uninstall existing then install
 alsamixer -D bluealsa
 amixer -D bluealsa
 ```
+### MAC
+```sh
+bluetoothctl devices
+```
 ### mpd.conf
 ```
 audio_output {
