@@ -26,9 +26,6 @@ amixer -D bluealsa
 ```
 ### MAC addresss
 ```sh
-bluetoothctl devices
-
-# paired
 bluetoothctl paired-devices | cut -d' ' -f2
 ```
 ### mpd.conf
