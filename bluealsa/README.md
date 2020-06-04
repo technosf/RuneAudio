@@ -38,9 +38,5 @@ audio_output {
 	device         "bluealsa:DEV=xx:xx:xx:xx:xx:xx,PROFILE=a2dp"
 	type           "alsa"
 	mixer_type     "software"
-	auto_resample  "no"
-	auto_format    "no"
-	buffer_time    "500000"
-	period_time    "256000000"
 }
 ```
