@@ -37,3 +37,4 @@ audio_output {
 	mixer_type     "software"
 }
 ```
+*`xx:xx:xx:xx:xx:xx` - MAC address
