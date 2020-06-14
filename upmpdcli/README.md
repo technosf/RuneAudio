@@ -37,11 +37,9 @@ pacman -U libupupp*.pkg.tar.xz
 # upmpdcli
 su alarm
 cd
-mkdir upmpdcli
+git clone https://aur.archlinux.org/upmpdcli.git
 cd upmpdcli
-wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/PKGBUILD
-wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.install
-wget https://github.com/rern/RuneAudio/raw/master/upmpdcli/upmpdcli/upmpdcli.service
+# get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
 makepkg -A --skipinteg
 ```
