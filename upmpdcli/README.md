@@ -41,5 +41,8 @@ git clone https://aur.archlinux.org/upmpdcli.git
 cd upmpdcli
 # get version from: https://www.lesbonscomptes.com/upmpdcli/downloads/
 
+# fix: errors on build with multicores
+sed -i 's/\(MAKEFLAGS=\).*/\1"-j1"/' /etc/makepkg.conf
+
 makepkg -A --skipinteg
 ```
